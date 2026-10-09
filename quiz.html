@@ -1,0 +1,480 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz Zone | Haari Codes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        .back-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0 8px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progressBar {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            transition: width 0.3s;
+        }
+
+        #question {
+            font-size: 21px;
+            line-height: 1.5;
+            margin: 25px 0 20px;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 14px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option:hover:not(:disabled) {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .option:disabled {
+            cursor: default;
+            color: #1e293b;
+        }
+
+        .option.correct {
+            background: #dcfce7;
+            border-color: #16a34a;
+        }
+
+        .option.wrong {
+            background: #fee2e2;
+            border-color: #dc2626;
+        }
+
+        #feedback {
+            min-height: 25px;
+            margin-top: 18px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .next-btn, .restart-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .next-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        #resultScreen {
+            display: none;
+            text-align: center;
+        }
+
+        .trophy {
+            font-size: 65px;
+            margin: 10px 0;
+        }
+
+        #finalScore {
+            font-size: 38px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 15px 0;
+        }
+
+        #resultMessage {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .score-box {
+            background: #eff6ff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .quiz-card {
+                padding: 18px;
+            }
+
+            #question {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion | Quiz Zone 🧠</p>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back-link">
+        ← Back to Home
+    </a>
+
+    <div class="quiz-card" id="quizScreen">
+
+        <span class="badge">💻 COMPUTER SCIENCE</span>
+
+        <div class="progress-info">
+            <span id="questionNumber">Question 1 of 5</span>
+            <span id="scoreDisplay">Score: 0</span>
+        </div>
+
+        <div class="progress-track">
+            <div id="progressBar"></div>
+        </div>
+
+        <h2 id="question">Question loading...</h2>
+
+        <div id="options"></div>
+
+        <p id="feedback" aria-live="polite"></p>
+
+        <button class="next-btn" id="nextBtn" disabled>
+            Next Question →
+        </button>
+
+    </div>
+
+    <div class="quiz-card" id="resultScreen">
+
+        <div class="trophy" id="trophy">🏆</div>
+
+        <h2>Quiz Completed!</h2>
+
+        <p>Your final score is</p>
+
+        <div id="finalScore">0 / 5</div>
+
+        <div class="score-box">
+            <p id="resultMessage"></p>
+        </div>
+
+        <button class="restart-btn" onclick="startQuiz()">
+            🔄 Try Again
+        </button>
+
+        <a href="courses.html"
+           class="back-link"
+           style="margin-top:20px">
+            📚 Explore Courses
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | Learn. Practice. Improve.
+</footer>
+
+<script>
+
+const questions = [
+    {
+        question: "1. Which function is the starting point of a C program?",
+        options: ["printf()", "main()", "scanf()", "return()"],
+        answer: 1,
+        explanation: "The main() function is the entry point of a C program."
+    },
+
+    {
+        question: "2. Which data type is used to store a whole number in C?",
+        options: ["float", "char", "int", "double"],
+        answer: 2,
+        explanation: "The int data type is used to store integer values."
+    },
+
+    {
+        question: "3. Which operator is used to get the address of a variable?",
+        options: ["*", "&", "%", "#"],
+        answer: 1,
+        explanation: "The & operator gives the memory address of a variable."
+    },
+
+    {
+        question: "4. Which loop executes its body at least once?",
+        options: ["for", "while", "do-while", "None of these"],
+        answer: 2,
+        explanation: "A do-while loop checks its condition after executing the body."
+    },
+
+    {
+        question: "5. Which operator accesses a structure member through a pointer?",
+        options: [".", "->", "&", "=="],
+        answer: 1,
+        explanation: "The arrow operator (->) accesses structure members through a pointer."
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz() {
+
+    currentQuestion = 0;
+    score = 0;
+    answered = false;
+
+    document.getElementById("quizScreen").style.display = "block";
+    document.getElementById("resultScreen").style.display = "none";
+
+    showQuestion();
+}
+
+function showQuestion() {
+
+    answered = false;
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("question").textContent = q.question;
+
+    document.getElementById("questionNumber").textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+    document.getElementById("scoreDisplay").textContent =
+        "Score: " + score;
+
+    document.getElementById("progressBar").style.width =
+        (currentQuestion / questions.length * 100) + "%";
+
+    document.getElementById("feedback").textContent = "";
+
+    const optionsContainer = document.getElementById("options");
+
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach(function(option, index) {
+
+        const button = document.createElement("button");
+
+        button.className = "option";
+        button.textContent =
+            String.fromCharCode(65 + index) + ") " + option;
+
+        button.addEventListener("click", function() {
+            checkAnswer(index, button);
+        });
+
+        optionsContainer.appendChild(button);
+    });
+
+    const nextBtn = document.getElementById("nextBtn");
+
+    nextBtn.disabled = true;
+
+    nextBtn.textContent =
+        currentQuestion === questions.length - 1
+        ? "See My Result 🏆"
+        : "Next Question →";
+}
+
+function checkAnswer(selected, selectedButton) {
+
+    if (answered) return;
+
+    answered = true;
+
+    const q = questions[currentQuestion];
+
+    const buttons = document.querySelectorAll(".option");
+
+    buttons.forEach(function(button) {
+        button.disabled = true;
+    });
+
+    const feedback = document.getElementById("feedback");
+
+    if (selected === q.answer) {
+
+        score++;
+
+        selectedButton.classList.add("correct");
+
+        feedback.textContent = "✅ Correct! " + q.explanation;
+        feedback.style.color = "#15803d";
+
+    } else {
+
+        selectedButton.classList.add("wrong");
+
+        buttons[q.answer].classList.add("correct");
+
+        feedback.textContent = "❌ Not quite! " + q.explanation;
+        feedback.style.color = "#b91c1c";
+    }
+
+    document.getElementById("scoreDisplay").textContent =
+        "Score: " + score;
+
+    document.getElementById("progressBar").style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
+
+    document.getElementById("nextBtn").disabled = false;
+}
+
+document.getElementById("nextBtn").addEventListener("click", function() {
+
+    if (!answered) return;
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        showResult();
+    }
+});
+
+function showResult() {
+
+    document.getElementById("quizScreen").style.display = "none";
+    document.getElementById("resultScreen").style.display = "block";
+
+    document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+    const percentage = (score / questions.length) * 100;
+
+    let message;
+    let trophy;
+
+    if (percentage === 100) {
+
+        message = "Perfect score! You've mastered this quiz. 🎉";
+        trophy = "🏆";
+
+    } else if (percentage >= 60) {
+
+        message = "Great job! Keep learning and practising. 💙";
+        trophy = "🥇";
+
+    } else {
+
+        message = "Good attempt! Review your lessons and try again. 💪";
+        trophy = "📚";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+
+    document.getElementById("trophy").textContent = trophy;
+
+    document.getElementById("progressBar").style.width = "100%";
+}
+
+startQuiz();
+
+</script>
+
+</body>
+</html>

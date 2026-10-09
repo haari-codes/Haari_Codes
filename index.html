@@ -1,0 +1,596 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Haari_Codes | CS Companion</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8faff;
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #4338ca;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #7c3aed;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 480px;
+            padding: 75px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+            background:
+                radial-gradient(circle at 85% 20%,
+                rgba(167, 139, 250, 0.35), transparent 30%),
+                linear-gradient(135deg, #eef2ff, #f5f3ff, #eff6ff);
+        }
+
+        .hero-content {
+            flex: 1 1 300px;
+            animation: slideUp 0.8s ease;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.12;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #4f46e5, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 480px;
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .primary {
+            color: white;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+        }
+
+        .secondary {
+            color: #4338ca;
+            background: white;
+            border: 1px solid #ddd6fe;
+        }
+
+        /* HERO VISUAL */
+
+        .hero-visual {
+            flex: 1 1 260px;
+            max-width: 390px;
+            min-height: 290px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .visual-card {
+            width: 270px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid white;
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(79, 70, 229, 0.15);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .code-icon {
+            width: 65px;
+            height: 65px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-size: 27px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .visual-card h3 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .visual-card p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .code-line {
+            height: 7px;
+            background: #e0e7ff;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .code-line:nth-child(2) {
+            width: 85%;
+        }
+
+        .code-line:nth-child(3) {
+            width: 65%;
+        }
+
+        .code-line:nth-child(4) {
+            width: 75%;
+        }
+
+        /* FEATURES */
+
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-heading span {
+            font-size: 12px;
+            font-weight: bold;
+            color: #7c3aed;
+            letter-spacing: 2px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(27px, 4vw, 36px);
+            margin: 12px 0;
+        }
+
+        .section-heading p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 27px;
+            border: 1px solid #e8eaf3;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 35px rgba(79, 70, 229, 0.1);
+            border-color: #c4b5fd;
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: #eef2ff;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 0 7% 70px;
+            padding: 45px 25px;
+            text-align: center;
+            color: white;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #4338ca, #7c3aed, #9333ea);
+        }
+
+        .cta h2 {
+            font-size: clamp(26px, 4vw, 36px);
+            margin-bottom: 14px;
+        }
+
+        .cta p {
+            line-height: 1.7;
+            color: #ede9fe;
+            margin-bottom: 25px;
+        }
+
+        .cta .btn {
+            background: white;
+            color: #5b21b6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+                text-align: center;
+                padding: 18px 5%;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 55px 6%;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                width: 100%;
+                min-height: 280px;
+            }
+
+            .section {
+                padding: 55px 6%;
+            }
+
+            .cta {
+                margin: 0 5% 50px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Haari<span>_Codes.</span></div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="quiz.html">Quiz Zone</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="tag">💻 YOUR CS LEARNING SPACE</span>
+
+        <h1>
+            Learn.<br>
+            Practice.<br>
+            <span>Improve.</span>
+        </h1>
+
+        <p>
+            Your companion on the journey of Computer Science.
+            Explore programming concepts, learn at your own pace,
+            and test your knowledge through interactive quizzes.
+        </p>
+
+        <div class="buttons">
+            <a href="courses.html" class="btn primary">
+                Start Learning →
+            </a>
+
+            <a href="quiz.html" class="btn secondary">
+                Take a Quiz 🧠
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="visual-card">
+
+            <div class="code-icon">&lt;/&gt;</div>
+
+            <h3>Think in Code.</h3>
+
+            <p>
+                Every expert was once a beginner.
+                Start learning one concept at a time.
+            </p>
+
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section" id="features">
+
+    <div class="section-heading">
+
+        <span>EXPLORE & LEARN</span>
+
+        <h2>Your Learning Toolkit</h2>
+
+        <p>
+            Everything you need to take your first steps in CS.
+        </p>
+
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📚</div>
+
+            <h3>Learn</h3>
+
+            <p>
+                Explore programming topics with simple explanations
+                and examples.
+            </p>
+
+            <a href="courses.html">Explore Courses →</a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🧠</div>
+
+            <h3>Quiz Zone</h3>
+
+            <p>
+                Test your Computer Science knowledge with
+                interactive multiple-choice questions.
+            </p>
+
+            <a href="quiz.html">Start Quiz →</a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">💻</div>
+
+            <h3>Programming</h3>
+
+            <p>
+                Begin with C Programming and build your
+                understanding step by step.
+            </p>
+
+            <a href="c-programming.html">Explore C →</a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🚀</div>
+
+            <h3>Keep Improving</h3>
+
+            <p>
+                Learn consistently, practise concepts,
+                and grow your problem-solving skills.
+            </p>
+
+            <a href="courses.html">Continue Learning →</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta">
+
+    <h2>Your CS Journey Starts Here.</h2>
+
+    <p>
+        Take the first step today.<br>
+        Learn something new, one concept at a time.
+    </p>
+
+    <a href="courses.html" class="btn">
+        Explore Courses →
+    </a>
+
+</section>
+
+<footer>
+
+    <h3>Haari_Codes</h3>
+
+    <p>CS Companion</p>
+
+    <p>Learn. Practice. Improve.</p>
+
+    <p style="margin-top:15px;">
+        © 2026 Haari_Codes. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

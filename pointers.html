@@ -1,0 +1,516 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Pointers - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .memory {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .memory-box {
+            background: #dbeafe;
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .memory-box strong {
+            display: block;
+            color: #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>10. Pointers</h2>
+
+    <div class="lesson">
+        <h2>📘 What is a Pointer?</h2>
+
+        <p>
+            A pointer is a variable that stores the memory
+            address of another object, such as a variable.
+        </p>
+
+        <div class="example">
+            <strong>Simple idea:</strong>
+
+            <p>
+                A normal variable stores a value.
+                A pointer stores the address where that
+                value is located.
+            </p>
+
+            <div class="memory">
+
+                <div class="memory-box">
+                    <strong>Variable x</strong>
+                    Value: 10
+                </div>
+
+                <div class="memory-box">
+                    <strong>Pointer p</strong>
+                    Stores x's address
+                </div>
+
+            </div>
+
+            <p>
+                The actual memory address depends on the
+                computer and program execution.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ Pointer Declaration</h2>
+
+        <p>General syntax:</p>
+
+        <div class="code">
+<pre>
+data_type *pointer_name;
+</pre>
+        </div>
+
+        <p>Example:</p>
+
+        <div class="code">
+<pre>
+int *p;
+float *q;
+char *r;
+</pre>
+        </div>
+
+        <p>
+            Here, p can point to an int object, q to a float
+            object, and r to a char object.
+        </p>
+
+        <p>
+            The asterisk in a declaration indicates that
+            the variable is a pointer.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ Address Operator (&amp;)</h2>
+
+        <p>
+            The address operator <strong>&amp;</strong>
+            gives the memory address of a variable.
+        </p>
+
+        <div class="code">
+<pre>
+int x = 10;
+
+printf("%p", (void *)&x);
+</pre>
+        </div>
+
+        <p>
+            Here, &amp;x means the address of x.
+            The actual address may differ each time.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ Pointer Initialization</h2>
+
+        <p>
+            We can initialize a pointer using the address
+            of a compatible variable.
+        </p>
+
+        <div class="code">
+<pre>
+int x = 10;
+int *p = &x;
+</pre>
+        </div>
+
+        <p>
+            Now p stores the address of x.
+        </p>
+
+        <div class="example">
+            <strong>Remember:</strong>
+
+            <p>
+                Make sure a pointer is initialized to a valid
+                object or set to NULL before dereferencing it.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>4️⃣ Dereference Operator (*)</h2>
+
+        <p>
+            The dereference operator <strong>*</strong>
+            accesses the value of the object pointed to
+            by a valid pointer.
+        </p>
+
+        <div class="code">
+<pre>
+int x = 10;
+int *p = &x;
+
+printf("%d", *p);
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+            <p>10</p>
+
+            <p>
+                Since p points to x, *p gives the value
+                stored in x.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>5️⃣ Complete Example Program</h2>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 10;
+    int *p = &x;
+
+    printf("Value of x = %d\n", x);
+    printf("Value using pointer = %d\n", *p);
+
+    *p = 25;
+
+    printf("Updated value of x = %d\n", x);
+
+    return 0;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <div class="code">
+<pre>
+Value of x = 10
+Value using pointer = 10
+Updated value of x = 25
+</pre>
+            </div>
+
+            <p>
+                When we write *p = 25, we change the value
+                of x because p points to x.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>6️⃣ Important Difference</h2>
+
+        <div class="code">
+<pre>
+int x = 10;
+int *p = &x;
+</pre>
+        </div>
+
+        <ul>
+            <li><strong>x:</strong> The value of the variable is 10.</li>
+            <li><strong>&amp;x:</strong> The address of x.</li>
+            <li><strong>p:</strong> The address stored in the pointer.</li>
+            <li><strong>*p:</strong> The value of x, which is 10.</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Quick Revision</h2>
+
+        <ul>
+            <li>A pointer stores an address.</li>
+            <li>&amp; is the address-of operator.</li>
+            <li>* is used to declare a pointer and to dereference it in expressions.</li>
+            <li>Dereferencing an invalid pointer causes undefined behaviour.</li>
+            <li>A pointer can modify a variable through its address.</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <p>
+            <strong>Question:</strong><br><br>
+            What does *p give when p points to the
+            integer variable x?
+        </p>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) The address of p
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                B) The value stored in x
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                C) The data type of x
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) The name of x
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="strings.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn">
+            Next Lesson →
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! *p accesses the value stored in x.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is the value stored in x.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("value stored in x")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

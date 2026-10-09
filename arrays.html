@@ -1,0 +1,465 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Arrays - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>08. Arrays</h2>
+
+    <div class="lesson">
+        <h2>📘 What is an Array?</h2>
+
+        <p>
+            An array is a collection of elements of the same
+            data type stored under a single name.
+        </p>
+
+        <p>
+            Instead of creating separate variables for
+            multiple values, we can store them in an array.
+        </p>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <p>
+                Imagine you have marks for five subjects.
+                An array can store all five marks using one name.
+            </p>
+
+            <div class="code">
+<pre>
+int marks[5] = {80, 75, 90, 85, 70};
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ Array Declaration</h2>
+
+        <p>The general syntax is:</p>
+
+        <div class="code">
+<pre>
+data_type array_name[size];
+</pre>
+        </div>
+
+        <p>Example:</p>
+
+        <div class="code">
+<pre>
+int numbers[5];
+float prices[10];
+char letters[4];
+</pre>
+        </div>
+
+        <ul>
+            <li><strong>int:</strong> Data type</li>
+            <li><strong>numbers:</strong> Array name</li>
+            <li><strong>5:</strong> Number of elements</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ Array Initialization</h2>
+
+        <p>
+            Initialization means assigning initial values
+            to the array elements.
+        </p>
+
+        <div class="code">
+<pre>
+int numbers[5] = {10, 20, 30, 40, 50};
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Array elements:</strong>
+
+            <div class="code">
+<pre>
+Index:    0   1   2   3   4
+Value:   10  20  30  40  50
+</pre>
+            </div>
+
+            <p>
+                Important: In C, array indexing starts from 0.
+                Therefore, an array of five elements has indices
+                from 0 to 4.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ Accessing Array Elements</h2>
+
+        <p>
+            We can access an element using the array name
+            and its index.
+        </p>
+
+        <div class="code">
+<pre>
+int numbers[5] = {10, 20, 30, 40, 50};
+
+printf("%d", numbers[0]);
+printf("%d", numbers[2]);
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <div class="code">
+<pre>
+10
+30
+</pre>
+            </div>
+
+            <p>
+                <strong>numbers[0]</strong> gives 10.
+                <strong>numbers[2]</strong> gives 30.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>4️⃣ Traversing an Array</h2>
+
+        <p>
+            Traversing means visiting each element of an array,
+            usually using a loop.
+        </p>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int numbers[5] = {10, 20, 30, 40, 50};
+    int i;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        printf("%d ", numbers[i]);
+    }
+
+    return 0;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <p>10 20 30 40 50</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>5️⃣ Reading Array Elements</h2>
+
+        <p>
+            We can use a loop with scanf() to read values
+            from the user.
+        </p>
+
+        <div class="code">
+<pre>
+int numbers[5];
+int i;
+
+for(i = 0; i &lt; 5; i++)
+{
+    scanf("%d", &numbers[i]);
+}
+</pre>
+        </div>
+
+        <p>
+            The expression <strong>&numbers[i]</strong> gives
+            the address where the input value should be stored.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Important Points</h2>
+
+        <ul>
+            <li>All elements normally have the same data type.</li>
+            <li>Array indexing starts from 0.</li>
+            <li>The last valid index is size minus 1.</li>
+            <li>Array elements can be accessed using their indices.</li>
+            <li>Loops make it easier to process arrays.</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <p>
+            <strong>Question:</strong><br><br>
+            What is the index of the first element in a C array?
+        </p>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) 1
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                B) 0
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                C) -1
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) 2
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="functions.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn">
+            Next Lesson →
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! Array indexing in C starts from 0.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is 0.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("0")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

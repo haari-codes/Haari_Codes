@@ -1,0 +1,380 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Introduction to C | Haari Codes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .lesson {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .lesson h2 {
+            margin-bottom: 12px;
+        }
+
+        .lesson p {
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .lesson ul {
+            padding-left: 22px;
+            color: #475569;
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .question {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            border: none;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background: #111827;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.options button {
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1f2937;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.options button:hover {
+    background: #dbeafe;
+}
+
+.options button.correct {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.options button.wrong {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+#result {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 25px 0 15px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.nav-btn.disabled {
+    background: #b8c0cc;
+    color: #666;
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back">
+        ← Back to C Programming
+    </a>
+
+    <div class="lesson">
+        <h2>01. Introduction to C</h2>
+
+        <p>
+            C is a general-purpose programming language that is
+            widely used for system programming, application
+            development and learning programming fundamentals.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>💡 What is C?</h2>
+
+        <p>
+            C is a structured programming language that allows
+            programmers to write instructions that a computer
+            can execute.
+        </p>
+
+        <p>
+            It is known for being fast, efficient and close to
+            the hardware.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>⭐ Features of C</h2>
+
+        <ul>
+            <li>Simple and structured</li>
+            <li>Fast and efficient</li>
+            <li>Portable</li>
+            <li>Supports functions</li>
+            <li>Provides low-level memory access</li>
+            <li>Widely used in system programming</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>💻 Your First C Program</h2>
+
+        <p>
+            Here is a simple C program that prints
+            "Hello, World!" on the screen.
+        </p>
+
+        <div class="code">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello, World!");
+
+    return 0;
+}
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>🔍 Understanding the Program</h2>
+
+        <p>
+            <strong>#include &lt;stdio.h&gt;</strong>
+            gives access to standard input and output functions.
+        </p>
+
+        <p>
+            <strong>int main()</strong>
+            is the starting point of the C program.
+        </p>
+
+        <p>
+            <strong>printf()</strong>
+            is used to display output.
+        </p>
+
+        <p>
+            <strong>return 0;</strong>
+            indicates that the program finished successfully.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+<div class="lesson">
+    <h2>🧠 Quick Check</h2>
+
+    <div class="question">
+        <strong>Question:</strong><br><br>
+
+        Which function is used to display output
+        in a basic C program?
+    </div>
+
+    <div class="options">
+        <button onclick="checkAnswer(this, false)">A) scanf()</button>
+
+        <button onclick="checkAnswer(this, true)">B) printf()</button>
+
+        <button onclick="checkAnswer(this, false)">C) main()</button>
+
+        <button onclick="checkAnswer(this, false)">D) return</button>
+    </div>
+
+    <p id="result"></p>
+</div>
+
+        
+    </div>
+<div class="lesson-navigation">
+
+    <button class="nav-btn disabled" disabled>
+        ← Previous Lesson
+    </button>
+
+    <a href="variables.html" class="nav-btn">
+        Next Lesson →
+    </a>
+
+</div>
+
+<button class="complete-btn" id="completeBtn">
+    ✅ Mark as Completed
+</button>
+</div>
+
+<footer>
+    © 2026 Haari Codes • CS Companion
+</footer>
+<script>
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+        button.classList.add("correct");
+        result.textContent = "🎉 Correct! printf() is used to display output.";
+        result.style.color = "#166534";
+    } else {
+        button.classList.add("wrong");
+        result.textContent = "❌ Not quite! The correct answer is printf().";
+        result.style.color = "#991b1b";
+        
+        buttons.forEach(function(btn) {
+            if (btn.textContent.includes("printf")) {
+                btn.classList.add("correct");
+            }
+        });
+    }
+}
+function markCompleted() {
+
+    localStorage.setItem("cIntroductionCompleted", "true");
+
+    const button = document.getElementById("completeBtn");
+
+    button.textContent = "✅ Lesson Completed";
+    button.style.background = "#16a34a";
+    button.disabled = true;
+}
+window.onload = function() {
+
+    const completed = localStorage.getItem("cIntroductionCompleted");
+
+    if (completed === "true") {
+
+        const button = document.getElementById("completeBtn");
+
+        button.textContent = "✅ Lesson Completed";
+        button.style.background = "#16a34a";
+        button.disabled = true;
+    }
+};
+document.getElementById("completeBtn").addEventListener("click", function() {
+    this.textContent = "✅ Lesson Completed";
+    this.style.backgroundColor = "#16a34a";
+    this.disabled = true;
+});
+
+</script>
+</body>
+</html>

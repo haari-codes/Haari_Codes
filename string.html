@@ -1,0 +1,537 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Strings - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>09. Strings</h2>
+
+    <div class="lesson">
+        <h2>📘 What is a String?</h2>
+
+        <p>
+            A string is a sequence of characters terminated
+            by a special character called the null character
+            <strong>'\0'</strong>.
+        </p>
+
+        <p>
+            In C, strings are stored using character arrays.
+        </p>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <div class="code">
+<pre>
+char name[] = "Haari";
+</pre>
+            </div>
+
+            <p>
+                Here, the characters H, a, a, r, i and the
+                terminating null character are stored in memory.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ String Declaration</h2>
+
+        <p>General syntax:</p>
+
+        <div class="code">
+<pre>
+char string_name[size];
+</pre>
+        </div>
+
+        <p>Example:</p>
+
+        <div class="code">
+<pre>
+char name[20];
+char city[30];
+</pre>
+        </div>
+
+        <p>
+            The array size determines how many characters
+            can fit, including the terminating '\0'.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ String Initialization</h2>
+
+        <p>
+            We can initialize a string while declaring it.
+        </p>
+
+        <div class="code">
+<pre>
+char name[] = "Haari";
+</pre>
+        </div>
+
+        <p>This is equivalent to:</p>
+
+        <div class="code">
+<pre>
+char name[] = {'H', 'a', 'a', 'r', 'i', '\0'};
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Remember:</strong>
+            <p>
+                A C string needs a terminating null character
+                to mark the end of the string.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ Displaying a String</h2>
+
+        <p>
+            We can use printf() with the %s format specifier
+            to display a string.
+        </p>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Haari";
+
+    printf("%s", name);
+
+    return 0;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+            <p>Haari</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>4️⃣ Reading a String</h2>
+
+        <p>
+            scanf() with %s can read a word from the user.
+            It stops reading at whitespace.
+        </p>
+
+        <div class="code">
+<pre>
+char name[30];
+
+scanf("%29s", name);
+
+printf("%s", name);
+</pre>
+        </div>
+
+        <p>
+            The width limit helps prevent input from exceeding
+            the available array space.
+        </p>
+
+        <div class="example">
+            <strong>Example input:</strong>
+            <p>Haari</p>
+
+            <strong>Output:</strong>
+            <p>Haari</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>5️⃣ Important String Functions</h2>
+
+        <p>
+            Include <strong>&lt;string.h&gt;</strong> to use
+            these standard string functions.
+        </p>
+
+        <h3>📏 strlen()</h3>
+
+        <p>
+            Returns the number of characters before '\0'.
+        </p>
+
+        <div class="code">
+<pre>
+strlen("Hello");
+</pre>
+        </div>
+
+        <p>Result: 5</p>
+
+        <h3>📋 strcpy()</h3>
+
+        <p>Copies a string into another character array.</p>
+
+        <div class="code">
+<pre>
+char source[] = "Hello";
+char destination[20];
+
+strcpy(destination, source);
+</pre>
+        </div>
+
+        <h3>⚖️ strcmp()</h3>
+
+        <p>Compares two strings.</p>
+
+        <div class="code">
+<pre>
+strcmp("Apple", "Apple");
+</pre>
+        </div>
+
+        <p>
+            Result: 0, because both strings are equal.
+            A nonzero result indicates a difference.
+        </p>
+
+        <h3>🔗 strcat()</h3>
+
+        <p>Appends one string to the end of another.</p>
+
+        <div class="code">
+<pre>
+char a[20] = "Hello ";
+char b[] = "World";
+
+strcat(a, b);
+</pre>
+        </div>
+
+        <p>Result stored in a: Hello World</p>
+
+        <div class="example">
+            <strong>Important:</strong>
+            <p>
+                The destination array must have enough space
+                for the combined string and its '\0' character.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>💻 Complete Example Program</h2>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char name[] = "Haari";
+
+    printf("Name = %s\n", name);
+    printf("Length = %zu", strlen(name));
+
+    return 0;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <div class="code">
+<pre>
+Name = Haari
+Length = 5
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Important Points</h2>
+
+        <ul>
+            <li>Strings in C are stored as character arrays.</li>
+            <li>The null character '\0' marks the end of a string.</li>
+            <li>%s is commonly used to display strings.</li>
+            <li>strlen() finds the string length.</li>
+            <li>strcpy() copies a string.</li>
+            <li>strcmp() compares strings.</li>
+            <li>strcat() joins strings.</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <p>
+            <strong>Question:</strong><br><br>
+            Which function is used to find the length
+            of a string in C?
+        </p>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) strcpy()
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                B) strlen()
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                C) strcat()
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) strcmp()
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="arrays.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn">
+            Next Lesson →
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! strlen() returns the length of a string.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is strlen().";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("strlen")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

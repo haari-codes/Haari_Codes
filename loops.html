@@ -1,0 +1,424 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Loops - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:hover {
+            background: #dbeafe;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>06. Loops</h2>
+
+    <div class="lesson">
+        <h2>🔁 What is a Loop?</h2>
+
+        <p>
+            A loop is used to execute a block of code repeatedly
+            until a particular condition becomes false.
+        </p>
+
+        <p>
+            In C, the main types of loops are:
+        </p>
+
+        <ul>
+            <li><strong>for loop</strong></li>
+            <li><strong>while loop</strong></li>
+            <li><strong>do-while loop</strong></li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ for Loop</h2>
+
+        <p>
+            The <strong>for loop</strong> is commonly used when
+            we know how many times the loop should execute.
+        </p>
+
+        <div class="code">
+<pre>
+for(initialization; condition; update)
+{
+    // statements
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}
+</pre>
+            </div>
+
+            <p><strong>Output:</strong> 1 2 3 4 5</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ while Loop</h2>
+
+        <p>
+            The <strong>while loop</strong> executes the statements
+            as long as the condition is true.
+        </p>
+
+        <div class="code">
+<pre>
+while(condition)
+{
+    // statements
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <div class="code">
+<pre>
+int i = 1;
+
+while(i &lt;= 5)
+{
+    printf("%d ", i);
+    i++;
+}
+</pre>
+            </div>
+
+            <p><strong>Output:</strong> 1 2 3 4 5</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ do-while Loop</h2>
+
+        <p>
+            The <strong>do-while loop</strong> executes the statements
+            at least once before checking the condition.
+        </p>
+
+        <div class="code">
+<pre>
+do
+{
+    // statements
+}
+while(condition);
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <div class="code">
+<pre>
+int i = 1;
+
+do
+{
+    printf("%d ", i);
+    i++;
+}
+while(i &lt;= 5);
+</pre>
+            </div>
+
+            <p><strong>Output:</strong> 1 2 3 4 5</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Difference Between Loops</h2>
+
+        <ul>
+            <li>
+                <strong>for:</strong> Best when the number of iterations is known.
+            </li>
+
+            <li>
+                <strong>while:</strong> Condition is checked before execution.
+            </li>
+
+            <li>
+                <strong>do-while:</strong> Executes at least once.
+            </li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <div class="question">
+            <strong>Question:</strong><br><br>
+
+            Which loop is guaranteed to execute at least once?
+        </div>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) for loop
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                B) while loop
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                C) do-while loop
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) None
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="conditional-statements.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn">
+            Next Lesson →
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! A do-while loop executes at least once.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is do-while loop.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("do-while")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

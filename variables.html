@@ -1,0 +1,419 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Variables & Data Types | Haari Codes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .lesson {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .lesson h2 {
+            margin-bottom: 12px;
+        }
+
+        .lesson p {
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .lesson ul {
+            padding-left: 22px;
+            color: #475569;
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #dbe2ea;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background: #eff6ff;
+        }
+
+        .question {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 25px 0 15px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-btn.disabled {
+            background: #b8c0cc;
+            color: #666;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            border: none;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background: #111827;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back">
+        ← Back to C Programming
+    </a>
+
+    <div class="lesson">
+        <h2>02. Variables & Data Types</h2>
+
+        <p>
+            Variables and data types are fundamental concepts
+            in C programming. They help us store and work
+            with different kinds of data.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>💡 What is a Variable?</h2>
+
+        <p>
+            A variable is a named memory location used to
+            store a value that can change during program
+            execution.
+        </p>
+
+        <p>
+            Every variable in C has a data type, a name
+            and a value.
+        </p>
+
+        <div class="code">
+int age = 18;
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>🧩 Parts of a Variable</h2>
+
+        <div class="code">
+int age = 18;
+        </div>
+
+        <p>
+            <strong>int</strong> → Data type
+        </p>
+
+        <p>
+            <strong>age</strong> → Variable name
+        </p>
+
+        <p>
+            <strong>18</strong> → Value
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>📦 Common Data Types</h2>
+
+        <table class="data-table">
+            <tr>
+                <th>Data Type</th>
+                <th>Used For</th>
+                <th>Example</th>
+            </tr>
+
+            <tr>
+                <td>int</td>
+                <td>Whole numbers</td>
+                <td>25</td>
+            </tr>
+
+            <tr>
+                <td>float</td>
+                <td>Decimal numbers</td>
+                <td>3.14</td>
+            </tr>
+
+            <tr>
+                <td>char</td>
+                <td>Single character</td>
+                <td>'A'</td>
+            </tr>
+
+            <tr>
+                <td>double</td>
+                <td>Large decimal values</td>
+                <td>25.6789</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="lesson">
+        <h2>💻 Example Program</h2>
+
+        <div class="code">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 18;
+    float height = 1.65;
+    char grade = 'A';
+
+    printf("Age: %d\n", age);
+    printf("Height: %.2f\n", height);
+    printf("Grade: %c\n", grade);
+
+    return 0;
+}
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <div class="question">
+            <strong>Question:</strong><br><br>
+
+            Which data type is normally used to store
+            a whole number in C?
+        </div>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) float
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                B) int
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                C) char
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) double
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson-navigation">
+
+        <a href="c-introduction.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn disabled">
+            Next Lesson →
+        </a>
+
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+        ✅ Mark as Completed
+    </button>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes • CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! int is used to store whole numbers.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is int.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("int")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

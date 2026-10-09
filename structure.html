@@ -1,0 +1,521 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Structures - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>11. Structures</h2>
+
+    <div class="lesson">
+        <h2>📘 What is a Structure?</h2>
+
+        <p>
+            A structure is a user-defined data type in C
+            that groups related variables, possibly of
+            different data types, under one name.
+        </p>
+
+        <div class="example">
+            <strong>Real-life example:</strong>
+
+            <p>
+                A student has a name, roll number and mark.
+                We can group these details using a structure.
+            </p>
+
+            <div class="code">
+<pre>
+Name: Haari
+Roll Number: 101
+Mark: 95
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ Structure Declaration</h2>
+
+        <p>
+            We use the keyword <strong>struct</strong>
+            to declare a structure.
+        </p>
+
+        <div class="code">
+<pre>
+struct Student
+{
+    char name[30];
+    int roll;
+    float mark;
+};
+</pre>
+        </div>
+
+        <p>
+            Here, Student is the structure tag.
+            It contains three members: name, roll and mark.
+        </p>
+
+        <ul>
+            <li><strong>char name[30]:</strong> Stores the name.</li>
+            <li><strong>int roll:</strong> Stores the roll number.</li>
+            <li><strong>float mark:</strong> Stores the mark.</li>
+        </ul>
+
+        <p>
+            Notice the semicolon after the closing brace.
+            It is required in a structure declaration.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ Declaring a Structure Variable</h2>
+
+        <p>
+            After defining the structure type, we can
+            declare variables of that type.
+        </p>
+
+        <div class="code">
+<pre>
+struct Student s1;
+</pre>
+        </div>
+
+        <p>
+            Here, s1 is a structure variable.
+            It can hold the name, roll number and mark
+            of one student.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ Structure Initialization</h2>
+
+        <p>
+            We can assign initial values when declaring
+            a structure variable.
+        </p>
+
+        <div class="code">
+<pre>
+struct Student
+{
+    char name[30];
+    int roll;
+    float mark;
+};
+
+struct Student s1 = {"Haari", 101, 95.5f};
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Values stored in s1:</strong>
+
+            <div class="code">
+<pre>
+name = Haari
+roll = 101
+mark = 95.5
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>4️⃣ Accessing Structure Members</h2>
+
+        <p>
+            The dot operator <strong>.</strong> is used
+            to access members of a structure variable.
+        </p>
+
+        <div class="code">
+<pre>
+s1.roll = 101;
+s1.mark = 95.5f;
+
+printf("%d", s1.roll);
+printf("%.1f", s1.mark);
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <div class="code">
+<pre>
+101
+95.5
+</pre>
+            </div>
+
+            <p>
+                s1.roll accesses the roll member.
+                s1.mark accesses the mark member.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>5️⃣ Complete Example Program</h2>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+struct Student
+{
+    char name[30];
+    int roll;
+    float mark;
+};
+
+int main()
+{
+    struct Student s1 = {"Haari", 101, 95.5f};
+
+    printf("Name: %s\n", s1.name);
+    printf("Roll: %d\n", s1.roll);
+    printf("Mark: %.1f\n", s1.mark);
+
+    return 0;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+
+            <div class="code">
+<pre>
+Name: Haari
+Roll: 101
+Mark: 95.5
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>6️⃣ Pointer to a Structure</h2>
+
+        <p>
+            A structure pointer stores the address of
+            a structure variable.
+        </p>
+
+        <div class="code">
+<pre>
+struct Student s1 = {"Haari", 101, 95.5f};
+
+struct Student *p = &s1;
+</pre>
+        </div>
+
+        <p>
+            Here, p points to the structure variable s1.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>7️⃣ Arrow Operator (-&gt;)</h2>
+
+        <p>
+            The arrow operator <strong>-&gt;</strong>
+            accesses a structure member through a pointer.
+        </p>
+
+        <div class="code">
+<pre>
+printf("%d", p->roll);
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+            <p>101</p>
+
+            <p>
+                p-&gt;roll is equivalent to (*p).roll.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Important Points</h2>
+
+        <ul>
+            <li>struct is used to define a structure type.</li>
+            <li>A structure can contain different data types.</li>
+            <li>The dot operator accesses members through a structure variable.</li>
+            <li>A structure pointer stores the address of a structure.</li>
+            <li>The arrow operator accesses members through a pointer.</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <p>
+            <strong>Question:</strong><br><br>
+            Which operator is used to access a member
+            through a structure pointer?
+        </p>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) .
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                B) &
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                C) ->
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) %
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="pointers.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="c-programming.html" class="nav-btn">
+            Back to Course
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! The arrow operator accesses structure members through a pointer.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is ->.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("->")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>

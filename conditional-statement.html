@@ -1,0 +1,514 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Conditional Statements | Haari Codes</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+header p {
+    color: #cbd5e1;
+    margin-top: 5px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.lesson {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.lesson h2 {
+    margin-bottom: 12px;
+}
+
+.lesson p {
+    color: #475569;
+    margin-bottom: 12px;
+}
+
+.lesson ul {
+    padding-left: 22px;
+    color: #475569;
+}
+
+.code {
+    background: #111827;
+    color: #e5e7eb;
+    padding: 18px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin-top: 15px;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.info {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.question {
+    background: #eff6ff;
+    border-left: 5px solid #2563eb;
+    padding: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.options button {
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1f2937;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.options button.correct {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.options button.wrong {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+#result {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.lesson-navigation {
+    display: flex;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.complete-btn {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background: #111827;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Haari Codes</h1>
+
+<p>CS Companion</p>
+
+</header>
+
+
+<div class="container">
+
+
+<a href="c-programming.html" class="back">
+← Back to C Programming
+</a>
+
+
+<div class="lesson">
+
+<h2>05. Conditional Statements</h2>
+
+<p>
+Conditional statements are used to make decisions
+in a C program.
+</p>
+
+<p>
+They allow a program to execute different blocks
+of code depending on a condition.
+</p>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🤔 What is a Condition?</h2>
+
+<p>
+A condition is an expression that can be either
+<strong>true</strong> or <strong>false</strong>.
+</p>
+
+<div class="code">
+
+age >= 18
+
+</div>
+
+<div class="info">
+
+If the condition is true, one block of code
+can be executed.
+
+<br><br>
+
+If the condition is false, another block can
+be executed.
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🔹 if Statement</h2>
+
+<p>
+The <strong>if</strong> statement executes a block
+of code only when the condition is true.
+</p>
+
+<div class="code">
+
+if (age >= 18)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("You are an adult");
+}
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🔹 if-else Statement</h2>
+
+<p>
+The <strong>if-else</strong> statement is used when
+there are two possible outcomes.
+</p>
+
+<div class="code">
+
+if (age >= 18)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Adult");
+}
+else
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Minor");
+}
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🔹 else-if Statement</h2>
+
+<p>
+The <strong>else-if</strong> statement is used when
+there are multiple conditions to check.
+</p>
+
+<div class="code">
+
+if (mark >= 90)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("A Grade");
+}
+else if (mark >= 75)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("B Grade");
+}
+else
+{
+&nbsp;&nbsp;&nbsp;&nbsp;printf("C Grade");
+}
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🔹 switch Statement</h2>
+
+<p>
+The <strong>switch</strong> statement is useful when
+we need to choose between multiple fixed options.
+</p>
+
+<div class="code">
+
+switch(choice)
+{
+&nbsp;&nbsp;&nbsp;&nbsp;case 1:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("One");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+
+&nbsp;&nbsp;&nbsp;&nbsp;case 2:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Two");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;
+
+&nbsp;&nbsp;&nbsp;&nbsp;default:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Invalid choice");
+}
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>💻 Example Program</h2>
+
+<div class="code">
+
+#include &lt;stdio.h&gt;
+
+int main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;int number;
+
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Enter a number: ");
+&nbsp;&nbsp;&nbsp;&nbsp;scanf("%d", &amp;number);
+
+&nbsp;&nbsp;&nbsp;&nbsp;if (number &gt; 0)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Positive number");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else if (number &lt; 0)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Negative number");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Zero");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;return 0;
+}
+
+</div>
+
+</div>
+
+
+<div class="lesson">
+
+<h2>🧠 Quick Check</h2>
+
+<div class="question">
+
+<strong>Question:</strong><br><br>
+
+Which statement is used to make a decision
+based on a condition?
+
+</div>
+
+<div class="options">
+
+<button onclick="checkAnswer(this, true)">
+A) if
+</button>
+
+<button onclick="checkAnswer(this, false)">
+B) printf()
+</button>
+
+<button onclick="checkAnswer(this, false)">
+C) scanf()
+</button>
+
+<button onclick="checkAnswer(this, false)">
+D) return
+</button>
+
+</div>
+
+<p id="result"></p>
+
+</div>
+
+
+<div class="lesson-navigation">
+
+<a href="input-output.html" class="nav-btn">
+← Previous Lesson
+</a>
+
+<a href="#" class="nav-btn">
+Next Lesson →
+</a>
+
+</div>
+
+
+<button class="complete-btn" id="completeBtn">
+
+✅ Mark as Completed
+
+</button>
+
+
+</div>
+
+
+<footer>
+
+© 2026 Haari Codes • CS Companion
+
+</footer>
+
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! The if statement is used to make decisions.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is if.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("if")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+
+</body>
+
+</html>

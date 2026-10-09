@@ -1,0 +1,465 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+    <title>Functions - Haari Codes</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1f2937;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        .lesson {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .code {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+
+        .example {
+            background: #eff6ff;
+            padding: 15px;
+            border-left: 5px solid #2563eb;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .options button {
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #1f2937;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .options button:disabled {
+            cursor: default;
+        }
+
+        .options button.correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .options button.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari Codes</h1>
+    <p>CS Companion</p>
+</header>
+
+<div class="container">
+
+    <a href="c-programming.html" class="back-btn">
+        ← Back to C Programming
+    </a>
+
+    <h2>07. Functions</h2>
+
+    <div class="lesson">
+        <h2>📘 What is a Function?</h2>
+
+        <p>
+            A function is a block of code that performs
+            a specific task. It helps us divide a large
+            program into smaller, manageable parts.
+        </p>
+
+        <p><strong>Advantages of functions:</strong></p>
+
+        <ul>
+            <li>Code reusability</li>
+            <li>Easy debugging</li>
+            <li>Better program organization</li>
+            <li>Less code repetition</li>
+        </ul>
+    </div>
+
+    <div class="lesson">
+        <h2>🧩 Types of Functions</h2>
+
+        <p>C functions can be broadly classified into:</p>
+
+        <ul>
+            <li><strong>Library functions:</strong> Predefined functions such as printf() and scanf().</li>
+            <li><strong>User-defined functions:</strong> Functions created by the programmer.</li>
+        </ul>
+
+        <div class="example">
+            <strong>Example:</strong>
+
+            <div class="code">
+<pre>
+printf("Hello");
+</pre>
+            </div>
+
+            <p>
+                Here, printf() is a library function used
+                to display output.
+            </p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>1️⃣ Function Declaration</h2>
+
+        <p>
+            A function declaration tells the compiler
+            the function's name, return type and parameters.
+        </p>
+
+        <div class="code">
+<pre>
+int add(int, int);
+</pre>
+        </div>
+
+        <p>
+            Here, <strong>int</strong> is the return type,
+            <strong>add</strong> is the function name, and
+            the two integers are its parameters.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>2️⃣ Function Definition</h2>
+
+        <p>
+            A function definition contains the actual
+            statements that perform the task.
+        </p>
+
+        <div class="code">
+<pre>
+int add(int a, int b)
+{
+    return a + b;
+}
+</pre>
+        </div>
+
+        <p>
+            This function receives two integers and
+            returns their sum.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>3️⃣ Function Call</h2>
+
+        <p>
+            A function call executes the function.
+            We call a function using its name and arguments.
+        </p>
+
+        <div class="code">
+<pre>
+int result = add(10, 20);
+</pre>
+        </div>
+
+        <p>
+            Here, 10 and 20 are passed to the function.
+            The returned value, 30, is stored in result.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>💻 Complete Example Program</h2>
+
+        <div class="code">
+<pre>
+#include &lt;stdio.h&gt;
+
+int add(int, int);
+
+int main()
+{
+    int result;
+
+    result = add(10, 20);
+
+    printf("Sum = %d", result);
+
+    return 0;
+}
+
+int add(int a, int b)
+{
+    return a + b;
+}
+</pre>
+        </div>
+
+        <div class="example">
+            <strong>Output:</strong>
+            <p>Sum = 30</p>
+        </div>
+    </div>
+
+    <div class="lesson">
+        <h2>📌 Parameters and Arguments</h2>
+
+        <p>
+            <strong>Parameters:</strong> Variables listed in
+            the function definition.
+        </p>
+
+        <p>
+            <strong>Arguments:</strong> Actual values passed
+            when the function is called.
+        </p>
+
+        <div class="code">
+<pre>
+int add(int a, int b)
+{
+    return a + b;
+}
+
+add(5, 3);
+</pre>
+        </div>
+
+        <p>
+            In this example, a and b are parameters.
+            The values 5 and 3 are arguments.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>↩️ Return Value</h2>
+
+        <p>
+            The return statement sends a value back to
+            the calling function.
+        </p>
+
+        <div class="code">
+<pre>
+int square(int n)
+{
+    return n * n;
+}
+</pre>
+        </div>
+
+        <p>
+            Calling square(4) returns 16.
+        </p>
+    </div>
+
+    <div class="lesson">
+        <h2>🧠 Quick Check</h2>
+
+        <p>
+            <strong>Question:</strong><br><br>
+            Which keyword is used to send a value back
+            from a function?
+        </p>
+
+        <div class="options">
+
+            <button onclick="checkAnswer(this, false)">
+                A) break
+            </button>
+
+            <button onclick="checkAnswer(this, true)">
+                B) return
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                C) continue
+            </button>
+
+            <button onclick="checkAnswer(this, false)">
+                D) printf
+            </button>
+
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="lesson">
+        <button class="complete-btn" id="completeBtn">
+            ✅ Mark as Completed
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <a href="loops.html" class="nav-btn">
+            ← Previous Lesson
+        </a>
+
+        <a href="#" class="nav-btn">
+            Next Lesson →
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Haari Codes | CS Companion
+</footer>
+
+<script>
+
+function checkAnswer(button, isCorrect) {
+
+    const buttons = document.querySelectorAll(".options button");
+
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+    });
+
+    const result = document.getElementById("result");
+
+    if (isCorrect) {
+
+        button.classList.add("correct");
+
+        result.textContent =
+            "🎉 Correct! The return keyword sends a value back.";
+
+        result.style.color = "#166534";
+
+    } else {
+
+        button.classList.add("wrong");
+
+        result.textContent =
+            "❌ Not quite! The correct answer is return.";
+
+        result.style.color = "#991b1b";
+
+        buttons.forEach(function(btn) {
+
+            if (btn.textContent.includes("return")) {
+                btn.classList.add("correct");
+            }
+
+        });
+    }
+}
+
+document.getElementById("completeBtn").addEventListener("click", function() {
+
+    this.textContent = "✅ Lesson Completed";
+
+    this.style.backgroundColor = "#16a34a";
+
+    this.disabled = true;
+
+});
+
+</script>
+
+</body>
+</html>
