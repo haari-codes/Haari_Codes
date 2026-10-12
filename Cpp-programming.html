@@ -1,77 +1,66 @@
-
-
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>C++ Programming | Haari Codes</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:lobster;background:#f4f6fb;color:#202938}
-header,footer{background:#111827;color:white;text-align:center;padding:16px}
-header h2{margin:0;font-style:italic}
-header p{margin:5px;font-size:12px}
-main{max-width:900px;margin:25px auto;padding:16px}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938}
+header{background:#111827;color:white;padding:20px;text-align:center}
+header h1{margin:0;font-size:25px}
+header p{margin:7px 0 0;color:#cbd5e1}
+main{max-width:850px;margin:22px auto;padding:15px}
 a{color:#2563eb;text-decoration:none}
-h2{text-align:center}
-.intro{background:white;padding:18px;border-radius:12px;box-shadow:0 4px 14px #00000010}
-.lesson{background:white;padding:15px;margin:12px 0;border-radius:12px;box-shadow:0 4px 14px #00000010}
-.lesson h3{margin:0 0 8px}
-.lesson p{font-size:14px;line-height:1.5}
-button{background:#2563eb;color:white;border:0;border-radius:7px;padding:10px 15px;font-family:inherit;cursor:pointer}
-#details{display:none;background:#eaf0ff;padding:16px;border-radius:12px;margin-top:15px;line-height:1.7}
-footer{margin-top:30px;font-size:12px}
+.hero,.lesson{background:white;padding:20px;border-radius:14px;margin:15px 0;box-shadow:0 4px 14px #0000000d}
+.hero{border-left:5px solid #2563eb}
+h2{color:#1d4ed8}
+.topic{display:block;background:white;padding:17px;margin:12px 0;border-radius:10px;box-shadow:0 3px 10px #0000000a;color:#202938}
+.topic small{display:block;color:#64748b;margin-top:7px}
+footer{text-align:center;padding:20px;background:#111827;color:#cbd5e1;margin-top:30px}
 </style>
 </head>
 <body>
 <header>
-<h2>Haari Codes</h2>
+<h1>Haari Codes</h1>
 <p>CS Companion</p>
-</header>
-<main>
-<a href="courses.html">← Back to Courses</a>
+</header><main>
+<a href="courses.html">← Back to Courses</a><section class="hero">
 <h2>⚡ C++ Programming</h2>
-<div class="intro">
-<h3>Welcome to C++!</h3>
-<p>Learn C++ step by step, from basic programming concepts to object-oriented programming.</p>
-<p><b>What you'll learn:</b> Variables, operators, conditions, loops, functions, arrays and classes.</p>
-</div><div id="lessons"></div>
-<div id="details">
-<h3 id="topicTitle"></h3>
-<p id="topicText"></p>
-<button onclick="closeLesson()">Close Lesson</button>
-</div>
+<p>Learn C++ step by step, from basic concepts to object-oriented programming.</p>
+<p><b>10 Lessons • Examples • Quick Check</b></p>
+</section><h2>Course Lessons</h2><a class="topic" href="cpp-introduction.html">
+<b>1. Introduction to C++</b>
+<small>Learn the basics of C++ →</small>
+</a><a class="topic" href="cpp-variables.html">
+<b>2. Variables & Data Types</b>
+<small>Understand variables and data types →</small>
+</a><a class="topic" href="cpp-operators.html">
+<b>3. Operators</b>
+<small>Arithmetic, relational and logical operators →</small>
+</a><a class="topic" href="cpp-input-output.html">
+<b>4. Input & Output</b>
+<small>Learn cin and cout →</small>
+</a><a class="topic" href="cpp-conditions.html">
+<b>5. Conditional Statements</b>
+<small>Learn if, else if and else →</small>
+</a><a class="topic" href="cpp-loops.html">
+<b>6. Loops</b>
+<small>Understand for, while and do-while →</small>
+</a><a class="topic" href="cpp-functions.html">
+<b>7. Functions</b>
+<small>Create reusable blocks of code →</small>
+</a><a class="topic" href="cpp-arrays.html">
+<b>8. Arrays & Strings</b>
+<small>Store and manage collections of data →</small>
+</a><a class="topic" href="cpp-pointers.html">
+<b>9. Pointers</b>
+<small>Understand memory addresses →</small>
+</a><a class="topic" href="cpp-oop.html">
+<b>10. Object-Oriented Programming</b>
+<small>Learn classes, objects and OOP concepts →</small>
+</a><footer>
+© 2026 Haari Codes • CS Companion
+</footer>
 </main>
-<footer>© 2026 Haari Codes • CS Companion</footer><script>
-const topics=[
-["Introduction to C++","C++ is a general-purpose programming language. It supports procedural and object-oriented programming."],
-["Variables & Data Types","Variables store values. Common types include int for integers, float for decimal values, char for characters and string for text."],
-["Operators","Operators perform operations. Examples include + for addition, - for subtraction, * for multiplication and == for comparison."],
-["Input & Output","Use cout to display output and cin to receive input. Example: cout << \"Hello World\";"],
-["Conditional Statements","Use if, else if and else to make decisions based on conditions."],
-["Loops","for, while and do-while loops repeat a block of code."],
-["Functions","Functions are reusable blocks of code that perform a particular task."],
-["Arrays & Strings","Arrays store multiple values of the same type. Strings represent sequences of characters."],
-["Pointers","Pointers store memory addresses. The & operator obtains an address and * can access the value through a pointer."],
-["Object-Oriented Programming","OOP organizes code using classes and objects. Important concepts include encapsulation, inheritance and polymorphism."]
-];
-
-const container=document.getElementById("lessons");
-topics.forEach((topic,index)=>{
-const card=document.createElement("div");
-card.className="lesson";
-card.innerHTML="<h3>"+(index+1)+". "+topic[0]+"</h3><p>Explore this C++ topic with a simple explanation.</p><button onclick='openLesson("+index+")'>Study Topic</button>";
-container.appendChild(card);
-});
-
-function openLesson(index){
-document.getElementById("topicTitle").textContent=topics[index][0];
-document.getElementById("topicText").textContent=topics[index][1];
-document.getElementById("details").style.display="block";
-document.getElementById("details").scrollIntoView({behavior:"smooth"});
-}
-function closeLesson(){
-document.getElementById("details").style.display="none";
-}
-</script></body>
+</body>
 </html>
