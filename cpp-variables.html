@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variables & Data Types | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h2{margin:0}
+header p{margin:7px 0 0;color:#cbd5e1}
+main{max-width:850px;margin:25px auto;padding:16px}
+a{color:#2563eb;text-decoration:none}
+.card{background:white;padding:22px;border-radius:14px;margin:18px 0;box-shadow:0 4px 14px #0000000d}
+h2{color:#1d4ed8}
+pre{background:#111827;color:#a7f3d0;padding:16px;border-radius:10px;overflow:auto;white-space:pre-wrap}
+button{background:#2563eb;color:white;border:0;padding:12px 16px;border-radius:8px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+.secondary{background:#475569}
+#quiz{display:none}
+</style>
+</head>
+<body>
+<header>
+<h2>Haari Codes</h2>
+<p>CS Companion</p>
+</header>
+<main>
+<a href="cpp-programming.html">← Back to C++ Programming</a><section class="card">
+<p>Lesson 2 of 10</p>
+<h2>Variables & Data Types</h2>
+<p>A variable is a named storage location used to hold a value. A data type determines what kind of value a variable can store.</p><h3>Common Data Types</h3>
+<ul>
+<li><b>int:</b> whole numbers, such as 18</li>
+<li><b>float:</b> decimal numbers, such as 92.5</li>
+<li><b>char:</b> a single character, such as 'A'</li>
+<li><b>string:</b> text, such as "Haari"</li>
+<li><b>bool:</b> true or false</li>
+</ul><h3>Code Example</h3>
+<pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;int main() {
+int age = 18;
+float mark = 92.5;
+char grade = 'A';
+string name = "Haari";
+bool passed = true;
+
+cout &lt;&lt; name &lt;&lt; endl;
+cout &lt;&lt; age &lt;&lt; endl;
+cout &lt;&lt; mark &lt;&lt; endl;
+cout &lt;&lt; grade &lt;&lt; endl;
+cout &lt;&lt; passed;
+return 0;
+
+}</pre>
+
+<h3>Expected Output</h3>
+<pre>Haari
+18
+92.5
+A
+1</pre>
+<p><b>Remember:</b> C++ prints a bool value as 1 for true and 0 for false by default.</p>
+</section><section class="card" id="quiz">
+<h2>🧠 Quick Check</h2>
+<p id="question"></p>
+<div id="options"></div>
+<p id="result"></p>
+<button id="nextQuestion" onclick="nextQ()" style="display:none">Next Question</button>
+</section><div class="card">
+<button class="secondary" onclick="location.href='cpp-programming.html'">← Back to C++ Programming</button>
+<button class="secondary" onclick="location.href='cpp-introduction.html'">← Previous</button>
+<button onclick="showQuiz()">Quick Check</button>
+<button onclick="location.href='cpp-operators.html'">Next →</button>
+</div>
+</main>
+<footer>© 2026 Haari Codes • CS Companion</footer><script>
+const questions=[
+{q:"Which data type stores whole numbers?",options:["float","int","char","string"],answer:1},
+{q:"Which data type stores a single character?",options:["char","int","bool","float"],answer:0},
+{q:"What does bool store?",options:["Text","Decimal numbers","True or false","Only letters"],answer:2}
+];
+let index=0,score=0,answered=false;
+function showQuiz(){
+document.getElementById("quiz").style.display="block";
+document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+index=0;score=0;render();
+}
+function render(){
+answered=false;
+document.getElementById("result").textContent="";
+document.getElementById("nextQuestion").style.display="none";
+const q=questions[index];
+document.getElementById("question").textContent=(index+1)+"/"+questions.length+" • "+q.q;
+const box=document.getElementById("options");
+box.innerHTML="";
+q.options.forEach((option,i)=>{
+const b=document.createElement("button");
+b.textContent=option;
+b.style.display="block";
+b.style.margin="8px 0";
+b.onclick=()=>check(i);
+box.appendChild(b);
+});
+}
+function check(i){
+if(answered)return;
+answered=true;
+const q=questions[index];
+if(i===q.answer){score++;document.getElementById("result").textContent="Correct! 🎉";}
+else{document.getElementById("result").textContent="Correct answer: "+q.options[q.answer];}
+document.querySelectorAll("#options button").forEach(b=>b.disabled=true);
+document.getElementById("nextQuestion").style.display="inline-block";
+document.getElementById("nextQuestion").textContent=index===questions.length-1?"See Result":"Next Question";
+}
+function nextQ(){
+if(!answered)return;
+if(index<questions.length-1){index++;render();}
+else{
+document.getElementById("question").textContent="Quiz completed!";
+document.getElementById("options").innerHTML="";
+document.getElementById("result").textContent="Your score: "+score+"/"+questions.length;
+document.getElementById("nextQuestion").style.display="none";
+}
+}
+</script></body>
+</html>
