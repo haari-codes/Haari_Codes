@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions | Haari Codes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: #f4f6fb;
+      color: #222;
+      line-height: 1.7;
+    }
+    header, footer {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 18px;
+    }
+    main {
+      max-width: 850px;
+      margin: 25px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px #00000012;
+    }
+    h2 { color: #2563eb; }
+    pre {
+      background: #eef2ff;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 5px 3px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 7px;
+      font-family: Georgia, serif;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #1d4ed8; }
+    .nav { text-align: center; margin-top: 25px; }
+    #quiz {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+    }
+    .question { margin-bottom: 18px; }
+    #result { font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body><header>
+  <h1>Haari Codes</h1>
+  <p>C++ Programming Course</p>
+</header><main>
+  <p><strong>Lesson 7 of 10</strong></p>
+  <h2>C++ Functions</h2>  <p>A function is a block of code that performs a specific task. We can call a function whenever we need it, which helps us reuse code and keep programs organised.</p>  <h2>1. Why Do We Use Functions?</h2>
+  <ul>
+    <li>To reuse code.</li>
+    <li>To reduce repetition.</li>
+    <li>To make programs easier to understand.</li>
+    <li>To divide a large program into smaller parts.</li>
+  </ul>  <h2>2. Creating and Calling a Function</h2>
+  <pre>#include &lt;iostream&gt;
+using namespace std;void greet() {
+cout << "Hello, student!";
+}
+
+int main() {
+greet();
+return 0;
+}</pre>
+
+  <p><strong>Output:</strong></p>
+  <pre>Hello, student!</pre>  <p>Here, <code>greet()</code> is the function name. The function runs when we call it using <code>greet();</code>.</p>  <h2>3. Function Parameters</h2>
+  <p>Parameters allow us to pass information into a function.</p>
+  <pre>#include &lt;iostream&gt;
+using namespace std;void greet(string name) {
+cout << "Hello, " << name;
+}
+
+int main() {
+greet("Haari");
+return 0;
+}</pre>
+
+  <p><strong>Output:</strong></p>
+  <pre>Hello, Haari</pre>  <p>The value <code>"Haari"</code> is passed to the parameter <code>name</code>.</p>  <h2>4. Return Values</h2>
+  <p>A function can calculate a value and return it to the place where it was called.</p>
+  <pre>#include &lt;iostream&gt;
+using namespace std;int add(int a, int b) {
+return a + b;
+}
+
+int main() {
+int result = add(5, 3);
+cout << result;
+return 0;
+}</pre>
+
+  <p><strong>Output:</strong></p>
+  <pre>8</pre>  <p>The function <code>add()</code> receives two integers and returns their sum. Since the return type is <code>int</code>, it returns an integer value.</p>  <h2>5. The void Keyword</h2>
+  <p>The <code>void</code> return type means the function does not return a value.</p>
+  <pre>void display() {
+    cout &lt;&lt; "Welcome!";
+}</pre>  <h2>6. Function Declaration and Definition</h2>
+  <p>A function declaration, also called a prototype, tells the compiler about a function before it is used. The definition contains the actual code.</p>
+  <pre>#include &lt;iostream&gt;
+using namespace std;int square(int);
+
+int main() {
+cout << square(4);
+return 0;
+}
+
+int square(int n) {
+return n * n;
+}</pre>
+
+  <p><strong>Output:</strong></p>
+  <pre>16</pre>  <p><code>int square(int);</code> is the declaration. The later block containing <code>return n * n;</code> is the definition.</p>  <h2>Quick Revision</h2>
+  <ul>
+    <li><code>void</code>: function does not return a value.</li>
+    <li><code>return</code>: sends a value back to the caller.</li>
+    <li>Parameters: receive values passed to a function.</li>
+    <li>Function call: executes the function.</li>
+  </ul>  <div class="nav">
+    <button class="btn" onclick="location.href='cpp-programming.html'">Back to C++ Programming</button>
+    <button class="btn" onclick="location.href='cpp-loops.html'">Previous</button>
+    <button class="btn" onclick="showQuiz()">Quick Check</button>
+    <button class="btn" onclick="location.href='cpp-arrays.html'">Next Lesson</button>
+  </div>  <section id="quiz">
+    <h2>Quick Check 🧠</h2>
+    <form id="quizForm">
+      <div class="question">
+        <p><strong>1. Why do we use functions?</strong></p>
+        <label><input type="radio" name="q1" value="a"> To reuse code</label><br>
+        <label><input type="radio" name="q1" value="b"> To delete variables</label><br>
+        <label><input type="radio" name="q1" value="c"> To stop compilation</label>
+      </div>  <div class="question">
+    <p><strong>2. Which keyword indicates that a function returns no value?</strong></p>
+    <label><input type="radio" name="q2" value="a"> int</label><br>
+    <label><input type="radio" name="q2" value="b"> void</label><br>
+    <label><input type="radio" name="q2" value="c"> return</label>
+  </div>
+
+  <div class="question">
+    <p><strong>3. What is the output of add(5, 3) if add returns a + b?</strong></p>
+    <label><input type="radio" name="q3" value="a"> 53</label><br>
+    <label><input type="radio" name="q3" value="b"> 2</label><br>
+    <label><input type="radio" name="q3" value="c"> 8</label>
+  </div>
+
+  <button class="btn" type="submit">Submit Answers</button>
+</form>
+<p id="result"></p>
+
+  </section>
+</main><footer>
+  <p>Haari Codes | Learn. Code. Create.</p>
+</footer><script>
+  function showQuiz() {
+    const quiz = document.getElementById("quiz");
+    quiz.style.display = "block";
+    quiz.scrollIntoView({ behavior: "smooth" });
+  }
+
+  document.getElementById("quizForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const answers = { q1: "a", q2: "b", q3: "c" };
+    let score = 0;
+
+    for (const question in answers) {
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+      if (selected && selected.value === answers[question]) {
+        score++;
+      }
+    }
+
+    document.getElementById("result").textContent =
+      "Your score: " + score + "/3" +
+      (score === 3 ? " 🎉 Excellent!" : " Keep learning and try again!");
+  });
+</script></body>
+</html>
