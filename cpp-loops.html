@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loops | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h2{margin:0}
+header p{margin:7px 0 0;color:#cbd5e1}
+main{max-width:850px;margin:25px auto;padding:16px}
+a{color:#2563eb;text-decoration:none}
+.card{background:white;padding:22px;border-radius:14px;margin:18px 0;box-shadow:0 4px 14px #0000000d}
+h2{color:#1d4ed8}
+pre{background:#111827;color:#a7f3d0;padding:16px;border-radius:10px;overflow:auto;white-space:pre-wrap}
+button{background:#2563eb;color:white;border:0;padding:12px 16px;border-radius:8px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+.secondary{background:#475569}
+#quiz{display:none}
+</style>
+</head>
+<body>
+<header>
+<h2>Haari Codes</h2>
+<p>CS Companion</p>
+</header>
+<main>
+<a href="Cpp-programming.html">← Back to C++ Programming</a><section class="card">
+<p>Lesson 6 of 10</p>
+<h2>Loops in C++</h2>
+<p>Loops repeat a block of code while a condition is true. They help avoid writing the same statements again and again.</p><h3>1. for Loop</h3>
+<p>A for loop is useful when you know how many times you want to repeat an action.</p>
+<pre>for (int i = 1; i &lt;= 5; i++) {
+    cout &lt;&lt; i &lt;&lt; " ";
+}</pre>
+<p>Output:</p>
+<pre>1 2 3 4 5</pre>
+<ul>
+<li><b>int i = 1</b> initializes the loop variable.</li>
+<li><b>i &lt;= 5</b> is the condition.</li>
+<li><b>i++</b> increases i by one after each iteration.</li>
+</ul><h3>2. while Loop</h3>
+<p>A while loop checks the condition before each repetition.</p>
+<pre>int i = 1;while (i <= 3) {
+cout << i << " ";
+i++;
+}</pre>
+
+<p>Output:</p>
+<pre>1 2 3</pre><h3>3. do-while Loop</h3>
+<p>A do-while loop executes its body at least once because the condition is checked afterward.</p>
+<pre>int i = 1;do {
+cout << i << " ";
+i++;
+} while (i <= 3);</pre>
+
+<p>Output:</p>
+<pre>1 2 3</pre><h3>4. break and continue</h3>
+<p><b>break</b> exits a loop. <b>continue</b> skips the current iteration and proceeds to the next one.</p>
+<pre>for (int i = 1; i &lt;= 5; i++) {
+    if (i == 3) {
+        continue;
+    }
+    cout &lt;&lt; i &lt;&lt; " ";
+}</pre>
+<p>Output:</p>
+<pre>1 2 4 5</pre><h3>Remember</h3>
+<ul>
+<li>Make sure the loop condition can eventually become false.</li>
+<li>For and while loops may execute zero times.</li>
+<li>A do-while loop executes at least once.</li>
+</ul>
+</section><section class="card" id="quiz">
+<h2>🧠 Quick Check</h2>
+<p id="question"></p>
+<div id="options"></div>
+<p id="result"></p>
+<button id="nextQuestion" onclick="nextQ()" style="display:none">Next Question</button>
+</section><div class="card">
+<button class="secondary" onclick="location.href='Cpp-programming.html'">← Back to C++ Programming</button>
+<button class="secondary" onclick="location.href='cpp-conditions.html'">← Previous</button>
+<button onclick="showQuiz()">Quick Check</button>
+<button onclick="location.href='cpp-functions.html'">Next →</button>
+</div>
+</main>
+<footer>© 2026 Haari Codes • CS Companion</footer><script>
+const questions=[
+{q:"Which loop is useful when the number of repetitions is known?",options:["for","if","switch","class"],answer:0},
+{q:"Which loop executes at least once?",options:["for","while","do-while","None"],answer:2},
+{q:"What does break do inside a loop?",options:["Restarts it","Exits the loop","Skips one iteration","Increases i"],answer:1}
+];
+let index=0,score=0,answered=false;
+function showQuiz(){
+document.getElementById("quiz").style.display="block";
+document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+index=0;score=0;render();
+}
+function render(){
+answered=false;
+document.getElementById("result").textContent="";
+document.getElementById("nextQuestion").style.display="none";
+const q=questions[index];
+document.getElementById("question").textContent=(index+1)+"/"+questions.length+" • "+q.q;
+const box=document.getElementById("options");
+box.innerHTML="";
+q.options.forEach((option,i)=>{
+const b=document.createElement("button");
+b.textContent=option;
+b.style.display="block";
+b.style.margin="8px 0";
+b.onclick=()=>check(i);
+box.appendChild(b);
+});
+}
+function check(i){
+if(answered)return;
+answered=true;
+const q=questions[index];
+if(i===q.answer){score++;document.getElementById("result").textContent="Correct! 🎉";}
+else{document.getElementById("result").textContent="Correct answer: "+q.options[q.answer];}
+document.querySelectorAll("#options button").forEach(b=>b.disabled=true);
+document.getElementById("nextQuestion").style.display="inline-block";
+document.getElementById("nextQuestion").textContent=index===questions.length-1?"See Result":"Next Question";
+}
+function nextQ(){
+if(!answered)return;
+if(index<questions.length-1){index++;render();}
+else{
+document.getElementById("question").textContent="Quiz completed!";
+document.getElementById("options").innerHTML="";
+document.getElementById("result").textContent="Your score: "+score+"/"+questions.length;
+document.getElementById("nextQuestion").style.display="none";
+}
+}
+</script></body>
+</html>
