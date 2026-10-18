@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pointers | Haari Codes</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f6fb;
+  color: #202938;
+  line-height: 1.7;
+}
+header, footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 18px;
+}
+main {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 15px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px #00000010;
+}
+h2 { color: #2563eb; }
+pre {
+  background: #111827;
+  color: #a7f3d0;
+  padding: 15px;
+  border-radius: 9px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 22px 0;
+}
+.nav-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.nav-button:hover { background: #1d4ed8; }
+#quiz {
+  display: none;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin: 20px 0;
+}
+.answer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #172554;
+  cursor: pointer;
+}
+#result { font-weight: bold; }
+</style>
+</head>
+<body><header>
+  <h1>Haari Codes</h1>
+  <p>CS Companion | C++ Programming</p>
+</header><main>
+  <section class="card">
+    <p><strong>Lesson 9 of 10</strong></p>
+    <h2>C++ Pointers</h2>
+    <p>A pointer is a variable that stores the memory address of another variable. Pointers are useful for working with memory and building data structures.</p>
+  </section>  <section class="card">
+    <h2>1. Declaring a Pointer</h2>
+    <p>A pointer declaration uses the data type followed by the <code>*</code> symbol.</p>
+    <pre>int number = 10;
+int *ptr = &amp;number;</pre>
+    <p>Here, <code>ptr</code> is a pointer to an integer. The <code>&amp;</code> operator gets the address of <code>number</code>.</p>
+  </section>  <section class="card">
+    <h2>2. Address Operator (&amp;)</h2>
+    <p>The address operator returns the memory address of a variable.</p>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int number = 25;
+cout << &number;
+return 0;
+}</pre>
+<p><strong>Output:</strong> A memory address, which varies each time and between systems.</p>
+
+  </section>  <section class="card">
+    <h2>3. Dereferencing Operator (*)</h2>
+    <p>The <code>*</code> operator can access the value stored at the address held by a pointer.</p>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int number = 25;
+int *ptr = &number;
+
+cout &lt;&lt; *ptr;
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>25</pre>
+<p><code>*ptr</code> accesses the value of <code>number</code>.</p>
+
+  </section>  <section class="card">
+    <h2>4. Changing a Value Using a Pointer</h2>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int number = 10;
+int *ptr = &number;
+
+*ptr = 50;
+
+cout &lt;&lt; number;
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>50</pre>
+<p>Changing <code>*ptr</code> changes the value of the variable whose address it holds.</p>
+
+  </section>  <section class="card">
+    <h2>5. Null Pointers</h2>
+    <p>A null pointer does not point to a valid object. We can initialise a pointer to <code>nullptr</code> when it does not yet refer to an object.</p>
+    <pre>int *ptr = nullptr;</pre>
+    <p>Do not dereference a null pointer. Check that a pointer is valid before using <code>*ptr</code>.</p>
+  </section>  <section class="card">
+    <h2>Remember</h2>
+    <ul>
+      <li><code>&amp;number</code> gets the address of a variable.</li>
+      <li><code>int *ptr</code> declares an integer pointer.</li>
+      <li><code>*ptr</code> accesses the value at the stored address.</li>
+      <li><code>nullptr</code> represents a null pointer.</li>
+    </ul>
+  </section>  <div class="nav-buttons">
+    <a class="nav-button" href="Cpp-programming.html">← Back to C++ Programming</a>
+    <a class="nav-button" href="cpp-array.html">← Previous Lesson</a>
+    <button class="nav-button" onclick="openQuiz()">Quick Check</button>
+    <a class="nav-button" href="cpp-oop.html">Next Lesson →</a>
+  </div>  <section id="quiz">
+    <h2>Quick Check 🧠</h2>
+    <p id="question"></p>
+    <div id="answers"></div>
+    <p id="result"></p>
+    <button class="nav-button" id="nextButton" onclick="nextQuestion()" style="display:none">Next Question</button>
+  </section>
+</main><footer>
+  <p>Haari Codes | Learn. Code. Create.</p>
+</footer><script>
+const questions = [
+  {
+    question: "1. What does a pointer store?",
+    answers: ["A memory address", "Only a character", "A loop"],
+    correct: 0
+  },
+  {
+    question: "2. Which operator gets a variable's address?",
+    answers: ["*", "&amp;", "%"],
+    correct: 1
+  },
+  {
+    question: "3. What does *ptr access?",
+    answers: ["The pointer's name", "The value at the stored address", "The next line"],
+    correct: 1
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function openQuiz() {
+  document.getElementById("quiz").style.display = "block";
+  current = 0;
+  score = 0;
+  showQuestion();
+  document.getElementById("quiz").scrollIntoView({behavior: "smooth"});
+}
+
+function showQuestion() {
+  answered = false;
+  document.getElementById("question").textContent = questions[current].question;
+  document.getElementById("result").textContent = "";
+  document.getElementById("nextButton").style.display = "none";
+
+  const box = document.getElementById("answers");
+  box.innerHTML = "";
+
+  questions[current].answers.forEach(function(answer, i) {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = answer.replace("&amp;", "&");
+    button.onclick = function() { checkAnswer(i); };
+    box.appendChild(button);
+  });
+}
+
+function checkAnswer(choice) {
+  if (answered) return;
+  answered = true;
+
+  if (choice === questions[current].correct) {
+    score++;
+    document.getElementById("result").textContent = "Correct! 🎉";
+  } else {
+    document.getElementById("result").textContent =
+      "Correct answer: " +
+      questions[current].answers[questions[current].correct].replace("&amp;", "&");
+  }
+
+  document.querySelectorAll(".answer").forEach(function(button) {
+    button.disabled = true;
+  });
+
+  const next = document.getElementById("nextButton");
+  next.style.display = "block";
+  next.textContent = current === questions.length - 1 ? "See Result" : "Next Question";
+}
+
+function nextQuestion() {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    document.getElementById("question").textContent = "Quiz completed!";
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("result").textContent =
+      "Your score: " + score + "/" + questions.length;
+    document.getElementById("nextButton").style.display = "none";
+  }
+}
+</script></body>
+  </html>
