@@ -29,10 +29,7 @@ a{color:#2563eb}
 </head>
 <body>
 <header>
-<h1>Haari_Codes</h1>
-<p>SQL Course · Lesson 5</p>
-<h2 style="color:white">SQL Operators</h2>
-<p>Learn to filter data using conditions</p>
+
 </header>
 
 <main>
@@ -186,11 +183,52 @@ WHERE (city = 'Kochi' OR city = 'Calicut')
 <div id="review"></div>
 </form>
 </div>
+<style>
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 25px 20px;
+    margin: 25px 0;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
 
-<div class="card nav">
-<a href="sql-select.html">← Previous: SELECT</a>
-<a href="sql.html">SQL Home</a>
-<a href="sql-functions.html">Next: SQL Functions →</a>
+.lesson-nav a {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 14px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 17px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.lesson-nav a:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+    .lesson-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lesson-nav a {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="lesson-nav">
+    <a href="sql-select.html">← Previous select</a>
+    <a href="sql.html">SQL Course Home</a>
+    <a href="sql-function.html">next→functions</a>
 </div>
 </main>
 
