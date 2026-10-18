@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorting Algorithms | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{color:#93c5fd;margin:0}
+main{max-width:950px;margin:24px auto;padding:0 15px}
+section{background:white;padding:22px;margin:18px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+h2{border-bottom:2px solid #dbeafe;padding-bottom:7px}
+code{background:#eaf1ff;padding:2px 5px;border-radius:4px}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:9px;overflow-x:auto;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+button,.nav a{display:inline-block;background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:15px;margin:4px}
+button:hover,.nav a:hover{background:#1d4ed8}
+.question{padding:12px 0;border-bottom:1px solid #e5e7eb}
+label{display:block;margin:6px 0}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:25px 0}
+#result{font-weight:bold}
+@media(max-width:600px){section{padding:16px}table{font-size:13px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures and Algorithms</p>
+<h2 style="color:white;border:0">Lesson 7: Sorting Algorithms</h2>
+</header>
+
+<main>
+<section>
+<h2>1. What Is Sorting?</h2>
+<p><b>Sorting</b> is the process of arranging data in a particular order, usually ascending or descending.</p>
+<p><b>Ascending order:</b> smallest to largest.</p>
+<p>Example: <code>[5, 2, 8, 1]</code> becomes <code>[1, 2, 5, 8]</code>.</p>
+<p><b>Descending order:</b> largest to smallest.</p>
+<p>Example: <code>[5, 2, 8, 1]</code> becomes <code>[8, 5, 2, 1]</code>.</p>
+<h3>Why is sorting useful?</h3>
+<ul>
+<li>Makes data easier to understand.</li>
+<li>Can make searching more efficient.</li>
+<li>Helps organise student marks, names, prices and records.</li>
+<li>Is used in databases and many software applications.</li>
+</ul>
+<p>In this lesson, we study five common sorting algorithms.</p>
+</section>
+
+<section>
+<h2>2. Bubble Sort</h2>
+<h3>Definition</h3>
+<p>Bubble Sort repeatedly compares adjacent elements and swaps them if they are in the wrong order. After each pass, a large element moves towards the end of the array in ascending sorting.</p>
+<h3>Example</h3>
+<p>Start: <code>[5, 3, 8, 2]</code></p>
+<p><b>Pass 1:</b></p>
+<ul>
+<li>Compare 5 and 3: swap → <code>[3, 5, 8, 2]</code></li>
+<li>Compare 5 and 8: no swap.</li>
+<li>Compare 8 and 2: swap → <code>[3, 5, 2, 8]</code></li>
+</ul>
+<p><b>Pass 2:</b> Compare 3 and 5, then 5 and 2. Result: <code>[3, 2, 5, 8]</code>.</p>
+<p><b>Pass 3:</b> Swap 3 and 2. Final result: <code>[2, 3, 5, 8]</code>.</p>
+<h3>Algorithm</h3>
+<ol>
+<li>Start at the first element.</li>
+<li>Compare each pair of adjacent elements.</li>
+<li>Swap if the left element is greater than the right.</li>
+<li>Repeat passes until the array is sorted.</li>
+</ol>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[] = {5, 3, 8, 2};
+    int n = 4;
+
+    for (int i = 0; i &lt; n - 1; i++) {
+        bool swapped = false;
+
+        for (int j = 0; j &lt; n - 1 - i; j++) {
+            if (a[j] &gt; a[j + 1]) {
+                int temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+                swapped = true;
+            }
+        }
+
+        if (!swapped) break;
+    }
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>2 3 5 8</code></p>
+<h3>Advantages</h3>
+<ul><li>Easy to learn and implement.</li><li>Can stop early if no swaps are needed.</li></ul>
+<h3>Disadvantages</h3>
+<ul><li>Slow for large datasets.</li><li>May require many comparisons and swaps.</li></ul>
+</section>
+
+<section>
+<h2>3. Selection Sort</h2>
+<h3>Definition</h3>
+<p>Selection Sort repeatedly finds the smallest element in the unsorted part and places it at the beginning of that part.</p>
+<h3>Example</h3>
+<p>Start: <code>[5, 3, 8, 2]</code></p>
+<ol>
+<li>Smallest is 2. Swap it with 5 → <code>[2, 3, 8, 5]</code>.</li>
+<li>In the remaining part <code>[3, 8, 5]</code>, smallest is 3. Leave it in place.</li>
+<li>In <code>[8, 5]</code>, smallest is 5. Swap → <code>[2, 3, 5, 8]</code>.</li>
+</ol>
+<h3>Algorithm</h3>
+<ol>
+<li>Assume the first unsorted element is the smallest.</li>
+<li>Scan the remaining elements to find the actual smallest.</li>
+<li>Swap it with the first unsorted element.</li>
+<li>Repeat for the remaining unsorted section.</li>
+</ol>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[] = {5, 3, 8, 2};
+    int n = 4;
+
+    for (int i = 0; i &lt; n - 1; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j &lt; n; j++) {
+            if (a[j] &lt; a[minIndex])
+                minIndex = j;
+        }
+
+        int temp = a[i];
+        a[i] = a[minIndex];
+        a[minIndex] = temp;
+    }
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>2 3 5 8</code></p>
+<h3>Advantages</h3>
+<ul><li>Simple to understand.</li><li>Uses very little extra memory.</li><li>Performs at most a linear number of swaps.</li></ul>
+<h3>Disadvantages</h3>
+<ul><li>Still performs many comparisons even if the array is nearly sorted.</li><li>Not efficient for large datasets.</li></ul>
+</section>
+
+<section>
+<h2>4. Insertion Sort</h2>
+<h3>Definition</h3>
+<p>Insertion Sort builds a sorted section one element at a time. Each new element is inserted into its correct position among the previously sorted elements.</p>
+<p>Think of arranging playing cards in your hand: pick up one card and insert it where it belongs.</p>
+<h3>Example</h3>
+<p>Start: <code>[5, 3, 8, 2]</code></p>
+<ol>
+<li>Start with 5 as the sorted section.</li>
+<li>Insert 3 before 5 → <code>[3, 5, 8, 2]</code>.</li>
+<li>8 is already in the correct place → <code>[3, 5, 8, 2]</code>.</li>
+<li>Insert 2 at the beginning → <code>[2, 3, 5, 8]</code>.</li>
+</ol>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[] = {5, 3, 8, 2};
+    int n = 4;
+
+    for (int i = 1; i &lt; n; i++) {
+        int key = a[i];
+        int j = i - 1;
+
+        while (j &gt;= 0 &amp;&amp; a[j] &gt; key) {
+            a[j + 1] = a[j];
+            j--;
+        }
+
+        a[j + 1] = key;
+    }
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>2 3 5 8</code></p>
+<h3>Advantages</h3>
+<ul><li>Simple and efficient for small arrays.</li><li>Works well when the data is already nearly sorted.</li><li>Uses constant extra space.</li></ul>
+<h3>Disadvantages</h3>
+<ul><li>Can be slow for large, reverse-sorted arrays.</li><li>May shift many elements to insert one value.</li></ul>
+</section>
+
+<section>
+<h2>5. Merge Sort</h2>
+<h3>Definition</h3>
+<p>Merge Sort uses the <b>divide-and-conquer</b> technique. It divides the array into smaller parts, sorts those parts, and merges them into one sorted array.</p>
+<h3>Example</h3>
+<p>Original: <code>[8, 3, 5, 2]</code></p>
+<ol>
+<li>Divide into <code>[8, 3]</code> and <code>[5, 2]</code>.</li>
+<li>Divide further into <code>[8]</code>, <code>[3]</code>, <code>[5]</code>, <code>[2]</code>.</li>
+<li>Merge sorted pairs: <code>[3, 8]</code> and <code>[2, 5]</code>.</li>
+<li>Merge them: <code>[2, 3, 5, 8]</code>.</li>
+</ol>
+<h3>Core idea in pseudocode</h3>
+<pre>MERGE_SORT(array)
+    if array has 0 or 1 element
+        return array
+
+    divide array into left and right
+    MERGE_SORT(left)
+    MERGE_SORT(right)
+    merge left and right in sorted order</pre>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+void merge(int a[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int L[n1], R[n2];
+
+    for (int i = 0; i &lt; n1; i++)
+        L[i] = a[left + i];
+
+    for (int j = 0; j &lt; n2; j++)
+        R[j] = a[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        if (L[i] &lt;= R[j])
+            a[k++] = L[i++];
+        else
+            a[k++] = R[j++];
+    }
+
+    while (i &lt; n1)
+        a[k++] = L[i++];
+
+    while (j &lt; n2)
+        a[k++] = R[j++];
+}
+
+void mergeSort(int a[], int left, int right) {
+    if (left &lt; right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(a, left, mid);
+        mergeSort(a, mid + 1, right);
+        merge(a, left, mid, right);
+    }
+}
+
+int main() {
+    int a[] = {8, 3, 5, 2};
+    int n = 4;
+
+    mergeSort(a, 0, n - 1);
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>2 3 5 8</code></p>
+<p class="note">Note: The temporary arrays above are supported by many C++ compilers as an extension, but variable-length arrays are not standard C++. For strictly standard C++, use <code>vector</code> or dynamically allocated temporary arrays.</p>
+<h3>Advantages</h3>
+<ul><li>Reliable O(n log n) time even in the worst case.</li><li>Suitable for large datasets.</li><li>Stable when implemented with equal elements taken from the left half first.</li></ul>
+<h3>Disadvantages</h3>
+<ul><li>Requires additional memory for merging an array.</li><li>Implementation is more complex than simple sorting methods.</li></ul>
+</section>
+
+<section>
+<h2>6. Quick Sort</h2>
+<h3>Definition</h3>
+<p>Quick Sort also uses divide-and-conquer. It selects a value called a <b>pivot</b>, partitions the elements around that pivot, and recursively sorts the parts.</p>
+<p>In ascending order, values smaller than or equal to the pivot are placed on its left, and larger values on its right, depending on the partition method.</p>
+<h3>Example concept</h3>
+<p>Array: <code>[5, 3, 8, 2, 7]</code></p>
+<p>Choose pivot 5. One possible partition is <code>[3, 2] 5 [8, 7]</code>. Sort both sides: <code>[2, 3, 5, 7, 8]</code>.</p>
+<p>The exact intermediate order depends on the partition algorithm and chosen pivot.</p>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int partition(int a[], int low, int high) {
+    int pivot = a[high];
+    int i = low - 1;
+
+    for (int j = low; j &lt; high; j++) {
+        if (a[j] &lt;= pivot) {
+            i++;
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+    }
+
+    int temp = a[i + 1];
+    a[i + 1] = a[high];
+    a[high] = temp;
+
+    return i + 1;
+}
+
+void quickSort(int a[], int low, int high) {
+    if (low &lt; high) {
+        int p = partition(a, low, high);
+        quickSort(a, low, p - 1);
+        quickSort(a, p + 1, high);
+    }
+}
+
+int main() {
+    int a[] = {5, 3, 8, 2, 7};
+    int n = 5;
+
+    quickSort(a, 0, n - 1);
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>2 3 5 7 8</code></p>
+<h3>Advantages</h3>
+<ul><li>Usually fast in practice.</li><li>Typically uses less extra array storage than Merge Sort.</li></ul>
+<h3>Disadvantages</h3>
+<ul><li>A poor pivot choice can lead to O(n²) worst-case time.</li><li>Recursive calls use stack memory.</li><li>This implementation is not stable in general.</li></ul>
+</section>
+
+<section>
+<h2>7. Time and Space Complexity</h2>
+<p><b>Time complexity</b> describes how running time grows with input size. <b>Space complexity</b> describes the extra memory required by the algorithm.</p>
+<table>
+<tr><th>Algorithm</th><th>Best Time</th><th>Average Time</th><th>Worst Time</th><th>Extra Space</th></tr>
+<tr><td>Bubble Sort (with early stop)</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+<tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr>
+<tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>Typically O(log n) stack on balanced partitions; worst O(n)</td></tr>
+</table>
+<p class="note">The table describes common implementations. Actual performance can depend on the input, pivot choice, and implementation details.</p>
+</section>
+
+<section>
+<h2>8. Quick Comparison</h2>
+<table>
+<tr><th>Algorithm</th><th>Main idea</th><th>Best use</th></tr>
+<tr><td>Bubble Sort</td><td>Swap adjacent elements</td><td>Learning basic sorting</td></tr>
+<tr><td>Selection Sort</td><td>Select the minimum each pass</td><td>Simple cases where few swaps are useful</td></tr>
+<tr><td>Insertion Sort</td><td>Insert each element in the sorted part</td><td>Small or nearly sorted data</td></tr>
+<tr><td>Merge Sort</td><td>Divide, sort and merge</td><td>Large datasets needing predictable O(n log n) time</td></tr>
+<tr><td>Quick Sort</td><td>Partition around a pivot</td><td>Fast general-purpose in-memory sorting</td></tr>
+</table>
+</section>
+
+<section>
+<h2>9. Quick Check 🧠</h2>
+<p>Choose your answers and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><b>1. Which algorithm swaps adjacent elements?</b></p>
+<label><input type="radio" name="q1" value="a"> Bubble Sort</label>
+<label><input type="radio" name="q1" value="b"> Merge Sort</label>
+<label><input type="radio" name="q1" value="c"> Quick Sort</label>
+</div>
+<div class="question">
+<p><b>2. Which algorithm repeatedly selects the smallest element?</b></p>
+<label><input type="radio" name="q2" value="a"> Insertion Sort</label>
+<label><input type="radio" name="q2" value="b"> Selection Sort</label>
+<label><input type="radio" name="q2" value="c"> Merge Sort</label>
+</div>
+<div class="question">
+<p><b>3. Which algorithm is especially good for nearly sorted data?</b></p>
+<label><input type="radio" name="q3" value="a"> Insertion Sort</label>
+<label><input type="radio" name="q3" value="b"> Selection Sort</label>
+<label><input type="radio" name="q3" value="c"> Quick Sort in every case</label>
+</div>
+<div class="question">
+<p><b>4. Which algorithm has O(n log n) worst-case time among these choices?</b></p>
+<label><input type="radio" name="q4" value="a"> Bubble Sort</label>
+<label><input type="radio" name="q4" value="b"> Selection Sort</label>
+<label><input type="radio" name="q4" value="c"> Merge Sort</label>
+</div>
+<div class="question">
+<p><b>5. What is the pivot used for in Quick Sort?</b></p>
+<label><input type="radio" name="q5" value="a"> To partition elements</label>
+<label><input type="radio" name="q5" value="b"> To count array elements</label>
+<label><input type="radio" name="q5" value="c"> To stop all comparisons</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+<p id="result" aria-live="polite"></p>
+</form>
+</section>
+
+<div class="nav">
+<a href="ds-searching.html">← Previous: Searching</a>
+<a href="data-structure.html">Course Home</a>
+<a href="ds-trees.html">Next: Trees →</a>
+</div>
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+function checkAnswers(){
+    const answers={q1:"a",q2:"b",q3:"a",q4:"c",q5:"a"};
+    let score=0;
+    let unanswered=0;
+
+    for(const q in answers){
+        const chosen=document.querySelector('input[name="'+q+'"]:checked');
+        if(!chosen) unanswered++;
+        else if(chosen.value===answers[q]) score++;
+    }
+
+    const result=document.getElementById("result");
+    if(unanswered>0){
+        result.textContent="Answer all 5 questions first. Unanswered: "+unanswered;
+        return;
+    }
+
+    result.textContent="Your score: "+score+"/5. "+
+      (score===5?"Perfect! Sorting master unlocked! 🎉":
+       score>=3?"Good job! Revise the missed concepts and try again. 💙":
+       "Keep going! Read the examples again and give it another try. 💪");
+}
+</script>
+</body>
+</html>
