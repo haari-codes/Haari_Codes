@@ -22,13 +22,10 @@ header, footer {
     text-align: center;
     padding: 22px 15px;
 }
-header h1 {
-    margin: 0;
-    color: #60a5fa;
-}
-header p {
-    margin-bottom: 0;
-}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
 main {
     max-width: 900px;
     margin: auto;
@@ -113,10 +110,8 @@ th {
 <body>
 
 <header>
-    <h1>Haari_Codes</h1>
-    <p>SQL Course | Lesson 10 of 10</p>
-    <h2 style="color:white;">SQL Constraints</h2>
-    <p>Rules that keep database data valid and reliable</p>
+    <h1>🔎 Lesson 10: SQL Constraints</h1>
+<p>Haari_Codes | Rules that keep database data valid and reliable</p>
 </header>
 
 <main>
@@ -428,12 +423,53 @@ REFERENCES Departments(department_id);</code></pre>
 
 <div id="result" aria-live="polite"></div>
 </section>
+<style>
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 25px 20px;
+    margin: 25px 0;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
 
-<div class="nav">
-<a href="sql-subqueries.html">← Previous Lesson</a>
-<a href="sql.html">SQL Course Home</a>
+.lesson-nav a {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 14px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 17px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.lesson-nav a:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+    .lesson-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lesson-nav a {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="lesson-nav">
+    <a href="sql-subqueries.html">← Previous Lesson</a>
+    <a href="sql.html">SQL Course Home</a>
+    <a href="sql.html">SQL Course complete </a>
 </div>
-
 </main>
 
 <footer>
