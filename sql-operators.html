@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Operators | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#60a5fa}
+header p{margin:5px 0}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre-wrap}
+code{font-family:Consolas,monospace}
+.note{background:#eff6ff;padding:12px;border-left:4px solid #2563eb;border-radius:5px}
+button{background:#2563eb;color:white;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+button:hover{background:#1d4ed8}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.question{border-bottom:1px solid #e5e7eb;padding:12px 0}
+label{display:block;padding:4px;cursor:pointer}
+#result{font-weight:bold;margin-top:15px}
+footer a{color:#93c5fd}
+a{color:#2563eb}
+.small{color:#6b7280;font-size:.94em}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>SQL Course · Lesson 5</p>
+<h2 style="color:white">SQL Operators</h2>
+<p>Learn to filter data using conditions</p>
+</header>
+
+<main>
+<div class="card">
+<h2>1. What are SQL Operators?</h2>
+<p>SQL operators are symbols or keywords used to perform comparisons, combine conditions, and filter records from a table.</p>
+<p>Consider this sample table named <code>Students</code>:</p>
+<pre>id | name  | age | mark | city
+1  | Anu   | 18  | 85   | Kochi
+2  | Rahul | 19  | 72   | Calicut
+3  | Meera | 18  | 91   | Kochi
+4  | Arun  | 20  | 65   | Thrissur
+5  | Diya  | 19  | 78   | NULL</pre>
+</div>
+
+<div class="card">
+<h2>2. Comparison Operators</h2>
+<p>These operators compare two values.</p>
+<table style="width:100%;border-collapse:collapse">
+<tr style="background:#eff6ff"><th style="padding:8px">Operator</th><th>Meaning</th><th>Example</th></tr>
+<tr><td>=</td><td>Equal to</td><td><code>age = 18</code></td></tr>
+<tr><td>&lt;&gt; or !=</td><td>Not equal to</td><td><code>city &lt;&gt; 'Kochi'</code></td></tr>
+<tr><td>&gt;</td><td>Greater than</td><td><code>mark &gt; 80</code></td></tr>
+<tr><td>&lt;</td><td>Less than</td><td><code>age &lt; 20</code></td></tr>
+<tr><td>&gt;=</td><td>Greater than or equal to</td><td><code>mark &gt;= 75</code></td></tr>
+<tr><td>&lt;=</td><td>Less than or equal to</td><td><code>age &lt;= 19</code></td></tr>
+</table>
+<pre>SELECT * FROM Students
+WHERE mark >= 80;</pre>
+<p><b>Result:</b> Anu and Meera.</p>
+</div>
+
+<div class="card">
+<h2>3. AND Operator</h2>
+<p><code>AND</code> returns records only when <b>all conditions are true</b>.</p>
+<pre>SELECT * FROM Students
+WHERE age = 18 AND mark > 85;</pre>
+<p><b>Result:</b> Meera.</p>
+<p>Both conditions must be true: age is 18 and mark is greater than 85.</p>
+</div>
+
+<div class="card">
+<h2>4. OR Operator</h2>
+<p><code>OR</code> returns records when <b>at least one condition is true</b>.</p>
+<pre>SELECT * FROM Students
+WHERE city = 'Kochi' OR mark > 85;</pre>
+<p><b>Result:</b> Anu and Meera.</p>
+<p>Either condition can be true. A record satisfying both conditions is still returned only once.</p>
+</div>
+
+<div class="card">
+<h2>5. NOT Operator</h2>
+<p><code>NOT</code> reverses a condition.</p>
+<pre>SELECT * FROM Students
+WHERE NOT city = 'Kochi';</pre>
+<p>This returns records whose city is not Kochi, excluding rows where city is NULL because that comparison is unknown.</p>
+<p>You can also write:</p>
+<pre>SELECT * FROM Students
+WHERE mark NOT BETWEEN 70 AND 85;</pre>
+<p>This selects marks outside the range 70 to 85.</p>
+</div>
+
+<div class="card">
+<h2>6. BETWEEN Operator</h2>
+<p><code>BETWEEN</code> checks whether a value falls within a range. Both endpoints are included.</p>
+<pre>SELECT * FROM Students
+WHERE mark BETWEEN 70 AND 85;</pre>
+<p><b>Result:</b> Anu (85), Rahul (72), and Diya (78).</p>
+<p>It is equivalent to:</p>
+<pre>WHERE mark >= 70 AND mark <= 85</pre>
+<div class="note">Remember: BETWEEN 70 AND 85 includes both 70 and 85.</div>
+</div>
+
+<div class="card">
+<h2>7. IN Operator</h2>
+<p><code>IN</code> checks whether a value matches any value in a list.</p>
+<pre>SELECT * FROM Students
+WHERE city IN ('Kochi', 'Calicut');</pre>
+<p><b>Result:</b> Anu, Rahul, and Meera.</p>
+<p>It is a shorter alternative to:</p>
+<pre>WHERE city = 'Kochi'
+   OR city = 'Calicut'</pre>
+<p>To exclude the listed values, use <code>NOT IN</code>.</p>
+</div>
+
+<div class="card">
+<h2>8. LIKE Operator</h2>
+<p><code>LIKE</code> searches for a pattern in text.</p>
+<table style="width:100%;border-collapse:collapse">
+<tr style="background:#eff6ff"><th style="padding:8px">Pattern</th><th>Meaning</th></tr>
+<tr><td><code>'A%'</code></td><td>Starts with A</td></tr>
+<tr><td><code>'%a'</code></td><td>Ends with a</td></tr>
+<tr><td><code>'%ee%'</code></td><td>Contains ee</td></tr>
+<tr><td><code>'A_u'</code></td><td>A, followed by any one character, then u</td></tr>
+<tr><td><code>'_n%'</code></td><td>Second character is n</td></tr>
+</table>
+<p><code>%</code> represents zero or more characters. <code>_</code> represents exactly one character.</p>
+<pre>SELECT * FROM Students
+WHERE name LIKE 'A%';</pre>
+<p><b>Result:</b> Anu and Arun.</p>
+<pre>SELECT * FROM Students
+WHERE name LIKE '%ee%';</pre>
+<p><b>Result:</b> Meera.</p>
+<p class="small">Pattern matching and case sensitivity can vary by database and collation.</p>
+</div>
+
+<div class="card">
+<h2>9. IS NULL and IS NOT NULL</h2>
+<p><code>NULL</code> means a value is missing or unknown. It is not the same as zero or an empty string.</p>
+<pre>SELECT * FROM Students
+WHERE city IS NULL;</pre>
+<p><b>Result:</b> Diya.</p>
+<p>To find rows where city has a value:</p>
+<pre>SELECT * FROM Students
+WHERE city IS NOT NULL;</pre>
+<div class="note"><b>Important:</b> Never use <code>city = NULL</code> or <code>city != NULL</code> to test for NULL. Use <code>IS NULL</code> or <code>IS NOT NULL</code>.</div>
+</div>
+
+<div class="card">
+<h2>10. Combining Conditions</h2>
+<p>You can combine operators to make more specific queries. Use parentheses to make your intention clear.</p>
+<pre>SELECT * FROM Students
+WHERE (city = 'Kochi' OR city = 'Calicut')
+  AND mark >= 80;</pre>
+<p><b>Result:</b> Anu and Meera.</p>
+<p>Without parentheses, SQL generally evaluates <code>NOT</code> before <code>AND</code>, and <code>AND</code> before <code>OR</code>. Parentheses help avoid confusion.</p>
+</div>
+
+<div class="card">
+<h2>11. Quick Revision</h2>
+<ul>
+<li><b>AND:</b> Every condition must be true.</li>
+<li><b>OR:</b> At least one condition must be true.</li>
+<li><b>NOT:</b> Reverses a condition.</li>
+<li><b>BETWEEN:</b> Checks an inclusive range.</li>
+<li><b>IN:</b> Matches any value in a list.</li>
+<li><b>LIKE:</b> Matches a text pattern.</li>
+<li><b>IS NULL:</b> Finds missing/unknown values.</li>
+<li><b>IS NOT NULL:</b> Finds values that are not NULL.</li>
+</ul>
+</div>
+
+<div class="card" id="quiz">
+<h2>12. Quick Check Quiz 🧠</h2>
+<p>Choose one answer for each question, then press <b>Check Answers</b>.</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" onclick="resetQuiz()" style="background:#4b5563">Try Again</button>
+<div id="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</div>
+
+<div class="card nav">
+<a href="sql-select.html">← Previous: SELECT</a>
+<a href="sql.html">SQL Home</a>
+<a href="sql-functions.html">Next: SQL Functions →</a>
+</div>
+</main>
+
+<footer>
+<p><b>Haari_Codes</b> | Learn. Practise. Build.</p>
+<p>One query at a time! 💙</p>
+</footer>
+
+<script>
+const questions = [
+{
+q:"1. Which operator requires every condition to be true?",
+a:["OR","AND","NOT","LIKE"], ans:1,
+exp:"AND requires all specified conditions to be true."
+},
+{
+q:"2. Which operator matches at least one condition?",
+a:["AND","BETWEEN","OR","IS NULL"], ans:2,
+exp:"OR returns a row when at least one condition is true."
+},
+{
+q:"3. What does BETWEEN 10 AND 20 include?",
+a:["Only 10 and 20","Values greater than 10 but below 20","Values from 10 through 20, including both endpoints","Only values below 20"], ans:2,
+exp:"BETWEEN includes both endpoints."
+},
+{
+q:"4. Which query finds students from Kochi or Calicut?",
+a:["WHERE city IN ('Kochi','Calicut')","WHERE city BETWEEN 'Kochi' AND 'Calicut'","WHERE city IS NULL","WHERE city LIKE 'Kochi Calicut'"], ans:0,
+exp:"IN matches a value against a list."
+},
+{
+q:"5. In a LIKE pattern, what does % mean?",
+a:["Exactly one character","Zero or more characters","A number only","A missing value"], ans:1,
+exp:"% matches zero or more characters."
+},
+{
+q:"6. What does the underscore (_) wildcard represent in LIKE?",
+a:["Any number of characters","A space only","Exactly one character","A NULL value"], ans:2,
+exp:"The underscore wildcard matches exactly one character."
+},
+{
+q:"7. Which condition correctly finds missing city values?",
+a:["city = NULL","city != NULL","city IS NULL","city LIKE NULL"], ans:2,
+exp:"Use IS NULL to test for NULL values."
+},
+{
+q:"8. Which query finds marks from 70 to 85, including both?",
+a:["WHERE mark > 70 AND mark < 85","WHERE mark BETWEEN 70 AND 85","WHERE mark IN (70,85)","WHERE mark = 70 OR 85"], ans:1,
+exp:"BETWEEN includes every value in the range, including 70 and 85."
+},
+{
+q:"9. What does NOT do?",
+a:["Adds two values","Sorts rows","Reverses a condition","Creates a table"], ans:2,
+exp:"NOT reverses a condition's truth value."
+},
+{
+q:"10. Which query finds names starting with A?",
+a:["WHERE name LIKE '%A'","WHERE name LIKE 'A%'","WHERE name = '%A%'","WHERE name IS NULL"], ans:1,
+exp:"A% matches text that starts with A."
+}
+];
+
+const questionsDiv = document.getElementById("questions");
+
+function renderQuestions(){
+  questionsDiv.innerHTML = "";
+  questions.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    const title = document.createElement("p");
+    const strong = document.createElement("b");
+    strong.textContent = item.q;
+    title.appendChild(strong);
+    div.appendChild(title);
+
+    item.a.forEach((option, j) => {
+      const label = document.createElement("label");
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "q" + i;
+      radio.value = j;
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(" " + option));
+      div.appendChild(label);
+    });
+    questionsDiv.appendChild(div);
+  });
+}
+function checkAnswers(){
+  let score = 0;
+  let unanswered = 0;
+  let reviewHTML = "<h3>Answer Review</h3>";
+  questions.forEach((item, i) => {
+    const selected = document.querySelector('input[name="q' + i + '"]:checked');
+    if(!selected) unanswered++;
+    const correct = selected && Number(selected.value) === item.ans;
+    if(correct) score++;
+    reviewHTML += "<p><b>" + item.q + "</b><br>";
+    reviewHTML += correct ? "✅ Correct! " : "❌ Correct answer: " + item.a[item.ans] + ". ";
+    reviewHTML += item.exp + "</p>";
+  });
+  document.getElementById("result").textContent =
+    "Your score: " + score + "/10" +
+    (unanswered ? " · Unanswered: " + unanswered : "") +
+    (score === 10 ? " · Perfect score! 🎉" : score >= 7 ? " · Good work! 💙" : " · Revise and try again!");
+  document.getElementById("review").innerHTML = reviewHTML;
+}
+function resetQuiz(){
+  document.getElementById("quizForm").reset();
+  document.getElementById("result").textContent = "";
+  document.getElementById("review").innerHTML = "";
+}
+renderQuestions();
+</script>
+</body>
+</html>
