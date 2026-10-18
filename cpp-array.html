@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrays | Haari Codes</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f6fb;
+  color: #202938;
+  line-height: 1.7;
+}
+header, footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 18px;
+}
+main {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 15px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px #00000010;
+}
+h2 { color: #2563eb; }
+pre {
+  background: #111827;
+  color: #a7f3d0;
+  padding: 15px;
+  border-radius: 9px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 22px 0;
+}
+.nav-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.nav-button:hover { background: #1d4ed8; }
+#quiz {
+  display: none;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin: 20px 0;
+}
+.answer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #172554;
+  cursor: pointer;
+}
+#result { font-weight: bold; }
+</style>
+</head><body>
+<header>
+  <h1>Haari Codes</h1>
+  <p>CS Companion | C++ Programming</p>
+</header><main>
+  <section class="card">
+    <p><strong>Lesson 8 of 10</strong></p>
+    <h2>C++ Arrays</h2>
+    <p>An array is a collection of elements of the same data type stored under one name. Each element is accessed using an index.</p>
+  </section>  <section class="card">
+    <h2>1. Declaring an Array</h2>
+    <p>We specify the data type, array name and number of elements.</p>
+    <pre>int marks[5];</pre>
+    <p>This creates an integer array that can store five values. Array indexing starts at <strong>0</strong>, so the indexes are 0, 1, 2, 3 and 4.</p>
+  </section>  <section class="card">
+    <h2>2. Initialising an Array</h2>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int numbers[5] = {10, 20, 30, 40, 50};
+
+cout &lt;&lt; numbers[0] &lt;&lt; endl;
+cout &lt;&lt; numbers[2] &lt;&lt; endl;
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>10
+30</pre>
+<p><code>numbers[0]</code> accesses the first element. <code>numbers[2]</code> accesses the third element.</p>
+
+  </section>  <section class="card">
+    <h2>3. Changing an Array Element</h2>
+    <pre>int numbers[3] = {5, 10, 15};
+numbers[1] = 25;
+cout &lt;&lt; numbers[1];</pre>
+    <p><strong>Output:</strong></p>
+    <pre>25</pre>
+    <p>We can change an element by assigning a new value to its index.</p>
+  </section>  <section class="card">
+    <h2>4. Using a for Loop with Arrays</h2>
+    <p>A loop helps us access every element without writing a separate statement for each one.</p>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int numbers[4] = {10, 20, 30, 40};
+
+for (int i = 0; i &lt; 4; i++) {
+    cout &lt;&lt; numbers[i] &lt;&lt; " ";
+}
+
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>10 20 30 40</pre>
+<p>The loop starts at index 0 and continues while <code>i < 4</code>.</p>
+
+  </section>  <section class="card">
+    <h2>5. Finding the Sum of Array Elements</h2>
+    <pre>#include &lt;iostream&gt;
+using namespace std;int main() {
+int numbers[4] = {2, 4, 6, 8};
+int sum = 0;
+
+for (int i = 0; i &lt; 4; i++) {
+    sum = sum + numbers[i];
+}
+
+cout &lt;&lt; "Sum = " &lt;&lt; sum;
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>Sum = 20</pre>
+
+  </section>  <section class="card">
+    <h2>6. Introduction to Strings</h2>
+    <p>A string stores a sequence of characters. In C++, we can use the <code>string</code> type from the string library.</p>
+    <pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;int main() {
+string name = "Haari Codes";
+cout << name;
+return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>Haari Codes</pre>
+
+  </section>  <section class="card">
+    <h2>Remember</h2>
+    <ul>
+      <li>All elements in an array have the same data type.</li>
+      <li>Array indexing starts from 0.</li>
+      <li>The last index of an array of size 5 is 4.</li>
+      <li>Loops are useful for accessing array elements.</li>
+      <li>Never access an index outside the array's valid range.</li>
+    </ul>
+  </section>  <div class="nav-buttons">
+    <a class="nav-button" href="Cpp-programming.html">← Back to C++ Programming</a>
+    <a class="nav-button" href="cpp-functions.html">← Previous Lesson</a>
+    <button class="nav-button" onclick="openQuiz()">Quick Check</button>
+    <a class="nav-button" href="cpp-pointers.html">Next Lesson →</a>
+  </div>  <section id="quiz">
+    <h2>Quick Check 🧠</h2>
+    <p id="question"></p>
+    <div id="answers"></div>
+    <p id="result"></p>
+    <button class="nav-button" id="nextButton" onclick="nextQuestion()" style="display:none">Next Question</button>
+  </section>
+</main><footer>
+  <p>Haari Codes | Learn. Code. Create.</p>
+</footer><script>
+const questions = [
+  {
+    question: "1. What is the first index of an array?",
+    answers: ["1", "0", "-1"],
+    correct: 1
+  },
+  {
+    question: "2. What is the value of numbers[2] in {10, 20, 30, 40}?",
+    answers: ["20", "30", "40"],
+    correct: 1
+  },
+  {
+    question: "3. Which loop is commonly used to visit array elements?",
+    answers: ["for loop", "if statement", "switch statement"],
+    correct: 0
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function openQuiz() {
+  document.getElementById("quiz").style.display = "block";
+  current = 0;
+  score = 0;
+  showQuestion();
+  document.getElementById("quiz").scrollIntoView({behavior: "smooth"});
+}
+
+function showQuestion() {
+  answered = false;
+  document.getElementById("question").textContent = questions[current].question;
+  document.getElementById("result").textContent = "";
+  document.getElementById("nextButton").style.display = "none";
+
+  const box = document.getElementById("answers");
+  box.innerHTML = "";
+
+  questions[current].answers.forEach(function(answer, i) {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = answer;
+    button.onclick = function() { checkAnswer(i); };
+    box.appendChild(button);
+  });
+}
+
+function checkAnswer(choice) {
+  if (answered) return;
+  answered = true;
+
+  if (choice === questions[current].correct) {
+    score++;
+    document.getElementById("result").textContent = "Correct! 🎉";
+  } else {
+    document.getElementById("result").textContent =
+      "Correct answer: " + questions[current].answers[questions[current].correct];
+  }
+
+  document.querySelectorAll(".answer").forEach(function(button) {
+    button.disabled = true;
+  });
+
+  const next = document.getElementById("nextButton");
+  next.style.display = "block";
+  next.textContent = current === questions.length - 1 ? "See Result" : "Next Question";
+}
+
+function nextQuestion() {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    document.getElementById("question").textContent = "Quiz completed!";
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("result").textContent =
+      "Your score: " + score + "/" + questions.length;
+    document.getElementById("nextButton").style.display = "none";
+  }
+}
+</script></body>
+</html>
