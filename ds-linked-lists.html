@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linked Lists | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#1f2937;font-family:Georgia,serif;line-height:1.75}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h1{margin:0}
+header p,footer p{margin:5px 0;color:#d1d5db}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:white;padding:22px;margin-bottom:18px;border-radius:13px;box-shadow:0 3px 12px #00000009}
+h2{color:#2563eb;margin-top:0}
+h3{color:#111827;margin-bottom:5px}
+pre{background:#111827;color:#e5e7eb;padding:15px;border-radius:9px;overflow-x:auto;white-space:pre}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+.btn,button{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:10px 15px;border:0;border-radius:8px;margin:5px 5px 5px 0;font-family:Georgia,serif;font-size:15px;cursor:pointer}
+.secondary{background:#374151}
+.question{border:1px solid #e5e7eb;padding:14px;border-radius:10px;margin:12px 0}
+label{display:block;padding:4px 0;cursor:pointer}
+#result{font-weight:bold}
+.small{font-size:14px;color:#6b7280}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures | Lesson 03</p>
+</header>
+
+<main>
+<section class="card">
+<h2>Linked Lists</h2>
+<p>A linked list is a linear data structure made up of nodes. Each node stores data and one or more links that connect it to other nodes.</p>
+<p class="note"><strong>Learning objectives:</strong> Understand nodes and pointers, identify types of linked lists, perform basic operations and write a simple linked list program in C++.</p>
+</section>
+
+<section class="card">
+<h2>1. Definition</h2>
+<p>A <strong>linked list</strong> is a dynamic linear data structure in which elements are stored in separate nodes connected using links or pointers.</p>
+<p>Unlike an array, the nodes do not have to occupy consecutive memory locations.</p>
+<pre>HEAD
+  |
+  v
+[10 | next] → [20 | next] → [30 | NULL]</pre>
+<p>Each box represents a node. The final node points to <code>NULL</code>, indicating that there is no next node in a normal singly linked list.</p>
+</section>
+
+<section class="card">
+<h2>2. What Is a Node?</h2>
+<p>A <strong>node</strong> is an individual unit of a linked list. A node in a singly linked list contains:</p>
+<ul>
+<li><strong>Data field:</strong> Stores the value.</li>
+<li><strong>Link field:</strong> Stores a pointer to the next node.</li>
+</ul>
+<pre>struct Node {
+    int data;
+    Node* next;
+};</pre>
+<p><code>data</code> stores an integer and <code>next</code> points to another node.</p>
+<p><strong>Head:</strong> A pointer to the first node. If the list is empty, head is <code>NULL</code> or <code>nullptr</code>.</p>
+</section>
+
+<section class="card">
+<h2>3. Types of Linked Lists</h2>
+<h3>A. Singly Linked List</h3>
+<p>Each node points to the next node. Traversal normally proceeds in one direction.</p>
+<pre>HEAD → [10] → [20] → [30] → NULL</pre>
+<p>Application: A simple sequence of records.</p>
+
+<h3>B. Doubly Linked List</h3>
+<p>Each node has links to both the previous and next nodes.</p>
+<pre>NULL ← [10] ⇄ [20] ⇄ [30] → NULL</pre>
+<p>Application: Navigating both forward and backward through items.</p>
+
+<h3>C. Circular Singly Linked List</h3>
+<p>The last node points back to the first node instead of pointing to NULL.</p>
+<pre>HEAD → [10] → [20] → [30]
+         ↑              |
+         └──────────────┘</pre>
+<p>Application: Repeating cycles of tasks.</p>
+
+<h3>D. Circular Doubly Linked List</h3>
+<p>Each node has previous and next links, and the first and last nodes connect to one another in both directions.</p>
+<p>Application: Circular navigation through items in either direction.</p>
+</section>
+
+<section class="card">
+<h2>4. Creating a Linked List in C++</h2>
+<p>The following program creates three nodes and connects them.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    Node* first = new Node{10, nullptr};
+    Node* second = new Node{20, nullptr};
+    Node* third = new Node{30, nullptr};
+
+    first-&gt;next = second;
+    second-&gt;next = third;
+
+    Node* head = first;
+    Node* current = head;
+
+    while (current != nullptr) {
+        cout &lt;&lt; current-&gt;data &lt;&lt; " ";
+        current = current-&gt;next;
+    }
+
+    delete third;
+    delete second;
+    delete first;
+
+    return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>10 20 30</pre>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>Three nodes are created dynamically.</li>
+<li>Each node stores a value and a pointer.</li>
+<li>The next pointers connect the nodes.</li>
+<li><code>head</code> points to the first node.</li>
+<li>The loop visits each node until it reaches <code>nullptr</code>.</li>
+<li>The dynamically allocated nodes are deleted to release their memory.</li>
+</ol>
+</section>
+
+<section class="card">
+<h2>5. Traversal</h2>
+<p><strong>Traversal</strong> means visiting each node, usually from the head to the end of the list.</p>
+<pre>Node* current = head;
+
+while (current != nullptr) {
+    cout &lt;&lt; current-&gt;data &lt;&lt; " ";
+    current = current-&gt;next;
+}</pre>
+<p>Initially, <code>current</code> points to the first node. Each step moves to the next node. The loop stops when current becomes <code>nullptr</code>.</p>
+<p><strong>Time complexity:</strong> O(n), because the algorithm may visit all n nodes.</p>
+</section>
+
+<section class="card">
+<h2>6. Insertion</h2>
+<p>Insertion means adding a new node to a linked list.</p>
+<h3>A. Insertion at the Beginning</h3>
+<ol>
+<li>Create a new node.</li>
+<li>Make its next pointer point to the current head.</li>
+<li>Update head to point to the new node.</li>
+</ol>
+<pre>Node* newNode = new Node{5, head};
+head = newNode;</pre>
+<p>This inserts the value 5 at the beginning. It takes O(1) time when the head pointer is available.</p>
+
+<h3>B. Insertion at the End</h3>
+<p>Create a new node whose next pointer is <code>nullptr</code>. Traverse to the last node and link its next pointer to the new node. With only a head pointer, traversal takes O(n); with a maintained tail pointer, insertion can be O(1).</p>
+
+<h3>C. Insertion in the Middle</h3>
+<p>Find the node after which the new node should be inserted. Link the new node to the following node, then link the previous node to the new node. Finding the position may take O(n).</p>
+</section>
+
+<section class="card">
+<h2>7. Deletion</h2>
+<p>Deletion means removing a node from the list and releasing its allocated memory where applicable.</p>
+<h3>A. Delete the First Node</h3>
+<pre>if (head != nullptr) {
+    Node* temp = head;
+    head = head-&gt;next;
+    delete temp;
+}</pre>
+<p>The old head is saved, head moves to the next node, and the old node is deleted. This takes O(1) time.</p>
+
+<h3>B. Delete a Middle Node</h3>
+<p>Find the node before the target node, change its next pointer to skip the target, and delete the target node. Finding the target usually takes O(n).</p>
+
+<h3>C. Delete the Last Node</h3>
+<p>For a singly linked list, find the second-last node, set its next pointer to <code>nullptr</code>, and delete the old last node. Special handling is needed if the list has zero or one node.</p>
+<p class="note">Always update links carefully before deleting nodes. Accessing a node after it has been deleted can cause undefined behavior.</p>
+</section>
+
+<section class="card">
+<h2>8. Applications</h2>
+<ul>
+<li>Implementing stacks and queues.</li>
+<li>Representing sequences that grow or shrink.</li>
+<li>Moving forward and backward through items using doubly linked lists.</li>
+<li>Representing graphs with adjacency lists.</li>
+<li>Managing collections where insertions and deletions are frequent.</li>
+<li>Building certain memory-management structures and playlists.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>9. Advantages</h2>
+<ul>
+<li>Can grow or shrink dynamically.</li>
+<li>Insertion and deletion at a known position can be efficient.</li>
+<li>Does not require all nodes to be stored consecutively in memory.</li>
+<li>Doubly linked lists support movement in both directions.</li>
+</ul>
+
+<h2>10. Disadvantages</h2>
+<ul>
+<li>Extra memory is needed for pointers.</li>
+<li>No direct index-based access like an array.</li>
+<li>Searching for a particular value usually takes O(n).</li>
+<li>Pointer handling makes implementation more complex.</li>
+<li>Nodes may have poorer cache locality than contiguous arrays.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>11. Array vs Linked List</h2>
+<table>
+<tr><th>Feature</th><th>Array</th><th>Linked List</th></tr>
+<tr><td>Memory layout</td><td>Contiguous</td><td>Nodes can be scattered</td></tr>
+<tr><td>Size</td><td>Built-in array size is fixed</td><td>Can grow or shrink dynamically</td></tr>
+<tr><td>Access by index</td><td>O(1)</td><td>O(n) to reach an indexed node</td></tr>
+<tr><td>Insert at beginning</td><td>Usually O(n) due to shifting</td><td>O(1) with head pointer</td></tr>
+<tr><td>Extra pointer memory</td><td>Not needed for normal elements</td><td>Needed for links</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>12. Time Complexity</h2>
+<table>
+<tr><th>Operation</th><th>Singly linked list</th></tr>
+<tr><td>Access first node</td><td>O(1)</td></tr>
+<tr><td>Search by value</td><td>O(n)</td></tr>
+<tr><td>Traverse all nodes</td><td>O(n)</td></tr>
+<tr><td>Insert at beginning</td><td>O(1)</td></tr>
+<tr><td>Delete at beginning</td><td>O(1)</td></tr>
+<tr><td>Insert at end</td><td>O(n) with head only; O(1) with tail pointer</td></tr>
+</table>
+<p class="small">These costs assume a standard singly linked list. If the target node or its predecessor is already known, some insertion and deletion operations can be O(1).</p>
+</section>
+
+<section class="card">
+<h2>13. Quick Check 🧠</h2>
+<p>Select an answer for each question, then check your score.</p>
+<form id="quiz">
+<div class="question">
+<p><strong>1. What does a node in a singly linked list contain?</strong></p>
+<label><input type="radio" name="q1" value="a"> Only a data field</label>
+<label><input type="radio" name="q1" value="b"> Data and a link to the next node</label>
+<label><input type="radio" name="q1" value="c"> Only an array index</label>
+</div>
+<div class="question">
+<p><strong>2. What does the head pointer refer to?</strong></p>
+<label><input type="radio" name="q2" value="a"> The first node</label>
+<label><input type="radio" name="q2" value="b"> Always the last node</label>
+<label><input type="radio" name="q2" value="c"> The number of nodes</label>
+</div>
+<div class="question">
+<p><strong>3. Which linked list supports forward and backward links?</strong></p>
+<label><input type="radio" name="q3" value="a"> Singly linked list</label>
+<label><input type="radio" name="q3" value="b"> Doubly linked list</label>
+<label><input type="radio" name="q3" value="c"> Array</label>
+</div>
+<div class="question">
+<p><strong>4. What is the usual complexity of searching for a value?</strong></p>
+<label><input type="radio" name="q4" value="a"> O(1) in every case</label>
+<label><input type="radio" name="q4" value="b"> O(log n) in every case</label>
+<label><input type="radio" name="q4" value="c"> O(n)</label>
+</div>
+<div class="question">
+<p><strong>5. What does nullptr indicate in the last node of a normal singly linked list?</strong></p>
+<label><input type="radio" name="q5" value="a"> There is no next node</label>
+<label><input type="radio" name="q5" value="b"> The node contains zero</label>
+<label><input type="radio" name="q5" value="c"> The list has exactly zero nodes</label>
+</div>
+<div class="question">
+<p><strong>6. Which is an advantage of a linked list?</strong></p>
+<label><input type="radio" name="q6" value="a"> Direct O(1) access to every index</label>
+<label><input type="radio" name="q6" value="b"> Flexible size and efficient insertion at the head</label>
+<label><input type="radio" name="q6" value="c"> It never uses extra memory</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" class="secondary" onclick="resetQuiz()">Try Again</button>
+<p id="result" aria-live="polite"></p>
+<div id="answers" hidden>
+<h3>Answer Key</h3>
+<ol>
+<li>B: A node stores data and a next pointer.</li>
+<li>A: Head refers to the first node.</li>
+<li>B: A doubly linked list has previous and next links.</li>
+<li>C: Searching may require visiting every node.</li>
+<li>A: nullptr marks the end of the normal singly linked list.</li>
+<li>B: A linked list can grow and supports O(1) insertion at the head.</li>
+</ol>
+</div>
+</form>
+</section>
+
+<section class="card">
+<h2>Lesson Summary</h2>
+<ul>
+<li>A linked list consists of connected nodes.</li>
+<li>A node stores data and one or more links.</li>
+<li>Main types include singly, doubly and circular linked lists.</li>
+<li>Insertion at the head is O(1); searching is generally O(n).</li>
+<li>Linked lists are flexible, but pointer management needs care.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Continue Learning</h2>
+<a class="btn secondary" href="ds-arrays.html">← Previous: Arrays</a>
+<a class="btn secondary" href="data-structure.html">Course Home</a>
+<a class="btn" href="ds-stacks.html">Next: Stacks →</a>
+<p class="small">The Next button works after ds-stacks.html is created.</p>
+</section>
+</main>
+
+<footer><p>Haari_Codes | Learn. Practise. Build.</p></footer>
+
+<script>
+function checkAnswers(){
+ const correct={q1:"b",q2:"a",q3:"b",q4:"c",q5:"a",q6:"b"};
+ let score=0,unanswered=0;
+ for(const q in correct){
+  const selected=document.querySelector('input[name="'+q+'"]:checked');
+  if(!selected) unanswered++;
+  else if(selected.value===correct[q]) score++;
+ }
+ document.getElementById("result").textContent=
+ "Your score: "+score+"/6"+(unanswered?" | "+unanswered+" unanswered.":"");
+ document.getElementById("answers").hidden=false;
+}
+function resetQuiz(){
+ document.getElementById("quiz").reset();
+ document.getElementById("result").textContent="";
+ document.getElementById("answers").hidden=true;
+}
+</script>
+</body>
+</html>
