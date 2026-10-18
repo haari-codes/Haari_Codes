@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trees | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#93c5fd}
+main{max-width:950px;margin:24px auto;padding:0 15px}
+section{background:white;padding:22px;margin:18px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+h2{border-bottom:2px solid #dbeafe;padding-bottom:7px}
+code{background:#eaf1ff;padding:2px 5px;border-radius:4px}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:9px;overflow-x:auto;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+button,.nav a{display:inline-block;background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:15px;margin:4px}
+button:hover,.nav a:hover{background:#1d4ed8}
+.question{padding:12px 0;border-bottom:1px solid #e5e7eb}
+label{display:block;margin:6px 0}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:25px 0}
+#result{font-weight:bold}
+.tree{background:#eff6ff;text-align:center;padding:15px;border-radius:9px;font-family:monospace;white-space:pre;overflow-x:auto;line-height:1.5}
+@media(max-width:600px){section{padding:16px}table{font-size:13px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures and Algorithms</p>
+<h2 style="color:white;border:0">Lesson 8: Trees</h2>
+</header>
+
+<main>
+<section>
+<h2>1. What Is a Tree?</h2>
+<p>A <b>tree</b> is a non-linear, hierarchical data structure consisting of nodes connected by edges.</p>
+<p>Unlike an array or linked list, tree data is organised into parent-child relationships. A tree with <code>n</code> nodes has <code>n - 1</code> edges when it is a non-empty tree.</p>
+<h3>Example</h3>
+<div class="tree">        A
+       / \
+      B   C
+     / \
+    D   E</div>
+<p>Here, A is the root. B and C are its children. D and E are children of B.</p>
+<h3>Why use trees?</h3>
+<ul>
+<li>To represent hierarchical relationships.</li>
+<li>To organise data for efficient searching.</li>
+<li>To represent folders, organisation charts and decision processes.</li>
+<li>To implement databases and priority queues using specialised tree structures.</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Tree Terminology</h2>
+<ul>
+<li><b>Node:</b> An individual element in a tree.</li>
+<li><b>Root:</b> The topmost node. It has no parent.</li>
+<li><b>Edge:</b> A connection between two nodes.</li>
+<li><b>Parent:</b> A node that has one or more children.</li>
+<li><b>Child:</b> A node directly connected below a parent.</li>
+<li><b>Siblings:</b> Nodes sharing the same parent.</li>
+<li><b>Leaf node:</b> A node with no children.</li>
+<li><b>Internal node:</b> A node with at least one child.</li>
+<li><b>Ancestor:</b> Any node on the path from the root to a particular node, excluding that node itself.</li>
+<li><b>Descendant:</b> A node below another node in its subtree.</li>
+<li><b>Subtree:</b> A node and all its descendants.</li>
+<li><b>Depth:</b> The number of edges from the root to a node.</li>
+<li><b>Height of a node:</b> The number of edges on the longest downward path from that node to a leaf.</li>
+<li><b>Height of a tree:</b> The height of its root. A single-node tree has height 0 under this convention.</li>
+</ul>
+<p>In the example above, A is the root, B and C are siblings, and C is a leaf node.</p>
+</section>
+
+<section>
+<h2>3. Types of Trees</h2>
+<h3>General Tree</h3>
+<p>A node can have any number of children.</p>
+<h3>Binary Tree</h3>
+<p>A tree in which each node has at most two children, commonly called the left child and right child.</p>
+<div class="tree">        10
+       /  \
+      5    20
+     / \
+    2   7</div>
+<h3>Full Binary Tree</h3>
+<p>Every node has either zero or exactly two children.</p>
+<h3>Complete Binary Tree</h3>
+<p>Every level is completely filled except possibly the last, and the last level is filled from left to right.</p>
+<h3>Perfect Binary Tree</h3>
+<p>Every internal node has two children, and all leaves are at the same depth.</p>
+<h3>Binary Search Tree (BST)</h3>
+<p>A binary tree in which values in the left subtree are smaller than the node's value and values in the right subtree are larger, assuming distinct keys and this insertion rule.</p>
+<h3>Balanced Tree</h3>
+<p>A tree kept at a controlled height so that operations such as searching can remain efficient. AVL trees and Red-Black trees are examples of self-balancing BSTs.</p>
+</section>
+
+<section>
+<h2>4. Binary Tree Representation in C++</h2>
+<p>A common representation uses a structure or class containing the data and pointers to the left and right children.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int value) {
+        data = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+int main() {
+    Node* root = new Node(10);
+    root-&gt;left = new Node(5);
+    root-&gt;right = new Node(20);
+
+    cout &lt;&lt; root-&gt;data &lt;&lt; endl;
+    cout &lt;&lt; root-&gt;left-&gt;data &lt;&lt; endl;
+    cout &lt;&lt; root-&gt;right-&gt;data &lt;&lt; endl;
+
+    delete root-&gt;left;
+    delete root-&gt;right;
+    delete root;
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>10
+5
+20</pre>
+<p><code>left</code> and <code>right</code> point to child nodes. <code>nullptr</code> means there is no child at that pointer.</p>
+</section>
+
+<section>
+<h2>5. Tree Traversal</h2>
+<p><b>Traversal</b> means visiting each node in a tree in a particular order.</p>
+<p>Consider this tree:</p>
+<div class="tree">        1
+       / \
+      2   3
+     / \
+    4   5</div>
+
+<h3>A. Inorder: Left, Root, Right (LNR)</h3>
+<ol>
+<li>Traverse the left subtree.</li>
+<li>Visit the root.</li>
+<li>Traverse the right subtree.</li>
+</ol>
+<p><b>Output:</b> <code>4 2 5 1 3</code></p>
+
+<h3>B. Preorder: Root, Left, Right (NLR)</h3>
+<ol>
+<li>Visit the root.</li>
+<li>Traverse the left subtree.</li>
+<li>Traverse the right subtree.</li>
+</ol>
+<p><b>Output:</b> <code>1 2 4 5 3</code></p>
+
+<h3>C. Postorder: Left, Right, Root (LRN)</h3>
+<ol>
+<li>Traverse the left subtree.</li>
+<li>Traverse the right subtree.</li>
+<li>Visit the root.</li>
+</ol>
+<p><b>Output:</b> <code>4 5 2 3 1</code></p>
+
+<h3>D. Level Order</h3>
+<p>Visits nodes level by level from left to right. It typically uses a queue.</p>
+<p><b>Output:</b> <code>1 2 3 4 5</code></p>
+</section>
+
+<section>
+<h2>6. C++ Program for Tree Traversals</h2>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int value) {
+        data = value;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+void inorder(Node* root) {
+    if (root == nullptr) return;
+
+    inorder(root-&gt;left);
+    cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+    inorder(root-&gt;right);
+}
+
+void preorder(Node* root) {
+    if (root == nullptr) return;
+
+    cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+void postorder(Node* root) {
+    if (root == nullptr) return;
+
+    postorder(root-&gt;left);
+    postorder(root-&gt;right);
+    cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+}
+
+int main() {
+    Node* root = new Node(1);
+    root-&gt;left = new Node(2);
+    root-&gt;right = new Node(3);
+    root-&gt;left-&gt;left = new Node(4);
+    root-&gt;left-&gt;right = new Node(5);
+
+    cout &lt;&lt; "Inorder: ";
+    inorder(root);
+
+    cout &lt;&lt; "\nPreorder: ";
+    preorder(root);
+
+    cout &lt;&lt; "\nPostorder: ";
+    postorder(root);
+
+    cout &lt;&lt; endl;
+
+    delete root-&gt;left-&gt;left;
+    delete root-&gt;left-&gt;right;
+    delete root-&gt;left;
+    delete root-&gt;right;
+    delete root;
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>Inorder: 4 2 5 1 3
+Preorder: 1 2 4 5 3
+Postorder: 4 5 2 3 1</pre>
+<div class="note"><b>Memory tip:</b> Inorder = LNR, Preorder = NLR, Postorder = LRN. The position of the root tells you the traversal name.</div>
+</section>
+
+<section>
+<h2>7. Binary Search Tree (BST)</h2>
+<p>A BST is a binary tree organised to make searching, insertion and deletion efficient when its height is reasonably small.</p>
+<p>For distinct values:</p>
+<ul>
+<li>Values smaller than a node go into its left subtree.</li>
+<li>Values larger than a node go into its right subtree.</li>
+<li>The rule applies recursively to each subtree.</li>
+</ul>
+<h3>Example</h3>
+<p>Insert values in this order: <code>10, 5, 15, 3, 7</code>.</p>
+<div class="tree">        10
+       /  \
+      5    15
+     / \
+    3   7</div>
+<p>Searching for 7:</p>
+<ol>
+<li>Compare 7 with 10. Since 7 is smaller, go left.</li>
+<li>Compare 7 with 5. Since 7 is larger, go right.</li>
+<li>Reach 7. Target found!</li>
+</ol>
+<h3>Advantages of BST</h3>
+<ul>
+<li>Can support efficient searching, insertion and deletion.</li>
+<li>Inorder traversal produces sorted values for a BST.</li>
+<li>Can support ordered operations such as finding a minimum or maximum.</li>
+</ul>
+<h3>Disadvantages of BST</h3>
+<ul>
+<li>An ordinary BST can become skewed, reducing performance.</li>
+<li>Implementation is more complex than an array.</li>
+<li>Balancing adds extra implementation requirements.</li>
+</ul>
+</section>
+
+<section>
+<h2>8. Complexity of Tree Operations</h2>
+<table>
+<tr><th>Operation</th><th>Typical complexity</th></tr>
+<tr><td>Traverse all nodes</td><td>O(n)</td></tr>
+<tr><td>Search in a balanced BST</td><td>O(log n)</td></tr>
+<tr><td>Insert in a balanced BST</td><td>O(log n)</td></tr>
+<tr><td>Delete in a balanced BST</td><td>O(log n)</td></tr>
+<tr><td>Search in a skewed BST</td><td>O(n)</td></tr>
+<tr><td>Insert in a skewed BST</td><td>O(n)</td></tr>
+</table>
+<p class="note">Here, <code>n</code> is the number of nodes. BST complexity depends on tree height. Balanced BSTs keep the height around O(log n), while a skewed tree can have height O(n).</p>
+</section>
+
+<section>
+<h2>9. Applications of Trees</h2>
+<ul>
+<li>Folder and file systems.</li>
+<li>HTML and XML document structure.</li>
+<li>Database indexes and search structures.</li>
+<li>Expression trees used in compilers and calculators.</li>
+<li>Decision trees in machine learning.</li>
+<li>Hierarchical organisation charts.</li>
+<li>Autocomplete and dictionary lookup using specialised tree structures.</li>
+</ul>
+</section>
+
+<section>
+<h2>10. Quick Check 🧠</h2>
+<p>Select one answer for each question, then press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><b>1. What is the topmost node of a tree called?</b></p>
+<label><input type="radio" name="q1" value="a"> Leaf</label>
+<label><input type="radio" name="q1" value="b"> Root</label>
+<label><input type="radio" name="q1" value="c"> Edge</label>
+</div>
+<div class="question">
+<p><b>2. How many children can a binary tree node have at most?</b></p>
+<label><input type="radio" name="q2" value="a"> One</label>
+<label><input type="radio" name="q2" value="b"> Two</label>
+<label><input type="radio" name="q2" value="c"> Four</label>
+</div>
+<div class="question">
+<p><b>3. Which traversal follows Left, Root, Right?</b></p>
+<label><input type="radio" name="q3" value="a"> Preorder</label>
+<label><input type="radio" name="q3" value="b"> Postorder</label>
+<label><input type="radio" name="q3" value="c"> Inorder</label>
+</div>
+<div class="question">
+<p><b>4. Which data structure is commonly used for level-order traversal?</b></p>
+<label><input type="radio" name="q4" value="a"> Queue</label>
+<label><input type="radio" name="q4" value="b"> Stack only</label>
+<label><input type="radio" name="q4" value="c"> String</label>
+</div>
+<div class="question">
+<p><b>5. What is the worst-case search time in a skewed BST?</b></p>
+<label><input type="radio" name="q5" value="a"> O(1)</label>
+<label><input type="radio" name="q5" value="b"> O(log n)</label>
+<label><input type="radio" name="q5" value="c"> O(n)</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+<p id="result" aria-live="polite"></p>
+</form>
+</section>
+
+<div class="nav">
+<a href="ds-sorting.html">← Previous: Sorting</a>
+<a href="data-structure.html">Course Home</a>
+<a href="ds-graphs.html">Next: Graphs →</a>
+</div>
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+function checkAnswers(){
+    const answers={q1:"b",q2:"b",q3:"c",q4:"a",q5:"c"};
+    let score=0;
+    let unanswered=0;
+
+    for(const q in answers){
+        const chosen=document.querySelector('input[name="'+q+'"]:checked');
+        if(!chosen) unanswered++;
+        else if(chosen.value===answers[q]) score++;
+    }
+
+    const result=document.getElementById("result");
+
+    if(unanswered>0){
+        result.textContent="Please answer all 5 questions. Unanswered: "+unanswered;
+        return;
+    }
+
+    result.textContent="Your score: "+score+"/5. "+
+        (score===5?"Excellent! Tree concepts mastered! 🎉":
+        score>=3?"Good work! Revise the missed answers and try again. 💙":
+        "Keep practising! Review tree terminology and traversal orders. 💪");
+}
+</script>
+</body>
+  </html>
