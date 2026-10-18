@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL DDL Commands | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#111827;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#d1fae5;padding:15px;border-radius:10px;overflow-x:auto}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px;border-radius:6px}
+.example{background:#f9fafb;border:1px solid #e5e7eb;padding:12px;border-radius:8px;overflow-x:auto}
+.button{display:inline-block;background:#2563eb;color:white;padding:10px 16px;text-decoration:none;border-radius:8px;margin:5px 5px 5px 0;border:0;font-family:inherit;cursor:pointer}
+.question{border:1px solid #e5e7eb;padding:15px;border-radius:10px;margin:14px 0}
+label.option{display:block;padding:7px;cursor:pointer}
+.result{font-weight:bold;margin-top:12px}
+.small{color:#6b7280;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🗄️ Lesson 02: DDL Commands</h1>
+<p>Haari_Codes | Define and modify database structures</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What is DDL?</h2>
+<p><strong>DDL</strong> stands for <strong>Data Definition Language</strong>.</p>
+<p>DDL is a category of SQL commands used to create, change or remove database objects such as tables.</p>
+<h3>Main DDL Commands</h3>
+<ul>
+<li><strong>CREATE:</strong> Creates a database object.</li>
+<li><strong>ALTER:</strong> Changes the structure of an existing object.</li>
+<li><strong>DROP:</strong> Removes a database object.</li>
+<li><strong>TRUNCATE:</strong> Removes all records from a table while keeping its structure.</li>
+</ul>
+<div class="note"><strong>Remember:</strong> DDL mainly deals with the structure of database objects, not individual record editing.</div>
+</section>
+
+<section class="card">
+<h2>2. CREATE Command</h2>
+<p>The <code>CREATE</code> command creates database objects, such as databases and tables.</p>
+<h3>Syntax</h3>
+<pre><code>CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype
+);</code></pre>
+<h3>Example</h3>
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50),
+    mark INT
+);</code></pre>
+<p>This creates a table named <code>Students</code> with three columns: <code>id</code>, <code>name</code> and <code>mark</code>.</p>
+<h3>Insert some sample data</h3>
+<pre><code>INSERT INTO Students VALUES (1, 'Anu', 90);
+INSERT INTO Students VALUES (2, 'Akhil', 85);</code></pre>
+<p>The INSERT statements are DML commands. They add records to the table created by CREATE.</p>
+<h3>View the records</h3>
+<pre><code>SELECT * FROM Students;</code></pre>
+<div class="example">
+<strong>Expected result</strong>
+<table style="width:100%;border-collapse:collapse;text-align:left">
+<tr style="background:#dbeafe"><th style="padding:8px;border:1px solid #cbd5e1">id</th><th style="padding:8px;border:1px solid #cbd5e1">name</th><th style="padding:8px;border:1px solid #cbd5e1">mark</th></tr>
+<tr><td style="padding:8px;border:1px solid #cbd5e1">1</td><td style="padding:8px;border:1px solid #cbd5e1">Anu</td><td style="padding:8px;border:1px solid #cbd5e1">90</td></tr>
+<tr><td style="padding:8px;border:1px solid #cbd5e1">2</td><td style="padding:8px;border:1px solid #cbd5e1">Akhil</td><td style="padding:8px;border:1px solid #cbd5e1">85</td></tr>
+</table>
+</div>
+</section>
+
+<section class="card">
+<h2>3. ALTER Command</h2>
+<p>The <code>ALTER</code> command changes the structure of an existing table.</p>
+<h3>A. Add a column</h3>
+<pre><code>ALTER TABLE Students
+ADD age INT;</code></pre>
+<p>This adds an <code>age</code> column to Students. Existing rows will have NULL in that column unless a default or other database-specific rule applies.</p>
+<h3>B. Change a column definition</h3>
+<p>The syntax depends on the database system. For example, in MySQL:</p>
+<pre><code>ALTER TABLE Students
+MODIFY name VARCHAR(100);</code></pre>
+<p>This changes the permitted length of the name column to 100 characters in MySQL.</p>
+<div class="note">Other systems use different syntax. For example, PostgreSQL uses ALTER COLUMN with TYPE for changing a column's data type.</div>
+<h3>C. Drop a column</h3>
+<pre><code>ALTER TABLE Students
+DROP COLUMN age;</code></pre>
+<p>This removes the age column and its stored values. Make sure you no longer need the data before running it.</p>
+</section>
+
+<section class="card">
+<h2>4. DROP Command</h2>
+<p>The <code>DROP</code> command removes a database object, such as a table.</p>
+<h3>Syntax</h3>
+<pre><code>DROP TABLE table_name;</code></pre>
+<h3>Example</h3>
+<pre><code>DROP TABLE Students;</code></pre>
+<p>This removes the Students table itself, including its records and structure.</p>
+<div class="note"><strong>Warning:</strong> DROP TABLE is destructive. You generally cannot retrieve the dropped table without a backup or recovery mechanism.</div>
+</section>
+
+<section class="card">
+<h2>5. TRUNCATE Command</h2>
+<p>The <code>TRUNCATE</code> command removes all records from a table but preserves the table structure.</p>
+<h3>Syntax</h3>
+<pre><code>TRUNCATE TABLE Students;</code></pre>
+<p>After truncation, the table still exists with the same columns, but it contains no records.</p>
+<div class="note">Transaction behaviour, identity-counter resets and restrictions differ between database systems. Do not assume TRUNCATE can always be rolled back.</div>
+</section>
+
+<section class="card">
+<h2>6. DROP vs TRUNCATE vs DELETE</h2>
+<div class="example">
+<table style="width:100%;border-collapse:collapse;text-align:left">
+<tr style="background:#dbeafe">
+<th style="padding:8px;border:1px solid #cbd5e1">Command</th>
+<th style="padding:8px;border:1px solid #cbd5e1">Effect</th>
+<th style="padding:8px;border:1px solid #cbd5e1">Keeps table?</th>
+</tr>
+<tr><td style="padding:8px;border:1px solid #cbd5e1">DROP</td><td style="padding:8px;border:1px solid #cbd5e1">Removes table and records</td><td style="padding:8px;border:1px solid #cbd5e1">No</td></tr>
+<tr><td style="padding:8px;border:1px solid #cbd5e1">TRUNCATE</td><td style="padding:8px;border:1px solid #cbd5e1">Removes all records</td><td style="padding:8px;border:1px solid #cbd5e1">Yes</td></tr>
+<tr><td style="padding:8px;border:1px solid #cbd5e1">DELETE</td><td style="padding:8px;border:1px solid #cbd5e1">Removes selected or all records</td><td style="padding:8px;border:1px solid #cbd5e1">Yes</td></tr>
+</table>
+</div>
+<h3>Example: DELETE with a condition</h3>
+<pre><code>DELETE FROM Students
+WHERE id = 1;</code></pre>
+<p>This removes the record whose id is 1, if it exists. The table remains, and other records are unaffected.</p>
+<h3>Example: DELETE all records</h3>
+<pre><code>DELETE FROM Students;</code></pre>
+<p>This removes all records but leaves the table structure intact.</p>
+<div class="note"><strong>Exam tip:</strong> DELETE is generally classified as DML. DROP, TRUNCATE and CREATE are commonly classified as DDL.</div>
+</section>
+
+<section class="card">
+<h2>7. Advantages of DDL</h2>
+<ul>
+<li>Creates tables and other database objects.</li>
+<li>Allows the table structure to evolve.</li>
+<li>Helps remove objects that are no longer needed.</li>
+<li>Supports organizing data using suitable columns and data types.</li>
+</ul>
+<h2>8. Precautions</h2>
+<ul>
+<li>Check the table name before running DROP or TRUNCATE.</li>
+<li>Back up important data before destructive changes.</li>
+<li>Check dependencies, constraints and permissions.</li>
+<li>Use the correct syntax for your database system.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>🧠 Quick Check Quiz</h2>
+<p>Answer all 10 questions, then select Check Answers.</p>
+<form id="quiz">
+
+<div class="question"><strong>1. What is the full form of DDL?</strong>
+<label class="option"><input type="radio" name="q1" value="a"> Data Definition Language</label>
+<label class="option"><input type="radio" name="q1" value="b"> Data Display Language</label>
+<label class="option"><input type="radio" name="q1" value="c"> Database Design Logic</label></div>
+
+<div class="question"><strong>2. Which command creates a table?</strong>
+<label class="option"><input type="radio" name="q2" value="a"> UPDATE</label>
+<label class="option"><input type="radio" name="q2" value="b"> CREATE</label>
+<label class="option"><input type="radio" name="q2" value="c"> SELECT</label></div>
+
+<div class="question"><strong>3. Which command changes a table's structure?</strong>
+<label class="option"><input type="radio" name="q3" value="a"> INSERT</label>
+<label class="option"><input type="radio" name="q3" value="b"> DELETE</label>
+<label class="option"><input type="radio" name="q3" value="c"> ALTER</label></div>
+
+<div class="question"><strong>4. Which command removes a table itself?</strong>
+<label class="option"><input type="radio" name="q4" value="a"> DROP</label>
+<label class="option"><input type="radio" name="q4" value="b"> SELECT</label>
+<label class="option"><input type="radio" name="q4" value="c"> UPDATE</label></div>
+
+<div class="question"><strong>5. Which command removes all records while retaining the table structure?</strong>
+<label class="option"><input type="radio" name="q5" value="a"> DROP</label>
+<label class="option"><input type="radio" name="q5" value="b"> TRUNCATE</label>
+<label class="option"><input type="radio" name="q5" value="c"> CREATE</label></div>
+
+<div class="question"><strong>6. Which command adds a new column?</strong>
+<label class="option"><input type="radio" name="q6" value="a"> ALTER TABLE ... ADD</label>
+<label class="option"><input type="radio" name="q6" value="b"> INSERT INTO ... ADD</label>
+<label class="option"><input type="radio" name="q6" value="c"> SELECT ... ADD</label></div>
+
+<div class="question"><strong>7. Which command is commonly classified as DML?</strong>
+<label class="option"><input type="radio" name="q7" value="a"> DROP</label>
+<label class="option"><input type="radio" name="q7" value="b"> CREATE</label>
+<label class="option"><input type="radio" name="q7" value="c"> DELETE</label></div>
+
+<div class="question"><strong>8. What does DROP TABLE Students do?</strong>
+<label class="option"><input type="radio" name="q8" value="a"> Displays the table</label>
+<label class="option"><input type="radio" name="q8" value="b"> Removes the table and its records</label>
+<label class="option"><input type="radio" name="q8" value="c"> Adds a column</label></div>
+
+<div class="question"><strong>9. Which command can remove only a matching record?</strong>
+<label class="option"><input type="radio" name="q9" value="a"> DELETE with WHERE</label>
+<label class="option"><input type="radio" name="q9" value="b"> TRUNCATE</label>
+<label class="option"><input type="radio" name="q9" value="c"> DROP TABLE</label></div>
+
+<div class="question"><strong>10. Which command removes a column from an existing table in common SQL systems?</strong>
+<label class="option"><input type="radio" name="q10" value="a"> DELETE COLUMN</label>
+<label class="option"><input type="radio" name="q10" value="b"> DROP TABLE</label>
+<label class="option"><input type="radio" name="q10" value="c"> ALTER TABLE ... DROP COLUMN</label></div>
+
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+<button class="button" type="button" onclick="resetQuiz()">Try Again</button>
+<div id="result" class="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</section>
+
+<section class="card">
+<h2>📌 Lesson Summary</h2>
+<ul>
+<li>CREATE creates database objects.</li>
+<li>ALTER changes the structure of existing objects.</li>
+<li>DROP removes a database object.</li>
+<li>TRUNCATE removes all records but keeps the table structure.</li>
+<li>DELETE removes selected records or all records, depending on the query.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>➡️ Continue Learning</h2>
+<a class="button" href="sql-introduction.html">← Previous Lesson</a>
+<a class="button" href="sql.html">SQL Course Home</a>
+<a class="button" href="sql-dml.html">Next: DML Commands →</a>
+<p style="color:#6b7280;font-size:14px">The next lesson link will work after you create sql-dml.html.</p>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Haari_Codes</strong></p>
+<p>Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+const answers = {
+q1:"a", q2:"b", q3:"c", q4:"a", q5:"b",
+q6:"a", q7:"c", q8:"b", q9:"a", q10:"c"
+};
+
+const explanations = {
+q1:"DDL means Data Definition Language.",
+q2:"CREATE is used to create a table.",
+q3:"ALTER changes the structure of an existing table.",
+q4:"DROP removes the table itself.",
+q5:"TRUNCATE removes all records but keeps the table structure.",
+q6:"ALTER TABLE ... ADD adds a column.",
+q7:"DELETE is commonly classified as a DML command.",
+q8:"DROP TABLE removes the table and its records.",
+q9:"DELETE with WHERE can remove records matching a condition.",
+q10:"ALTER TABLE ... DROP COLUMN removes a column in supported SQL systems."
+};
+
+function checkAnswers(){
+  let score = 0;
+  let unanswered = 0;
+  let html = "";
+
+  for(let i=1;i<=10;i++){
+    const key = "q"+i;
+    const selected = document.querySelector('input[name="'+key+'"]:checked');
+
+    if(!selected){
+      unanswered++;
+      html += '<div class="question"><strong>Q'+i+': Not answered.</strong><br>'+explanations[key]+'</div>';
+    }else if(selected.value===answers[key]){
+      score++;
+      html += '<div class="question"><strong>Q'+i+': ✅ Correct!</strong><br>'+explanations[key]+'</div>';
+    }else{
+      html += '<div class="question"><strong>Q'+i+': ❌ Incorrect.</strong><br>Correct option: <strong>'+answers[key].toUpperCase()+'</strong><br>'+explanations[key]+'</div>';
+    }
+  }
+
+  document.getElementById("result").textContent =
+    "Your score: "+score+"/10 ("+(score*10)+"%). Unanswered: "+unanswered+".";
+  document.getElementById("review").innerHTML = html;
+}
+
+function resetQuiz(){
+  document.getElementById("quiz").reset();
+  document.getElementById("result").textContent = "";
+  document.getElementById("review").innerHTML = "";
+}
+</script>
+</body>
+</html>
