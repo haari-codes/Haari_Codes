@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOP | Haari Codes</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f6fb;
+  color: #202938;
+  line-height: 1.7;
+}
+header, footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 18px;
+}
+main {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 15px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px #00000010;
+}
+h2 { color: #2563eb; }
+pre {
+  background: #111827;
+  color: #a7f3d0;
+  padding: 15px;
+  border-radius: 9px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 22px 0;
+}
+.nav-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.nav-button:hover { background: #1d4ed8; }
+#quiz {
+  display: none;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  margin: 20px 0;
+}
+.answer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #172554;
+  cursor: pointer;
+}
+#result { font-weight: bold; }
+</style>
+</head><body>
+<header>
+  <h1>Haari Codes</h1>
+  <p>CS Companion | C++ Programming</p>
+</header><main>
+  <section class="card">
+    <p><strong>Lesson 10 of 10</strong></p>
+    <h2>Object-Oriented Programming (OOP)</h2>
+    <p>Object-Oriented Programming is a programming approach that organises code using classes and objects. C++ supports OOP concepts that help us build reusable and organised programs.</p>
+  </section>  <section class="card">
+    <h2>1. What Is a Class?</h2>
+    <p>A class is a blueprint for creating objects. It can contain data members and member functions.</p>
+    <pre>class Student {
+public:
+    string name;
+    int age;
+};</pre>
+    <p>Here, <code>Student</code> is a class with two data members: <code>name</code> and <code>age</code>.</p>
+  </section>  <section class="card">
+    <h2>2. What Is an Object?</h2>
+    <p>An object is an instance of a class.</p>
+    <pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;class Student {
+public:
+string name;
+int age;
+};
+
+int main() {
+Student s1;
+s1.name = "Haari";
+s1.age = 19;
+
+cout &lt;&lt; s1.name &lt;&lt; endl;
+cout &lt;&lt; s1.age;
+
+return 0;
+
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>Haari
+19</pre>
+<p><code>s1</code> is an object of the <code>Student</code> class. The dot operator accesses its members.</p>
+
+  </section>  <section class="card">
+    <h2>3. Encapsulation</h2>
+    <p>Encapsulation combines data and functions inside a class. Access specifiers such as <code>private</code> help control access to data.</p>
+    <pre>class BankAccount {
+private:
+    int balance = 1000;public:
+int getBalance() {
+return balance;
+}
+};</pre>
+<p>The <code>balance</code> member is private, so it cannot be accessed directly from outside the class. The public function provides access to its value.</p>
+
+  </section>  <section class="card">
+    <h2>4. Inheritance</h2>
+    <p>Inheritance allows one class to acquire accessible members from another class.</p>
+    <pre>class Animal {
+public:
+    void eat() {
+        cout &lt;&lt; "Eating";
+    }
+};class Dog : public Animal {
+};</pre>
+<p><code>Dog</code> inherits from <code>Animal</code> and can use its public <code>eat()</code> function.</p>
+
+  </section>  <section class="card">
+    <h2>5. Polymorphism</h2>
+    <p>Polymorphism means “many forms”. It allows the same function name or interface to behave differently in different situations.</p>
+    <pre>#include &lt;iostream&gt;
+using namespace std;class Animal {
+public:
+virtual void sound() {
+cout << "Animal sound";
+}
+};
+
+class Dog : public Animal {
+public:
+void sound() override {
+cout << "Bark";
+}
+};
+
+int main() {
+Dog d;
+Animal* ptr = &d;
+ptr->sound();
+return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>Bark</pre>
+<p>The virtual function lets the derived class provide its own implementation.</p>
+
+  </section>  <section class="card">
+    <h2>6. Abstraction</h2>
+    <p>Abstraction means showing essential features while hiding unnecessary implementation details. In C++, abstract classes can be created using pure virtual functions.</p>
+    <pre>class Shape {
+public:
+    virtual void draw() = 0;
+};</pre>
+    <p><code>Shape</code> is an abstract class. We cannot create an object of it directly, and a concrete derived class must implement <code>draw()</code>.</p>
+  </section>  <section class="card">
+    <h2>OOP Concepts: Quick Revision</h2>
+    <ul>
+      <li><strong>Class:</strong> Blueprint for objects.</li>
+      <li><strong>Object:</strong> An instance of a class.</li>
+      <li><strong>Encapsulation:</strong> Combines data and functions and controls access.</li>
+      <li><strong>Inheritance:</strong> Builds a class using another class.</li>
+      <li><strong>Polymorphism:</strong> One interface, different behaviours.</li>
+      <li><strong>Abstraction:</strong> Hides implementation details and exposes essential features.</li>
+    </ul>
+  </section>  <div class="nav-buttons">
+    <a class="nav-button" href="Cpp-programming.html">← Back to C++ Programming</a>
+    <a class="nav-button" href="cpp-pointers.html">← Previous Lesson</a>
+    <button class="nav-button" onclick="openQuiz()">Quick Check</button>
+    <a class="nav-button" href="Cpp-programming.html">Finish Course →</a>
+  </div>  <section id="quiz">
+    <h2>Quick Check 🧠</h2>
+    <p id="question"></p>
+    <div id="answers"></div>
+    <p id="result"></p>
+    <button class="nav-button" id="nextButton" onclick="nextQuestion()" style="display:none">Next Question</button>
+  </section>
+</main><footer>
+  <p>Haari Codes | Learn. Code. Create.</p>
+</footer><script>
+const questions = [
+  {
+    question: "1. What is a class?",
+    answers: ["A blueprint for objects", "A loop", "A data type conversion"],
+    correct: 0
+  },
+  {
+    question: "2. Which OOP concept allows a class to inherit from another?",
+    answers: ["Encapsulation", "Inheritance", "Abstraction"],
+    correct: 1
+  },
+  {
+    question: "3. What does polymorphism mean?",
+    answers: ["Many forms", "One variable only", "Deleting objects"],
+    correct: 0
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function openQuiz() {
+  document.getElementById("quiz").style.display = "block";
+  current = 0;
+  score = 0;
+  showQuestion();
+  document.getElementById("quiz").scrollIntoView({behavior: "smooth"});
+}
+
+function showQuestion() {
+  answered = false;
+  document.getElementById("question").textContent = questions[current].question;
+  document.getElementById("result").textContent = "";
+  document.getElementById("nextButton").style.display = "none";
+
+  const box = document.getElementById("answers");
+  box.innerHTML = "";
+
+  questions[current].answers.forEach(function(answer, i) {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = answer;
+    button.onclick = function() { checkAnswer(i); };
+    box.appendChild(button);
+  });
+}
+
+function checkAnswer(choice) {
+  if (answered) return;
+  answered = true;
+
+  if (choice === questions[current].correct) {
+    score++;
+    document.getElementById("result").textContent = "Correct! 🎉";
+  } else {
+    document.getElementById("result").textContent =
+      "Correct answer: " + questions[current].answers[questions[current].correct];
+  }
+
+  document.querySelectorAll(".answer").forEach(function(button) {
+    button.disabled = true;
+  });
+
+  const next = document.getElementById("nextButton");
+  next.style.display = "block";
+  next.textContent = current === questions.length - 1 ? "See Result" : "Next Question";
+}
+
+function nextQuestion() {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    document.getElementById("question").textContent = "Quiz completed!";
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("result").textContent =
+      "Your score: " + score + "/" + questions.length;
+    document.getElementById("nextButton").style.display = "none";
+  }
+}
+</script></body>
+  </html>
