@@ -1,0 +1,264 @@
+File name: "ds-introduction.html"
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to Data Structures | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#1f2937;font-family:Georgia,serif;line-height:1.75}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h1{margin:0}
+header p,footer p{margin:5px 0;color:#d1d5db}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:white;padding:22px;margin-bottom:18px;border-radius:13px;box-shadow:0 3px 12px #00000009}
+h2{color:#2563eb;margin-top:0}
+h3{color:#111827;margin-bottom:5px}
+code,pre{font-family:monospace}
+pre{background:#111827;color:#e5e7eb;padding:15px;border-radius:9px;overflow-x:auto;white-space:pre}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+.btn{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:10px 16px;border-radius:8px;margin:5px 5px 5px 0}
+.btn:hover{background:#1d4ed8}
+.secondary{background:#374151}
+.question{border:1px solid #e5e7eb;padding:14px;border-radius:10px;margin:12px 0}
+label{display:block;padding:4px 0;cursor:pointer}
+button{border:0;background:#2563eb;color:white;border-radius:8px;padding:11px 16px;font-family:Georgia,serif;font-size:15px;cursor:pointer}
+#result{font-weight:bold;margin-top:12px}
+.small{color:#6b7280;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures | Lesson 01</p>
+</header>
+
+<main>
+
+<section class="card">
+<h2>Introduction to Data Structures</h2>
+<p>Welcome to Lesson 1! In this lesson, we will learn what data structures are, why they are needed, their types, real-life applications and basic examples.</p>
+<p class="note"><strong>Learning objectives:</strong> By the end of this lesson, you should be able to define a data structure, classify its types, compare common structures and explain why they are useful.</p>
+</section>
+
+<section class="card">
+<h2>1. Definition of Data Structure</h2>
+<p>A <strong>data structure</strong> is a particular way of organizing, storing and managing data in a computer so that it can be accessed and modified efficiently.</p>
+<p>For example, imagine storing the marks of 50 students. Keeping each mark in a separate variable would be inconvenient. An array can store all 50 marks under one name.</p>
+<pre>int marks[5] = {85, 90, 76, 88, 95};</pre>
+<p>Here, <code>marks</code> is an array that stores five integer values.</p>
+</section>
+
+<section class="card">
+<h2>2. Why Do We Need Data Structures?</h2>
+<ul>
+<li><strong>Organize data:</strong> Keep information arranged in a useful form.</li>
+<li><strong>Access data:</strong> Find the required information efficiently.</li>
+<li><strong>Insert and delete:</strong> Add or remove data when needed.</li>
+<li><strong>Process large data:</strong> Manage many records systematically.</li>
+<li><strong>Improve efficiency:</strong> Choose a suitable structure to reduce time or memory usage.</li>
+</ul>
+<p><strong>Example:</strong> A music player can use a list of songs. A browser can maintain a history of visited pages. Different tasks may benefit from different data structures.</p>
+</section>
+
+<section class="card">
+<h2>3. Classification of Data Structures</h2>
+
+<h3>A. Primitive Data Structures</h3>
+<p>Primitive data types are the basic built-in types used to represent individual values.</p>
+<ul>
+<li><code>int</code>: whole numbers, such as 10</li>
+<li><code>char</code>: a character, such as 'A'</li>
+<li><code>float</code>: decimal values, such as 3.5</li>
+<li><code>bool</code>: true or false</li>
+</ul>
+
+<h3>B. Non-Primitive Data Structures</h3>
+<p>These organize collections of values or relationships between data.</p>
+<ul>
+<li>Arrays</li>
+<li>Linked Lists</li>
+<li>Stacks</li>
+<li>Queues</li>
+<li>Trees</li>
+<li>Graphs</li>
+</ul>
+
+<h3>C. Linear Data Structures</h3>
+<p>Elements are arranged in a sequence, one after another.</p>
+<p><strong>Examples:</strong> Array, Linked List, Stack and Queue.</p>
+<pre>10 → 20 → 30 → 40</pre>
+
+<h3>D. Non-Linear Data Structures</h3>
+<p>Elements are arranged in hierarchical or network-like relationships rather than a single sequence.</p>
+<p><strong>Examples:</strong> Trees and Graphs.</p>
+<pre>        A
+       / \
+      B   C
+     / \
+    D   E</pre>
+
+<h3>E. Static and Dynamic Structures</h3>
+<table>
+<tr><th>Static</th><th>Dynamic</th></tr>
+<tr><td>Size is generally fixed for the object's lifetime.</td><td>Size can grow or shrink during execution.</td></tr>
+<tr><td>Example: a fixed-size C++ array.</td><td>Examples: linked lists and resizable containers such as <code>vector</code>.</td></tr>
+</table>
+<p class="small">Note: Static versus dynamic describes how storage size is managed. Linear versus non-linear describes how elements are organized.</p>
+</section>
+
+<section class="card">
+<h2>4. Common Data Structures</h2>
+<table>
+<tr><th>Structure</th><th>Main idea</th><th>Example use</th></tr>
+<tr><td>Array</td><td>Indexed collection of elements</td><td>Student marks</td></tr>
+<tr><td>Linked List</td><td>Nodes connected using links</td><td>Flexible lists</td></tr>
+<tr><td>Stack</td><td>Last In, First Out (LIFO)</td><td>Undo operations</td></tr>
+<tr><td>Queue</td><td>First In, First Out (FIFO)</td><td>Waiting lines</td></tr>
+<tr><td>Tree</td><td>Hierarchical relationships</td><td>Folder structures</td></tr>
+<tr><td>Graph</td><td>Connected vertices and edges</td><td>Road networks</td></tr>
+<tr><td>Hash Table</td><td>Key-based lookup</td><td>Fast record lookup</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>5. Advantages of Data Structures</h2>
+<ul>
+<li>Organize information systematically.</li>
+<li>Make searching, insertion, deletion or updating efficient when the appropriate structure is chosen.</li>
+<li>Help manage large amounts of information.</li>
+<li>Support the design of algorithms and software applications.</li>
+<li>Can improve memory usage and processing time.</li>
+</ul>
+
+<h2>6. Disadvantages and Limitations</h2>
+<ul>
+<li>Some structures are difficult to understand and implement.</li>
+<li>Some operations require extra memory, such as pointers in linked lists.</li>
+<li>A poorly chosen structure can make operations slower.</li>
+<li>Some structures have restrictions, such as the fixed capacity of a basic fixed-size array.</li>
+<li>Maintaining relationships between elements can make code more complex.</li>
+</ul>
+<p class="note"><strong>Remember:</strong> No single data structure is best for every situation. The right choice depends on the operations your program needs.</p>
+</section>
+
+<section class="card">
+<h2>7. Real-Life Applications</h2>
+<ul>
+<li><strong>Stack:</strong> Undo and redo operations in editors.</li>
+<li><strong>Queue:</strong> Tasks waiting to be processed.</li>
+<li><strong>Tree:</strong> Folder and file organization.</li>
+<li><strong>Graph:</strong> Maps, routes and social networks.</li>
+<li><strong>Hash table:</strong> Looking up information using a key.</li>
+<li><strong>Array:</strong> Storing marks, temperatures or daily measurements.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>8. Quick Check 🧠</h2>
+<p>Choose one answer for each question, then press <strong>Check Answers</strong>.</p>
+<form id="quiz">
+
+<div class="question">
+<p><strong>1. What is a data structure?</strong></p>
+<label><input type="radio" name="q1" value="a"> A computer's physical keyboard</label>
+<label><input type="radio" name="q1" value="b"> A way to organize and manage data</label>
+<label><input type="radio" name="q1" value="c"> A programming language only</label>
+</div>
+
+<div class="question">
+<p><strong>2. Which is a linear data structure?</strong></p>
+<label><input type="radio" name="q2" value="a"> Tree</label>
+<label><input type="radio" name="q2" value="b"> Graph</label>
+<label><input type="radio" name="q2" value="c"> Queue</label>
+</div>
+
+<div class="question">
+<p><strong>3. Which principle does a stack follow?</strong></p>
+<label><input type="radio" name="q3" value="a"> LIFO</label>
+<label><input type="radio" name="q3" value="b"> FIFO</label>
+<label><input type="radio" name="q3" value="c"> Random order only</label>
+</div>
+
+<div class="question">
+<p><strong>4. Which is an example of a non-linear data structure?</strong></p>
+<label><input type="radio" name="q4" value="a"> Array</label>
+<label><input type="radio" name="q4" value="b"> Tree</label>
+<label><input type="radio" name="q4" value="c"> Stack</label>
+</div>
+
+<div class="question">
+<p><strong>5. Which structure is commonly used to represent a road network?</strong></p>
+<label><input type="radio" name="q5" value="a"> Graph</label>
+<label><input type="radio" name="q5" value="b"> Stack</label>
+<label><input type="radio" name="q5" value="c"> Primitive char</label>
+</div>
+
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" class="secondary" onclick="resetQuiz()">Try Again</button>
+<p id="result" aria-live="polite"></p>
+<div id="answers" hidden>
+<h3>Answer Key</h3>
+<ol>
+<li><strong>B:</strong> A way to organize and manage data.</li>
+<li><strong>C:</strong> Queue is linear.</li>
+<li><strong>A:</strong> LIFO means Last In, First Out.</li>
+<li><strong>B:</strong> A tree is non-linear.</li>
+<li><strong>A:</strong> Graphs can represent locations and road connections.</li>
+</ol>
+</div>
+</form>
+</section>
+
+<section class="card">
+<h2>Lesson Summary</h2>
+<ul>
+<li>A data structure organizes and manages data.</li>
+<li>Primitive types represent basic values; non-primitive structures organize data collections or relationships.</li>
+<li>Linear structures include arrays, linked lists, stacks and queues.</li>
+<li>Non-linear structures include trees and graphs.</li>
+<li>Choose a structure based on the operations and requirements of the problem.</li>
+</ul>
+</section>
+
+<nav class="card">
+<h2>Continue Learning</h2>
+<a class="btn secondary" href="data-structures.html">← Back to Data Structures</a>
+<a class="btn" href="ds-arrays.html">Next: Arrays →</a>
+</nav>
+
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build.</p>
+</footer>
+
+<script>
+function checkAnswers(){
+ const correct={q1:"b",q2:"c",q3:"a",q4:"b",q5:"a"};
+ let score=0;
+ let unanswered=0;
+ for(const q in correct){
+  const selected=document.querySelector('input[name="'+q+'"]:checked');
+  if(!selected){unanswered++;}
+  else if(selected.value===correct[q]){score++;}
+ }
+ const result=document.getElementById("result");
+ result.textContent="Your score: "+score+"/5"+(unanswered?" | "+unanswered+" question(s) unanswered.":"");
+ document.getElementById("answers").hidden=false;
+}
+function resetQuiz(){
+ document.getElementById("quiz").reset();
+ document.getElementById("result").textContent="";
+ document.getElementById("answers").hidden=true;
+}
+</script>
+
+</body>
+</html>
