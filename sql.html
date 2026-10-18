@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Course | Haari_Codes</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f4f6fb;
+  color: #111827;
+  line-height: 1.7;
+}
+
+header {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 28px 16px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+header p {
+  color: #d1d5db;
+  margin-bottom: 0;
+}
+
+.container {
+  width: 92%;
+  max-width: 900px;
+  margin: 24px auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #0000000b;
+}
+
+h2, h3 {
+  color: #2563eb;
+}
+
+.lesson {
+  display: block;
+  text-decoration: none;
+  color: #111827;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 12px 0;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+.lesson:hover {
+  border-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+.lesson strong {
+  color: #2563eb;
+}
+
+.lesson p {
+  margin: 5px 0 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+pre {
+  background: #111827;
+  color: #d1fae5;
+  padding: 15px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: monospace;
+}
+
+.button {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 11px 18px;
+  border-radius: 9px;
+  text-decoration: none;
+  margin: 5px 5px 5px 0;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #1d4ed8;
+}
+
+footer {
+  background: #111827;
+  color: #d1d5db;
+  text-align: center;
+  padding: 20px;
+  margin-top: 35px;
+}
+
+.small {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🗄️ SQL Course</h1>
+  <p>Learn databases step by step with Haari_Codes</p>
+</header>
+
+<main class="container">
+
+  <section class="card">
+    <span class="badge">Beginner Friendly</span>
+    <h2>Welcome to SQL! 💻</h2>
+
+    <p>
+      SQL stands for <strong>Structured Query Language</strong>.
+      It is used to create, manage, retrieve and manipulate data
+      stored in relational databases.
+    </p>
+
+    <p>
+      In this course, you will learn SQL from the basics to more
+      advanced concepts through explanations, examples, queries
+      and quizzes.
+    </p>
+
+    <h3>What you will learn</h3>
+    <ul>
+      <li>How databases and tables work</li>
+      <li>How to create tables and insert records</li>
+      <li>How to retrieve and filter data</li>
+      <li>How to update and delete records</li>
+      <li>How to use functions, joins and subqueries</li>
+      <li>How to use keys, constraints, views and indexes</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>📌 SQL Basics</h2>
+
+    <h3>What is a database?</h3>
+    <p>
+      A database is an organized collection of data that can be
+      stored, accessed and managed efficiently.
+    </p>
+
+    <h3>What is a table?</h3>
+    <p>
+      A table stores data in rows and columns. Each row represents
+      a record, and each column represents an attribute.
+    </p>
+
+    <h3>Example SQL query</h3>
+    <pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50),
+    mark INT
+);
+
+INSERT INTO Students
+VALUES (1, 'Anu', 90);
+
+SELECT * FROM Students;</code></pre>
+
+    <p>
+      The <code>SELECT</code> query retrieves all columns from
+      the Students table.
+    </p>
+
+    <p class="small">
+      Note: SQL syntax can vary slightly between MySQL,
+      PostgreSQL, SQLite and other database systems.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>📚 Course Lessons</h2>
+    <p>Complete each lesson in order for the best learning experience.</p>
+
+    <a class="lesson" href="sql-introduction.html">
+      <span class="badge">Lesson 01</span>
+      <strong>SQL Introduction & Database Basics</strong>
+      <p>SQL meaning, databases, tables, rows, columns and data types.</p>
+    </a>
+
+    <a class="lesson" href="sql-ddl.html">
+      <span class="badge">Lesson 02</span>
+      <strong>DDL Commands</strong>
+      <p>CREATE, ALTER, DROP and TRUNCATE.</p>
+    </a>
+
+    <a class="lesson" href="sql-dml.html">
+      <span class="badge">Lesson 03</span>
+      <strong>DML Commands</strong>
+      <p>INSERT, UPDATE and DELETE records.</p>
+    </a>
+
+    <a class="lesson" href="sql-select.html">
+      <span class="badge">Lesson 04</span>
+      <strong>SELECT & Filtering Data</strong>
+      <p>SELECT, DISTINCT, WHERE, ORDER BY and LIMIT.</p>
+    </a>
+
+    <a class="lesson" href="sql-operators.html">
+      <span class="badge">Lesson 05</span>
+      <strong>SQL Operators</strong>
+      <p>Comparison, logical, BETWEEN, IN, LIKE and NULL conditions.</p>
+    </a>
+
+    <a class="lesson" href="sql-functions.html">
+      <span class="badge">Lesson 06</span>
+      <strong>SQL Functions</strong>
+      <p>COUNT, SUM, AVG, MIN, MAX and useful built-in functions.</p>
+    </a>
+
+    <a class="lesson" href="sql-group-by.html">
+      <span class="badge">Lesson 07</span>
+      <strong>GROUP BY & HAVING</strong>
+      <p>Group records and filter grouped results.</p>
+    </a>
+
+    <a class="lesson" href="sql-joins.html">
+      <span class="badge">Lesson 08</span>
+      <strong>SQL Joins</strong>
+      <p>INNER, LEFT, RIGHT and FULL JOIN concepts.</p>
+    </a>
+
+    <a class="lesson" href="sql-subqueries.html">
+      <span class="badge">Lesson 09</span>
+      <strong>Subqueries</strong>
+      <p>Queries inside other queries and nested conditions.</p>
+    </a>
+
+    <a class="lesson" href="sql-constraints.html">
+      <span class="badge">Lesson 10</span>
+      <strong>Keys, Constraints, Views & Indexes</strong>
+      <p>PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL and more.</p>
+    </a>
+  </section>
+
+  <section class="card">
+    <h2>🎯 How to study</h2>
+    <ol>
+      <li>Read the lesson definition and explanation.</li>
+      <li>Study each SQL query carefully.</li>
+      <li>Predict the output before checking it.</li>
+      <li>Practise writing the queries yourself.</li>
+      <li>Complete the Quick Check quiz.</li>
+    </ol>
+
+    <p>
+      <strong>Remember:</strong> SQL becomes easier when you practise
+      queries instead of memorizing them.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>🚀 Ready to begin?</h2>
+    <p>Start with Lesson 1 and build your SQL skills step by step.</p>
+    <a class="button" href="sql-introduction.html">Start Lesson 1 →</a>
+    <a class="button" href="courses.html">← All Courses</a>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>Haari_Codes</strong></p>
+  <p>Learn. Practise. Build. 💙</p>
+</footer>
+
+</body>
+        </html>
