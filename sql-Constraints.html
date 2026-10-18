@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Constraints | Haari_Codes</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #f4f6fb;
+    color: #111827;
+    line-height: 1.7;
+}
+header, footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 22px 15px;
+}
+header h1 {
+    margin: 0;
+    color: #60a5fa;
+}
+header p {
+    margin-bottom: 0;
+}
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+.card {
+    background: white;
+    padding: 22px;
+    margin: 18px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #0000000d;
+}
+h2, h3 {
+    color: #2563eb;
+}
+pre {
+    background: #111827;
+    color: #e5e7eb;
+    padding: 16px;
+    border-radius: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+code {
+    font-family: monospace;
+}
+.note {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 12px;
+    border-radius: 6px;
+}
+button, .nav a {
+    background: #2563eb;
+    color: white;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 3px;
+}
+button:hover, .nav a:hover {
+    background: #1d4ed8;
+}
+.question {
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+.question label {
+    display: block;
+    margin: 7px 0;
+    cursor: pointer;
+}
+#result {
+    font-weight: bold;
+    margin-top: 15px;
+}
+.nav {
+    text-align: center;
+    margin: 25px 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #d1d5db;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background: #eff6ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Haari_Codes</h1>
+    <p>SQL Course | Lesson 10 of 10</p>
+    <h2 style="color:white;">SQL Constraints</h2>
+    <p>Rules that keep database data valid and reliable</p>
+</header>
+
+<main>
+
+<section class="card">
+<h2>1. What Are SQL Constraints?</h2>
+<p>
+SQL constraints are rules applied to table columns or tables to maintain
+the accuracy, validity, and integrity of data.
+</p>
+<p>For example, a student's ID should not be empty or repeated. A constraint can enforce this rule automatically.</p>
+
+<pre><code>CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE
+);</code></pre>
+
+<p class="note">
+Remember: Constraints help prevent invalid data from entering a table.
+</p>
+</section>
+
+<section class="card">
+<h2>2. Types of SQL Constraints</h2>
+
+<table>
+<tr><th>Constraint</th><th>Purpose</th></tr>
+<tr><td>NOT NULL</td><td>Prevents a column from storing NULL values.</td></tr>
+<tr><td>UNIQUE</td><td>Prevents duplicate values in a column or column combination.</td></tr>
+<tr><td>PRIMARY KEY</td><td>Uniquely identifies each row; cannot contain NULL.</td></tr>
+<tr><td>FOREIGN KEY</td><td>Links a column to a key in another or the same table.</td></tr>
+<tr><td>CHECK</td><td>Requires values to satisfy a condition.</td></tr>
+<tr><td>DEFAULT</td><td>Provides a value when an insert omits that column.</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>3. NOT NULL</h2>
+<p>NOT NULL ensures that a column must have a value. It cannot be left as NULL.</p>
+
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50) NOT NULL
+);</code></pre>
+
+<p>Here, <code>name</code> must contain a value when inserting a row.</p>
+
+<pre><code>INSERT INTO Students (id, name)
+VALUES (1, 'Anu');</code></pre>
+
+<p class="note">An empty string is not the same as NULL. NOT NULL alone does not prevent empty text.</p>
+</section>
+
+<section class="card">
+<h2>4. UNIQUE</h2>
+<p>UNIQUE prevents duplicate values in a column or a specified combination of columns.</p>
+
+<pre><code>CREATE TABLE Users (
+    user_id INT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE
+);</code></pre>
+
+<p>Two users cannot have the same non-NULL email value under this constraint.</p>
+
+<p>You can also apply UNIQUE to multiple columns:</p>
+
+<pre><code>CREATE TABLE Enrollments (
+    student_id INT,
+    course_id INT,
+    UNIQUE (student_id, course_id)
+);</code></pre>
+
+<p>This prevents the same student-course combination from being entered twice.</p>
+</section>
+
+<section class="card">
+<h2>5. PRIMARY KEY</h2>
+<p>A PRIMARY KEY uniquely identifies every row in a table. It combines uniqueness with NOT NULL.</p>
+
+<pre><code>CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);</code></pre>
+
+<ul>
+<li>Duplicate primary-key values are not allowed.</li>
+<li>NULL primary-key values are not allowed.</li>
+<li>A table has only one primary-key constraint, but that key can contain multiple columns.</li>
+</ul>
+
+<p>Example of a composite primary key:</p>
+
+<pre><code>CREATE TABLE Marks (
+    student_id INT,
+    subject_id INT,
+    mark INT,
+    PRIMARY KEY (student_id, subject_id)
+);</code></pre>
+</section>
+
+<section class="card">
+<h2>6. FOREIGN KEY</h2>
+<p>A FOREIGN KEY maintains referential integrity by requiring a matching referenced key, subject to the database's NULL and constraint rules.</p>
+
+<pre><code>CREATE TABLE Departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50)
+);
+
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department_id INT,
+    FOREIGN KEY (department_id)
+        REFERENCES Departments(department_id)
+);</code></pre>
+
+<p>In this example, a non-NULL department ID in Students must match an existing department.</p>
+
+<h3>Referential actions</h3>
+<ul>
+<li><b>ON DELETE CASCADE:</b> Deleting a referenced parent row deletes matching child rows.</li>
+<li><b>ON DELETE SET NULL:</b> Sets the child foreign-key value to NULL, if allowed.</li>
+<li><b>ON DELETE RESTRICT:</b> Prevents deleting a referenced parent row while dependent rows exist. Exact behavior can vary by database.</li>
+</ul>
+
+<pre><code>FOREIGN KEY (department_id)
+REFERENCES Departments(department_id)
+ON DELETE SET NULL</code></pre>
+
+<p class="note">For SET NULL, the foreign-key column must allow NULL. Foreign-key support and syntax depend on the database system.</p>
+</section>
+
+<section class="card">
+<h2>7. CHECK</h2>
+<p>CHECK requires a value to satisfy a condition.</p>
+
+<pre><code>CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT CHECK (age >= 16),
+    mark INT CHECK (mark BETWEEN 0 AND 100)
+);</code></pre>
+
+<p>Here, age must be at least 16 and mark must be between 0 and 100.</p>
+
+<p>Named table-level example:</p>
+
+<pre><code>CREATE TABLE Products (
+    product_id INT PRIMARY KEY,
+    price DECIMAL(10,2),
+    CONSTRAINT chk_price
+        CHECK (price >= 0)
+);</code></pre>
+
+<p class="note">CHECK behavior differs across database versions. Modern MySQL versions enforce CHECK constraints; older versions may parse but ignore them. NULL handling also matters, so combine CHECK with NOT NULL when a value is required.</p>
+</section>
+
+<section class="card">
+<h2>8. DEFAULT</h2>
+<p>DEFAULT supplies a value when an INSERT statement does not provide one for that column.</p>
+
+<pre><code>CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    city VARCHAR(50) DEFAULT 'Unknown'
+);</code></pre>
+
+<pre><code>INSERT INTO Students (id, name)
+VALUES (1, 'Meera');</code></pre>
+
+<p>The city value will be <code>Unknown</code>.</p>
+<p>Inserting an explicit NULL is different from omitting the column. A DEFAULT does not automatically replace an explicitly supplied NULL.</p>
+</section>
+
+<section class="card">
+<h2>9. Naming and Modifying Constraints</h2>
+<p>You can name a constraint using <code>CONSTRAINT</code>.</p>
+
+<pre><code>CREATE TABLE Employees (
+    employee_id INT,
+    salary DECIMAL(10,2),
+    CONSTRAINT pk_employee PRIMARY KEY (employee_id),
+    CONSTRAINT chk_salary CHECK (salary >= 0)
+);</code></pre>
+
+<p>To add a constraint to an existing table, use ALTER TABLE. Exact syntax varies by database.</p>
+
+<pre><code>ALTER TABLE Employees
+ADD CONSTRAINT chk_salary_positive
+CHECK (salary >= 0);</code></pre>
+
+<p>Example in MySQL to add a foreign key:</p>
+
+<pre><code>ALTER TABLE Students
+ADD CONSTRAINT fk_student_department
+FOREIGN KEY (department_id)
+REFERENCES Departments(department_id);</code></pre>
+
+<p>Dropping constraints is database-specific. In MySQL, a named foreign key can be dropped using <code>ALTER TABLE ... DROP FOREIGN KEY constraint_name</code>. Other constraints may use <code>DROP CHECK</code>, <code>DROP INDEX</code>, or other syntax depending on the constraint and database version.</p>
+
+<p class="note">Before adding a constraint, check existing data. Invalid existing rows can cause the operation to fail.</p>
+</section>
+
+<section class="card">
+<h2>10. Common Mistakes</h2>
+<ul>
+<li>Using UNIQUE when the row needs a primary key.</li>
+<li>Assuming DEFAULT replaces every explicit NULL.</li>
+<li>Adding a foreign key before creating the referenced table or key.</li>
+<li>Using SET NULL on a foreign-key column defined as NOT NULL.</li>
+<li>Assuming every database handles CHECK constraints identically.</li>
+<li>Trying to add a constraint when existing rows violate its rule.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Quick Revision</h2>
+<ul>
+<li><b>NOT NULL:</b> Value is required.</li>
+<li><b>UNIQUE:</b> Prevents duplicate key values.</li>
+<li><b>PRIMARY KEY:</b> Uniquely identifies each row.</li>
+<li><b>FOREIGN KEY:</b> Maintains relationships between tables.</li>
+<li><b>CHECK:</b> Enforces a condition.</li>
+<li><b>DEFAULT:</b> Supplies a value when a column is omitted.</li>
+</ul>
+</section>
+
+<section class="card" id="quiz">
+<h2>Quick Check Quiz 🧠</h2>
+<p>Answer all 10 questions and tap Submit Answers.</p>
+
+<form id="quizForm">
+
+<div class="question">
+<p><b>1. Which constraint prevents NULL values?</b></p>
+<label><input type="radio" name="q1" value="a"> UNIQUE</label>
+<label><input type="radio" name="q1" value="b"> NOT NULL</label>
+<label><input type="radio" name="q1" value="c"> DEFAULT</label>
+</div>
+
+<div class="question">
+<p><b>2. Which key uniquely identifies each row?</b></p>
+<label><input type="radio" name="q2" value="a"> FOREIGN KEY</label>
+<label><input type="radio" name="q2" value="b"> CHECK</label>
+<label><input type="radio" name="q2" value="c"> PRIMARY KEY</label>
+</div>
+
+<div class="question">
+<p><b>3. Which constraint links related tables?</b></p>
+<label><input type="radio" name="q3" value="a"> FOREIGN KEY</label>
+<label><input type="radio" name="q3" value="b"> DEFAULT</label>
+<label><input type="radio" name="q3" value="c"> NOT NULL</label>
+</div>
+
+<div class="question">
+<p><b>4. Which constraint can enforce mark BETWEEN 0 AND 100?</b></p>
+<label><input type="radio" name="q4" value="a"> UNIQUE</label>
+<label><input type="radio" name="q4" value="b"> CHECK</label>
+<label><input type="radio" name="q4" value="c"> DEFAULT</label>
+</div>
+
+<div class="question">
+<p><b>5. What does DEFAULT do?</b></p>
+<label><input type="radio" name="q5" value="a"> Deletes a row</label>
+<label><input type="radio" name="q5" value="b"> Makes every value unique</label>
+<label><input type="radio" name="q5" value="c"> Supplies a value when a column is omitted</label>
+</div>
+
+<div class="question">
+<p><b>6. Can a table have more than one PRIMARY KEY constraint?</b></p>
+<label><input type="radio" name="q6" value="a"> Yes, always</label>
+<label><input type="radio" name="q6" value="b"> No, but its primary key can contain multiple columns</label>
+<label><input type="radio" name="q6" value="c"> No columns can be part of a primary key</label>
+</div>
+
+<div class="question">
+<p><b>7. What does UNIQUE generally prevent?</b></p>
+<label><input type="radio" name="q7" value="a"> Duplicate key values</label>
+<label><input type="radio" name="q7" value="b"> All NULL values in every database</label>
+<label><input type="radio" name="q7" value="c"> Table creation</label>
+</div>
+
+<div class="question">
+<p><b>8. Which command modifies an existing table's structure?</b></p>
+<label><input type="radio" name="q8" value="a"> SELECT</label>
+<label><input type="radio" name="q8" value="b"> ALTER TABLE</label>
+<label><input type="radio" name="q8" value="c"> ORDER BY</label>
+</div>
+
+<div class="question">
+<p><b>9. What does ON DELETE CASCADE generally do?</b></p>
+<label><input type="radio" name="q9" value="a"> Renames the parent table</label>
+<label><input type="radio" name="q9" value="b"> Adds a default value</label>
+<label><input type="radio" name="q9" value="c"> Deletes matching dependent child rows</label>
+</div>
+
+<div class="question">
+<p><b>10. What should you check before adding a constraint to an existing table?</b></p>
+<label><input type="radio" name="q10" value="a"> Whether existing data violates the constraint</label>
+<label><input type="radio" name="q10" value="b"> Only the page colour</label>
+<label><input type="radio" name="q10" value="c"> The browser's font</label>
+</div>
+
+<button type="button" onclick="checkAnswers()">Submit Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+</form>
+
+<div id="result" aria-live="polite"></div>
+</section>
+
+<div class="nav">
+<a href="sql-subqueries.html">← Previous Lesson</a>
+<a href="sql.html">SQL Course Home</a>
+</div>
+
+</main>
+
+<footer>
+<p>Haari_Codes | Learn • Practise • Grow 💙</p>
+<p>SQL Course Completed: 10 Lessons</p>
+</footer>
+
+<script>
+function checkAnswers() {
+    const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "a",
+        q4: "b",
+        q5: "c",
+        q6: "b",
+        q7: "a",
+        q8: "b",
+        q9: "c",
+        q10: "a"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    for (const question in answers) {
+        const selected = document.querySelector(
+            'input[name="' + question + '"]:checked'
+        );
+
+        if (!selected) {
+            unanswered++;
+        } else if (selected.value === answers[question]) {
+            score++;
+        }
+    }
+
+    const result = document.getElementById("result");
+
+    if (unanswered > 0) {
+        result.textContent =
+            "You have answered " + (10 - unanswered) +
+            " of 10 questions. Please answer all questions before submitting.";
+        return;
+    }
+
+    let message = "Your score: " + score + "/10. ";
+
+    if (score === 10) {
+        message += "Excellent! SQL Constraints mastered! 🎉";
+    } else if (score >= 7) {
+        message += "Great job! Revise the few concepts you missed. 💙";
+    } else {
+        message += "Good attempt! Review the lesson and try again. 📚";
+    }
+
+    result.textContent = message;
+}
+</script>
+
+</body>
+</html>
