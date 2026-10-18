@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL SELECT | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#111827;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#d1fae5;padding:15px;border-radius:10px;overflow-x:auto}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px;border-radius:6px}
+.example{background:#f9fafb;border:1px solid #e5e7eb;padding:12px;border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;text-align:left}
+th,td{padding:8px;border:1px solid #cbd5e1}
+th{background:#dbeafe}
+.button{display:inline-block;background:#2563eb;color:white;padding:10px 16px;text-decoration:none;border-radius:8px;margin:5px 5px 5px 0;border:0;font-family:inherit;cursor:pointer}
+.question{border:1px solid #e5e7eb;padding:15px;border-radius:10px;margin:14px 0}
+label.option{display:block;padding:7px;cursor:pointer}
+.result{font-weight:bold;margin-top:12px}
+.small{color:#6b7280;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🔎 Lesson 04: SELECT & Filtering</h1>
+<p>Haari_Codes | Retrieve, filter and sort data</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What is SELECT?</h2>
+<p>The <strong>SELECT</strong> statement retrieves data from one or more database tables.</p>
+<p>It is one of the most frequently used SQL statements.</p>
+
+<h3>General syntax</h3>
+<pre><code>SELECT column1, column2
+FROM table_name;</code></pre>
+
+<h3>Select every column</h3>
+<pre><code>SELECT *
+FROM Students;</code></pre>
+
+<p>The asterisk (<code>*</code>) means all columns in the selected table.</p>
+
+<h3>Select specific columns</h3>
+<pre><code>SELECT name, mark
+FROM Students;</code></pre>
+
+<p>This displays only the name and mark columns.</p>
+<div class="note">Tip: In large tables, selecting only the columns you need can be clearer and more efficient than using SELECT *.</div>
+</section>
+
+<section class="card">
+<h2>2. Sample Table</h2>
+<p>Use this Students table to understand the examples. Assume these are the records before each independent query.</p>
+
+<div class="example">
+<table>
+<tr><th>id</th><th>name</th><th>mark</th><th>city</th></tr>
+<tr><td>1</td><td>Anu</td><td>90</td><td>Kochi</td></tr>
+<tr><td>2</td><td>Akhil</td><td>75</td><td>Thrissur</td></tr>
+<tr><td>3</td><td>Meera</td><td>95</td><td>Kochi</td></tr>
+<tr><td>4</td><td>Rahul</td><td>60</td><td>Calicut</td></tr>
+<tr><td>5</td><td>Diya</td><td>75</td><td>Thrissur</td></tr>
+</table>
+</div>
+
+<p>We will use this table to retrieve, filter and sort student information.</p>
+</section>
+
+<section class="card">
+<h2>3. DISTINCT</h2>
+<p><strong>DISTINCT</strong> returns unique combinations of the selected column values, removing duplicate result rows.</p>
+
+<h3>Syntax</h3>
+<pre><code>SELECT DISTINCT column_name
+FROM table_name;</code></pre>
+
+<h3>Example</h3>
+<pre><code>SELECT DISTINCT city
+FROM Students;</code></pre>
+
+<h3>Expected result</h3>
+<div class="example">
+<table>
+<tr><th>city</th></tr>
+<tr><td>Kochi</td></tr>
+<tr><td>Thrissur</td></tr>
+<tr><td>Calicut</td></tr>
+</table>
+</div>
+
+<p>The city Kochi and Thrissur each appear only once in the result, even though multiple students live there.</p>
+
+<div class="note">The order of results is not guaranteed unless you use ORDER BY.</div>
+
+<h3>DISTINCT on multiple columns</h3>
+<pre><code>SELECT DISTINCT city, mark
+FROM Students;</code></pre>
+<p>This returns unique city-and-mark combinations, not unique cities alone.</p>
+</section>
+
+<section class="card">
+<h2>4. WHERE Clause</h2>
+<p>The <strong>WHERE</strong> clause filters rows according to a condition.</p>
+
+<h3>Syntax</h3>
+<pre><code>SELECT column_names
+FROM table_name
+WHERE condition;</code></pre>
+
+<h3>Example 1: Students scoring more than 80</h3>
+<pre><code>SELECT name, mark
+FROM Students
+WHERE mark > 80;</code></pre>
+
+<h3>Expected result</h3>
+<div class="example">
+<table>
+<tr><th>name</th><th>mark</th></tr>
+<tr><td>Anu</td><td>90</td></tr>
+<tr><td>Meera</td><td>95</td></tr>
+</table>
+</div>
+
+<h3>Example 2: Find students from Kochi</h3>
+<pre><code>SELECT *
+FROM Students
+WHERE city = 'Kochi';</code></pre>
+
+<h3>Example 3: Find students scoring 75</h3>
+<pre><code>SELECT name
+FROM Students
+WHERE mark = 75;</code></pre>
+
+<p>This returns Akhil and Diya.</p>
+
+<h3>Common comparison operators</h3>
+<div class="example">
+<table>
+<tr><th>Operator</th><th>Meaning</th></tr>
+<tr><td>=</td><td>Equal to</td></tr>
+<tr><td>&lt;&gt;</td><td>Not equal to</td></tr>
+<tr><td>&gt;</td><td>Greater than</td></tr>
+<tr><td>&lt;</td><td>Less than</td></tr>
+<tr><td>&gt;=</td><td>Greater than or equal to</td></tr>
+<tr><td>&lt;=</td><td>Less than or equal to</td></tr>
+</table>
+</div>
+
+<div class="note">Text values are commonly enclosed in single quotes. SQL comparisons with NULL need special conditions such as IS NULL, which we will study in the next lesson.</div>
+</section>
+
+<section class="card">
+<h2>5. ORDER BY</h2>
+<p><strong>ORDER BY</strong> sorts the rows in the query result.</p>
+
+<h3>A. Ascending order</h3>
+<pre><code>SELECT name, mark
+FROM Students
+ORDER BY mark ASC;</code></pre>
+<p><code>ASC</code> means ascending. For numbers, this means smallest to largest. ASC is the default sort direction when no direction is specified.</p>
+
+<h3>Expected result</h3>
+<div class="example">
+<table>
+<tr><th>name</th><th>mark</th></tr>
+<tr><td>Rahul</td><td>60</td></tr>
+<tr><td>Akhil</td><td>75</td></tr>
+<tr><td>Diya</td><td>75</td></tr>
+<tr><td>Anu</td><td>90</td></tr>
+<tr><td>Meera</td><td>95</td></tr>
+</table>
+</div>
+
+<p>Rows with the same mark may appear in either order unless an additional sort column is specified.</p>
+
+<h3>B. Descending order</h3>
+<pre><code>SELECT name, mark
+FROM Students
+ORDER BY mark DESC;</code></pre>
+
+<p><code>DESC</code> means descending. For numbers, this means largest to smallest.</p>
+
+<h3>C. Sort by multiple columns</h3>
+<pre><code>SELECT name, city, mark
+FROM Students
+ORDER BY city ASC, mark DESC;</code></pre>
+<p>This sorts by city first, then sorts marks from highest to lowest within each city.</p>
+</section>
+
+<section class="card">
+<h2>6. LIMIT</h2>
+<p><strong>LIMIT</strong> restricts the number of rows returned. It is supported by MySQL, PostgreSQL and SQLite, among others.</p>
+
+<h3>Syntax</h3>
+<pre><code>SELECT column_names
+FROM table_name
+LIMIT number;</code></pre>
+
+<h3>Example: Show only the first three rows</h3>
+<pre><code>SELECT *
+FROM Students
+LIMIT 3;</code></pre>
+<p>This returns up to three rows. Without ORDER BY, the database does not guarantee which rows will be first.</p>
+
+<h3>Example: Find the two highest marks</h3>
+<pre><code>SELECT name, mark
+FROM Students
+ORDER BY mark DESC
+LIMIT 2;</code></pre>
+
+<h3>Expected result</h3>
+<div class="example">
+<table>
+<tr><th>name</th><th>mark</th></tr>
+<tr><td>Meera</td><td>95</td></tr>
+<tr><td>Anu</td><td>90</td></tr>
+</table>
+</div>
+
+<div class="note">SQL dialects differ. SQL Server commonly uses TOP or OFFSET/FETCH, while standard SQL supports FETCH FIRST in suitable systems.</div>
+</section>
+
+<section class="card">
+<h2>7. Combining WHERE, ORDER BY and LIMIT</h2>
+<p>You can combine these clauses to answer more specific questions.</p>
+
+<h3>Example: Top two marks above 70</h3>
+<pre><code>SELECT name, mark
+FROM Students
+WHERE mark > 70
+ORDER BY mark DESC
+LIMIT 2;</code></pre>
+
+<h3>Expected result</h3>
+<div class="example">
+<table>
+<tr><th>name</th><th>mark</th></tr>
+<tr><td>Meera</td><td>95</td></tr>
+<tr><td>Anu</td><td>90</td></tr>
+</table>
+</div>
+
+<h3>Logical order of processing</h3>
+<p>For a simple SELECT query, the conceptual processing order is:</p>
+<ol>
+<li><strong>FROM:</strong> Choose the source table.</li>
+<li><strong>WHERE:</strong> Filter rows.</li>
+<li><strong>SELECT:</strong> Choose the output columns.</li>
+<li><strong>ORDER BY:</strong> Sort the result.</li>
+<li><strong>LIMIT:</strong> Restrict the number of rows returned.</li>
+</ol>
+<div class="note">This is a simplified logical order, not necessarily the order in which a database physically executes every operation.</div>
+</section>
+
+<section class="card">
+<h2>8. Common Mistakes</h2>
+<ul>
+<li>Forgetting FROM when selecting from a table.</li>
+<li>Using double equals (<code>==</code>) instead of the SQL equality operator (<code>=</code>).</li>
+<li>Forgetting quotes around text values.</li>
+<li>Expecting DISTINCT city to show every student.</li>
+<li>Using LIMIT without ORDER BY when a specific top result is needed.</li>
+<li>Expecting a fixed order when ORDER BY is missing.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>🧠 Quick Check Quiz</h2>
+<p>Answer all 10 questions and select Check Answers.</p>
+
+<form id="quiz">
+
+<div class="question"><strong>1. Which command retrieves data?</strong>
+<label class="option"><input type="radio" name="q1" value="a"> DELETE</label>
+<label class="option"><input type="radio" name="q1" value="b"> SELECT</label>
+<label class="option"><input type="radio" name="q1" value="c"> DROP</label></div>
+
+<div class="question"><strong>2. What does SELECT * retrieve?</strong>
+<label class="option"><input type="radio" name="q2" value="a"> All columns</label>
+<label class="option"><input type="radio" name="q2" value="b"> Only the first column</label>
+<label class="option"><input type="radio" name="q2" value="c"> Only unique rows automatically</label></div>
+
+<div class="question"><strong>3. Which keyword removes duplicate result rows?</strong>
+<label class="option"><input type="radio" name="q3" value="a"> UNIQUE ROWS</label>
+<label class="option"><input type="radio" name="q3" value="b"> ORDER</label>
+<label class="option"><input type="radio" name="q3" value="c"> DISTINCT</label></div>
+
+<div class="question"><strong>4. Which clause filters rows?</strong>
+<label class="option"><input type="radio" name="q4" value="a"> LIMIT</label>
+<label class="option"><input type="radio" name="q4" value="b"> WHERE</label>
+<label class="option"><input type="radio" name="q4" value="c"> ORDER BY</label></div>
+
+<div class="question"><strong>5. Which operator means greater than or equal to?</strong>
+<label class="option"><input type="radio" name="q5" value="a"> &gt;=</label>
+<label class="option"><input type="radio" name="q5" value="b"> =&gt;</label>
+<label class="option"><input type="radio" name="q5" value="c"> &lt;=</label></div>
+
+<div class="question"><strong>6. Which sorts numbers from largest to smallest?</strong>
+<label class="option"><input type="radio" name="q6" value="a"> ASC</label>
+<label class="option"><input type="radio" name="q6" value="b"> FIRST</label>
+<label class="option"><input type="radio" name="q6" value="c"> DESC</label></div>
+
+<div class="question"><strong>7. Which query finds students scoring above 80?</strong>
+<label class="option"><input type="radio" name="q7" value="a"> SELECT * FROM Students WHERE mark &gt; 80;</label>
+<label class="option"><input type="radio" name="q7" value="b"> SELECT * FROM Students WHERE mark &lt; 80;</label>
+<label class="option"><input type="radio" name="q7" value="c"> DELETE FROM Students WHERE mark &gt; 80;</label></div>
+
+<div class="question"><strong>8. In MySQL, what does LIMIT 3 do?</strong>
+<label class="option"><input type="radio" name="q8" value="a"> Sorts three columns</label>
+<label class="option"><input type="radio" name="q8" value="b"> Returns up to three rows</label>
+<label class="option"><input type="radio" name="q8" value="c"> Deletes three rows</label></div>
+
+<div class="question"><strong>9. Which query lists the two highest marks?</strong>
+<label class="option"><input type="radio" name="q9" value="a"> SELECT * FROM Students LIMIT 2;</label>
+<label class="option"><input type="radio" name="q9" value="b"> SELECT * FROM Students ORDER BY mark ASC LIMIT 2;</label>
+<label class="option"><input type="radio" name="q9" value="c"> SELECT * FROM Students ORDER BY mark DESC LIMIT 2;</label></div>
+
+<div class="question"><strong>10. Which query shows each city only once?</strong>
+<label class="option"><input type="radio" name="q10" value="a"> SELECT city FROM Students;</label>
+<label class="option"><input type="radio" name="q10" value="b"> SELECT DISTINCT city FROM Students;</label>
+<label class="option"><input type="radio" name="q10" value="c"> SELECT UNIQUE ROW city FROM Students;</label></div>
+
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+<button class="button" type="button" onclick="resetQuiz()">Try Again</button>
+<div id="result" class="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</section>
+
+<section class="card">
+<h2>📌 Lesson Summary</h2>
+<ul>
+<li>SELECT retrieves data.</li>
+<li>DISTINCT removes duplicate result rows.</li>
+<li>WHERE filters rows using conditions.</li>
+<li>ORDER BY sorts query results using ASC or DESC.</li>
+<li>LIMIT restricts the number of returned rows in supported systems.</li>
+<li>Combine these clauses to find exactly the information you need.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>➡️ Continue Learning</h2>
+<a class="button" href="sql-dml.html">← Previous Lesson</a>
+<a class="button" href="sql.html">SQL Course Home</a>
+<a class="button" href="sql-operators.html">Next: SQL Operators →</a>
+<p class="small">The next lesson link will work after you create sql-operators.html.</p>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Haari_Codes</strong></p>
+<p>Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+const answers = {
+q1:"b", q2:"a", q3:"c", q4:"b", q5:"a",
+q6:"c", q7:"a", q8:"b", q9:"c", q10:"b"
+};
+
+const explanations = {
+q1:"SELECT retrieves data from a table or other query source.",
+q2:"The asterisk (*) selects all columns from the chosen source.",
+q3:"DISTINCT removes duplicate result rows.",
+q4:"WHERE filters rows using a condition.",
+q5:">= means greater than or equal to.",
+q6:"DESC sorts numeric values from largest to smallest.",
+q7:"WHERE mark > 80 filters for marks strictly greater than 80.",
+q8:"In MySQL, LIMIT 3 returns up to three rows.",
+q9:"ORDER BY mark DESC sorts highest first; LIMIT 2 returns up to two rows.",
+q10:"SELECT DISTINCT city returns unique city values."
+};
+
+function checkAnswers(){
+  let score = 0;
+  let unanswered = 0;
+  let html = "";
+
+  for(let i=1;i<=10;i++){
+    const key = "q"+i;
+    const selected = document.querySelector('input[name="'+key+'"]:checked');
+
+    if(!selected){
+      unanswered++;
+      html += '<div class="question"><strong>Q'+i+': Not answered.</strong><br>'+explanations[key]+'</div>';
+    }else if(selected.value===answers[key]){
+      score++;
+      html += '<div class="question"><strong>Q'+i+': ✅ Correct!</strong><br>'+explanations[key]+'</div>';
+    }else{
+      html += '<div class="question"><strong>Q'+i+': ❌ Incorrect.</strong><br>Correct option: <strong>'+answers[key].toUpperCase()+'</strong><br>'+explanations[key]+'</div>';
+    }
+  }
+
+  document.getElementById("result").textContent =
+    "Your score: "+score+"/10 ("+(score*10)+"%). Unanswered: "+unanswered+".";
+  document.getElementById("review").innerHTML = html;
+}
+
+function resetQuiz(){
+  document.getElementById("quiz").reset();
+  document.getElementById("result").textContent = "";
+  document.getElementById("review").innerHTML = "";
+}
+</script>
+</body>
+</html>
