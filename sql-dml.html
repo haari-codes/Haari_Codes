@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL DML Commands | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#111827;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#d1fae5;padding:15px;border-radius:10px;overflow-x:auto}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px;border-radius:6px}
+.example{background:#f9fafb;border:1px solid #e5e7eb;padding:12px;border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;text-align:left}
+th,td{padding:8px;border:1px solid #cbd5e1}
+th{background:#dbeafe}
+.button{display:inline-block;background:#2563eb;color:white;padding:10px 16px;text-decoration:none;border-radius:8px;margin:5px 5px 5px 0;border:0;font-family:inherit;cursor:pointer}
+.question{border:1px solid #e5e7eb;padding:15px;border-radius:10px;margin:14px 0}
+label.option{display:block;padding:7px;cursor:pointer}
+.result{font-weight:bold;margin-top:12px}
+.small{color:#6b7280;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🗄️ Lesson 03: DML Commands</h1>
+<p>Haari_Codes | Insert, update and delete records</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What is DML?</h2>
+<p><strong>DML</strong> stands for <strong>Data Manipulation Language</strong>.</p>
+<p>DML commands are used to add, modify and remove records stored in database tables.</p>
+<h3>Main commands</h3>
+<ul>
+<li><strong>INSERT:</strong> Adds new records.</li>
+<li><strong>UPDATE:</strong> Modifies existing records.</li>
+<li><strong>DELETE:</strong> Removes records.</li>
+</ul>
+<div class="note">In this lesson, we will use a Students table to understand each command.</div>
+</section>
+
+<section class="card">
+<h2>2. Our Sample Table</h2>
+<p>Assume this table already exists:</p>
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50),
+    mark INT
+);</code></pre>
+<p>We will use the following records for our examples.</p>
+<div class="example">
+<table>
+<tr><th>id</th><th>name</th><th>mark</th></tr>
+<tr><td>1</td><td>Anu</td><td>90</td></tr>
+<tr><td>2</td><td>Akhil</td><td>85</td></tr>
+<tr><td>3</td><td>Meera</td><td>95</td></tr>
+</table>
+</div>
+<p>The table is assumed to contain these three records before each independent example unless stated otherwise.</p>
+</section>
+
+<section class="card">
+<h2>3. INSERT Command</h2>
+<p>The <code>INSERT</code> command adds new records to a table.</p>
+
+<h3>A. Insert values into every column</h3>
+<pre><code>INSERT INTO Students
+VALUES (4, 'Rahul', 88);</code></pre>
+<p>This inserts a new student with ID 4, name Rahul and mark 88.</p>
+
+<h3>B. Insert values into selected columns</h3>
+<pre><code>INSERT INTO Students (id, name)
+VALUES (5, 'Diya');</code></pre>
+<p>This inserts a record with ID 5 and name Diya. The mark column receives NULL if no default is defined and the column permits NULL.</p>
+
+<h3>C. Insert multiple records</h3>
+<pre><code>INSERT INTO Students (id, name, mark)
+VALUES
+(6, 'Nila', 91),
+(7, 'Arun', 84);</code></pre>
+<p>This adds two records in one statement in database systems that support this syntax.</p>
+
+<h3>Important rules</h3>
+<ul>
+<li>Text values are usually written inside single quotes.</li>
+<li>Numeric values usually do not need quotes.</li>
+<li>When values are supplied for every column without naming columns, their order must match the table definition.</li>
+<li>Explicitly listing column names often makes INSERT statements clearer and safer.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>4. UPDATE Command</h2>
+<p>The <code>UPDATE</code> command modifies existing records.</p>
+
+<h3>Syntax</h3>
+<pre><code>UPDATE table_name
+SET column_name = value
+WHERE condition;</code></pre>
+
+<h3>Example: Update one student's mark</h3>
+<pre><code>UPDATE Students
+SET mark = 92
+WHERE id = 1;</code></pre>
+<p>This changes Anu's mark from 90 to 92 because the record has ID 1.</p>
+
+<h3>Example: Update more than one column</h3>
+<pre><code>UPDATE Students
+SET name = 'Ananya', mark = 96
+WHERE id = 1;</code></pre>
+<p>This changes the name and mark for the record whose ID is 1.</p>
+
+<h3>What happens without WHERE?</h3>
+<pre><code>UPDATE Students
+SET mark = 0;</code></pre>
+<p>This sets the mark of <strong>every record</strong> in the table to 0.</p>
+
+<div class="note"><strong>Important safety rule:</strong> Always check your WHERE condition before running UPDATE. Without WHERE, all rows are affected.</div>
+</section>
+
+<section class="card">
+<h2>5. DELETE Command</h2>
+<p>The <code>DELETE</code> command removes records from a table.</p>
+
+<h3>Syntax</h3>
+<pre><code>DELETE FROM table_name
+WHERE condition;</code></pre>
+
+<h3>Example: Delete one record</h3>
+<pre><code>DELETE FROM Students
+WHERE id = 2;</code></pre>
+<p>This removes the record whose ID is 2, if it exists.</p>
+
+<h3>Example: Delete records that match a condition</h3>
+<pre><code>DELETE FROM Students
+WHERE mark &lt; 40;</code></pre>
+<p>This removes all records whose mark is less than 40.</p>
+
+<h3>What happens without WHERE?</h3>
+<pre><code>DELETE FROM Students;</code></pre>
+<p>This removes all records from Students, but the table structure remains.</p>
+
+<div class="note"><strong>Be careful:</strong> A DELETE statement without WHERE can remove every record. Check the condition and the target table before running it.</div>
+</section>
+
+<section class="card">
+<h2>6. INSERT vs UPDATE vs DELETE</h2>
+<div class="example">
+<table>
+<tr><th>Command</th><th>Purpose</th><th>Example</th></tr>
+<tr><td>INSERT</td><td>Adds new records</td><td>INSERT INTO Students ...</td></tr>
+<tr><td>UPDATE</td><td>Changes existing records</td><td>UPDATE Students SET ...</td></tr>
+<tr><td>DELETE</td><td>Removes records</td><td>DELETE FROM Students ...</td></tr>
+</table>
+</div>
+
+<h3>Remember this example</h3>
+<ul>
+<li>New student joins college → INSERT</li>
+<li>Student's mark is corrected → UPDATE</li>
+<li>A student record must be removed → DELETE</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>7. Using SELECT to Check Changes</h2>
+<p>After inserting, updating or deleting records, use SELECT to inspect the table.</p>
+<pre><code>SELECT * FROM Students;</code></pre>
+<p>To view only the name and mark columns:</p>
+<pre><code>SELECT name, mark
+FROM Students;</code></pre>
+<p>To view one particular student:</p>
+<pre><code>SELECT *
+FROM Students
+WHERE id = 1;</code></pre>
+<p>SELECT is commonly classified as DQL, while INSERT, UPDATE and DELETE are commonly classified as DML.</p>
+</section>
+
+<section class="card">
+<h2>8. Common Mistakes</h2>
+<ul>
+<li>Forgetting single quotes around text values.</li>
+<li>Providing values in the wrong column order.</li>
+<li>Using UPDATE without checking the WHERE condition.</li>
+<li>Using DELETE without WHERE when only one record should be removed.</li>
+<li>Forgetting that a condition may match multiple records.</li>
+<li>Assuming a successful query always affects exactly one row.</li>
+</ul>
+<div class="note">Tip: Before changing or deleting records, run a SELECT query with the same WHERE condition to check which records match.</div>
+</section>
+
+<section class="card">
+<h2>🧠 Quick Check Quiz</h2>
+<p>Choose your answers and press Check Answers to see your score and explanations.</p>
+
+<form id="quiz">
+
+<div class="question"><strong>1. What is the full form of DML?</strong>
+<label class="option"><input type="radio" name="q1" value="a"> Data Management Logic</label>
+<label class="option"><input type="radio" name="q1" value="b"> Data Manipulation Language</label>
+<label class="option"><input type="radio" name="q1" value="c"> Database Markup Language</label></div>
+
+<div class="question"><strong>2. Which command adds a new record?</strong>
+<label class="option"><input type="radio" name="q2" value="a"> INSERT</label>
+<label class="option"><input type="radio" name="q2" value="b"> UPDATE</label>
+<label class="option"><input type="radio" name="q2" value="c"> DELETE</label></div>
+
+<div class="question"><strong>3. Which command modifies an existing record?</strong>
+<label class="option"><input type="radio" name="q3" value="a"> CREATE</label>
+<label class="option"><input type="radio" name="q3" value="b"> DROP</label>
+<label class="option"><input type="radio" name="q3" value="c"> UPDATE</label></div>
+
+<div class="question"><strong>4. Which clause is commonly used to select particular records for UPDATE?</strong>
+<label class="option"><input type="radio" name="q4" value="a"> ORDER BY</label>
+<label class="option"><input type="radio" name="q4" value="b"> WHERE</label>
+<label class="option"><input type="radio" name="q4" value="c"> VALUES</label></div>
+
+<div class="question"><strong>5. What happens with DELETE FROM Students; without WHERE?</strong>
+<label class="option"><input type="radio" name="q5" value="a"> All records are removed</label>
+<label class="option"><input type="radio" name="q5" value="b"> Only the first record is removed</label>
+<label class="option"><input type="radio" name="q5" value="c"> The table structure is dropped</label></div>
+
+<div class="question"><strong>6. Which command removes a record with ID 3?</strong>
+<label class="option"><input type="radio" name="q6" value="a"> DROP Students WHERE id = 3;</label>
+<label class="option"><input type="radio" name="q6" value="b"> UPDATE Students WHERE id = 3;</label>
+<label class="option"><input type="radio" name="q6" value="c"> DELETE FROM Students WHERE id = 3;</label></div>
+
+<div class="question"><strong>7. What does this query do?</strong>
+<pre><code>UPDATE Students
+SET mark = 100;</code></pre>
+<label class="option"><input type="radio" name="q7" value="a"> Adds a new student</label>
+<label class="option"><input type="radio" name="q7" value="b"> Sets every record's mark to 100</label>
+<label class="option"><input type="radio" name="q7" value="c"> Deletes every student</label></div>
+
+<div class="question"><strong>8. Which is the correct way to insert a text value?</strong>
+<label class="option"><input type="radio" name="q8" value="a"> INSERT INTO Students VALUES (1, Anu, 90);</label>
+<label class="option"><input type="radio" name="q8" value="b"> INSERT INTO Students VALUES (1, 'Anu', 90);</label>
+<label class="option"><input type="radio" name="q8" value="c"> INSERT Students SET (1, 'Anu', 90);</label></div>
+
+<div class="question"><strong>9. Which command is used to inspect records after an UPDATE?</strong>
+<label class="option"><input type="radio" name="q9" value="a"> SELECT</label>
+<label class="option"><input type="radio" name="q9" value="b"> DROP</label>
+<label class="option"><input type="radio" name="q9" value="c"> ALTER</label></div>
+
+<div class="question"><strong>10. Which statement is correct?</strong>
+<label class="option"><input type="radio" name="q10" value="a"> INSERT changes only table structure</label>
+<label class="option"><input type="radio" name="q10" value="b"> UPDATE always deletes a record</label>
+<label class="option"><input type="radio" name="q10" value="c"> DELETE removes matching records and keeps the table structure</label></div>
+
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+<button class="button" type="button" onclick="resetQuiz()">Try Again</button>
+<div id="result" class="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</section>
+
+<section class="card">
+<h2>📌 Lesson Summary</h2>
+<ul>
+<li>INSERT adds records to a table.</li>
+<li>UPDATE modifies existing records.</li>
+<li>DELETE removes matching records.</li>
+<li>WHERE helps target particular records.</li>
+<li>Without WHERE, UPDATE and DELETE can affect every record.</li>
+<li>SELECT can be used to inspect records before and after changes.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>➡️ Continue Learning</h2>
+<a class="button" href="sql-ddl.html">← Previous Lesson</a>
+<a class="button" href="sql.html">SQL Course Home</a>
+<a class="button" href="sql-select.html">Next: SELECT & Filtering →</a>
+<p class="small">The next lesson link will work after you create sql-select.html.</p>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Haari_Codes</strong></p>
+<p>Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+const answers = {
+q1:"b", q2:"a", q3:"c", q4:"b", q5:"a",
+q6:"c", q7:"b", q8:"b", q9:"a", q10:"c"
+};
+
+const explanations = {
+q1:"DML means Data Manipulation Language.",
+q2:"INSERT adds new records.",
+q3:"UPDATE changes existing records.",
+q4:"WHERE identifies records matching a condition.",
+q5:"DELETE without WHERE removes all records in the table.",
+q6:"DELETE FROM Students WHERE id = 3 removes the matching record or records.",
+q7:"Without WHERE, every record's mark is set to 100.",
+q8:"Text values are commonly enclosed in single quotes.",
+q9:"SELECT retrieves records so you can inspect the results.",
+q10:"DELETE removes records, but the table structure remains."
+};
+
+function checkAnswers(){
+  let score = 0;
+  let unanswered = 0;
+  let html = "";
+
+  for(let i=1;i<=10;i++){
+    const key = "q"+i;
+    const selected = document.querySelector('input[name="'+key+'"]:checked');
+
+    if(!selected){
+      unanswered++;
+      html += '<div class="question"><strong>Q'+i+': Not answered.</strong><br>'+explanations[key]+'</div>';
+    }else if(selected.value===answers[key]){
+      score++;
+      html += '<div class="question"><strong>Q'+i+': ✅ Correct!</strong><br>'+explanations[key]+'</div>';
+    }else{
+      html += '<div class="question"><strong>Q'+i+': ❌ Incorrect.</strong><br>Correct option: <strong>'+answers[key].toUpperCase()+'</strong><br>'+explanations[key]+'</div>';
+    }
+  }
+
+  document.getElementById("result").textContent =
+    "Your score: "+score+"/10 ("+(score*10)+"%). Unanswered: "+unanswered+".";
+  document.getElementById("review").innerHTML = html;
+}
+
+function resetQuiz(){
+  document.getElementById("quiz").reset();
+  document.getElementById("result").textContent = "";
+  document.getElementById("review").innerHTML = "";
+}
+</script>
+</body>
+</html>
