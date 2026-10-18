@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Joins | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#60a5fa}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre-wrap}
+code{font-family:Consolas,monospace}
+.note{background:#eff6ff;padding:12px;border-left:4px solid #2563eb;border-radius:5px}
+button{background:#2563eb;color:white;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+button:hover{background:#1d4ed8}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.question{border-bottom:1px solid #e5e7eb;padding:12px 0}
+label{display:block;padding:4px;cursor:pointer}
+#result{font-weight:bold;margin-top:15px}
+a{color:#2563eb}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{padding:9px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#eff6ff}
+.small{color:#6b7280;font-size:.94em}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>SQL Course · Lesson 8</p>
+<h2 style="color:white">SQL Joins</h2>
+<p>Combine data from related tables</p>
+</header>
+
+<main>
+<div class="card">
+<h2>1. What is a JOIN?</h2>
+<p>A JOIN combines rows from two or more tables using a related column or a specified matching condition.</p>
+<p>Suppose we have two tables.</p>
+<h3>Students</h3>
+<table>
+<tr><th>student_id</th><th>name</th></tr>
+<tr><td>1</td><td>Anu</td></tr>
+<tr><td>2</td><td>Rahul</td></tr>
+<tr><td>3</td><td>Meera</td></tr>
+</table>
+<h3>Marks</h3>
+<table>
+<tr><th>student_id</th><th>subject</th><th>mark</th></tr>
+<tr><td>1</td><td>Computer Science</td><td>90</td></tr>
+<tr><td>2</td><td>Mathematics</td><td>85</td></tr>
+<tr><td>4</td><td>English</td><td>78</td></tr>
+</table>
+<p>The common column is <code>student_id</code>. We can use it to connect the tables.</p>
+</div>
+
+<div class="card">
+<h2>2. INNER JOIN</h2>
+<p><code>INNER JOIN</code> returns only rows that have matching values in both tables.</p>
+<pre>SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+INNER JOIN Marks
+ON Students.student_id = Marks.student_id;</pre>
+<p>Expected result:</p>
+<table>
+<tr><th>name</th><th>subject</th><th>mark</th></tr>
+<tr><td>Anu</td><td>Computer Science</td><td>90</td></tr>
+<tr><td>Rahul</td><td>Mathematics</td><td>85</td></tr>
+</table>
+<p>Meera is not included because she has no matching row in Marks. The marks row with student_id 4 is also excluded because no student matches it.</p>
+<div class="note">Remember: INNER JOIN = matching rows from both tables.</div>
+</div>
+
+<div class="card">
+<h2>3. LEFT JOIN</h2>
+<p><code>LEFT JOIN</code> returns every row from the left table and matching rows from the right table. If no match exists, right-table columns contain NULL.</p>
+<pre>SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+LEFT JOIN Marks
+ON Students.student_id = Marks.student_id;</pre>
+<p>Expected result:</p>
+<table>
+<tr><th>name</th><th>subject</th><th>mark</th></tr>
+<tr><td>Anu</td><td>Computer Science</td><td>90</td></tr>
+<tr><td>Rahul</td><td>Mathematics</td><td>85</td></tr>
+<tr><td>Meera</td><td>NULL</td><td>NULL</td></tr>
+</table>
+<p>All students appear, including Meera, who has no matching marks record.</p>
+<div class="note">Remember: LEFT JOIN = all rows from the left table, plus matching rows from the right.</div>
+</div>
+
+<div class="card">
+<h2>4. RIGHT JOIN</h2>
+<p><code>RIGHT JOIN</code> returns every row from the right table and matching rows from the left table. If no match exists, left-table columns contain NULL.</p>
+<pre>SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+RIGHT JOIN Marks
+ON Students.student_id = Marks.student_id;</pre>
+<p>Expected result:</p>
+<table>
+<tr><th>name</th><th>subject</th><th>mark</th></tr>
+<tr><td>Anu</td><td>Computer Science</td><td>90</td></tr>
+<tr><td>Rahul</td><td>Mathematics</td><td>85</td></tr>
+<tr><td>NULL</td><td>English</td><td>78</td></tr>
+</table>
+<p>The English marks row appears even though no student matches student_id 4.</p>
+<div class="note">Remember: RIGHT JOIN = all rows from the right table, plus matching rows from the left.</div>
+</div>
+
+<div class="card">
+<h2>5. FULL OUTER JOIN</h2>
+<p><code>FULL OUTER JOIN</code> returns all matching rows and all unmatched rows from both tables. Missing values are shown as NULL.</p>
+<pre>SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+FULL OUTER JOIN Marks
+ON Students.student_id = Marks.student_id;</pre>
+<p>Conceptual result:</p>
+<table>
+<tr><th>name</th><th>subject</th><th>mark</th></tr>
+<tr><td>Anu</td><td>Computer Science</td><td>90</td></tr>
+<tr><td>Rahul</td><td>Mathematics</td><td>85</td></tr>
+<tr><td>Meera</td><td>NULL</td><td>NULL</td></tr>
+<tr><td>NULL</td><td>English</td><td>78</td></tr>
+</table>
+<div class="note"><b>Important:</b> MySQL does not directly support FULL OUTER JOIN. In MySQL, you can combine a LEFT JOIN with a RIGHT JOIN using UNION, or use a LEFT JOIN plus a query for unmatched right-side rows. Other database systems may support FULL OUTER JOIN directly.</div>
+<h3>MySQL alternative</h3>
+<pre>SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+LEFT JOIN Marks
+ON Students.student_id = Marks.student_id
+
+UNION ALL
+
+SELECT Students.name, Marks.subject, Marks.mark
+FROM Students
+RIGHT JOIN Marks
+ON Students.student_id = Marks.student_id
+WHERE Students.student_id IS NULL;</pre>
+<p>This keeps the left-join results and adds only unmatched right-side rows, avoiding duplicates from matching rows.</p>
+</div>
+
+<div class="card">
+<h2>6. CROSS JOIN</h2>
+<p><code>CROSS JOIN</code> returns every possible combination of rows from the two tables. It is also called a Cartesian product.</p>
+<pre>SELECT Students.name, Marks.subject
+FROM Students
+CROSS JOIN Marks;</pre>
+<p>There are 3 students and 3 marks rows, so the result contains 3 × 3 = 9 combinations.</p>
+<div class="note">Use CROSS JOIN carefully. Large tables can produce a very large result.</div>
+</div>
+
+<div class="card">
+<h2>7. SELF JOIN</h2>
+<p>A <code>SELF JOIN</code> joins a table with itself. It is useful for relationships within one table, such as employees and their managers.</p>
+<p>Imagine an Employees table with <code>employee_id</code>, <code>name</code>, and <code>manager_id</code>.</p>
+<pre>SELECT E.name AS employee,
+       M.name AS manager
+FROM Employees E
+LEFT JOIN Employees M
+ON E.manager_id = M.employee_id;</pre>
+<p><code>E</code> and <code>M</code> are aliases for the same table. The query lists employees and their managers. Employees without a manager still appear because LEFT JOIN is used.</p>
+</div>
+
+<div class="card">
+<h2>8. JOIN with WHERE and ORDER BY</h2>
+<p>JOINs can be combined with other SQL clauses.</p>
+<pre>SELECT Students.name, Marks.mark
+FROM Students
+INNER JOIN Marks
+ON Students.student_id = Marks.student_id
+WHERE Marks.mark >= 85
+ORDER BY Marks.mark DESC;</pre>
+<p>This returns matching students with marks of 85 or above, sorted from highest mark to lowest.</p>
+<h3>ON vs WHERE</h3>
+<ul>
+<li><code>ON</code> specifies how rows match between tables.</li>
+<li><code>WHERE</code> filters the result according to a condition.</li>
+</ul>
+<div class="note">With OUTER JOINs, putting a condition on the right table in WHERE can remove unmatched rows and change the result. Put conditions in ON when you want to preserve all rows from the outer side.</div>
+</div>
+
+<div class="card">
+<h2>9. JOIN Types: Quick Comparison</h2>
+<table>
+<tr><th>JOIN</th><th>What it returns</th></tr>
+<tr><td>INNER JOIN</td><td>Matching rows from both tables</td></tr>
+<tr><td>LEFT JOIN</td><td>All left rows and matching right rows</td></tr>
+<tr><td>RIGHT JOIN</td><td>All right rows and matching left rows</td></tr>
+<tr><td>FULL OUTER JOIN</td><td>All rows from both sides, matched where possible</td></tr>
+<tr><td>CROSS JOIN</td><td>Every combination of rows</td></tr>
+<tr><td>SELF JOIN</td><td>A table joined to itself</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>10. Common Mistakes</h2>
+<ul>
+<li>Forgetting the ON condition in a regular join, which can produce unintended combinations.</li>
+<li>Joining on unrelated columns.</li>
+<li>Assuming INNER JOIN includes unmatched rows.</li>
+<li>Forgetting that unmatched columns in an outer join can be NULL.</li>
+<li>Using FULL OUTER JOIN directly in MySQL, which does not support it as a native join type.</li>
+<li>Using unclear column names when both tables have columns with the same name. Use table names or aliases, such as <code>Students.student_id</code>.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>11. Quick Revision</h2>
+<ul>
+<li><b>INNER:</b> Matching rows only.</li>
+<li><b>LEFT:</b> All left rows, plus matches.</li>
+<li><b>RIGHT:</b> All right rows, plus matches.</li>
+<li><b>FULL:</b> All rows from both sides.</li>
+<li><b>CROSS:</b> Every possible combination.</li>
+<li><b>SELF:</b> A table joined to itself.</li>
+<li><b>ON:</b> Defines the matching condition.</li>
+<li><b>WHERE:</b> Filters rows in the result.</li>
+</ul>
+</div>
+
+<div class="card" id="quiz">
+<h2>12. Quick Check Quiz 🧠</h2>
+<p>Choose one answer for each question, then check your score.</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" onclick="resetQuiz()" style="background:#4b5563">Try Again</button>
+<div id="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</div>
+
+<div class="card nav">
+<a href="sql-group-by.html">← Previous: GROUP BY</a>
+<a href="sql.html">SQL Home</a>
+<a href="sql-subqueries.html">Next: Subqueries →</a>
+</div>
+</main>
+
+<footer>
+<p><b>Haari_Codes</b> | Learn. Practise. Build.</p>
+<p>Connect the tables, connect the knowledge! 💙</p>
+</footer>
+
+<script>
+const questions=[
+{q:"1. Which JOIN returns only matching rows?",a:["LEFT JOIN","RIGHT JOIN","INNER JOIN","CROSS JOIN"],ans:2,exp:"INNER JOIN returns rows with matching values in both tables."},
+{q:"2. Which JOIN preserves every row from the left table?",a:["LEFT JOIN","INNER JOIN","CROSS JOIN","SELF JOIN"],ans:0,exp:"LEFT JOIN includes every left-table row."},
+{q:"3. In an outer join, what appears in columns when there is no match?",a:["0 always","NULL","The word FALSE","The row is always deleted"],ans:1,exp:"Unmatched columns from the other side are returned as NULL."},
+{q:"4. Which JOIN returns all rows from the right table?",a:["INNER JOIN","LEFT JOIN","RIGHT JOIN","CROSS JOIN"],ans:2,exp:"RIGHT JOIN preserves every row from the right table."},
+{q:"5. Which JOIN produces every possible row combination?",a:["SELF JOIN","CROSS JOIN","INNER JOIN","LEFT JOIN"],ans:1,exp:"CROSS JOIN creates a Cartesian product."},
+{q:"6. What does ON specify in a JOIN?",a:["The sort order","The matching condition","The database name","The output file"],ans:1,exp:"ON defines the condition used to match rows."},
+{q:"7. Which JOIN joins a table to itself?",a:["CROSS JOIN","FULL JOIN","SELF JOIN","RIGHT JOIN"],ans:2,exp:"A self join uses the same table twice, typically with aliases."},
+{q:"8. Does MySQL directly support FULL OUTER JOIN?",a:["Yes, always","No, not as a native join type","Only for numbers","Only with ORDER BY"],ans:1,exp:"MySQL users can emulate it using joins and UNION."},
+{q:"9. Which clause filters joined results by mark >= 85?",a:["WHERE","ON only","CREATE","GROUP BY only"],ans:0,exp:"WHERE filters rows based on a condition."},
+{q:"10. If Students has 3 rows and Marks has 3 rows, how many rows does their CROSS JOIN produce?",a:["3","6","9","12"],ans:2,exp:"A CROSS JOIN produces 3 × 3 = 9 row combinations."}
+];
+
+function renderQuestions(){
+const container=document.getElementById("questions");
+container.innerHTML="";
+questions.forEach((item,i)=>{
+const div=document.createElement("div");
+div.className="question";
+const p=document.createElement("p");
+const b=document.createElement("b");
+b.textContent=item.q;
+p.appendChild(b);
+div.appendChild(p);
+item.a.forEach((option,j)=>{
+const label=document.createElement("label");
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="q"+i;
+radio.value=j;
+label.appendChild(radio);
+label.appendChild(document.createTextNode(" "+option));
+div.appendChild(label);
+});
+container.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0,unanswered=0;
+let html="<h3>Answer Review</h3>";
+questions.forEach((item,i)=>{
+const selected=document.querySelector('input[name="q'+i+'"]:checked');
+if(!selected)unanswered++;
+const correct=selected&&Number(selected.value)===item.ans;
+if(correct)score++;
+html+="<p><b>"+item.q+"</b><br>";
+html+=correct?"✅ Correct! ":"❌ Correct answer: "+item.a[item.ans]+". ";
+html+=item.exp+"</p>";
+});
+document.getElementById("result").textContent=
+"Your score: "+score+"/10"+
+(unanswered?" · Unanswered: "+unanswered:"")+
+(score===10?" · Perfect score! 🎉":score>=7?" · Good work! 💙":" · Revise and try again!");
+document.getElementById("review").innerHTML=html;
+}
+function resetQuiz(){
+document.getElementById("quizForm").reset();
+document.getElementById("result").textContent="";
+document.getElementById("review").innerHTML="";
+}
+renderQuestions();
+</script>
+</body>
+</html>
