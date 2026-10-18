@@ -8,7 +8,10 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
 header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
-header h1{margin:0;color:#60a5fa}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
 main{max-width:900px;margin:auto;padding:20px}
 .card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
 h2,h3{color:#2563eb}
@@ -29,10 +32,8 @@ th{background:#eff6ff}
 </head>
 <body>
 <header>
-<h1>Haari_Codes</h1>
-<p>SQL Course · Lesson 9</p>
-<h2 style="color:white">SQL Subqueries</h2>
-<p>A query inside another query</p>
+<h1>🔎 Lesson 09: SQL subqueries</h1>
+<p>Haari_Codes | A query inside another query </p>
 </header>
 
 <main>
@@ -229,10 +230,52 @@ WHERE average_salary > 25000;</pre>
 </form>
 </div>
 
-<div class="card nav">
-<a href="sql-joins.html">← Previous: SQL Joins</a>
-<a href="sql.html">SQL Home</a>
-<a href="sql-constraints.html">Next: SQL Constraints →</a>
+<style>
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    padding: 25px 20px;
+    margin: 25px 0;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.lesson-nav a {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 14px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 17px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.lesson-nav a:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+    .lesson-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lesson-nav a {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="lesson-nav">
+    <a href="Sql-joints.html">← Previous Lesson</a>
+    <a href="sql.html">SQL Course Home</a>
+    <a href="sql-constraints.html">next lesson→</a>
 </div>
 </main>
 
