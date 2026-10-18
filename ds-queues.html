@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Queues | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#1f2937;font-family:Georgia,serif;line-height:1.75}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h1{margin:0}
+header p,footer p{margin:5px 0;color:#d1d5db}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:white;padding:22px;margin-bottom:18px;border-radius:13px;box-shadow:0 3px 12px #00000009}
+h2{color:#2563eb;margin-top:0}
+h3{color:#111827;margin-bottom:5px}
+pre{background:#111827;color:#e5e7eb;padding:15px;border-radius:9px;overflow-x:auto;white-space:pre}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+.btn,button{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:10px 15px;border:0;border-radius:8px;margin:5px 5px 5px 0;font-family:Georgia,serif;font-size:15px;cursor:pointer}
+.secondary{background:#374151}
+.question{border:1px solid #e5e7eb;padding:14px;border-radius:10px;margin:12px 0}
+label{display:block;padding:4px 0;cursor:pointer}
+#result{font-weight:bold}
+.small{font-size:14px;color:#6b7280}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures | Lesson 05</p>
+</header>
+
+<main>
+<section class="card">
+<h2>Queue</h2>
+<p>A queue is a linear data structure in which elements are added at one end and removed from the other end.</p>
+<p class="note"><strong>Learning objectives:</strong> Understand FIFO, front and rear, enqueue and dequeue, types of queues, algorithms, C++ implementation, applications and complexity.</p>
+</section>
+
+<section class="card">
+<h2>1. Definition of Queue</h2>
+<p>A <strong>queue</strong> is a linear data structure that follows the <strong>FIFO (First In, First Out)</strong> principle. The first element inserted is the first element removed.</p>
+<p>Real-life example: People waiting in a normal line. The person who joins first is generally served first.</p>
+<pre>DEQUEUE ← [10] [20] [30] ← ENQUEUE
+           FRONT       REAR</pre>
+<p>Here, 10 is removed first, while a new element is added at the rear.</p>
+</section>
+
+<section class="card">
+<h2>2. Important Terminology</h2>
+<ul>
+<li><strong>Front:</strong> Position of the element that will be removed next.</li>
+<li><strong>Rear:</strong> Position of the most recently inserted element.</li>
+<li><strong>Enqueue:</strong> Add an element at the rear.</li>
+<li><strong>Dequeue:</strong> Remove an element from the front.</li>
+<li><strong>Peek:</strong> Read the front element without removing it.</li>
+<li><strong>Overflow:</strong> Trying to add an element to a full fixed-capacity queue.</li>
+<li><strong>Underflow:</strong> Trying to remove an element from an empty queue.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>3. Types of Queues</h2>
+<h3>A. Linear Queue</h3>
+<p>Insertion takes place at the rear, and deletion takes place at the front.</p>
+<pre>FRONT → [10] [20] [30] ← REAR</pre>
+<p>In a simple array implementation, deleted spaces at the beginning may remain unused until the queue is reset or elements are shifted. This can cause a false overflow when the rear reaches the last array index.</p>
+
+<h3>B. Circular Queue</h3>
+<p>The last array position connects logically back to the first position. This lets the queue reuse spaces freed by dequeue operations.</p>
+<pre>   [0] → [1] → [2]
+    ↑           ↓
+   [5] ← [4] ← [3]</pre>
+<p>For an array of capacity N, the next position is calculated using <code>(index + 1) % N</code>.</p>
+
+<h3>C. Priority Queue</h3>
+<p>Each element has a priority. Elements are removed according to priority rather than strictly by arrival order. When priorities are equal, the implementation may preserve arrival order.</p>
+<p>Application: Scheduling tasks according to importance.</p>
+
+<h3>D. Double-Ended Queue (Deque)</h3>
+<p>A deque allows insertion and deletion at both the front and rear.</p>
+<p>Application: Sliding-window algorithms and systems that need access at both ends.</p>
+</section>
+
+<section class="card">
+<h2>4. Array Representation</h2>
+<p>A simple linear queue can use an array and two variables called <code>front</code> and <code>rear</code>.</p>
+<pre>int queue[5];
+int front = -1;
+int rear = -1;</pre>
+<p>When the queue is empty, both variables are initially -1 in this simple implementation.</p>
+<ul>
+<li>When the first element is inserted, set both front and rear to 0.</li>
+<li>When another element is inserted, increment rear.</li>
+<li>When an element is removed, increment front.</li>
+<li>If the last element is removed, reset both variables to -1.</li>
+</ul>
+<p class="note">These rules describe a simple linear queue. Circular queues use different empty/full conditions.</p>
+</section>
+
+<section class="card">
+<h2>5. Enqueue Operation</h2>
+<p><strong>Enqueue</strong> inserts a new element at the rear of the queue.</p>
+<ol>
+<li>Check whether the queue is full.</li>
+<li>If the queue is empty, set front to 0.</li>
+<li>Increment rear.</li>
+<li>Store the new element at queue[rear].</li>
+</ol>
+<pre>if (rear == capacity - 1) {
+    // Overflow
+} else {
+    if (front == -1)
+        front = 0;
+
+    rear++;
+    queue[rear] = item;
+}</pre>
+<p>This is a basic linear queue algorithm. It does not reuse freed spaces at the beginning.</p>
+</section>
+
+<section class="card">
+<h2>6. Dequeue Operation</h2>
+<p><strong>Dequeue</strong> removes the front element.</p>
+<ol>
+<li>Check whether the queue is empty.</li>
+<li>Store the front element if needed.</li>
+<li>If front equals rear, reset both to -1.</li>
+<li>Otherwise, increment front.</li>
+</ol>
+<pre>if (front == -1) {
+    // Underflow
+} else {
+    int item = queue[front];
+
+    if (front == rear) {
+        front = rear = -1;
+    } else {
+        front++;
+    }
+}</pre>
+</section>
+
+<section class="card">
+<h2>7. Complete C++ Program: Linear Queue</h2>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+const int CAPACITY = 5;
+int q[CAPACITY];
+int frontIndex = -1;
+int rearIndex = -1;
+
+void enqueue(int value) {
+    if (rearIndex == CAPACITY - 1) {
+        cout &lt;&lt; "Queue Overflow\n";
+        return;
+    }
+
+    if (frontIndex == -1)
+        frontIndex = 0;
+
+    q[++rearIndex] = value;
+    cout &lt;&lt; value &lt;&lt; " enqueued\n";
+}
+
+void dequeue() {
+    if (frontIndex == -1) {
+        cout &lt;&lt; "Queue Underflow\n";
+        return;
+    }
+
+    cout &lt;&lt; "Removed: " &lt;&lt; q[frontIndex] &lt;&lt; "\n";
+
+    if (frontIndex == rearIndex) {
+        frontIndex = rearIndex = -1;
+    } else {
+        frontIndex++;
+    }
+}
+
+void peek() {
+    if (frontIndex == -1)
+        cout &lt;&lt; "Queue is empty\n";
+    else
+        cout &lt;&lt; "Front: " &lt;&lt; q[frontIndex] &lt;&lt; "\n";
+}
+
+void display() {
+    if (frontIndex == -1) {
+        cout &lt;&lt; "Queue is empty\n";
+        return;
+    }
+
+    cout &lt;&lt; "Front to rear: ";
+    for (int i = frontIndex; i &lt;= rearIndex; i++)
+        cout &lt;&lt; q[i] &lt;&lt; " ";
+
+    cout &lt;&lt; "\n";
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+
+    display();
+    peek();
+    dequeue();
+    display();
+
+    return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>10 enqueued
+20 enqueued
+30 enqueued
+Front to rear: 10 20 30
+Front: 10
+Removed: 10
+Front to rear: 20 30</pre>
+<p class="note">Limitation: This basic linear array queue does not reuse freed slots at the start until the queue becomes empty. A circular queue solves that space-reuse problem.</p>
+</section>
+
+<section class="card">
+<h2>8. Circular Queue: Key Conditions</h2>
+<p>In a circular queue of capacity N, the rear can wrap around to index 0.</p>
+<p><strong>Next index:</strong></p>
+<pre>next = (index + 1) % N;</pre>
+<p>For the common implementation that tracks the number of elements:</p>
+<ul>
+<li>Empty when <code>count == 0</code>.</li>
+<li>Full when <code>count == N</code>.</li>
+<li>Enqueue at rear, then update rear using modulo N.</li>
+<li>Dequeue at front, then update front using modulo N.</li>
+</ul>
+<p>This approach avoids confusion between a full queue and an empty queue.</p>
+</section>
+
+<section class="card">
+<h2>9. Applications of Queues</h2>
+<ul>
+<li>Printer job scheduling.</li>
+<li>Customer-service waiting lines.</li>
+<li>CPU and process scheduling systems.</li>
+<li>Network packet buffering.</li>
+<li>Breadth-first search (BFS) in graphs.</li>
+<li>Handling tasks in the order they arrive.</li>
+<li>Message processing systems.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>10. Advantages</h2>
+<ul>
+<li>Maintains FIFO order.</li>
+<li>Enqueue and dequeue can be O(1) with a suitable implementation.</li>
+<li>Useful for scheduling and buffering tasks.</li>
+<li>Circular queues reuse array positions efficiently.</li>
+</ul>
+<h2>11. Disadvantages</h2>
+<ul>
+<li>A simple fixed-size array queue has limited capacity.</li>
+<li>A basic linear queue can waste usable spaces at the beginning.</li>
+<li>Priority queues require priority-management logic.</li>
+<li>Incorrect front/rear updates can cause errors.</li>
+<li>Linked-list queues require additional pointer memory.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>12. Stack vs Queue</h2>
+<table>
+<tr><th>Feature</th><th>Stack</th><th>Queue</th></tr>
+<tr><td>Principle</td><td>LIFO</td><td>FIFO</td></tr>
+<tr><td>Insertion</td><td>Top</td><td>Rear</td></tr>
+<tr><td>Removal</td><td>Top</td><td>Front</td></tr>
+<tr><td>Example</td><td>Stack of plates</td><td>Waiting line</td></tr>
+<tr><td>Common operations</td><td>Push, Pop, Peek</td><td>Enqueue, Dequeue, Peek</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>13. Time Complexity</h2>
+<table>
+<tr><th>Operation</th><th>Typical complexity</th></tr>
+<tr><td>Enqueue</td><td>O(1)</td></tr>
+<tr><td>Dequeue</td><td>O(1)</td></tr>
+<tr><td>Peek at front</td><td>O(1)</td></tr>
+<tr><td>Display all elements</td><td>O(n)</td></tr>
+</table>
+<p class="small">These complexities assume a suitable implementation. A circular array queue and a linked-list queue with front/rear pointers can support O(1) enqueue and dequeue.</p>
+</section>
+
+<section class="card">
+<h2>14. Quick Check 🧠</h2>
+<p>Select one answer for each question and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><strong>1. Which principle does a normal queue follow?</strong></p>
+<label><input type="radio" name="q1" value="a"> LIFO</label>
+<label><input type="radio" name="q1" value="b"> FIFO</label>
+<label><input type="radio" name="q1" value="c"> Random order</label>
+</div>
+<div class="question">
+<p><strong>2. Where is an element inserted in a queue?</strong></p>
+<label><input type="radio" name="q2" value="a"> Front</label>
+<label><input type="radio" name="q2" value="b"> Middle only</label>
+<label><input type="radio" name="q2" value="c"> Rear</label>
+</div>
+<div class="question">
+<p><strong>3. Which operation removes an element from a queue?</strong></p>
+<label><input type="radio" name="q3" value="a"> Enqueue</label>
+<label><input type="radio" name="q3" value="b"> Dequeue</label>
+<label><input type="radio" name="q3" value="c"> Traverse only</label>
+</div>
+<div class="question">
+<p><strong>4. What is a major advantage of a circular queue?</strong></p>
+<label><input type="radio" name="q4" value="a"> It uses no memory</label>
+<label><input type="radio" name="q4" value="b"> It always sorts elements</label>
+<label><input type="radio" name="q4" value="c"> It can reuse freed array positions</label>
+</div>
+<div class="question">
+<p><strong>5. Which structure is commonly used in BFS?</strong></p>
+<label><input type="radio" name="q5" value="a"> Queue</label>
+<label><input type="radio" name="q5" value="b"> Stack only</label>
+<label><input type="radio" name="q5" value="c"> Single integer</label>
+</div>
+<div class="question">
+<p><strong>6. What happens when dequeue is attempted on an empty queue?</strong></p>
+<label><input type="radio" name="q6" value="a"> Overflow</label>
+<label><input type="radio" name="q6" value="b"> Underflow</label>
+<label><input type="radio" name="q6" value="c"> Enqueue</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" class="secondary" onclick="resetQuiz()">Try Again</button>
+<p id="result" aria-live="polite"></p>
+<div id="answers" hidden>
+<h3>Answer Key</h3>
+<ol>
+<li>B: FIFO means First In, First Out.</li>
+<li>C: New elements are added at the rear.</li>
+<li>B: Dequeue removes an element from the front.</li>
+<li>C: Circular queues reuse available positions.</li>
+<li>A: BFS commonly uses a queue.</li>
+<li>B: Removing from an empty queue causes underflow.</li>
+</ol>
+</div>
+</form>
+</section>
+
+<section class="card">
+<h2>Lesson Summary</h2>
+<ul>
+<li>A queue follows FIFO.</li>
+<li>Enqueue inserts at the rear; dequeue removes from the front.</li>
+<li>Front identifies the next element to remove.</li>
+<li>Circular queues reuse array positions efficiently.</li>
+<li>Queues are used in scheduling, buffering and BFS.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Continue Learning</h2>
+<a class="btn secondary" href="ds-stacks.html">← Previous: Stacks</a>
+<a class="btn secondary" href="data-structure.html">Course Home</a>
+<a class="btn" href="ds-searching.html">Next: Searching →</a>
+<p class="small">The Next button works after ds-searching.html is created.</p>
+</section>
+</main>
+
+<footer><p>Haari_Codes | Learn. Practise. Build.</p></footer>
+
+<script>
+function checkAnswers(){
+ const correct={q1:"b",q2:"c",q3:"b",q4:"c",q5:"a",q6:"b"};
+ let score=0,unanswered=0;
+ for(const q in correct){
+  const selected=document.querySelector('input[name="'+q+'"]:checked');
+  if(!selected) unanswered++;
+  else if(selected.value===correct[q]) score++;
+ }
+ document.getElementById("result").textContent=
+ "Your score: "+score+"/6"+(unanswered?" | "+unanswered+" unanswered.":"");
+ document.getElementById("answers").hidden=false;
+}
+function resetQuiz(){
+ document.getElementById("quiz").reset();
+ document.getElementById("result").textContent="";
+ document.getElementById("answers").hidden=true;
+}
+</script>
+</body>
+         </html>
