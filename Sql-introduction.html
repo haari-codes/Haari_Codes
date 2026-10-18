@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Introduction | Haari_Codes</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#111827;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0}
+header p,footer p{color:#d1d5db}
+.container{width:92%;max-width:900px;margin:24px auto}
+.card{background:white;padding:20px;margin-bottom:18px;border-radius:14px;box-shadow:0 3px 12px #0000000b}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#d1fae5;padding:15px;border-radius:10px;overflow-x:auto;white-space:pre}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px;border-radius:6px}
+.example{background:#f9fafb;border:1px solid #e5e7eb;padding:12px;border-radius:8px;overflow-x:auto}
+.button{display:inline-block;background:#2563eb;color:white;padding:10px 16px;text-decoration:none;border-radius:8px;margin:5px 5px 5px 0;border:0;font-family:inherit;cursor:pointer}
+.button:hover{background:#1d4ed8}
+.question{border:1px solid #e5e7eb;padding:15px;border-radius:10px;margin:14px 0}
+label.option{display:block;padding:7px;cursor:pointer}
+.result{font-weight:bold;margin-top:12px}
+.small{color:#6b7280;font-size:14px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🗄️ Lesson 01: SQL Introduction</h1>
+<p>Haari_Codes | Learn SQL from the beginning</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What is SQL?</h2>
+<p><strong>SQL</strong> stands for <strong>Structured Query Language</strong>.</p>
+<p>It is a language used to communicate with relational database management systems (RDBMS). We use SQL to create tables, store data, retrieve information, update records and delete records.</p>
+
+<h3>Example</h3>
+<p>Imagine a college database containing student names, roll numbers and marks. SQL helps us find a particular student's marks without searching every record manually.</p>
+
+<pre><code>SELECT name, mark
+FROM Students;</code></pre>
+
+<p>This query retrieves the name and mark columns from the Students table.</p>
+</section>
+
+<section class="card">
+<h2>2. What is a Database?</h2>
+<p>A <strong>database</strong> is an organized collection of data that can be stored, accessed and managed efficiently.</p>
+
+<h3>Examples of databases</h3>
+<ul>
+<li>College student records</li>
+<li>Bank account information</li>
+<li>Hospital patient records</li>
+<li>Online shopping products and orders</li>
+<li>Railway reservation information</li>
+</ul>
+
+<div class="note">
+<strong>Remember:</strong> A database organizes information so that it can be accessed and managed efficiently.
+</div>
+</section>
+
+<section class="card">
+<h2>3. What is a DBMS?</h2>
+<p><strong>DBMS</strong> stands for <strong>Database Management System</strong>.</p>
+<p>It is software used to create, store, organize and manage databases.</p>
+
+<h3>Examples</h3>
+<ul>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+<li>Oracle Database</li>
+<li>Microsoft SQL Server</li>
+<li>SQLite</li>
+</ul>
+
+<p>A relational DBMS stores related data in tables and can use SQL to manage that data.</p>
+
+<h3>SQL vs DBMS</h3>
+<div class="example">
+<p><strong>SQL:</strong> The language used to communicate with a database.</p>
+<p><strong>DBMS:</strong> The software that manages the database.</p>
+</div>
+</section>
+
+<section class="card">
+<h2>4. What is a Table?</h2>
+<p>A <strong>table</strong> stores data in rows and columns.</p>
+
+<h3>Example: Students</h3>
+<div class="example">
+<table style="width:100%;border-collapse:collapse;text-align:left">
+<tr style="background:#dbeafe">
+<th style="padding:9px;border:1px solid #cbd5e1">id</th>
+<th style="padding:9px;border:1px solid #cbd5e1">name</th>
+<th style="padding:9px;border:1px solid #cbd5e1">mark</th>
+</tr>
+<tr>
+<td style="padding:9px;border:1px solid #cbd5e1">1</td>
+<td style="padding:9px;border:1px solid #cbd5e1">Anu</td>
+<td style="padding:9px;border:1px solid #cbd5e1">90</td>
+</tr>
+<tr>
+<td style="padding:9px;border:1px solid #cbd5e1">2</td>
+<td style="padding:9px;border:1px solid #cbd5e1">Akhil</td>
+<td style="padding:9px;border:1px solid #cbd5e1">85</td>
+</tr>
+<tr>
+<td style="padding:9px;border:1px solid #cbd5e1">3</td>
+<td style="padding:9px;border:1px solid #cbd5e1">Meera</td>
+<td style="padding:9px;border:1px solid #cbd5e1">95</td>
+</tr>
+</table>
+</div>
+
+<ul>
+<li><strong>Table:</strong> Students</li>
+<li><strong>Columns:</strong> id, name, mark</li>
+<li><strong>Rows:</strong> Individual student records</li>
+<li><strong>Field:</strong> An individual data value within a record</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>5. Types of SQL Commands</h2>
+
+<h3>DDL: Data Definition Language</h3>
+<p>Used to define or change database structures.</p>
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50)
+);</code></pre>
+<p>Common commands: CREATE, ALTER, DROP, TRUNCATE.</p>
+
+<h3>DML: Data Manipulation Language</h3>
+<p>Used to insert, modify and remove table records.</p>
+<pre><code>INSERT INTO Students
+VALUES (1, 'Anu');
+
+UPDATE Students
+SET name = 'Meera'
+WHERE id = 1;
+
+DELETE FROM Students
+WHERE id = 1;</code></pre>
+<p>Common commands: INSERT, UPDATE, DELETE.</p>
+
+<h3>DQL: Data Query Language</h3>
+<p>Used to retrieve data.</p>
+<pre><code>SELECT * FROM Students;</code></pre>
+
+<h3>DCL: Data Control Language</h3>
+<p>Used to manage database access permissions.</p>
+<p>Common commands: GRANT and REVOKE.</p>
+
+<h3>TCL: Transaction Control Language</h3>
+<p>Used to manage database transactions.</p>
+<p>Common commands: COMMIT, ROLLBACK and SAVEPOINT.</p>
+
+<div class="note">
+Command classifications can vary slightly across textbooks and database systems. For this course, we will study these common categories.
+</div>
+</section>
+
+<section class="card">
+<h2>6. Common SQL Data Types</h2>
+
+<ul>
+<li><strong>INT:</strong> Whole numbers, such as 10 or 250.</li>
+<li><strong>VARCHAR(n):</strong> Variable-length text up to a specified maximum length.</li>
+<li><strong>CHAR(n):</strong> Fixed-length character strings.</li>
+<li><strong>DATE:</strong> Date values.</li>
+<li><strong>DECIMAL(p,s):</strong> Exact decimal numbers, useful for monetary values.</li>
+<li><strong>BOOLEAN:</strong> True/false values in systems that support it directly. Other systems may represent these differently.</li>
+</ul>
+
+<h3>Example</h3>
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50),
+    mark DECIMAL(5,2),
+    admission_date DATE
+);</code></pre>
+<p>This creates a table structure. It does not automatically add any student records.</p>
+</section>
+
+<section class="card">
+<h2>7. Create a Table and Retrieve Data</h2>
+
+<h3>Step 1: Create the table</h3>
+<pre><code>CREATE TABLE Students (
+    id INT,
+    name VARCHAR(50),
+    mark INT
+);</code></pre>
+
+<h3>Step 2: Insert a record</h3>
+<pre><code>INSERT INTO Students
+VALUES (1, 'Anu', 90);</code></pre>
+
+<h3>Step 3: Retrieve the record</h3>
+<pre><code>SELECT * FROM Students;</code></pre>
+
+<h3>Expected output</h3>
+<div class="example">
+<table style="width:100%;border-collapse:collapse;text-align:left">
+<tr style="background:#dbeafe">
+<th style="padding:9px;border:1px solid #cbd5e1">id</th>
+<th style="padding:9px;border:1px solid #cbd5e1">name</th>
+<th style="padding:9px;border:1px solid #cbd5e1">mark</th>
+</tr>
+<tr>
+<td style="padding:9px;border:1px solid #cbd5e1">1</td>
+<td style="padding:9px;border:1px solid #cbd5e1">Anu</td>
+<td style="padding:9px;border:1px solid #cbd5e1">90</td>
+</tr>
+</table>
+</div>
+
+<p class="small">The output assumes the table was empty before the INSERT statement and all three commands ran successfully.</p>
+</section>
+
+<section class="card">
+<h2>8. Advantages of SQL</h2>
+<ul>
+<li>Retrieves large amounts of data efficiently.</li>
+<li>Can insert, update and delete records.</li>
+<li>Supports filtering, sorting and grouping.</li>
+<li>Works with many relational database systems.</li>
+<li>Can help control access and maintain data integrity.</li>
+</ul>
+
+<h2>9. Applications of SQL</h2>
+<ul>
+<li>Banking and financial systems</li>
+<li>College and school management</li>
+<li>Railway and airline reservations</li>
+<li>E-commerce websites</li>
+<li>Hospital management systems</li>
+<li>Business reporting and data analysis</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>🧠 Quick Check Quiz</h2>
+<p>Choose one answer for each question, then press <strong>Check Answers</strong>.</p>
+
+<form id="quiz">
+
+<div class="question">
+<p><strong>1. What is the full form of SQL?</strong></p>
+<label class="option"><input type="radio" name="q1" value="a"> Simple Query Language</label>
+<label class="option"><input type="radio" name="q1" value="b"> Structured Query Language</label>
+<label class="option"><input type="radio" name="q1" value="c"> System Question Language</label>
+</div>
+
+<div class="question">
+<p><strong>2. What is a DBMS?</strong></p>
+<label class="option"><input type="radio" name="q2" value="a"> A programming variable</label>
+<label class="option"><input type="radio" name="q2" value="b"> A type of computer hardware</label>
+<label class="option"><input type="radio" name="q2" value="c"> Software used to manage databases</label>
+</div>
+
+<div class="question">
+<p><strong>3. In a table, a row generally represents what?</strong></p>
+<label class="option"><input type="radio" name="q3" value="a"> A record</label>
+<label class="option"><input type="radio" name="q3" value="b"> A database program</label>
+<label class="option"><input type="radio" name="q3" value="c"> A column heading only</label>
+</div>
+
+<div class="question">
+<p><strong>4. Which command retrieves data?</strong></p>
+<label class="option"><input type="radio" name="q4" value="a"> DROP</label>
+<label class="option"><input type="radio" name="q4" value="b"> SELECT</label>
+<label class="option"><input type="radio" name="q4" value="c"> UPDATE</label>
+</div>
+
+<div class="question">
+<p><strong>5. Which data type is commonly used for text of variable length?</strong></p>
+<label class="option"><input type="radio" name="q5" value="a"> INT</label>
+<label class="option"><input type="radio" name="q5" value="b"> DATE</label>
+<label class="option"><input type="radio" name="q5" value="c"> VARCHAR</label>
+</div>
+
+<div class="question">
+<p><strong>6. Which command creates a table?</strong></p>
+<label class="option"><input type="radio" name="q6" value="a"> CREATE TABLE</label>
+<label class="option"><input type="radio" name="q6" value="b"> SELECT TABLE</label>
+<label class="option"><input type="radio" name="q6" value="c"> SHOW ROW</label>
+</div>
+
+<div class="question">
+<p><strong>7. Which command adds a new record?</strong></p>
+<label class="option"><input type="radio" name="q7" value="a"> DELETE</label>
+<label class="option"><input type="radio" name="q7" value="b"> INSERT</label>
+<label class="option"><input type="radio" name="q7" value="c"> DROP</label>
+</div>
+
+<div class="question">
+<p><strong>8. What does SELECT * mean?</strong></p>
+<label class="option"><input type="radio" name="q8" value="a"> Select only the first row</label>
+<label class="option"><input type="radio" name="q8" value="b"> Delete every column</label>
+<label class="option"><input type="radio" name="q8" value="c"> Select all columns</label>
+</div>
+
+<div class="question">
+<p><strong>9. Which SQL category commonly includes ALTER?</strong></p>
+<label class="option"><input type="radio" name="q9" value="a"> DDL</label>
+<label class="option"><input type="radio" name="q9" value="b"> DML</label>
+<label class="option"><input type="radio" name="q9" value="c"> DCL</label>
+</div>
+
+<div class="question">
+<p><strong>10. Which command changes existing records?</strong></p>
+<label class="option"><input type="radio" name="q10" value="a"> CREATE</label>
+<label class="option"><input type="radio" name="q10" value="b"> UPDATE</label>
+<label class="option"><input type="radio" name="q10" value="c"> SELECT</label>
+</div>
+
+<button class="button" type="button" onclick="checkAnswers()">Check Answers</button>
+<button class="button" type="button" onclick="resetQuiz()">Try Again</button>
+
+<div id="result" class="result" aria-live="polite"></div>
+<div id="review"></div>
+
+</form>
+</section>
+
+<section class="card">
+<h2>📌 Lesson Summary</h2>
+<ul>
+<li>SQL means Structured Query Language.</li>
+<li>A database stores organized information.</li>
+<li>A DBMS manages databases.</li>
+<li>Tables contain rows and columns.</li>
+<li>SQL commands are grouped into common categories such as DDL, DML, DQL, DCL and TCL.</li>
+<li>SELECT retrieves data, INSERT adds records, and UPDATE changes records.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>➡️ Continue Learning</h2>
+<a class="button" href="sql.html">← SQL Course Home</a>
+<a class="button" href="sql-ddl.html">Next: DDL Commands →</a>
+<a class="button" href="courses.html">All Courses</a>
+<p class="small">The next lesson link will work after you create sql-ddl.html.</p>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Haari_Codes</strong></p>
+<p>Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+const answers = {
+  q1: "b",
+  q2: "c",
+  q3: "a",
+  q4: "b",
+  q5: "c",
+  q6: "a",
+  q7: "b",
+  q8: "c",
+  q9: "a",
+  q10: "b"
+};
+
+const explanations = {
+  q1: "SQL stands for Structured Query Language.",
+  q2: "A DBMS is software used to manage databases.",
+  q3: "A row represents a record in a table.",
+  q4: "SELECT retrieves data from a table.",
+  q5: "VARCHAR is commonly used for variable-length text.",
+  q6: "CREATE TABLE defines a new table.",
+  q7: "INSERT adds new records.",
+  q8: "The asterisk (*) selects all columns.",
+  q9: "ALTER is commonly classified as a DDL command.",
+  q10: "UPDATE changes existing records."
+};
+
+function checkAnswers() {
+  let score = 0;
+  let unanswered = 0;
+  let reviewHTML = "";
+
+  for (let i = 1; i <= 10; i++) {
+    const key = "q" + i;
+    const selected = document.querySelector(
+      'input[name="' + key + '"]:checked'
+    );
+
+    if (!selected) {
+      unanswered++;
+      reviewHTML +=
+        '<div class="question"><strong>Question ' + i +
+        ':</strong> Not answered.<br>' +
+        explanations[key] + '</div>';
+    } else if (selected.value === answers[key]) {
+      score++;
+      reviewHTML +=
+        '<div class="question"><strong>Question ' + i +
+        ':</strong> ✅ Correct!<br>' +
+        explanations[key] + '</div>';
+    } else {
+      reviewHTML +=
+        '<div class="question"><strong>Question ' + i +
+        ':</strong> ❌ Incorrect.<br>Correct answer: <strong>' +
+        answers[key].toUpperCase() + '</strong><br>' +
+        explanations[key] + '</div>';
+    }
+  }
+
+  const percentage = score * 10;
+
+  document.getElementById("result").textContent =
+    "Your score: " + score + "/10 (" + percentage +
+    "%). " + unanswered + " unanswered.";
+
+  document.getElementById("review").innerHTML = reviewHTML;
+}
+
+function resetQuiz() {
+  document.getElementById("quiz").reset();
+  document.getElementById("result").textContent = "";
+  document.getElementById("review").innerHTML = "";
+}
+</script>
+
+</body>
+                   </html>
