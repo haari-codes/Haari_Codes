@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrays | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#1f2937;font-family:Georgia,serif;line-height:1.75}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h1{margin:0}
+header p,footer p{margin:5px 0;color:#d1d5db}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:white;padding:22px;margin-bottom:18px;border-radius:13px;box-shadow:0 3px 12px #00000009}
+h2{color:#2563eb;margin-top:0}
+h3{color:#111827;margin-bottom:5px}
+pre{background:#111827;color:#e5e7eb;padding:15px;border-radius:9px;overflow-x:auto;white-space:pre}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+.btn,button{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:10px 15px;border:0;border-radius:8px;margin:5px 5px 5px 0;font-family:Georgia,serif;font-size:15px;cursor:pointer}
+.secondary{background:#374151}
+.question{border:1px solid #e5e7eb;padding:14px;border-radius:10px;margin:12px 0}
+label{display:block;padding:4px 0;cursor:pointer}
+#result{font-weight:bold}
+.small{font-size:14px;color:#6b7280}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures | Lesson 02</p>
+</header>
+
+<main>
+<section class="card">
+<h2>Arrays in C++</h2>
+<p>In this lesson, we will study array definition, characteristics, types, declaration, initialization, accessing elements, traversal, insertion and deletion concepts, applications, advantages, disadvantages and time complexity.</p>
+<p class="note"><strong>Learning objective:</strong> By the end, you should be able to declare arrays, access their elements and write simple array programs in C++.</p>
+</section>
+
+<section class="card">
+<h2>1. Definition of Array</h2>
+<p>An <strong>array</strong> is a linear data structure that stores multiple elements of the same data type under a single name. Each element is accessed using an index.</p>
+<p>Example: To store the marks of five students, we can use one array instead of five separate variables.</p>
+<pre>int marks[5] = {85, 90, 76, 88, 95};</pre>
+<p>Here, <code>marks</code> is an integer array containing five elements.</p>
+</section>
+
+<section class="card">
+<h2>2. Characteristics of Arrays</h2>
+<ul>
+<li><strong>Same data type:</strong> Elements in a normal C++ array have the same element type.</li>
+<li><strong>Index-based access:</strong> Elements are accessed by index.</li>
+<li><strong>Zero-based indexing:</strong> The first element is at index 0.</li>
+<li><strong>Fixed size:</strong> A built-in array's size cannot be changed after creation.</li>
+<li><strong>Contiguous storage:</strong> Array elements are stored in consecutive memory locations.</li>
+<li><strong>Direct access:</strong> An element can usually be accessed in constant time using its index.</li>
+</ul>
+<p class="note">For an array of size 5, valid indexes are <strong>0, 1, 2, 3, 4</strong>. Index 5 is outside the array bounds.</p>
+</section>
+
+<section class="card">
+<h2>3. Types of Arrays</h2>
+<h3>A. One-Dimensional Array (1D)</h3>
+<p>A one-dimensional array stores elements in a single sequence.</p>
+<pre>int numbers[4] = {10, 20, 30, 40};</pre>
+<p>Indexes: 0, 1, 2, 3.</p>
+<p>Applications: marks, temperatures, prices and lists of numbers.</p>
+
+<h3>B. Two-Dimensional Array (2D)</h3>
+<p>A two-dimensional array organizes elements in rows and columns. It is useful for tabular data and matrices.</p>
+<pre>int matrix[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};</pre>
+<p>This array has 2 rows and 3 columns. The element <code>matrix[1][2]</code> is 6.</p>
+
+<h3>C. Multidimensional Array</h3>
+<p>An array with three or more dimensions is called a multidimensional array.</p>
+<pre>int data[2][3][4];</pre>
+<p>This declares a three-dimensional array. Such arrays can represent data organized across multiple dimensions.</p>
+</section>
+
+<section class="card">
+<h2>4. Array Declaration</h2>
+<p><strong>Definition:</strong> Array declaration specifies the element type, array name and number of elements.</p>
+<p><strong>Syntax:</strong></p>
+<pre>data_type array_name[size];</pre>
+<p>Example:</p>
+<pre>int age[5];
+float prices[10];
+char letters[4];</pre>
+<ul>
+<li><code>int</code>, <code>float</code> and <code>char</code> are data types.</li>
+<li><code>age</code>, <code>prices</code> and <code>letters</code> are array names.</li>
+<li>The number in square brackets specifies the number of elements.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>5. Array Initialization</h2>
+<p><strong>Definition:</strong> Initialization means assigning initial values to an array.</p>
+<pre>int marks[5] = {80, 75, 90, 85, 95};</pre>
+<p>We can also let the compiler determine the size from the initializer list:</p>
+<pre>int values[] = {10, 20, 30};</pre>
+<p>Here, the array has three elements.</p>
+<p>In this example, the remaining elements are value-initialized to zero:</p>
+<pre>int numbers[5] = {1, 2};</pre>
+<p>The values are 1, 2, 0, 0, 0.</p>
+<p class="note">For local built-in arrays, declaring an array without initialization does not automatically make its elements zero.</p>
+</section>
+
+<section class="card">
+<h2>6. Accessing and Updating Elements</h2>
+<p>Use the array name followed by an index in square brackets.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int marks[3] = {80, 90, 75};
+
+    cout &lt;&lt; marks[0] &lt;&lt; endl;
+    cout &lt;&lt; marks[2] &lt;&lt; endl;
+
+    marks[1] = 95;
+    cout &lt;&lt; marks[1];
+
+    return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>80
+75
+95</pre>
+<p><code>marks[1] = 95;</code> changes the second element. Remember that index 1 refers to the second element, not the first.</p>
+</section>
+
+<section class="card">
+<h2>7. Traversing an Array</h2>
+<p><strong>Traversal</strong> means visiting each element of an array, usually one by one.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[5] = {10, 20, 30, 40, 50};
+
+    for (int i = 0; i &lt; 5; i++) {
+        cout &lt;&lt; a[i] &lt;&lt; " ";
+    }
+
+    return 0;
+}</pre>
+<p><strong>Output:</strong> <code>10 20 30 40 50</code></p>
+<p>The loop starts at index 0 and stops before index 5. This prevents accessing an invalid index.</p>
+</section>
+
+<section class="card">
+<h2>8. Insertion and Deletion</h2>
+<h3>Insertion</h3>
+<p>Insertion means adding a new element at a particular position. In a basic fixed-size array, there must be an available slot. Elements may need to be shifted to make space.</p>
+<p>Example: Inserting 25 into <code>[10, 20, 30, 40]</code> at index 2 requires shifting 30 and 40 to the right, producing <code>[10, 20, 25, 30, 40]</code>.</p>
+
+<h3>Deletion</h3>
+<p>Deletion means removing an element from a logical list. Elements after it may need to shift left.</p>
+<p>Example: Removing the element 20 from <code>[10, 20, 30, 40]</code> produces <code>[10, 30, 40]</code>.</p>
+<p class="note">A built-in C++ array has a fixed capacity. Insertion and deletion in these examples change the logical contents, not the array's allocated size.</p>
+</section>
+
+<section class="card">
+<h2>9. Applications of Arrays</h2>
+<ul>
+<li>Storing marks of students.</li>
+<li>Representing matrices and tables.</li>
+<li>Recording daily temperatures.</li>
+<li>Storing lists of prices or scores.</li>
+<li>Representing images as grids of pixels.</li>
+<li>Serving as the basis for other algorithms and data structures.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>10. Advantages of Arrays</h2>
+<ul>
+<li>Simple to understand and implement.</li>
+<li>Accessing an element by index is fast, typically O(1).</li>
+<li>Elements are stored contiguously, helping efficient iteration.</li>
+<li>Useful for storing many values of the same type under one name.</li>
+<li>Works well when the number of elements is known in advance.</li>
+</ul>
+
+<h2>11. Disadvantages of Arrays</h2>
+<ul>
+<li>A built-in array has a fixed size.</li>
+<li>Inserting or deleting elements in the middle can require shifting elements.</li>
+<li>Elements in a normal array must share the same element type.</li>
+<li>Choosing an unnecessarily large size can waste space; choosing a size that is too small can limit capacity.</li>
+<li>Accessing an invalid index causes undefined behavior in C++.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>12. Time Complexity Basics</h2>
+<table>
+<tr><th>Operation</th><th>Typical complexity</th><th>Explanation</th></tr>
+<tr><td>Access by index</td><td>O(1)</td><td>Direct access to an element</td></tr>
+<tr><td>Linear search</td><td>O(n)</td><td>May inspect every element</td></tr>
+<tr><td>Traversal</td><td>O(n)</td><td>Visits all n elements</td></tr>
+<tr><td>Insertion in the middle</td><td>O(n)</td><td>May shift many elements</td></tr>
+<tr><td>Deletion in the middle</td><td>O(n)</td><td>May shift later elements</td></tr>
+</table>
+<p class="small">These are typical worst-case costs for a simple array implementation. Actual costs depend on the operation and assumptions.</p>
+</section>
+
+<section class="card">
+<h2>13. Quick Check 🧠</h2>
+<p>Select one answer for each question and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><strong>1. What is the index of the first array element in C++?</strong></p>
+<label><input type="radio" name="q1" value="a"> 1</label>
+<label><input type="radio" name="q1" value="b"> 0</label>
+<label><input type="radio" name="q1" value="c"> -1</label>
+</div>
+<div class="question">
+<p><strong>2. Which declaration creates five integers?</strong></p>
+<label><input type="radio" name="q2" value="a"> int a;</label>
+<label><input type="radio" name="q2" value="b"> int a(5);</label>
+<label><input type="radio" name="q2" value="c"> int a[5];</label>
+</div>
+<div class="question">
+<p><strong>3. What is the value of a[1] in int a[3] = {4, 7, 9};?</strong></p>
+<label><input type="radio" name="q3" value="a"> 4</label>
+<label><input type="radio" name="q3" value="b"> 7</label>
+<label><input type="radio" name="q3" value="c"> 9</label>
+</div>
+<div class="question">
+<p><strong>4. Which array type is arranged in rows and columns?</strong></p>
+<label><input type="radio" name="q4" value="a"> One-dimensional array</label>
+<label><input type="radio" name="q4" value="b"> Two-dimensional array</label>
+<label><input type="radio" name="q4" value="c"> Character variable</label>
+</div>
+<div class="question">
+<p><strong>5. What is the usual time complexity of accessing an array element by index?</strong></p>
+<label><input type="radio" name="q5" value="a"> O(1)</label>
+<label><input type="radio" name="q5" value="b"> O(n)</label>
+<label><input type="radio" name="q5" value="c"> O(n²)</label>
+</div>
+<div class="question">
+<p><strong>6. Which is a common disadvantage of a basic built-in array?</strong></p>
+<label><input type="radio" name="q6" value="a"> It cannot store integers</label>
+<label><input type="radio" name="q6" value="b"> It has no indexes</label>
+<label><input type="radio" name="q6" value="c"> Its size is fixed</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" class="secondary" onclick="resetQuiz()">Try Again</button>
+<p id="result" aria-live="polite"></p>
+<div id="answers" hidden>
+<h3>Answer Key</h3>
+<ol>
+<li>B: Indexing starts at 0.</li>
+<li>C: <code>int a[5];</code> declares five integers.</li>
+<li>B: Index 1 contains the second element, 7.</li>
+<li>B: A 2D array uses rows and columns.</li>
+<li>A: Indexed access is typically O(1).</li>
+<li>C: A basic built-in array has a fixed size.</li>
+</ol>
+</div>
+</form>
+</section>
+
+<section class="card">
+<h2>Lesson Summary</h2>
+<ul>
+<li>An array stores elements of the same type under one name.</li>
+<li>Array indexes start at zero in C++.</li>
+<li>Common forms are 1D, 2D and multidimensional arrays.</li>
+<li>Declaration defines the array; initialization supplies initial values.</li>
+<li>Index access is fast, but insertion and deletion can require shifting elements.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Continue Learning</h2>
+<a class="btn secondary" href="ds-introduction.html">← Previous: Introduction</a>
+<a class="btn secondary" href="data-structure.html">Course Home</a>
+<a class="btn" href="ds-linked-lists.html">Next: Linked Lists →</a>
+<p class="small">Note: The Next button works after the Linked Lists lesson file is created.</p>
+</section>
+</main>
+
+<footer><p>Haari_Codes | Learn. Practise. Build.</p></footer>
+
+<script>
+function checkAnswers(){
+ const correct={q1:"b",q2:"c",q3:"b",q4:"b",q5:"a",q6:"c"};
+ let score=0,unanswered=0;
+ for(const q in correct){
+  const selected=document.querySelector('input[name="'+q+'"]:checked');
+  if(!selected) unanswered++;
+  else if(selected.value===correct[q]) score++;
+ }
+ document.getElementById("result").textContent=
+ "Your score: "+score+"/6"+(unanswered?" | "+unanswered+" unanswered.":"");
+ document.getElementById("answers").hidden=false;
+}
+function resetQuiz(){
+ document.getElementById("quiz").reset();
+ document.getElementById("result").textContent="";
+ document.getElementById("answers").hidden=true;
+}
+</script>
+</body>
+  </html>
