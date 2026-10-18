@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL GROUP BY | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#60a5fa}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre-wrap}
+code{font-family:Consolas,monospace}
+.note{background:#eff6ff;padding:12px;border-left:4px solid #2563eb;border-radius:5px}
+button{background:#2563eb;color:white;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+button:hover{background:#1d4ed8}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.question{border-bottom:1px solid #e5e7eb;padding:12px 0}
+label{display:block;padding:4px;cursor:pointer}
+#result{font-weight:bold;margin-top:15px}
+a{color:#2563eb}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{padding:9px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#eff6ff}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>SQL Course · Lesson 7</p>
+<h2 style="color:white">GROUP BY and HAVING</h2>
+<p>Group rows and calculate useful summaries</p>
+</header>
+
+<main>
+<div class="card">
+<h2>1. What is GROUP BY?</h2>
+<p><code>GROUP BY</code> groups rows that have the same value in one or more columns. It is commonly used with aggregate functions such as COUNT(), SUM(), AVG(), MAX(), and MIN().</p>
+<p>Consider this table named <code>Employees</code>:</p>
+<table>
+<tr><th>name</th><th>department</th><th>salary</th></tr>
+<tr><td>Anu</td><td>IT</td><td>30000</td></tr>
+<tr><td>Rahul</td><td>HR</td><td>25000</td></tr>
+<tr><td>Meera</td><td>IT</td><td>40000</td></tr>
+<tr><td>Arun</td><td>HR</td><td>28000</td></tr>
+<tr><td>Diya</td><td>Sales</td><td>22000</td></tr>
+</table>
+<p>To calculate the total salary for each department:</p>
+<pre>SELECT department, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department;</pre>
+<p>Expected result:</p>
+<table>
+<tr><th>department</th><th>total_salary</th></tr>
+<tr><td>HR</td><td>53000</td></tr>
+<tr><td>IT</td><td>70000</td></tr>
+<tr><td>Sales</td><td>22000</td></tr>
+</table>
+<p>Rows are grouped by department, and SUM() calculates each group's total.</p>
+</div>
+
+<div class="card">
+<h2>2. GROUP BY with COUNT()</h2>
+<p>Count how many employees work in each department.</p>
+<pre>SELECT department, COUNT(*) AS employee_count
+FROM Employees
+GROUP BY department;</pre>
+<p>Expected result:</p>
+<table>
+<tr><th>department</th><th>employee_count</th></tr>
+<tr><td>HR</td><td>2</td></tr>
+<tr><td>IT</td><td>2</td></tr>
+<tr><td>Sales</td><td>1</td></tr>
+</table>
+<p><code>COUNT(*)</code> counts the rows in each group.</p>
+</div>
+
+<div class="card">
+<h2>3. GROUP BY with AVG(), MAX(), and MIN()</h2>
+<p>Find the average salary in each department:</p>
+<pre>SELECT department, AVG(salary) AS average_salary
+FROM Employees
+GROUP BY department;</pre>
+<p>Find the highest salary in each department:</p>
+<pre>SELECT department, MAX(salary) AS highest_salary
+FROM Employees
+GROUP BY department;</pre>
+<p>Find the lowest salary in each department:</p>
+<pre>SELECT department, MIN(salary) AS lowest_salary
+FROM Employees
+GROUP BY department;</pre>
+<div class="note">Aggregate functions generally ignore NULL values. COUNT(*) counts all rows in a group, while COUNT(column) counts only non-NULL values in that column.</div>
+</div>
+
+<div class="card">
+<h2>4. GROUP BY with Multiple Columns</h2>
+<p>You can group by more than one column. Each distinct combination forms a separate group.</p>
+<pre>SELECT department, job_title, COUNT(*) AS total
+FROM Employees
+GROUP BY department, job_title;</pre>
+<p>This example assumes the Employees table has a <code>job_title</code> column. It counts employees for each department and job-title combination.</p>
+<p>For example, IT + Developer and IT + Tester would be two separate groups.</p>
+</div>
+
+<div class="card">
+<h2>5. What is HAVING?</h2>
+<p><code>HAVING</code> filters groups after they have been formed. It is especially useful for conditions involving aggregate functions.</p>
+<p>Example: show only departments whose total salary is greater than 30000.</p>
+<pre>SELECT department, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department
+HAVING SUM(salary) > 30000;</pre>
+<p>Expected result: HR and IT. Sales is excluded because its total is 22000.</p>
+</div>
+
+<div class="card">
+<h2>6. WHERE vs HAVING</h2>
+<table>
+<tr><th>WHERE</th><th>HAVING</th></tr>
+<tr><td>Filters individual rows.</td><td>Filters groups.</td></tr>
+<tr><td>Applied before grouping.</td><td>Applied after grouping.</td></tr>
+<tr><td>Usually filters regular column values.</td><td>Often filters aggregate results.</td></tr>
+</table>
+<p>Example: first select employees earning at least 25000, then group them by department, and finally show departments with at least two qualifying employees.</p>
+<pre>SELECT department, COUNT(*) AS employee_count
+FROM Employees
+WHERE salary >= 25000
+GROUP BY department
+HAVING COUNT(*) >= 2;</pre>
+<p>Only HR qualifies: Rahul and Arun both earn at least 25000. IT also qualifies: Anu and Meera both earn at least 25000.</p>
+</div>
+
+<div class="card">
+<h2>7. GROUP BY with ORDER BY</h2>
+<p>Use <code>ORDER BY</code> to sort grouped results.</p>
+<pre>SELECT department, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY department
+ORDER BY total_salary DESC;</pre>
+<p>This displays departments from the highest total salary to the lowest.</p>
+<ul>
+<li><code>ASC</code>: ascending order, generally the default.</li>
+<li><code>DESC</code>: descending order.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>8. SQL Query Execution Order</h2>
+<p>A useful simplified logical order for these clauses is:</p>
+<pre>SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY</pre>
+<p>The database logically identifies the source rows, filters rows with WHERE, groups them, filters groups with HAVING, then sorts the result with ORDER BY and returns the selected columns.</p>
+<div class="note">This is a simplified logical processing order, not necessarily the physical order in which the database executes operations.</div>
+</div>
+
+<div class="card">
+<h2>9. Common Mistakes</h2>
+<ul>
+<li>Using <code>WHERE SUM(salary) &gt; 30000</code>. Use HAVING for a condition on the aggregate result.</li>
+<li>Selecting an ordinary column that is neither grouped nor aggregated. This can cause an error or produce unreliable results, depending on the database settings.</li>
+<li>Forgetting the GROUP BY clause when trying to calculate separate results for each category.</li>
+<li>Confusing <code>COUNT(*)</code>, which counts rows, with <code>COUNT(column)</code>, which ignores NULL in that column.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>10. Quick Revision</h2>
+<ul>
+<li><b>GROUP BY:</b> Groups rows with matching values.</li>
+<li><b>COUNT():</b> Counts rows or non-NULL values.</li>
+<li><b>SUM():</b> Calculates a total.</li>
+<li><b>AVG():</b> Calculates an average.</li>
+<li><b>MAX() / MIN():</b> Finds the highest / lowest value.</li>
+<li><b>WHERE:</b> Filters rows before grouping.</li>
+<li><b>HAVING:</b> Filters groups after grouping.</li>
+<li><b>ORDER BY:</b> Sorts the resulting rows.</li>
+</ul>
+</div>
+
+<div class="card" id="quiz">
+<h2>11. Quick Check Quiz 🧠</h2>
+<p>Choose one answer for each question and check your score.</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" onclick="resetQuiz()" style="background:#4b5563">Try Again</button>
+<div id="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</div>
+
+<div class="card nav">
+<a href="sql-functions.html">← Previous: SQL Functions</a>
+<a href="sql.html">SQL Home</a>
+<a href="sql-joins.html">Next: SQL Joins →</a>
+</div>
+</main>
+
+<footer>
+<p><b>Haari_Codes</b> | Learn. Practise. Build.</p>
+<p>One query at a time! 💙</p>
+</footer>
+
+<script>
+const questions=[
+{q:"1. What is the main purpose of GROUP BY?",a:["Sort all rows","Group rows with matching values","Delete duplicate rows","Create a new table"],ans:1,exp:"GROUP BY forms groups from rows with matching column values."},
+{q:"2. Which function counts every row in a group?",a:["SUM(*)","AVG(*)","COUNT(*)","MAX(*)"],ans:2,exp:"COUNT(*) counts all rows in a group."},
+{q:"3. Which clause filters individual rows before grouping?",a:["HAVING","ORDER BY","WHERE","GROUP BY"],ans:2,exp:"WHERE filters individual rows before grouping."},
+{q:"4. Which clause can filter groups by total salary?",a:["WHERE","HAVING","FROM","INSERT"],ans:1,exp:"HAVING can filter groups using aggregate conditions."},
+{q:"5. What does SUM(salary) calculate?",a:["Number of employees","Average salary","Total salary","Highest salary"],ans:2,exp:"SUM() adds the non-NULL values."},
+{q:"6. Which clause sorts grouped results?",a:["ORDER BY","GROUP BY","HAVING","WHERE"],ans:0,exp:"ORDER BY sorts the query result."},
+{q:"7. What does DESC mean in ORDER BY?",a:["Ascending order","Descending order","Delete records","Group records"],ans:1,exp:"DESC sorts from higher to lower for numeric values."},
+{q:"8. Which query correctly filters departments with total salary above 30000?",a:["WHERE SUM(salary)>30000","HAVING SUM(salary)>30000 after GROUP BY","ORDER BY SUM(salary)>30000","COUNT(salary)>30000"],ans:1,exp:"Use HAVING after GROUP BY to filter aggregate results."},
+{q:"9. What does GROUP BY department, city do?",a:["Groups only by department","Groups only by city","Groups by each department-city combination","Deletes duplicate cities"],ans:2,exp:"Each distinct combination of department and city forms a group."},
+{q:"10. Which clause logically comes after GROUP BY to filter groups?",a:["WHERE","HAVING","FROM","INSERT"],ans:1,exp:"HAVING filters groups after GROUP BY."}
+];
+
+function renderQuestions(){
+const container=document.getElementById("questions");
+container.innerHTML="";
+questions.forEach((item,i)=>{
+const div=document.createElement("div");
+div.className="question";
+const p=document.createElement("p");
+const b=document.createElement("b");
+b.textContent=item.q;
+p.appendChild(b);
+div.appendChild(p);
+item.a.forEach((option,j)=>{
+const label=document.createElement("label");
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="q"+i;
+radio.value=j;
+label.appendChild(radio);
+label.appendChild(document.createTextNode(" "+option));
+div.appendChild(label);
+});
+container.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0,unanswered=0;
+let html="<h3>Answer Review</h3>";
+questions.forEach((item,i)=>{
+const selected=document.querySelector('input[name="q'+i+'"]:checked');
+if(!selected)unanswered++;
+const correct=selected&&Number(selected.value)===item.ans;
+if(correct)score++;
+html+="<p><b>"+item.q+"</b><br>";
+html+=correct?"✅ Correct! ":"❌ Correct answer: "+item.a[item.ans]+". ";
+html+=item.exp+"</p>";
+});
+document.getElementById("result").textContent=
+"Your score: "+score+"/10"+
+(unanswered?" · Unanswered: "+unanswered:"")+
+(score===10?" · Perfect score! 🎉":score>=7?" · Good work! 💙":" · Revise and try again!");
+document.getElementById("review").innerHTML=html;
+}
+
+function resetQuiz(){
+document.getElementById("quizForm").reset();
+document.getElementById("result").textContent="";
+document.getElementById("review").innerHTML="";
+}
+renderQuestions();
+</script>
+</body>
+</html>
