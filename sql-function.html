@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Functions | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#60a5fa}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre-wrap}
+code{font-family:Consolas,monospace}
+.note{background:#eff6ff;padding:12px;border-left:4px solid #2563eb;border-radius:5px}
+button{background:#2563eb;color:white;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+button:hover{background:#1d4ed8}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.question{border-bottom:1px solid #e5e7eb;padding:12px 0}
+label{display:block;padding:4px;cursor:pointer}
+#result{font-weight:bold;margin-top:15px}
+a{color:#2563eb}
+footer a{color:#93c5fd}
+.small{color:#6b7280;font-size:.94em}
+table{width:100%;border-collapse:collapse}
+th,td{padding:9px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#eff6ff}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>SQL Course · Lesson 6</p>
+<h2 style="color:white">SQL Functions</h2>
+<p>Make SQL queries more powerful!</p>
+</header>
+
+<main>
+<div class="card">
+<h2>1. What are SQL Functions?</h2>
+<p>SQL functions are built-in operations that process values and return a result.</p>
+<p>For example, a function can convert text to uppercase, calculate an average, count records, or extract part of a string.</p>
+<pre>SELECT UPPER('haari_codes');</pre>
+<p><b>Result:</b> HAARI_CODES</p>
+<h3>Types of SQL Functions</h3>
+<ul>
+<li><b>String functions:</b> Work with text.</li>
+<li><b>Numeric functions:</b> Perform mathematical operations.</li>
+<li><b>Date functions:</b> Work with dates and times.</li>
+<li><b>Aggregate functions:</b> Calculate a result from multiple rows.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>2. String Functions</h2>
+<p>String functions manipulate text values.</p>
+
+<h3>UPPER()</h3>
+<p>Converts text to uppercase.</p>
+<pre>SELECT UPPER('hello');</pre>
+<p>Result: <code>HELLO</code></p>
+
+<h3>LOWER()</h3>
+<p>Converts text to lowercase.</p>
+<pre>SELECT LOWER('SQL COURSE');</pre>
+<p>Result: <code>sql course</code></p>
+
+<h3>LENGTH()</h3>
+<p>Returns the length of a string in bytes in MySQL. For ordinary English text, this often equals the character count.</p>
+<pre>SELECT LENGTH('HAARI');</pre>
+<p>Result: <code>5</code></p>
+
+<h3>CHAR_LENGTH()</h3>
+<p>Returns the number of characters in MySQL.</p>
+<pre>SELECT CHAR_LENGTH('HAARI');</pre>
+<p>Result: <code>5</code></p>
+
+<h3>CONCAT()</h3>
+<p>Combines strings.</p>
+<pre>SELECT CONCAT('Haari', '_Codes');</pre>
+<p>Result: <code>Haari_Codes</code></p>
+
+<h3>SUBSTRING()</h3>
+<p>Extracts part of a string. In MySQL, positions start at 1.</p>
+<pre>SELECT SUBSTRING('DATABASE', 1, 4);</pre>
+<p>Result: <code>DATA</code></p>
+
+<h3>TRIM()</h3>
+<p>Removes leading and trailing spaces.</p>
+<pre>SELECT TRIM('  SQL  ');</pre>
+<p>Result: <code>SQL</code></p>
+</div>
+
+<div class="card">
+<h2>3. Numeric Functions</h2>
+<p>Numeric functions perform calculations on numbers.</p>
+<table>
+<tr><th>Function</th><th>Purpose</th><th>Example</th><th>Result</th></tr>
+<tr><td>ABS()</td><td>Absolute value</td><td><code>ABS(-8)</code></td><td>8</td></tr>
+<tr><td>ROUND()</td><td>Rounds a number</td><td><code>ROUND(4.567, 2)</code></td><td>4.57</td></tr>
+<tr><td>CEIL()</td><td>Rounds upward</td><td><code>CEIL(4.2)</code></td><td>5</td></tr>
+<tr><td>FLOOR()</td><td>Rounds downward</td><td><code>FLOOR(4.8)</code></td><td>4</td></tr>
+<tr><td>MOD()</td><td>Returns remainder</td><td><code>MOD(10, 3)</code></td><td>1</td></tr>
+</table>
+<p>Example:</p>
+<pre>SELECT ABS(-25) AS positive_value,
+       ROUND(12.456, 2) AS rounded_value;</pre>
+<p>Result: <code>positive_value = 25</code> and <code>rounded_value = 12.46</code>.</p>
+</div>
+
+<div class="card">
+<h2>4. Aggregate Functions</h2>
+<p>Aggregate functions calculate one result from a set of rows.</p>
+<p>Suppose we have a table called <code>Students</code>:</p>
+<pre>name  | mark
+Anu   | 85
+Rahul | 72
+Meera | 91
+Arun  | 65
+Diya  | 78</pre>
+
+<h3>COUNT()</h3>
+<p>Counts rows or non-NULL values, depending on the expression.</p>
+<pre>SELECT COUNT(*) FROM Students;</pre>
+<p>Result: <code>5</code></p>
+<p><code>COUNT(*)</code> counts all rows, while <code>COUNT(mark)</code> counts rows where mark is not NULL.</p>
+
+<h3>SUM()</h3>
+<p>Calculates the total of non-NULL values.</p>
+<pre>SELECT SUM(mark) FROM Students;</pre>
+<p>Result: <code>391</code></p>
+
+<h3>AVG()</h3>
+<p>Calculates the average of non-NULL values.</p>
+<pre>SELECT AVG(mark) FROM Students;</pre>
+<p>Result: <code>78.2</code></p>
+
+<h3>MAX()</h3>
+<p>Returns the highest value.</p>
+<pre>SELECT MAX(mark) FROM Students;</pre>
+<p>Result: <code>91</code></p>
+
+<h3>MIN()</h3>
+<p>Returns the lowest value.</p>
+<pre>SELECT MIN(mark) FROM Students;</pre>
+<p>Result: <code>65</code></p>
+
+<div class="note">Aggregate functions generally ignore NULL values, except <code>COUNT(*)</code>, which counts rows even if some columns contain NULL.</div>
+</div>
+
+<div class="card">
+<h2>5. Using Functions with WHERE</h2>
+<p>You can use functions inside a query to filter records.</p>
+<pre>SELECT name, mark
+FROM Students
+WHERE mark >= 80;</pre>
+<p>This returns students with marks of 80 or above.</p>
+<p>You can also use a string function in a condition:</p>
+<pre>SELECT *
+FROM Students
+WHERE UPPER(name) = 'ANU';</pre>
+<p>This finds the row whose name matches ANU after conversion to uppercase. Applying functions to columns in conditions can sometimes affect index usage.</p>
+</div>
+
+<div class="card">
+<h2>6. Date Functions</h2>
+<p>Date functions vary between database systems. These examples use MySQL.</p>
+
+<h3>CURDATE()</h3>
+<p>Returns the current date.</p>
+<pre>SELECT CURDATE();</pre>
+
+<h3>NOW()</h3>
+<p>Returns the current date and time.</p>
+<pre>SELECT NOW();</pre>
+
+<h3>YEAR()</h3>
+<p>Extracts the year from a date.</p>
+<pre>SELECT YEAR('2026-10-18');</pre>
+<p>Result: <code>2026</code></p>
+
+<h3>MONTH()</h3>
+<p>Extracts the month number.</p>
+<pre>SELECT MONTH('2026-10-18');</pre>
+<p>Result: <code>10</code></p>
+
+<div class="note">The exact date and time returned by CURDATE() and NOW() depend on the database server's current date, time, and time-zone settings.</div>
+</div>
+
+<div class="card">
+<h2>7. Aliases with AS</h2>
+<p>An alias gives a column or calculated result a temporary display name.</p>
+<pre>SELECT AVG(mark) AS average_mark,
+       MAX(mark) AS highest_mark
+FROM Students;</pre>
+<p>The output columns will be named <code>average_mark</code> and <code>highest_mark</code>.</p>
+<p><code>AS</code> changes the output label. It does not rename the original table column.</p>
+</div>
+
+<div class="card">
+<h2>8. Common Mistakes</h2>
+<ul>
+<li>Forgetting parentheses after a function name.</li>
+<li>Using <code>COUNT(column)</code> when you intend to count every row. Use <code>COUNT(*)</code> for all rows.</li>
+<li>Assuming <code>AVG()</code> treats NULL as zero. It normally ignores NULL values.</li>
+<li>Confusing <code>LENGTH()</code> with character count. In MySQL, use <code>CHAR_LENGTH()</code> for characters.</li>
+<li>Assuming every database uses the same date-function syntax. Check which database system you are using.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>9. Quick Revision</h2>
+<ul>
+<li><code>UPPER()</code> and <code>LOWER()</code>: Change letter case.</li>
+<li><code>CONCAT()</code>: Joins strings.</li>
+<li><code>SUBSTRING()</code>: Extracts part of a string.</li>
+<li><code>ROUND()</code>: Rounds a number.</li>
+<li><code>COUNT()</code>: Counts rows or non-NULL values.</li>
+<li><code>SUM()</code>: Calculates a total.</li>
+<li><code>AVG()</code>: Calculates an average.</li>
+<li><code>MAX()</code> and <code>MIN()</code>: Find the highest and lowest values.</li>
+<li><code>CURDATE()</code> and <code>NOW()</code>: Return current date and date-time in MySQL.</li>
+</ul>
+</div>
+
+<div class="card" id="quiz">
+<h2>10. Quick Check Quiz 🧠</h2>
+<p>Choose your answers and press Check Answers.</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" onclick="resetQuiz()" style="background:#4b5563">Try Again</button>
+<div id="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</div>
+
+<div class="card nav">
+<a href="sql-operators.html">← Previous: SQL Operators</a>
+<a href="sql.html">SQL Home</a>
+<a href="sql-group-by.html">Next: GROUP BY →</a>
+</div>
+</main>
+
+<footer>
+<p><b>Haari_Codes</b> | Learn. Practise. Build.</p>
+<p>Keep querying, keep growing! 💙</p>
+</footer>
+
+<script>
+const questions = [
+{q:"1. Which function converts text to uppercase?",a:["LOWER()","UPPER()","ROUND()","COUNT()"],ans:1,exp:"UPPER() converts text to uppercase."},
+{q:"2. Which function combines strings in MySQL?",a:["SUM()","TRIM()","CONCAT()","MAX()"],ans:2,exp:"CONCAT() combines strings."},
+{q:"3. What is ROUND(4.567, 2)?",a:["4.56","4.57","5","4.567"],ans:1,exp:"Rounding to two decimal places gives 4.57."},
+{q:"4. Which function counts every row in a table?",a:["COUNT(*)","SUM(*)","AVG(*)","TOTAL(*)"],ans:0,exp:"COUNT(*) counts all rows."},
+{q:"5. Which function calculates the average?",a:["MAX()","SUM()","AVG()","MIN()"],ans:2,exp:"AVG() calculates the average of non-NULL values."},
+{q:"6. Which function returns the highest mark?",a:["MIN()","MAX()","COUNT()","LOWER()"],ans:1,exp:"MAX() returns the highest value."},
+{q:"7. What does ABS(-8) return?",a:["-8","0","8","64"],ans:2,exp:"ABS() returns the absolute value, 8."},
+{q:"8. In MySQL, which function returns the current date?",a:["CURDATE()","UPPER()","YEAR()","COUNT()"],ans:0,exp:"CURDATE() returns the current date."},
+{q:"9. Which function extracts the year from a date in MySQL?",a:["MONTH()","YEAR()","NOW()","TRIM()"],ans:1,exp:"YEAR() extracts the year component."},
+{q:"10. What does AS average_mark do in a SELECT query?",a:["Deletes a column","Changes the stored data","Gives the output column an alias","Calculates the average by itself"],ans:2,exp:"AS assigns a temporary display name to a selected result."}
+];
+
+function renderQuestions(){
+const container=document.getElementById("questions");
+container.innerHTML="";
+questions.forEach((item,i)=>{
+const div=document.createElement("div");
+div.className="question";
+const p=document.createElement("p");
+const b=document.createElement("b");
+b.textContent=item.q;
+p.appendChild(b);
+div.appendChild(p);
+item.a.forEach((option,j)=>{
+const label=document.createElement("label");
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="q"+i;
+radio.value=j;
+label.appendChild(radio);
+label.appendChild(document.createTextNode(" "+option));
+div.appendChild(label);
+});
+container.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0,unanswered=0;
+let html="<h3>Answer Review</h3>";
+questions.forEach((item,i)=>{
+const selected=document.querySelector('input[name="q'+i+'"]:checked');
+if(!selected) unanswered++;
+const correct=selected && Number(selected.value)===item.ans;
+if(correct) score++;
+html+="<p><b>"+item.q+"</b><br>";
+html+=correct?"✅ Correct! ":"❌ Correct answer: "+item.a[item.ans]+". ";
+html+=item.exp+"</p>";
+});
+document.getElementById("result").textContent=
+"Your score: "+score+"/10"+
+(unanswered?" · Unanswered: "+unanswered:"")+
+(score===10?" · Perfect! 🎉":score>=7?" · Good work! 💙":" · Revise and try again!");
+document.getElementById("review").innerHTML=html;
+}
+
+function resetQuiz(){
+document.getElementById("quizForm").reset();
+document.getElementById("result").textContent="";
+document.getElementById("review").innerHTML="";
+}
+
+renderQuestions();
+</script>
+</body>
+</html>
