@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphs | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#93c5fd}
+main{max-width:950px;margin:24px auto;padding:0 15px}
+section{background:white;padding:22px;margin:18px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+h2{border-bottom:2px solid #dbeafe;padding-bottom:7px}
+code{background:#eaf1ff;padding:2px 5px;border-radius:4px}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:9px;overflow-x:auto;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+button,.nav a{display:inline-block;background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:15px;margin:4px}
+button:hover,.nav a:hover{background:#1d4ed8}
+.question{padding:12px 0;border-bottom:1px solid #e5e7eb}
+label{display:block;margin:6px 0}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:25px 0}
+#result{font-weight:bold}
+.graph{background:#eff6ff;padding:16px;border-radius:9px;text-align:center;font-family:monospace;white-space:pre;overflow-x:auto;line-height:1.6}
+@media(max-width:600px){section{padding:16px}table{font-size:13px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures and Algorithms</p>
+<h2 style="color:white;border:0">Lesson 9: Graphs</h2>
+</header>
+
+<main>
+<section>
+<h2>1. What Is a Graph?</h2>
+<p>A <b>graph</b> is a non-linear data structure consisting of a set of vertices and a set of edges connecting them.</p>
+<p>It is commonly represented as <code>G = (V, E)</code>, where:</p>
+<ul>
+<li><b>V:</b> Set of vertices, also called nodes.</li>
+<li><b>E:</b> Set of edges connecting pairs of vertices.</li>
+</ul>
+<div class="graph">A ----- B
+|       |
+|       |
+C ----- D</div>
+<p>In this example, A, B, C and D are vertices. The lines connecting them are edges.</p>
+<h3>Real-life examples</h3>
+<ul>
+<li>Social networks: people are vertices, friendships are edges.</li>
+<li>Maps: places are vertices, roads are edges.</li>
+<li>Computer networks: computers are vertices, connections are edges.</li>
+<li>Airline routes: airports are vertices, flights are edges.</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Graph Terminology</h2>
+<ul>
+<li><b>Vertex:</b> An individual node in a graph.</li>
+<li><b>Edge:</b> A connection between two vertices.</li>
+<li><b>Adjacent vertices:</b> Vertices directly connected by an edge.</li>
+<li><b>Degree:</b> In an undirected graph, the number of edges incident to a vertex. A self-loop contributes two to the degree.</li>
+<li><b>Path:</b> A sequence of vertices connected by edges.</li>
+<li><b>Cycle:</b> A path that returns to its starting vertex, following the graph's edges.</li>
+<li><b>Connected graph:</b> An undirected graph in which every vertex can reach every other vertex.</li>
+<li><b>Weighted graph:</b> A graph whose edges have values such as distance, cost or time.</li>
+<li><b>Component:</b> A maximal connected part of an undirected graph.</li>
+</ul>
+<p>Unlike a tree, a graph may contain cycles and may have multiple separate components.</p>
+</section>
+
+<section>
+<h2>3. Types of Graphs</h2>
+<h3>A. Undirected Graph</h3>
+<p>Edges have no direction. If A is connected to B, the connection can be followed both ways.</p>
+<div class="graph">A ----- B
+ \     /
+  \   /
+    C</div>
+<h3>B. Directed Graph</h3>
+<p>Each edge has a direction, often shown using an arrow. A connection from A to B does not automatically mean B connects to A.</p>
+<div class="graph">A ----&gt; B ----&gt; C</div>
+<h3>C. Weighted Graph</h3>
+<p>Edges carry weights such as distance or cost.</p>
+<div class="graph">A --5-- B
+ \      /
+  2    3
+   \  /
+    C</div>
+<h3>D. Unweighted Graph</h3>
+<p>Edges are treated as connections without numerical weights.</p>
+<h3>E. Connected and Disconnected Graphs</h3>
+<p>A connected undirected graph has a path between every pair of vertices. A disconnected graph has at least two vertices that cannot reach each other.</p>
+<h3>F. Cyclic and Acyclic Graphs</h3>
+<p>A cyclic graph contains a cycle. An acyclic graph does not. A connected, undirected, acyclic graph is called a tree.</p>
+</section>
+
+<section>
+<h2>4. Graph Representation</h2>
+<p>Graphs can be stored in different ways. Two common methods are the adjacency matrix and adjacency list.</p>
+
+<h3>A. Adjacency Matrix</h3>
+<p>An adjacency matrix is a two-dimensional array. For an unweighted graph, <code>matrix[i][j] = 1</code> means an edge connects vertex i to vertex j; otherwise it is 0.</p>
+<p>Consider an undirected graph with edges A-B, A-C and B-C.</p>
+<table>
+<tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+<tr><th>A</th><td>0</td><td>1</td><td>1</td></tr>
+<tr><th>B</th><td>1</td><td>0</td><td>1</td></tr>
+<tr><th>C</th><td>1</td><td>1</td><td>0</td></tr>
+</table>
+<p>For an undirected graph without special edge cases, the matrix is symmetric: <code>matrix[i][j] = matrix[j][i]</code>.</p>
+<h4>C++ Example</h4>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int matrix[3][3] = {
+        {0, 1, 1},
+        {1, 0, 1},
+        {1, 1, 0}
+    };
+
+    for (int i = 0; i &lt; 3; i++) {
+        for (int j = 0; j &lt; 3; j++)
+            cout &lt;&lt; matrix[i][j] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}</pre>
+
+<h3>B. Adjacency List</h3>
+<p>An adjacency list stores the neighbours of each vertex. It is often more memory-efficient for sparse graphs, which have relatively few edges.</p>
+<p>For the same graph:</p>
+<pre>A: B, C
+B: A, C
+C: A, B</pre>
+<h4>C++ Example</h4>
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; adj(3);
+
+    adj[0].push_back(1);
+    adj[0].push_back(2);
+
+    adj[1].push_back(0);
+    adj[1].push_back(2);
+
+    adj[2].push_back(0);
+    adj[2].push_back(1);
+
+    for (int i = 0; i &lt; 3; i++) {
+        cout &lt;&lt; i &lt;&lt; ": ";
+        for (int v : adj[i])
+            cout &lt;&lt; v &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>0: 1 2
+1: 0 2
+2: 0 1</pre>
+<p class="note">In this program, vertices are numbered 0, 1 and 2 instead of A, B and C. The connections are the same.</p>
+</section>
+
+<section>
+<h2>5. Breadth-First Search (BFS)</h2>
+<h3>Definition</h3>
+<p><b>BFS</b> is a graph traversal algorithm that visits vertices level by level, exploring nearby vertices before moving farther away.</p>
+<p>BFS commonly uses a <b>queue</b> to maintain the order of vertices waiting to be explored.</p>
+<h3>Algorithm</h3>
+<ol>
+<li>Mark the starting vertex as visited.</li>
+<li>Insert it into a queue.</li>
+<li>Remove the front vertex and process it.</li>
+<li>Add each unvisited neighbour to the queue and mark it visited.</li>
+<li>Repeat until the queue is empty.</li>
+</ol>
+<h3>C++ Program</h3>
+<p>This program uses an undirected graph with vertices numbered 0 to 4.</p>
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    int n = 5;
+    vector&lt;vector&lt;int&gt;&gt; adj(n);
+
+    adj[0] = {1, 2};
+    adj[1] = {0, 3};
+    adj[2] = {0, 4};
+    adj[3] = {1};
+    adj[4] = {2};
+
+    vector&lt;bool&gt; visited(n, false);
+    queue&lt;int&gt; q;
+
+    int start = 0;
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+
+        cout &lt;&lt; u &lt;&lt; " ";
+
+        for (int v : adj[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>0 1 2 3 4</code></p>
+<p>The order can differ if neighbours are stored in a different order.</p>
+<h3>Applications</h3>
+<ul>
+<li>Finding the shortest path in an unweighted graph.</li>
+<li>Finding all vertices reachable from a starting point.</li>
+<li>Exploring a network level by level.</li>
+<li>Finding connected components when repeated from unvisited vertices.</li>
+</ul>
+</section>
+
+<section>
+<h2>6. Depth-First Search (DFS)</h2>
+<h3>Definition</h3>
+<p><b>DFS</b> explores as far as possible along one path before backtracking to explore another path.</p>
+<p>DFS can be implemented using recursion or an explicit stack.</p>
+<h3>Algorithm using recursion</h3>
+<ol>
+<li>Start from a vertex.</li>
+<li>Mark it as visited and process it.</li>
+<li>Visit each unvisited neighbour recursively.</li>
+<li>Backtrack when no unvisited neighbours remain.</li>
+</ol>
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void dfs(int u, vector&lt;vector&lt;int&gt;&gt;&amp; adj,
+         vector&lt;bool&gt;&amp; visited) {
+    visited[u] = true;
+    cout &lt;&lt; u &lt;&lt; " ";
+
+    for (int v : adj[u]) {
+        if (!visited[v])
+            dfs(v, adj, visited);
+    }
+}
+
+int main() {
+    int n = 5;
+    vector&lt;vector&lt;int&gt;&gt; adj(n);
+
+    adj[0] = {1, 2};
+    adj[1] = {0, 3};
+    adj[2] = {0, 4};
+    adj[3] = {1};
+    adj[4] = {2};
+
+    vector&lt;bool&gt; visited(n, false);
+
+    dfs(0, adj, visited);
+
+    return 0;
+}</pre>
+<p><b>Output:</b> <code>0 1 3 2 4</code></p>
+<p>The output depends on the order of neighbours in the adjacency list.</p>
+<h3>Applications</h3>
+<ul>
+<li>Detecting cycles in graphs.</li>
+<li>Exploring mazes and paths.</li>
+<li>Finding connected components.</li>
+<li>Topological sorting in directed acyclic graphs, using an appropriate DFS-based method.</li>
+</ul>
+</section>
+
+<section>
+<h2>7. BFS vs DFS</h2>
+<table>
+<tr><th>Feature</th><th>BFS</th><th>DFS</th></tr>
+<tr><td>Full form</td><td>Breadth-First Search</td><td>Depth-First Search</td></tr>
+<tr><td>Exploration</td><td>Level by level</td><td>Deep along a path, then backtracks</td></tr>
+<tr><td>Main structure</td><td>Queue</td><td>Stack or recursion</td></tr>
+<tr><td>Shortest path</td><td>Finds shortest paths in unweighted graphs</td><td>Does not generally guarantee shortest paths</td></tr>
+<tr><td>Time with adjacency list</td><td>O(V + E)</td><td>O(V + E)</td></tr>
+<tr><td>Extra space</td><td>O(V)</td><td>O(V), including visited and traversal storage</td></tr>
+</table>
+<p><b>V</b> is the number of vertices and <b>E</b> is the number of edges. These complexities assume an adjacency-list representation and a traversal that accounts for all relevant vertices and edges.</p>
+</section>
+
+<section>
+<h2>8. Advantages and Disadvantages</h2>
+<h3>Advantages</h3>
+<ul>
+<li>Represents complex relationships naturally.</li>
+<li>Supports route planning and network analysis.</li>
+<li>Can model directed, weighted and interconnected data.</li>
+<li>BFS and DFS efficiently explore reachable vertices.</li>
+</ul>
+<h3>Disadvantages</h3>
+<ul>
+<li>Large graphs can require substantial memory.</li>
+<li>Choosing a suitable representation can be important.</li>
+<li>Some graph algorithms are difficult to implement correctly.</li>
+<li>Cycles require visited tracking in many traversal algorithms to prevent repeated exploration.</li>
+</ul>
+</section>
+
+<section>
+<h2>9. Quick Check 🧠</h2>
+<p>Select one answer for each question and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><b>1. What are the two main components of a graph?</b></p>
+<label><input type="radio" name="q1" value="a"> Roots and leaves</label>
+<label><input type="radio" name="q1" value="b"> Vertices and edges</label>
+<label><input type="radio" name="q1" value="c"> Arrays and strings</label>
+</div>
+<div class="question">
+<p><b>2. Which data structure does BFS commonly use?</b></p>
+<label><input type="radio" name="q2" value="a"> Queue</label>
+<label><input type="radio" name="q2" value="b"> Tree only</label>
+<label><input type="radio" name="q2" value="c"> Hash function</label>
+</div>
+<div class="question">
+<p><b>3. Which data structure is commonly used by recursive DFS?</b></p>
+<label><input type="radio" name="q3" value="a"> Queue only</label>
+<label><input type="radio" name="q3" value="b"> Call stack</label>
+<label><input type="radio" name="q3" value="c"> Adjacency matrix only</label>
+</div>
+<div class="question">
+<p><b>4. Which representation stores each vertex's neighbours?</b></p>
+<label><input type="radio" name="q4" value="a"> Adjacency list</label>
+<label><input type="radio" name="q4" value="b"> Stack array only</label>
+<label><input type="radio" name="q4" value="c"> Binary search tree</label>
+</div>
+<div class="question">
+<p><b>5. What is the BFS/DFS time complexity using an adjacency list?</b></p>
+<label><input type="radio" name="q5" value="a"> O(V² + E²)</label>
+<label><input type="radio" name="q5" value="b"> O(log V)</label>
+<label><input type="radio" name="q5" value="c"> O(V + E)</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+<p id="result" aria-live="polite"></p>
+</form>
+</section>
+
+<div class="nav">
+<a href="ds-trees.html">← Previous: Trees</a>
+<a href="data-structure.html">Course Home</a>
+<a href="ds-hashing.html">Next: Hashing →</a>
+</div>
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build. 💙</p>
+</footer>
+
+<script>
+function checkAnswers(){
+    const answers={q1:"b",q2:"a",q3:"b",q4:"a",q5:"c"};
+    let score=0;
+    let unanswered=0;
+
+    for(const q in answers){
+        const selected=document.querySelector('input[name="'+q+'"]:checked');
+        if(!selected) unanswered++;
+        else if(selected.value===answers[q]) score++;
+    }
+
+    const result=document.getElementById("result");
+
+    if(unanswered>0){
+        result.textContent="Please answer all 5 questions first. Unanswered: "+unanswered;
+        return;
+    }
+
+    result.textContent="Your score: "+score+"/5. "+
+        (score===5?"Excellent! Graph expert unlocked! 🎉":
+        score>=3?"Good work! Revise the missed concepts and try again. 💙":
+        "Keep practising! Review BFS, DFS and graph representations. 💪");
+}
+</script>
+</body>
+</html>
