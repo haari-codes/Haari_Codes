@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hashing | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#93c5fd}
+main{max-width:950px;margin:24px auto;padding:0 15px}
+section{background:white;padding:22px;margin:18px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+h2{border-bottom:2px solid #dbeafe;padding-bottom:7px}
+code{background:#eaf1ff;padding:2px 5px;border-radius:4px}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:9px;overflow-x:auto;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+button,.nav a{display:inline-block;background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:15px;margin:4px}
+button:hover,.nav a:hover{background:#1d4ed8}
+.question{padding:12px 0;border-bottom:1px solid #e5e7eb}
+label{display:block;margin:6px 0}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:25px 0}
+#result{font-weight:bold}
+@media(max-width:600px){section{padding:16px}table{font-size:13px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures and Algorithms</p>
+<h2 style="color:white;border:0">Lesson 10: Hashing</h2>
+</header>
+
+<main>
+<section>
+<h2>1. What Is Hashing?</h2>
+<p><b>Hashing</b> is a technique used to store and retrieve data efficiently by converting a key into an index using a hash function.</p>
+<p>The index identifies where the data should be stored in a hash table.</p>
+<h3>Example</h3>
+<p>Suppose we have a hash table with 10 positions, numbered 0 to 9, and we want to store the key 42.</p>
+<p>Using the simple hash function:</p>
+<pre>h(key) = key % table_size</pre>
+<p>For key 42:</p>
+<pre>h(42) = 42 % 10
+      = 2</pre>
+<p>Therefore, key 42 is assigned to index 2.</p>
+<div class="note">Hashing can make search, insertion and deletion very fast on average, but performance depends on the hash function, collisions and table load.</div>
+</section>
+
+<section>
+<h2>2. Important Terminology</h2>
+<ul>
+<li><b>Key:</b> The value used to identify or locate a record.</li>
+<li><b>Hash function:</b> A function that maps a key to a table index.</li>
+<li><b>Hash table:</b> A data structure that stores key-value entries using hash-based indexing.</li>
+<li><b>Hash value:</b> The result produced by a hash function.</li>
+<li><b>Collision:</b> When two different keys map to the same table index.</li>
+<li><b>Bucket:</b> A table position that may hold one or more entries, depending on the collision-handling method.</li>
+<li><b>Load factor:</b> The number of stored entries divided by the number of table buckets.</li>
+</ul>
+<p>For example, with 7 stored entries and 10 buckets:</p>
+<pre>Load factor = 7 / 10 = 0.7</pre>
+</section>
+
+<section>
+<h2>3. Hash Function</h2>
+<p>A hash function converts a key into a valid table index. A good hash function distributes keys reasonably evenly across the table.</p>
+<h3>Common simple methods</h3>
+<p><b>A. Division method</b></p>
+<pre>h(key) = key % table_size</pre>
+<p>Example: <code>h(27) = 27 % 10 = 7</code>.</p>
+<p><b>B. Mid-square method</b></p>
+<p>Square the key and select some digits from the middle of the result to form the hash value. The selected digits must be mapped to a valid table index.</p>
+<p><b>C. Folding method</b></p>
+<p>Divide the key into parts and combine those parts to calculate a hash value.</p>
+<p>These are common teaching examples. Real systems may use more sophisticated hash functions depending on the keys and security requirements.</p>
+</section>
+
+<section>
+<h2>4. What Is a Collision?</h2>
+<p>A collision occurs when different keys produce the same index.</p>
+<p>Suppose the table size is 10:</p>
+<pre>h(key) = key % 10
+
+h(22) = 22 % 10 = 2
+h(42) = 42 % 10 = 2</pre>
+<p>Both keys map to index 2. The hash table needs a collision-resolution technique to store both values.</p>
+</section>
+
+<section>
+<h2>5. Collision Resolution Techniques</h2>
+<h3>A. Separate Chaining</h3>
+<p>Each table position stores a collection of entries, often represented by a linked list or another suitable container.</p>
+<p>For keys 22, 42 and 32, using <code>key % 10</code>:</p>
+<pre>Index 2: 22 -> 42 -> 32</pre>
+<p>All three keys have the same hash index and are stored in the same chain.</p>
+<h4>Advantages</h4>
+<ul>
+<li>Multiple keys can be stored at one index.</li>
+<li>Insertion is straightforward.</li>
+<li>The table can store more entries than its number of buckets.</li>
+</ul>
+<h4>Disadvantages</h4>
+<ul>
+<li>Requires extra storage for the chains.</li>
+<li>Long chains can make searching slower.</li>
+</ul>
+
+<h3>B. Open Addressing</h3>
+<p>In open addressing, all entries are stored inside the table itself. If an index is occupied, the algorithm probes other positions to find an available slot.</p>
+
+<h3>1. Linear Probing</h3>
+<p>Check the next position one by one until an empty slot is found.</p>
+<pre>index = (h(key) + i) % table_size</pre>
+<p>Here, <code>i</code> starts at 0 and increases after each unsuccessful attempt.</p>
+<p>Example with table size 10:</p>
+<ul>
+<li>Insert 22 at index 2.</li>
+<li>Insert 42. Index 2 is occupied, so try index 3.</li>
+<li>Insert 32. Index 2 is occupied, then index 3, so try index 4.</li>
+</ul>
+<p>Result:</p>
+<pre>Index 2: 22
+Index 3: 42
+Index 4: 32</pre>
+<p><b>Limitation:</b> Linear probing can cause primary clustering, where long groups of occupied positions build up.</p>
+
+<h3>2. Quadratic Probing</h3>
+<p>Instead of checking consecutive positions, the algorithm uses increasing quadratic offsets.</p>
+<pre>index = (h(key) + i * i) % table_size</pre>
+<p>The precise formula and table size must be chosen carefully to ensure the probing sequence can reach enough positions.</p>
+
+<h3>3. Double Hashing</h3>
+<p>A second hash function determines the step size used when the first position is occupied.</p>
+<pre>index = (h1(key) + i * h2(key)) % table_size</pre>
+<p>This can reduce clustering when the functions and table size are chosen appropriately.</p>
+</section>
+
+<section>
+<h2>6. C++ Example: Simple Hash Function</h2>
+<p>This example calculates the index for each key using the division method.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int hashFunction(int key, int tableSize) {
+    return key % tableSize;
+}
+
+int main() {
+    int tableSize = 10;
+    int keys[] = {22, 42, 17, 35};
+    int n = 4;
+
+    for (int i = 0; i &lt; n; i++) {
+        cout &lt;&lt; "Key: " &lt;&lt; keys[i]
+             &lt;&lt; ", Index: "
+             &lt;&lt; hashFunction(keys[i], tableSize)
+             &lt;&lt; endl;
+    }
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>Key: 22, Index: 2
+Key: 42, Index: 2
+Key: 17, Index: 7
+Key: 35, Index: 5</pre>
+<p>Notice that keys 22 and 42 have the same index. That is a collision.</p>
+</section>
+
+<section>
+<h2>7. C++ Example: Hash Table with Linear Probing</h2>
+<p>This simple example stores integer keys in a fixed-size table. It handles collisions using linear probing.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+const int SIZE = 10;
+const int EMPTY = -1;
+
+int table[SIZE];
+
+void initialize() {
+    for (int i = 0; i &lt; SIZE; i++)
+        table[i] = EMPTY;
+}
+
+bool insertKey(int key) {
+    int start = key % SIZE;
+
+    for (int i = 0; i &lt; SIZE; i++) {
+        int index = (start + i) % SIZE;
+
+        if (table[index] == EMPTY) {
+            table[index] = key;
+            return true;
+        }
+
+        if (table[index] == key)
+            return true;
+    }
+
+    return false;
+}
+
+int searchKey(int key) {
+    int start = key % SIZE;
+
+    for (int i = 0; i &lt; SIZE; i++) {
+        int index = (start + i) % SIZE;
+
+        if (table[index] == EMPTY)
+            return -1;
+
+        if (table[index] == key)
+            return index;
+    }
+
+    return -1;
+}
+
+int main() {
+    initialize();
+
+    insertKey(22);
+    insertKey(42);
+    insertKey(32);
+    insertKey(17);
+
+    for (int i = 0; i &lt; SIZE; i++) {
+        cout &lt;&lt; i &lt;&lt; ": ";
+        if (table[i] == EMPTY)
+            cout &lt;&lt; "Empty";
+        else
+            cout &lt;&lt; table[i];
+        cout &lt;&lt; endl;
+    }
+
+    int key = 32;
+    int position = searchKey(key);
+
+    if (position != -1)
+        cout &lt;&lt; key &lt;&lt; " found at index "
+             &lt;&lt; position &lt;&lt; endl;
+    else
+        cout &lt;&lt; key &lt;&lt; " not found" &lt;&lt; endl;
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>0: Empty
+1: Empty
+2: 22
+3: 42
+4: 32
+5: Empty
+6: Empty
+7: 17
+8: Empty
+9: Empty
+32 found at index 4</pre>
+<div class="note"><b>Important limitation:</b> This teaching example uses -1 to mark an empty slot, so -1 cannot be stored as a key. It also does not implement deletion. With deletion in open addressing, simply clearing a slot can break later searches; implementations commonly use a special deleted marker.</div>
+</section>
+
+<section>
+<h2>8. Time Complexity</h2>
+<table>
+<tr><th>Operation</th><th>Average case</th><th>Worst case</th></tr>
+<tr><td>Search</td><td>O(1)</td><td>O(n)</td></tr>
+<tr><td>Insertion</td><td>O(1)</td><td>O(n)</td></tr>
+<tr><td>Deletion</td><td>O(1) expected with suitable handling</td><td>O(n)</td></tr>
+</table>
+<p>These are typical expected and worst-case bounds for common hash-table designs, not guarantees for every implementation.</p>
+<p>Average-case operations can be close to O(1) when the hash function distributes keys well and the load factor is controlled. Many collisions can degrade performance to O(n).</p>
+</section>
+
+<section>
+<h2>9. Applications of Hashing</h2>
+<ul>
+<li>Fast lookup in dictionaries and maps.</li>
+<li>Database indexing and lookup structures.</li>
+<li>Caching frequently accessed data.</li>
+<li>Checking whether a value has already been seen.</li>
+<li>Counting the frequency of words or numbers.</li>
+<li>Symbol tables in compilers.</li>
+<li>Integrity checks using cryptographic hash functions.</li>
+</ul>
+<p class="note">A cryptographic hash function is designed for security properties such as resistance to collisions and preimage attacks. The simple modulo function used in this lesson is not a cryptographic hash function.</p>
+</section>
+
+<section>
+<h2>10. Advantages and Disadvantages</h2>
+<h3>Advantages</h3>
+<ul>
+<li>Fast average-case lookup, insertion and deletion.</li>
+<li>Useful for storing key-value pairs.</li>
+<li>Works well for dictionaries, caches and frequency counting.</li>
+</ul>
+<h3>Disadvantages</h3>
+<ul>
+<li>Collisions must be handled.</li>
+<li>Worst-case operations may take O(n).</li>
+<li>Hash tables do not naturally keep keys sorted.</li>
+<li>Resizing and choosing a good hash function require care.</li>
+</ul>
+</section>
+
+<section>
+<h2>11. Quick Check 🧠</h2>
+<p>Select one answer for each question and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><b>1. What does a hash function calculate?</b></p>
+<label><input type="radio" name="q1" value="a"> A table index from a key</label>
+<label><input type="radio" name="q1" value="b"> The height of a tree</label>
+<label><input type="radio" name="q1" value="c"> The number of graph vertices</label>
+</div>
+<div class="question">
+<p><b>2. What is a collision?</b></p>
+<label><input type="radio" name="q2" value="a"> When a table is empty</label>
+<label><input type="radio" name="q2" value="b"> When different keys map to the same index</label>
+<label><input type="radio" name="q2" value="c"> When a key is deleted</label>
+</div>
+<div class="question">
+<p><b>3. Which method stores colliding entries in a chain at a bucket?</b></p>
+<label><input type="radio" name="q3" value="a"> Binary Search</label>
+<label><input type="radio" name="q3" value="b"> Selection Sort</label>
+<label><input type="radio" name="q3" value="c"> Separate Chaining</label>
+</div>
+<div class="question">
+<p><b>4. With h(key) = key % 10, what is h(42)?</b></p>
+<label><input type="radio" name="q4" value="a"> 2</label>
+<label><input type="radio" name="q4" value="b"> 4</label>
+<label><input type="radio" name="q4" value="c"> 10</label>
+</div>
+<div class="question">
+<p><b>5. What is the typical average-case search time in a well-designed hash table?</b></p>
+<label><input type="radio" name="q5" value="a"> O(n²)</label>
+<label><input type="radio" name="q5" value="b"> O(1)</label>
+<label><input type="radio" name="q5" value="c"> O(log n) always</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+<p id="result" aria-live="polite"></p>
+</form>
+</section>
+
+<div class="nav">
+<a href="ds-graphs.html">← Previous: Graphs</a>
+<a href="data-structure.html">Course Home</a>
+<a href="courses.html">All Courses</a>
+</div>
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build. 💙</p>
+<p>Data Structures: 10 lessons, one step at a time!</p>
+</footer>
+
+<script>
+function checkAnswers(){
+    const answers={q1:"a",q2:"b",q3:"c",q4:"a",q5:"b"};
+    let score=0;
+    let unanswered=0;
+
+    for(const q in answers){
+        const selected=document.querySelector('input[name="'+q+'"]:checked');
+        if(!selected) unanswered++;
+        else if(selected.value===answers[q]) score++;
+    }
+
+    const result=document.getElementById("result");
+
+    if(unanswered>0){
+        result.textContent="Please answer all 5 questions first. Unanswered: "+unanswered;
+        return;
+    }
+
+    result.textContent="Your score: "+score+"/5. "+
+        (score===5?"Perfect! Hashing champion unlocked! 🎉":
+        score>=3?"Great progress! Review the missed concepts and try again. 💙":
+        "Keep practising! Review hash functions and collision handling. 💪");
+}
+</script>
+</body>
+</html>
