@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Subqueries | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#60a5fa}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;padding:20px;margin:18px 0;border-radius:14px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:10px;overflow-x:auto;white-space:pre-wrap}
+code{font-family:Consolas,monospace}
+.note{background:#eff6ff;padding:12px;border-left:4px solid #2563eb;border-radius:5px}
+button{background:#2563eb;color:white;border:0;border-radius:8px;padding:10px 16px;font-family:inherit;font-size:15px;cursor:pointer;margin:5px 3px}
+button:hover{background:#1d4ed8}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.question{border-bottom:1px solid #e5e7eb;padding:12px 0}
+label{display:block;padding:4px;cursor:pointer}
+#result{font-weight:bold;margin-top:15px}
+a{color:#2563eb}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{padding:9px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#eff6ff}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>SQL Course · Lesson 9</p>
+<h2 style="color:white">SQL Subqueries</h2>
+<p>A query inside another query</p>
+</header>
+
+<main>
+<div class="card">
+<h2>1. What is a Subquery?</h2>
+<p>A <b>subquery</b> is an SQL query written inside another SQL statement. It is also called an inner query or nested query.</p>
+<p>The query containing the subquery is called the outer query.</p>
+<p>Consider this table named <code>Employees</code>:</p>
+<table>
+<tr><th>id</th><th>name</th><th>department</th><th>salary</th></tr>
+<tr><td>1</td><td>Anu</td><td>IT</td><td>30000</td></tr>
+<tr><td>2</td><td>Rahul</td><td>HR</td><td>25000</td></tr>
+<tr><td>3</td><td>Meera</td><td>IT</td><td>40000</td></tr>
+<tr><td>4</td><td>Arun</td><td>HR</td><td>28000</td></tr>
+<tr><td>5</td><td>Diya</td><td>Sales</td><td>22000</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>2. Subquery with a Comparison Operator</h2>
+<p>Question: Find employees whose salary is greater than the average salary.</p>
+<pre>SELECT name, salary
+FROM Employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM Employees
+);</pre>
+<p><b>How it works:</b></p>
+<ol>
+<li>The inner query calculates the average salary: 29000.</li>
+<li>The outer query selects employees whose salary is greater than 29000.</li>
+</ol>
+<p><b>Expected result:</b> Anu (30000) and Meera (40000).</p>
+<div class="note">The parentheses contain the subquery. In this example, it returns one value, so it can be compared using &gt;.</div>
+</div>
+
+<div class="card">
+<h2>3. Single-Row Subquery</h2>
+<p>A single-row subquery returns one row. A single-value result can be used with operators such as <code>=</code>, <code>&gt;</code>, and <code>&lt;</code>.</p>
+<p>Example: Find the employee earning the highest salary by comparing salaries with the maximum salary.</p>
+<pre>SELECT name, salary
+FROM Employees
+WHERE salary = (
+    SELECT MAX(salary)
+    FROM Employees
+);</pre>
+<p><b>Expected result:</b> Meera, 40000.</p>
+<p>If multiple employees share the maximum salary, all matching employees are returned.</p>
+</div>
+
+<div class="card">
+<h2>4. Multi-Row Subquery with IN</h2>
+<p>Use <code>IN</code> when the subquery can return multiple values.</p>
+<p>Question: Find employees who work in a department that has an employee earning more than 35000.</p>
+<pre>SELECT name, department
+FROM Employees
+WHERE department IN (
+    SELECT department
+    FROM Employees
+    WHERE salary > 35000
+);</pre>
+<p>The inner query returns <code>IT</code>. The outer query finds all employees in IT.</p>
+<p><b>Expected result:</b> Anu (IT) and Meera (IT).</p>
+</div>
+
+<div class="card">
+<h2>5. Subquery with ANY and ALL</h2>
+<p>These operators compare a value against the results of a subquery. The exact syntax and support may vary by database.</p>
+<h3>ANY</h3>
+<p><code>&gt; ANY</code> means the value is greater than at least one value returned by the subquery.</p>
+<pre>SELECT name, salary
+FROM Employees
+WHERE salary > ANY (
+    SELECT salary
+    FROM Employees
+    WHERE department = 'HR'
+);</pre>
+<p>HR salaries are 25000 and 28000. The condition is true when salary is greater than at least one of them, so salaries greater than 25000 qualify.</p>
+<h3>ALL</h3>
+<p><code>&gt; ALL</code> means the value must be greater than every value returned by the subquery.</p>
+<pre>SELECT name, salary
+FROM Employees
+WHERE salary > ALL (
+    SELECT salary
+    FROM Employees
+    WHERE department = 'HR'
+);</pre>
+<p>This finds employees earning more than both HR salaries, meaning more than 28000.</p>
+<div class="note">For exams, remember: ANY means at least one; ALL means every value.</div>
+</div>
+
+<div class="card">
+<h2>6. Subquery with EXISTS</h2>
+<p><code>EXISTS</code> checks whether a subquery returns at least one row.</p>
+<p>Suppose we have a table named <code>Departments</code> with a column called <code>department</code>.</p>
+<pre>SELECT D.department
+FROM Departments D
+WHERE EXISTS (
+    SELECT 1
+    FROM Employees E
+    WHERE E.department = D.department
+);</pre>
+<p>This returns departments that have at least one matching employee.</p>
+<p><code>NOT EXISTS</code> can be used to find departments without any matching employees.</p>
+<pre>SELECT D.department
+FROM Departments D
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Employees E
+    WHERE E.department = D.department
+);</pre>
+</div>
+
+<div class="card">
+<h2>7. Correlated Subquery</h2>
+<p>A correlated subquery refers to a column from the outer query. It depends on the current outer row and is conceptually evaluated for each candidate row, though a database may optimize its execution.</p>
+<p>Question: Find employees whose salary is greater than the average salary of their own department.</p>
+<pre>SELECT E.name, E.department, E.salary
+FROM Employees E
+WHERE E.salary > (
+    SELECT AVG(E2.salary)
+    FROM Employees E2
+    WHERE E2.department = E.department
+);</pre>
+<p><b>Expected result:</b></p>
+<ul>
+<li>Meera: IT average is 35000, and her salary is 40000.</li>
+<li>Arun: HR average is 26500, and his salary is 28000.</li>
+</ul>
+<p><code>E</code> and <code>E2</code> are aliases for the Employees table. The inner query uses <code>E.department</code> from the outer query.</p>
+</div>
+
+<div class="card">
+<h2>8. Subquery in the FROM Clause</h2>
+<p>A subquery in the FROM clause creates a temporary result set for the outer query. Many databases call this a derived table.</p>
+<pre>SELECT department, average_salary
+FROM (
+    SELECT department,
+           AVG(salary) AS average_salary
+    FROM Employees
+    GROUP BY department
+) AS DepartmentAverages
+WHERE average_salary > 25000;</pre>
+<p>The inner query calculates the average salary for each department. The outer query keeps departments whose average salary is greater than 25000.</p>
+<p><b>Expected result:</b> HR (26500) and IT (35000).</p>
+<div class="note">In MySQL, a derived table in the FROM clause needs a table alias, such as <code>DepartmentAverages</code>.</div>
+</div>
+
+<div class="card">
+<h2>9. Subquery vs JOIN</h2>
+<table>
+<tr><th>Subquery</th><th>JOIN</th></tr>
+<tr><td>Contains a query inside another query.</td><td>Combines rows from tables using a join condition.</td></tr>
+<tr><td>Useful for comparing with averages, maximums, or sets of values.</td><td>Useful for displaying related columns from multiple tables.</td></tr>
+<tr><td>Can use IN, EXISTS, or comparison operators.</td><td>Can use INNER, LEFT, RIGHT, and other supported joins.</td></tr>
+</table>
+<p>Both approaches can sometimes solve the same problem. The clearest and most efficient option depends on the query, database, indexes, and data.</p>
+</div>
+
+<div class="card">
+<h2>10. Common Mistakes</h2>
+<ul>
+<li>Forgetting parentheses around a subquery.</li>
+<li>Using <code>=</code> when a subquery may return multiple rows. Consider IN, ANY, ALL, or EXISTS as appropriate.</li>
+<li>Forgetting to give a derived table an alias when the database requires it.</li>
+<li>Using a column name that is ambiguous between the inner and outer queries. Use table aliases to clarify.</li>
+<li>Assuming a subquery always runs separately for every row. The database optimizer may transform or optimize it.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>11. Quick Revision</h2>
+<ul>
+<li><b>Subquery:</b> A query inside another query.</li>
+<li><b>Single-value subquery:</b> Returns one value for comparison.</li>
+<li><b>IN:</b> Checks membership in a set of values.</li>
+<li><b>ANY:</b> Condition matches at least one returned value.</li>
+<li><b>ALL:</b> Condition matches every returned value.</li>
+<li><b>EXISTS:</b> Checks whether any row exists.</li>
+<li><b>Correlated subquery:</b> Refers to a column from the outer query.</li>
+<li><b>Derived table:</b> A subquery in the FROM clause.</li>
+</ul>
+</div>
+
+<div class="card" id="quiz">
+<h2>12. Quick Check Quiz 🧠</h2>
+<p>Choose one answer for each question, then check your score.</p>
+<form id="quizForm">
+<div id="questions"></div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" onclick="resetQuiz()" style="background:#4b5563">Try Again</button>
+<div id="result" aria-live="polite"></div>
+<div id="review"></div>
+</form>
+</div>
+
+<div class="card nav">
+<a href="sql-joins.html">← Previous: SQL Joins</a>
+<a href="sql.html">SQL Home</a>
+<a href="sql-constraints.html">Next: SQL Constraints →</a>
+</div>
+</main>
+
+<footer>
+<p><b>Haari_Codes</b> | Learn. Practise. Build.</p>
+<p>One query inside another, one step closer to mastery! 💙</p>
+</footer>
+
+<script>
+const questions=[
+{q:"1. What is a subquery?",a:["A query inside another query","A type of database","A table constraint","A sorting command"],ans:0,exp:"A subquery is nested inside another SQL statement."},
+{q:"2. Which operator is useful when a subquery returns multiple values?",a:["= only","IN","AS","ORDER BY"],ans:1,exp:"IN checks whether a value matches one of the returned values."},
+{q:"3. Which function can calculate the average salary in a subquery?",a:["COUNT()","AVG()","LOWER()","CONCAT()"],ans:1,exp:"AVG() calculates the average of non-NULL values."},
+{q:"4. What does EXISTS check?",a:["Whether a table has an index","Whether a subquery returns at least one row","Whether a column is numeric","Whether rows are sorted"],ans:1,exp:"EXISTS is true when the subquery returns at least one row."},
+{q:"5. What does > ALL mean?",a:["Greater than at least one value","Greater than every value returned","Equal to every value","Less than every value"],ans:1,exp:"> ALL requires the value to be greater than every returned value."},
+{q:"6. What does > ANY mean?",a:["Greater than at least one returned value","Greater than every returned value","Always false","Equal to the average"],ans:0,exp:"> ANY requires the value to be greater than at least one returned value."},
+{q:"7. What makes a subquery correlated?",a:["It contains ORDER BY","It uses a value from the outer query","It has no WHERE clause","It creates a table"],ans:1,exp:"A correlated subquery refers to a column from the outer query."},
+{q:"8. Where is a derived table subquery written?",a:["Only in INSERT","In the FROM clause","Only in CREATE DATABASE","Only after LIMIT"],ans:1,exp:"A subquery in FROM acts as a derived table."},
+{q:"9. What is a risk of using = with a subquery that returns multiple rows?",a:["It always sorts the rows","It may produce a multiple-row error","It deletes the table","It converts values to text"],ans:1,exp:"A scalar comparison such as = normally expects a single value."},
+{q:"10. Which keyword finds rows for which a matching row does not exist?",a:["NOT EXISTS","GROUP BY","ROUND","UNION ALL"],ans:0,exp:"NOT EXISTS checks that the subquery returns no rows."}
+];
+
+function renderQuestions(){
+const container=document.getElementById("questions");
+container.innerHTML="";
+questions.forEach((item,i)=>{
+const div=document.createElement("div");
+div.className="question";
+const p=document.createElement("p");
+const b=document.createElement("b");
+b.textContent=item.q;
+p.appendChild(b);
+div.appendChild(p);
+item.a.forEach((option,j)=>{
+const label=document.createElement("label");
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="q"+i;
+radio.value=j;
+label.appendChild(radio);
+label.appendChild(document.createTextNode(" "+option));
+div.appendChild(label);
+});
+container.appendChild(div);
+});
+}
+
+function checkAnswers(){
+let score=0,unanswered=0;
+let html="<h3>Answer Review</h3>";
+questions.forEach((item,i)=>{
+const selected=document.querySelector('input[name="q'+i+'"]:checked');
+if(!selected)unanswered++;
+const correct=selected&&Number(selected.value)===item.ans;
+if(correct)score++;
+html+="<p><b>"+item.q+"</b><br>";
+html+=correct?"✅ Correct! ":"❌ Correct answer: "+item.a[item.ans]+". ";
+html+=item.exp+"</p>";
+});
+document.getElementById("result").textContent=
+"Your score: "+score+"/10"+
+(unanswered?" · Unanswered: "+unanswered:"")+
+(score===10?" · Perfect score! 🎉":score>=7?" · Good work! 💙":" · Revise and try again!");
+document.getElementById("review").innerHTML=html;
+}
+
+function resetQuiz(){
+document.getElementById("quizForm").reset();
+document.getElementById("result").textContent="";
+document.getElementById("review").innerHTML="";
+}
+renderQuestions();
+</script>
+</body>
+  </html>
