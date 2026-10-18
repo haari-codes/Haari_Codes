@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacks | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f6fb;color:#1f2937;font-family:Georgia,serif;line-height:1.75}
+header,footer{background:#111827;color:white;text-align:center;padding:20px}
+header h1{margin:0}
+header p,footer p{margin:5px 0;color:#d1d5db}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:white;padding:22px;margin-bottom:18px;border-radius:13px;box-shadow:0 3px 12px #00000009}
+h2{color:#2563eb;margin-top:0}
+h3{color:#111827;margin-bottom:5px}
+pre{background:#111827;color:#e5e7eb;padding:15px;border-radius:9px;overflow-x:auto;white-space:pre}
+code{font-family:monospace}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+.btn,button{display:inline-block;background:#2563eb;color:white;text-decoration:none;padding:10px 15px;border:0;border-radius:8px;margin:5px 5px 5px 0;font-family:Georgia,serif;font-size:15px;cursor:pointer}
+.secondary{background:#374151}
+.question{border:1px solid #e5e7eb;padding:14px;border-radius:10px;margin:12px 0}
+label{display:block;padding:4px 0;cursor:pointer}
+#result{font-weight:bold}
+.small{font-size:14px;color:#6b7280}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures | Lesson 04</p>
+</header>
+
+<main>
+<section class="card">
+<h2>Stack</h2>
+<p>A stack is a linear data structure in which insertion and deletion take place at the same end, called the <strong>top</strong>.</p>
+<p class="note"><strong>Learning objectives:</strong> Understand LIFO, stack operations, the top variable, overflow and underflow, array implementation, algorithms, complexity and real-life applications.</p>
+</section>
+
+<section class="card">
+<h2>1. Definition of Stack</h2>
+<p>A <strong>stack</strong> is a linear data structure that follows the <strong>LIFO (Last In, First Out)</strong> principle. The last element inserted is the first element removed.</p>
+<p>Think of a stack of plates. The last plate placed on top is normally the first plate taken off.</p>
+<pre>       TOP
+        |
+      [30] ← Last inserted
+      [20]
+      [10] ← First inserted</pre>
+<p>If we push 10, then 20, then 30, the first pop removes 30.</p>
+</section>
+
+<section class="card">
+<h2>2. Important Terminology</h2>
+<ul>
+<li><strong>TOP:</strong> Indicates the position of the top element.</li>
+<li><strong>Push:</strong> Inserts an element at the top.</li>
+<li><strong>Pop:</strong> Removes the top element.</li>
+<li><strong>Peek/Top:</strong> Reads the top element without removing it.</li>
+<li><strong>Overflow:</strong> Trying to push into a full fixed-capacity stack.</li>
+<li><strong>Underflow:</strong> Trying to pop from an empty stack.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>3. Array Representation of a Stack</h2>
+<p>Suppose we have an array of capacity 5. We use a variable called <code>top</code> to track the top element.</p>
+<pre>int stack[5];
+int top = -1;</pre>
+<p><strong>Why is top = -1?</strong></p>
+<p>Array indexes begin at 0. When the stack is empty, no valid index contains a stack element, so we use -1 to represent the empty stack.</p>
+<table>
+<tr><th>Stack state</th><th>TOP value</th></tr>
+<tr><td>Empty</td><td>-1</td></tr>
+<tr><td>One element</td><td>0</td></tr>
+<tr><td>Two elements</td><td>1</td></tr>
+<tr><td>Five elements in capacity 5</td><td>4</td></tr>
+</table>
+<p class="note">For a stack with capacity N, the array is full when <code>top == N - 1</code>, and empty when <code>top == -1</code>.</p>
+</section>
+
+<section class="card">
+<h2>4. Stack Operations</h2>
+<h3>A. Push</h3>
+<p>Push adds a new element to the top of the stack.</p>
+<pre>if (top == capacity - 1) {
+    // Stack Overflow
+} else {
+    top++;
+    stack[top] = value;
+}</pre>
+<p>First check whether the stack is full. If not, increment top and store the value.</p>
+
+<h3>B. Pop</h3>
+<p>Pop removes the top element.</p>
+<pre>if (top == -1) {
+    // Stack Underflow
+} else {
+    int removed = stack[top];
+    top--;
+}</pre>
+<p>First check whether the stack is empty. If it is not empty, read the top value and decrement top.</p>
+<p>In a basic array stack, decrementing top removes the element from the logical stack. The old value may still remain in the array memory, but it is no longer part of the stack.</p>
+
+<h3>C. Peek</h3>
+<p>Peek reads the top element without removing it.</p>
+<pre>if (top == -1) {
+    // Stack is empty
+} else {
+    cout &lt;&lt; stack[top];
+}</pre>
+
+<h3>D. isEmpty and isFull</h3>
+<pre>bool isEmpty = (top == -1);
+bool isFull = (top == capacity - 1);</pre>
+</section>
+
+<section class="card">
+<h2>5. Step-by-Step Example</h2>
+<p>Assume the capacity is 5 and initially <code>top = -1</code>.</p>
+<table>
+<tr><th>Operation</th><th>Stack (bottom to top)</th><th>TOP</th></tr>
+<tr><td>Initial state</td><td>Empty</td><td>-1</td></tr>
+<tr><td>Push(10)</td><td>10</td><td>0</td></tr>
+<tr><td>Push(20)</td><td>10, 20</td><td>1</td></tr>
+<tr><td>Push(30)</td><td>10, 20, 30</td><td>2</td></tr>
+<tr><td>Pop()</td><td>10, 20</td><td>1</td></tr>
+<tr><td>Push(40)</td><td>10, 20, 40</td><td>2</td></tr>
+</table>
+<p>The pop operation removes 30 because it was the last element inserted.</p>
+</section>
+
+<section class="card">
+<h2>6. Algorithms</h2>
+<h3>Algorithm: PUSH(STACK, TOP, ITEM)</h3>
+<ol>
+<li>If <code>TOP == MAX - 1</code>, report Overflow and stop.</li>
+<li>Set <code>TOP = TOP + 1</code>.</li>
+<li>Set <code>STACK[TOP] = ITEM</code>.</li>
+<li>Stop.</li>
+</ol>
+
+<h3>Algorithm: POP(STACK, TOP)</h3>
+<ol>
+<li>If <code>TOP == -1</code>, report Underflow and stop.</li>
+<li>Store <code>STACK[TOP]</code> in ITEM.</li>
+<li>Set <code>TOP = TOP - 1</code>.</li>
+<li>Return ITEM.</li>
+</ol>
+<p class="note">For exams, write the algorithm steps clearly and mention the overflow or underflow condition.</p>
+</section>
+
+<section class="card">
+<h2>7. Complete C++ Program</h2>
+<p>This program implements push, pop, peek and display operations.</p>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+const int CAPACITY = 5;
+int stackArr[CAPACITY];
+int top = -1;
+
+void push(int value) {
+    if (top == CAPACITY - 1) {
+        cout &lt;&lt; "Stack Overflow\n";
+        return;
+    }
+    stackArr[++top] = value;
+    cout &lt;&lt; value &lt;&lt; " pushed\n";
+}
+
+void pop() {
+    if (top == -1) {
+        cout &lt;&lt; "Stack Underflow\n";
+        return;
+    }
+    cout &lt;&lt; "Removed: " &lt;&lt; stackArr[top--] &lt;&lt; "\n";
+}
+
+void peek() {
+    if (top == -1) {
+        cout &lt;&lt; "Stack is empty\n";
+    } else {
+        cout &lt;&lt; "Top: " &lt;&lt; stackArr[top] &lt;&lt; "\n";
+    }
+}
+
+void display() {
+    if (top == -1) {
+        cout &lt;&lt; "Stack is empty\n";
+        return;
+    }
+
+    cout &lt;&lt; "Top to bottom: ";
+    for (int i = top; i &gt;= 0; i--) {
+        cout &lt;&lt; stackArr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; "\n";
+}
+
+int main() {
+    push(10);
+    push(20);
+    push(30);
+    display();
+    peek();
+    pop();
+    display();
+
+    return 0;
+}</pre>
+<p><strong>Output:</strong></p>
+<pre>10 pushed
+20 pushed
+30 pushed
+Top to bottom: 30 20 10
+Top: 30
+Removed: 30
+Top to bottom: 20 10</pre>
+</section>
+
+<section class="card">
+<h2>8. Types / Implementations of Stack</h2>
+<h3>A. Array-based Stack</h3>
+<p>Uses an array and a top variable. It is simple and provides a fixed capacity unless a resizable structure is used.</p>
+
+<h3>B. Linked-list-based Stack</h3>
+<p>Uses nodes connected by pointers. The head can act as the top, allowing push and pop at the head in O(1) time. It grows dynamically until memory resources become limiting.</p>
+
+<h3>C. Call Stack</h3>
+<p>Programming languages use a call stack to manage active function calls, including return information and local execution state.</p>
+</section>
+
+<section class="card">
+<h2>9. Applications of Stack</h2>
+<ul>
+<li>Undo and redo operations in editors.</li>
+<li>Browser history navigation in suitable implementations.</li>
+<li>Function calls and recursion.</li>
+<li>Expression evaluation and conversion.</li>
+<li>Checking balanced brackets in expressions.</li>
+<li>Backtracking algorithms and depth-first search.</li>
+<li>Reversing data such as a sequence of characters.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>10. Advantages</h2>
+<ul>
+<li>Simple to implement.</li>
+<li>Push and pop are typically O(1).</li>
+<li>Useful for reversing and backtracking tasks.</li>
+<li>Helps manage nested function calls and expressions.</li>
+</ul>
+<h2>11. Disadvantages</h2>
+<ul>
+<li>A fixed-size array stack has limited capacity.</li>
+<li>Trying to pop an empty stack causes underflow.</li>
+<li>Only the top element is directly accessible through normal stack operations.</li>
+<li>A linked-list stack needs extra memory for pointers.</li>
+<li>Incorrect recursion or excessive calls can exhaust the program's call stack.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>12. Time Complexity</h2>
+<table>
+<tr><th>Operation</th><th>Typical complexity</th></tr>
+<tr><td>Push</td><td>O(1)</td></tr>
+<tr><td>Pop</td><td>O(1)</td></tr>
+<tr><td>Peek</td><td>O(1)</td></tr>
+<tr><td>isEmpty / isFull</td><td>O(1)</td></tr>
+<tr><td>Display all elements</td><td>O(n)</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>13. Quick Check 🧠</h2>
+<p>Select your answers and press Check Answers.</p>
+<form id="quiz">
+<div class="question">
+<p><strong>1. Which principle does a stack follow?</strong></p>
+<label><input type="radio" name="q1" value="a"> FIFO</label>
+<label><input type="radio" name="q1" value="b"> LIFO</label>
+<label><input type="radio" name="q1" value="c"> Random order</label>
+</div>
+<div class="question">
+<p><strong>2. What is the initial TOP value of an empty array stack?</strong></p>
+<label><input type="radio" name="q2" value="a"> 0</label>
+<label><input type="radio" name="q2" value="b"> 1</label>
+<label><input type="radio" name="q2" value="c"> -1</label>
+</div>
+<div class="question">
+<p><strong>3. What happens when we pop an empty stack?</strong></p>
+<label><input type="radio" name="q3" value="a"> Overflow</label>
+<label><input type="radio" name="q3" value="b"> Underflow</label>
+<label><input type="radio" name="q3" value="c"> Traversal</label>
+</div>
+<div class="question">
+<p><strong>4. If we push 10, 20, then 30, what does the first pop return?</strong></p>
+<label><input type="radio" name="q4" value="a"> 10</label>
+<label><input type="radio" name="q4" value="b"> 20</label>
+<label><input type="radio" name="q4" value="c"> 30</label>
+</div>
+<div class="question">
+<p><strong>5. In a stack of capacity 5, what is the full condition?</strong></p>
+<label><input type="radio" name="q5" value="a"> top == -1</label>
+<label><input type="radio" name="q5" value="b"> top == 4</label>
+<label><input type="radio" name="q5" value="c"> top == 5</label>
+</div>
+<div class="question">
+<p><strong>6. What does peek do?</strong></p>
+<label><input type="radio" name="q6" value="a"> Removes the top element</label>
+<label><input type="radio" name="q6" value="b"> Deletes the entire stack</label>
+<label><input type="radio" name="q6" value="c"> Reads the top element without removing it</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="button" class="secondary" onclick="resetQuiz()">Try Again</button>
+<p id="result" aria-live="polite"></p>
+<div id="answers" hidden>
+<h3>Answer Key</h3>
+<ol>
+<li>B: LIFO means Last In, First Out.</li>
+<li>C: -1 indicates that no element is present.</li>
+<li>B: Pop on an empty stack causes underflow.</li>
+<li>C: 30 was inserted last, so it is removed first.</li>
+<li>B: For capacity 5, the last valid index is 4.</li>
+<li>C: Peek reads the top without removing it.</li>
+</ol>
+</div>
+</form>
+</section>
+
+<section class="card">
+<h2>Lesson Summary</h2>
+<ul>
+<li>A stack follows LIFO.</li>
+<li>Push inserts, pop removes, and peek reads the top element.</li>
+<li>For a basic array stack, top starts at -1.</li>
+<li>Overflow occurs when pushing into a full fixed-capacity stack; underflow occurs when removing from an empty stack.</li>
+<li>Push, pop and peek are typically O(1).</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Continue Learning</h2>
+<a class="btn secondary" href="ds-linked-lists.html">← Previous: Linked Lists</a>
+<a class="btn secondary" href="data-structure.html">Course Home</a>
+<a class="btn" href="ds-queues.html">Next: Queues →</a>
+<p class="small">The Next button works after ds-queues.html is created.</p>
+</section>
+</main>
+
+<footer><p>Haari_Codes | Learn. Practise. Build.</p></footer>
+
+<script>
+function checkAnswers(){
+ const correct={q1:"b",q2:"c",q3:"b",q4:"c",q5:"b",q6:"c"};
+ let score=0,unanswered=0;
+ for(const q in correct){
+  const selected=document.querySelector('input[name="'+q+'"]:checked');
+  if(!selected) unanswered++;
+  else if(selected.value===correct[q]) score++;
+ }
+ document.getElementById("result").textContent=
+ "Your score: "+score+"/6"+(unanswered?" | "+unanswered+" unanswered.":"");
+ document.getElementById("answers").hidden=false;
+}
+function resetQuiz(){
+ document.getElementById("quiz").reset();
+ document.getElementById("result").textContent="";
+ document.getElementById("answers").hidden=true;
+}
+</script>
+</body>
+</html>
