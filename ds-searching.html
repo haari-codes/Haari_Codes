@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Searching Algorithms | Haari_Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f4f6fb;color:#202938;line-height:1.7}
+header,footer{background:#111827;color:white;text-align:center;padding:22px 15px}
+header h1{margin:0;color:#93c5fd}
+header p{margin:5px 0}
+main{max-width:950px;margin:24px auto;padding:0 15px}
+section,.card{background:white;padding:22px;margin:18px 0;border-radius:13px;box-shadow:0 3px 12px #0000000c}
+h2,h3{color:#2563eb}
+h2{border-bottom:2px solid #dbeafe;padding-bottom:7px}
+code{background:#eaf1ff;padding:2px 5px;border-radius:4px}
+pre{background:#111827;color:#e5e7eb;padding:16px;border-radius:9px;overflow-x:auto;line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:9px;text-align:left}
+th{background:#dbeafe}
+button,.nav a{display:inline-block;background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:15px;margin:4px}
+button:hover,.nav a:hover{background:#1d4ed8}
+.question{padding:14px 0;border-bottom:1px solid #e5e7eb}
+label{display:block;margin:6px 0;cursor:pointer}
+#result{font-weight:bold;margin-top:12px}
+.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:25px 0}
+.small{font-size:.94rem;color:#4b5563}
+@media(max-width:600px){section,.card{padding:16px}table{font-size:14px}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari_Codes</h1>
+<p>Data Structures and Algorithms</p>
+<h2 style="color:white;border:0">Lesson 6: Searching Algorithms</h2>
+</header>
+
+<main>
+<section>
+<h2>1. What Is Searching?</h2>
+<p><b>Searching</b> is the process of finding a particular element or value in a collection of data.</p>
+<p>The value we want to find is called the <b>key</b> or <b>target</b>. A searching algorithm tells us whether the element exists and, usually, its position.</p>
+<p><b>Example:</b> Finding a student's roll number in a list, locating a contact in a phone, or finding a book in a library catalogue.</p>
+<div class="note"><b>Main searching algorithms:</b> Linear Search and Binary Search.</div>
+</section>
+
+<section>
+<h2>2. Linear Search</h2>
+<h3>Definition</h3>
+<p>Linear Search checks each element one by one, starting from the first element, until the target is found or the list ends.</p>
+<h3>Example</h3>
+<p>Array: <code>[12, 7, 25, 9, 18]</code><br>Target: <code>9</code></p>
+<ol>
+<li>Check 12. It is not 9.</li>
+<li>Check 7. It is not 9.</li>
+<li>Check 25. It is not 9.</li>
+<li>Check 9. Target found!</li>
+</ol>
+<p>The target is at index <code>3</code> in zero-based indexing, or position <code>4</code> when counting from 1.</p>
+
+<h3>Algorithm</h3>
+<ol>
+<li>Start from the first element.</li>
+<li>Compare the current element with the target.</li>
+<li>If they match, return its position.</li>
+<li>Otherwise, move to the next element.</li>
+<li>If all elements are checked, report that the target was not found.</li>
+</ol>
+
+<h3>Pseudocode</h3>
+<pre>LINEAR_SEARCH(A, n, key)
+    for i = 0 to n - 1
+        if A[i] == key
+            return i
+    return -1</pre>
+
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[] = {12, 7, 25, 9, 18};
+    int n = 5;
+    int key = 9;
+    int position = -1;
+
+    for (int i = 0; i &lt; n; i++) {
+        if (a[i] == key) {
+            position = i;
+            break;
+        }
+    }
+
+    if (position != -1)
+        cout &lt;&lt; "Found at index " &lt;&lt; position;
+    else
+        cout &lt;&lt; "Element not found";
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>Found at index 3</pre>
+
+<h3>Advantages</h3>
+<ul>
+<li>Simple and easy to implement.</li>
+<li>Works with sorted and unsorted data.</li>
+<li>Does not require extra storage for searching.</li>
+</ul>
+<h3>Disadvantages</h3>
+<ul>
+<li>May check every element in a large collection.</li>
+<li>Usually slower than Binary Search for large, sorted arrays.</li>
+</ul>
+</section>
+
+<section>
+<h2>3. Binary Search</h2>
+<h3>Definition</h3>
+<p>Binary Search finds a target by repeatedly dividing the search range into two halves.</p>
+<div class="note"><b>Important condition:</b> The data must be sorted in the order used by the algorithm. The example below uses ascending order.</div>
+
+<h3>Worked Example</h3>
+<p>Sorted array: <code>[3, 8, 12, 17, 23, 31, 42]</code><br>Target: <code>23</code></p>
+<table>
+<tr><th>Step</th><th>Low</th><th>High</th><th>Mid</th><th>Check</th></tr>
+<tr><td>1</td><td>0</td><td>6</td><td>3</td><td>17 &lt; 23, search right half</td></tr>
+<tr><td>2</td><td>4</td><td>6</td><td>5</td><td>31 &gt; 23, search left half</td></tr>
+<tr><td>3</td><td>4</td><td>4</td><td>4</td><td>23 found!</td></tr>
+</table>
+<p>The target is found at index <code>4</code>, which is position 5 when counting from 1.</p>
+
+<h3>How It Works</h3>
+<ol>
+<li>Set <code>low = 0</code> and <code>high = n - 1</code>.</li>
+<li>Calculate the middle index: <code>mid = low + (high - low) / 2</code>.</li>
+<li>If the middle element equals the target, return the index.</li>
+<li>If the target is greater, search the right half by setting <code>low = mid + 1</code>.</li>
+<li>If the target is smaller, search the left half by setting <code>high = mid - 1</code>.</li>
+<li>Repeat while <code>low &lt;= high</code>. If the range becomes empty, the target is absent.</li>
+</ol>
+
+<h3>Pseudocode</h3>
+<pre>BINARY_SEARCH(A, n, key)
+    low = 0
+    high = n - 1
+
+    while low &lt;= high
+        mid = low + (high - low) / 2
+
+        if A[mid] == key
+            return mid
+        else if A[mid] &lt; key
+            low = mid + 1
+        else
+            high = mid - 1
+
+    return -1</pre>
+
+<h3>C++ Program</h3>
+<pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a[] = {3, 8, 12, 17, 23, 31, 42};
+    int n = 7;
+    int key = 23;
+
+    int low = 0;
+    int high = n - 1;
+    int position = -1;
+
+    while (low &lt;= high) {
+        int mid = low + (high - low) / 2;
+
+        if (a[mid] == key) {
+            position = mid;
+            break;
+        }
+        else if (a[mid] &lt; key) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    }
+
+    if (position != -1)
+        cout &lt;&lt; "Found at index " &lt;&lt; position;
+    else
+        cout &lt;&lt; "Element not found";
+
+    return 0;
+}</pre>
+<p><b>Output:</b></p>
+<pre>Found at index 4</pre>
+
+<h3>Advantages</h3>
+<ul>
+<li>Very efficient for large, sorted arrays.</li>
+<li>Reduces the search range by about half each step.</li>
+</ul>
+<h3>Disadvantages</h3>
+<ul>
+<li>Requires sorted data.</li>
+<li>Sorting data first can take extra time if it is not already sorted.</li>
+<li>It is less straightforward than Linear Search.</li>
+</ul>
+</section>
+
+<section>
+<h2>4. Linear Search vs Binary Search</h2>
+<table>
+<tr><th>Feature</th><th>Linear Search</th><th>Binary Search</th></tr>
+<tr><td>Method</td><td>Checks elements one by one</td><td>Repeatedly halves the search range</td></tr>
+<tr><td>Sorted data required?</td><td>No</td><td>Yes, for this method</td></tr>
+<tr><td>Best time</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Average time</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Worst time</td><td>O(n)</td><td>O(log n)</td></tr>
+<tr><td>Iterative extra space</td><td>O(1)</td><td>O(1)</td></tr>
+<tr><td>Best suited for</td><td>Small or unsorted lists</td><td>Large, sorted arrays</td></tr>
+</table>
+<p><b>Complexity reminder:</b> <code>n</code> represents the number of elements. O(n) means the work may grow proportionally with the number of elements. O(log n) grows much more slowly because the search range is halved each step.</p>
+</section>
+
+<section>
+<h2>5. Applications of Searching</h2>
+<ul>
+<li>Finding a contact in a contact list.</li>
+<li>Searching student records using roll numbers.</li>
+<li>Finding an item in a database or catalogue.</li>
+<li>Looking up words in a dictionary.</li>
+<li>Searching for a file or record by its name or ID.</li>
+</ul>
+</section>
+
+<section>
+<h2>6. Quick Check 🧠</h2>
+<p>Choose one answer for each question, then press <b>Check Answers</b>.</p>
+<form id="quiz">
+<div class="question">
+<p><b>1. Which search checks elements one by one?</b></p>
+<label><input type="radio" name="q1" value="a"> Binary Search</label>
+<label><input type="radio" name="q1" value="b"> Linear Search</label>
+<label><input type="radio" name="q1" value="c"> Hashing</label>
+</div>
+<div class="question">
+<p><b>2. What is the important requirement for Binary Search?</b></p>
+<label><input type="radio" name="q2" value="a"> The array must be sorted</label>
+<label><input type="radio" name="q2" value="b"> The array must contain only odd numbers</label>
+<label><input type="radio" name="q2" value="c"> The array must have exactly 10 elements</label>
+</div>
+<div class="question">
+<p><b>3. What is the worst-case time complexity of Linear Search?</b></p>
+<label><input type="radio" name="q3" value="a"> O(1)</label>
+<label><input type="radio" name="q3" value="b"> O(log n)</label>
+<label><input type="radio" name="q3" value="c"> O(n)</label>
+</div>
+<div class="question">
+<p><b>4. What is the worst-case time complexity of Binary Search?</b></p>
+<label><input type="radio" name="q4" value="a"> O(n²)</label>
+<label><input type="radio" name="q4" value="b"> O(log n)</label>
+<label><input type="radio" name="q4" value="c"> O(n)</label>
+</div>
+<div class="question">
+<p><b>5. In the array [2, 4, 6, 8], what is the zero-based index of 6?</b></p>
+<label><input type="radio" name="q5" value="a"> 1</label>
+<label><input type="radio" name="q5" value="b"> 2</label>
+<label><input type="radio" name="q5" value="c"> 3</label>
+</div>
+<button type="button" onclick="checkAnswers()">Check Answers</button>
+<button type="reset" onclick="document.getElementById('result').textContent=''">Try Again</button>
+<p id="result" aria-live="polite"></p>
+</form>
+</section>
+
+<div class="nav">
+<a href="ds-queues.html">← Previous: Queues</a>
+<a href="data-structure.html">Course Home</a>
+<a href="ds-sorting.html">Next: Sorting →</a>
+</div>
+</main>
+
+<footer>
+<p>Haari_Codes | Learn. Practise. Build. 💙</p>
+<p class="small" style="color:#d1d5db">One concept at a time, one step closer to mastery.</p>
+</footer>
+
+<script>
+function checkAnswers(){
+    const answers = {q1:"b",q2:"a",q3:"c",q4:"b",q5:"b"};
+    let score = 0;
+    let unanswered = 0;
+
+    for(const question in answers){
+        const selected = document.querySelector('input[name="'+question+'"]:checked');
+        if(!selected){
+            unanswered++;
+        } else if(selected.value === answers[question]){
+            score++;
+        }
+    }
+
+    const result = document.getElementById("result");
+    if(unanswered > 0){
+        result.textContent = "Please answer all 5 questions first. You have "+unanswered+" unanswered.";
+        return;
+    }
+
+    result.textContent = "Your score: "+score+"/5. "+
+        (score===5 ? "Excellent! Searching pro aanallo! 🎉" :
+        score>=3 ? "Good work! Review the missed concepts and try again. 💙" :
+        "Keep practising! Read the examples once more and retry. 💪");
+}
+</script>
+</body>
+</html>
