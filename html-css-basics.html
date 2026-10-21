@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Basics | CS Companion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f4ff;color:#30234a;line-height:1.7}
+header{background:#6541a5;color:white;padding:24px 16px;text-align:center}
+header h1{margin:0}
+nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+nav a{color:white;text-decoration:none;border:1px solid #d9c9ff;padding:6px 12px;border-radius:8px}
+main{max-width:900px;margin:auto;padding:18px}
+section{background:white;border:1px solid #e5dcfa;border-radius:14px;padding:18px;margin:16px 0}
+h2{color:#6541a5}
+code,pre{background:#f0eaff;border-radius:6px;padding:3px 6px;overflow-wrap:anywhere}
+pre{padding:14px;overflow-x:auto;white-space:pre-wrap}
+button{background:#6541a5;color:white;border:0;border-radius:8px;padding:10px 15px;cursor:pointer;font-family:inherit;margin:4px}
+.demo{background:#faf8ff;padding:16px;border-radius:10px}
+#sample{background:white;border:1px solid #ddd;padding:16px;border-radius:8px}
+label{display:block;margin:7px 0}
+.question{border-bottom:1px solid #eee;padding:12px 0}
+footer{text-align:center;padding:20px;color:#6c5a85}
+</style>
+</head>
+<body>
+<header>
+<h1>CSS Basics 🎨</h1>
+<p>CS Companion | HTML Lesson 10</p>
+<nav>
+<a href="html-audio-video.html">← Previous</a>
+<a href="index.html">Home</a>
+<a href="error-detector.html">Error Detector →</a>
+</nav>
+</header><main>
+<section>
+<h2>1. What is CSS?</h2>
+<p><b>CSS</b> stands for Cascading Style Sheets. It controls how HTML elements look on a webpage.</p>
+<ul>
+<li>HTML creates the structure and content.</li>
+<li>CSS controls colours, fonts, spacing, borders and layout.</li>
+<li>JavaScript adds behaviour and interactivity.</li>
+</ul>
+</section><section>
+<h2>2. CSS Syntax</h2>
+<pre><code>p {
+  color: purple;
+  font-size: 18px;
+}</code></pre>
+<p>Every CSS rule contains a selector and a declaration block.</p>
+<ul>
+<li><code>p</code> is the selector. It targets paragraph elements.</li>
+<li><code>color</code> is a property.</li>
+<li><code>purple</code> is the property's value.</li>
+<li>A semicolon separates declarations.</li>
+</ul>
+</section><section>
+<h2>3. Three Ways to Add CSS</h2>
+<h3>Inline CSS</h3>
+<pre><code>&lt;p style="color: purple;"&gt;Hello!&lt;/p&gt;</code></pre>
+<p>CSS is written directly inside an HTML element's <code>style</code> attribute.</p><h3>Internal CSS</h3>
+<pre><code>&lt;head&gt;
+  &lt;style&gt;
+    p { color: purple; }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+<p>CSS is written inside a <code>&lt;style&gt;</code> element in the HTML document.</p><h3>External CSS</h3>
+<pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+<p>CSS is saved in a separate file, such as <code>style.css</code>. External CSS is especially useful for styling multiple pages consistently.</p>
+</section><section>
+<h2>4. CSS Selectors</h2>
+<pre><code>/* Element selector */
+p { color: purple; }/* Class selector */
+.note { background: lavender; }
+
+/* ID selector */
+#heading { font-size: 28px; }</code></pre>
+
+<ul>
+<li><b>Element selector:</b> targets all elements of that type.</li>
+<li><b>Class selector:</b> starts with a dot (<code>.</code>) and can be reused.</li>
+<li><b>ID selector:</b> starts with <code>#</code> and should identify one unique element on a page.</li>
+</ul>
+</section><section>
+<h2>5. Common CSS Properties</h2>
+<ul>
+<li><code>color</code>: text colour.</li>
+<li><code>background-color</code>: background colour.</li>
+<li><code>font-size</code>: text size.</li>
+<li><code>font-family</code>: font style.</li>
+<li><code>text-align</code>: text alignment.</li>
+<li><code>margin</code>: space outside an element.</li>
+<li><code>padding</code>: space inside an element's border.</li>
+<li><code>border</code>: draws a border.</li>
+<li><code>width</code> and <code>height</code>: control dimensions.</li>
+</ul>
+</section><section>
+<h2>6. Margin vs Padding</h2>
+<p><b>Margin</b> creates space outside an element. <b>Padding</b> creates space between the content and its border.</p>
+<pre><code>.card {
+  margin: 20px;
+  padding: 15px;
+  border: 2px solid purple;
+}</code></pre>
+<p>Remember: margin = outside space; padding = inside space.</p>
+</section><section>
+<h2>7. Live CSS Playground</h2>
+<p>Change the options and watch the sample update.</p>
+<div class="demo">
+<label for="colour">Text colour</label>
+<select id="colour">
+<option value="purple">Purple</option>
+<option value="deeppink">Deep pink</option>
+<option value="teal">Teal</option>
+<option value="black">Black</option>
+</select>
+<label for="size">Font size</label>
+<select id="size">
+<option value="16px">16px</option>
+<option value="20px">20px</option>
+<option value="26px">26px</option>
+</select>
+<label for="bg">Background</label>
+<select id="bg">
+<option value="#ffffff">White</option>
+<option value="#f0eaff">Lavender</option>
+<option value="#ffe5f0">Pink</option>
+</select>
+<div id="sample">
+<h3>Welcome to CS Companion!</h3>
+<p>CSS makes a webpage beautiful and readable.</p>
+</div>
+<button type="button" id="resetDemo">Reset Playground</button>
+</div>
+</section><section>
+<h2>8. Quick Quiz 📝</h2>
+<form id="quiz">
+<div class="question">
+<p>1. What does CSS stand for?</p>
+<label><input type="radio" name="q1" value="a"> Computer Style System</label>
+<label><input type="radio" name="q1" value="b"> Cascading Style Sheets</label>
+<label><input type="radio" name="q1" value="c"> Creative System Software</label>
+<p id="f1"></p>
+</div>
+<div class="question">
+<p>2. Which symbol selects a class?</p>
+<label><input type="radio" name="q2" value="a"> #</label>
+<label><input type="radio" name="q2" value="b"> .</label>
+<label><input type="radio" name="q2" value="c"> @</label>
+<p id="f2"></p>
+</div>
+<div class="question">
+<p>3. Which HTML element contains internal CSS?</p>
+<label><input type="radio" name="q3" value="a"> &lt;css&gt;</label>
+<label><input type="radio" name="q3" value="b"> &lt;design&gt;</label>
+<label><input type="radio" name="q3" value="c"> &lt;style&gt;</label>
+<p id="f3"></p>
+</div>
+<div class="question">
+<p>4. Which property changes text colour?</p>
+<label><input type="radio" name="q4" value="a"> color</label>
+<label><input type="radio" name="q4" value="b"> font-style-size</label>
+<label><input type="radio" name="q4" value="c"> background-image</label>
+<p id="f4"></p>
+</div>
+<div class="question">
+<p>5. Which property creates space inside the border?</p>
+<label><input type="radio" name="q5" value="a"> margin</label>
+<label><input type="radio" name="q5" value="b"> padding</label>
+<label><input type="radio" name="q5" value="c"> outline</label>
+<p id="f5"></p>
+</div>
+<button type="submit">Check Answers</button>
+<button type="button" id="resetQuiz">Try Again</button>
+<p id="result"></p>
+</form>
+</section><nav>
+<a href="html-audio-video.html">← Previous Lesson</a>
+<a href="index.html">Home</a>
+<a href="error-detector.html">Next: Error Detector →</a>
+</nav>
+</main><footer>Made with 💜 by Haari Codes | CS Companion</footer><script>
+const sample = document.getElementById("sample");
+const colour = document.getElementById("colour");
+const size = document.getElementById("size");
+const bg = document.getElementById("bg");
+
+function applyCSS(){
+  sample.style.color = colour.value;
+  sample.style.fontSize = size.value;
+  sample.style.backgroundColor = bg.value;
+}
+colour.addEventListener("change", applyCSS);
+size.addEventListener("change", applyCSS);
+bg.addEventListener("change", applyCSS);
+
+document.getElementById("resetDemo").addEventListener("click", function(){
+  colour.value = "purple";
+  size.value = "16px";
+  bg.value = "#ffffff";
+  applyCSS();
+});
+
+const answers = {
+  q1:["b","CSS means Cascading Style Sheets."],
+  q2:["b","A dot selects a class, for example .note."],
+  q3:["c","Internal CSS is written inside the <style> element."],
+  q4:["a","The color property changes text colour."],
+  q5:["b","Padding creates space inside an element's border."]
+};
+
+document.getElementById("quiz").addEventListener("submit",function(event){
+  event.preventDefault();
+  let score = 0;
+  for(let i=1;i<=5;i++){
+    const key="q"+i;
+    const chosen=document.querySelector('input[name="'+key+'"]:checked');
+    const feedback=document.getElementById("f"+i);
+    if(chosen && chosen.value===answers[key][0]){
+      score++;
+      feedback.textContent="Correct! "+answers[key][1];
+      feedback.style.color="green";
+    }else{
+      feedback.textContent="Correct answer: "+answers[key][0].toUpperCase()+". "+answers[key][1];
+      feedback.style.color="#b42318";
+    }
+  }
+  document.getElementById("result").textContent="Your score: "+score+"/5";
+});
+
+document.getElementById("resetQuiz").addEventListener("click",function(){
+  document.getElementById("quiz").reset();
+  for(let i=1;i<=5;i++) document.getElementById("f"+i).textContent="";
+  document.getElementById("result").textContent="";
+});
+</script></body>
+</html>
