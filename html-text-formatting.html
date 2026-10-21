@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Text Formatting | CS Companion</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #f7f3ff;
+    color: #29213b;
+    line-height: 1.7;
+}
+
+header {
+    background: #6c3bbd;
+    color: white;
+    text-align: center;
+    padding: 24px 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 0 16px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #29134b12;
+}
+
+h2 {
+    color: #6c3bbd;
+}
+
+code, pre {
+    background: #f0e8ff;
+    border-radius: 6px;
+}
+
+code {
+    padding: 3px 6px;
+    overflow-wrap: anywhere;
+}
+
+pre {
+    padding: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+button, .nav a {
+    display: inline-block;
+    background: #6c3bbd;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 5px 4px 5px 0;
+    font: inherit;
+}
+
+button:hover, .nav a:hover {
+    background: #4d258e;
+}
+
+.question {
+    border-bottom: 1px solid #e7def5;
+    padding: 12px 0;
+}
+
+label {
+    display: block;
+    margin: 7px 0;
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #655477;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>HTML Text Formatting</h1>
+    <p>CS Companion | HTML Lesson 03</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+    <h2>1. What is Text Formatting?</h2>
+    <p>
+        HTML text formatting tags change the appearance or meaning of text.
+        We can make text bold, italic, highlighted, smaller, or display it
+        as inserted or deleted text.
+    </p>
+    <p>Example:</p>
+    <pre><code>&lt;p&gt;This is &lt;strong&gt;important&lt;/strong&gt; text.&lt;/p&gt;</code></pre>
+    <p>Output: This is <strong>important</strong> text.</p>
+</section>
+
+<section class="card">
+    <h2>2. Important Formatting Tags</h2>
+
+    <p><code>&lt;b&gt;</code> makes text bold visually.</p>
+    <pre><code>&lt;b&gt;Bold text&lt;/b&gt;</code></pre>
+    <p><b>Bold text</b></p>
+
+    <p><code>&lt;strong&gt;</code> indicates that text is important.</p>
+    <pre><code>&lt;strong&gt;Important text&lt;/strong&gt;</code></pre>
+    <p><strong>Important text</strong></p>
+
+    <p><code>&lt;i&gt;</code> displays text in italics.</p>
+    <pre><code>&lt;i&gt;Italic text&lt;/i&gt;</code></pre>
+    <p><i>Italic text</i></p>
+
+    <p><code>&lt;em&gt;</code> adds emphasis to text.</p>
+    <pre><code>&lt;em&gt;Emphasized text&lt;/em&gt;</code></pre>
+    <p><em>Emphasized text</em></p>
+
+    <p><code>&lt;u&gt;</code> underlines text.</p>
+    <pre><code>&lt;u&gt;Underlined text&lt;/u&gt;</code></pre>
+    <p><u>Underlined text</u></p>
+
+    <p><code>&lt;mark&gt;</code> highlights text.</p>
+    <pre><code>&lt;mark&gt;Highlighted text&lt;/mark&gt;</code></pre>
+    <p><mark>Highlighted text</mark></p>
+
+    <p><code>&lt;small&gt;</code> displays smaller text.</p>
+    <pre><code>&lt;small&gt;Small text&lt;/small&gt;</code></pre>
+    <p><small>Small text</small></p>
+
+    <p><code>&lt;del&gt;</code> represents deleted text.</p>
+    <pre><code>&lt;del&gt;Old price: ₹500&lt;/del&gt;</code></pre>
+    <p><del>Old price: ₹500</del></p>
+
+    <p><code>&lt;ins&gt;</code> represents inserted text.</p>
+    <pre><code>&lt;ins&gt;New price: ₹400&lt;/ins&gt;</code></pre>
+    <p><ins>New price: ₹400</ins></p>
+
+    <p><code>&lt;sub&gt;</code> displays subscript text.</p>
+    <pre><code>H&lt;sub&gt;2&lt;/sub&gt;O</code></pre>
+    <p>H<sub>2</sub>O</p>
+
+    <p><code>&lt;sup&gt;</code> displays superscript text.</p>
+    <pre><code>x&lt;sup&gt;2&lt;/sup&gt;</code></pre>
+    <p>x<sup>2</sup></p>
+</section>
+
+<section class="card">
+    <h2>3. Difference Between b and strong</h2>
+    <p>
+        Both <code>&lt;b&gt;</code> and <code>&lt;strong&gt;</code>
+        usually appear bold in a browser.
+    </p>
+    <ul>
+        <li><b>b:</b> Draws attention visually without adding importance by itself.</li>
+        <li><b>strong:</b> Marks content as important.</li>
+    </ul>
+
+    <h2>4. Difference Between i and em</h2>
+    <ul>
+        <li><code>&lt;i&gt;</code> is often used for alternate voice, terms, or titles.</li>
+        <li><code>&lt;em&gt;</code> gives emphasis to words in a sentence.</li>
+    </ul>
+</section>
+
+<section class="card">
+    <h2>5. Try It Yourself</h2>
+    <p>Click the button to see a formatted HTML example.</p>
+
+    <button onclick="showExample()">Show Example</button>
+    <div id="exampleOutput"></div>
+
+    <script>
+    function showExample() {
+        document.getElementById("exampleOutput").innerHTML =
+            "<p><strong>Welcome!</strong></p>" +
+            "<p>This is <em>HTML</em> text formatting.</p>" +
+            "<p>Water formula: H<sub>2</sub>O</p>" +
+            "<p>Math example: x<sup>2</sup></p>" +
+            "<p><mark>Keep learning!</mark></p>";
+    }
+    </script>
+</section>
+
+<section class="card">
+    <h2>6. Quick Quiz</h2>
+    <p>Answer all five questions and check your score.</p>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <p>1. Which tag indicates important text?</p>
+            <label><input type="radio" name="q1" value="a"> &lt;small&gt;</label>
+            <label><input type="radio" name="q1" value="b"> &lt;strong&gt;</label>
+            <label><input type="radio" name="q1" value="c"> &lt;sub&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>2. Which tag highlights text?</p>
+            <label><input type="radio" name="q2" value="a"> &lt;del&gt;</label>
+            <label><input type="radio" name="q2" value="b"> &lt;sup&gt;</label>
+            <label><input type="radio" name="q2" value="c"> &lt;mark&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>3. Which tag creates subscript text?</p>
+            <label><input type="radio" name="q3" value="a"> &lt;sub&gt;</label>
+            <label><input type="radio" name="q3" value="b"> &lt;em&gt;</label>
+            <label><input type="radio" name="q3" value="c"> &lt;ins&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>4. Which tag represents deleted text?</p>
+            <label><input type="radio" name="q4" value="a"> &lt;strong&gt;</label>
+            <label><input type="radio" name="q4" value="b"> &lt;del&gt;</label>
+            <label><input type="radio" name="q4" value="c"> &lt;mark&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>5. Which tag creates superscript text?</p>
+            <label><input type="radio" name="q5" value="a"> &lt;u&gt;</label>
+            <label><input type="radio" name="q5" value="b"> &lt;small&gt;</label>
+            <label><input type="radio" name="q5" value="c"> &lt;sup&gt;</label>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+        <button type="reset" onclick="resetQuiz()">Try Again</button>
+    </form>
+
+    <div id="result"></div>
+</section>
+
+<section class="card nav">
+    <h2>Lesson Navigation</h2>
+    <a href="html-tags.html">← Previous Lesson</a>
+    <a href="index.html">Home</a>
+    <a href="html-links-images.html">Next Lesson →</a>
+</section>
+
+</main>
+
+<footer>
+    <p>Haari_Codes | Learn • Practice • Grow 💜</p>
+</footer>
+
+<script>
+function checkQuiz() {
+    const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "a",
+        q4: "b",
+        q5: "c"
+    };
+
+    let score = 0;
+    let unanswered = [];
+
+    for (const question in answers) {
+        const selected = document.querySelector(
+            'input[name="' + question + '"]:checked'
+        );
+
+        if (!selected) {
+            unanswered.push(question);
+        } else if (selected.value === answers[question]) {
+            score++;
+        }
+    }
+
+    const result = document.getElementById("result");
+
+    if (unanswered.length > 0) {
+        result.textContent = "Please answer all five questions first.";
+        return;
+    }
+
+    result.textContent = "Your score: " + score +
+        "/5. " + (score === 5
+        ? "Excellent work! 🎉"
+        : "Review the lesson and try again. 💜");
+}
+
+function resetQuiz() {
+    document.getElementById("result").textContent = "";
+}
+</script>
+
+</body>
+</html>
