@@ -1,480 +1,749 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haari Codes | Smart Quiz</title>
 
-    <title>Quiz Zone | Haari Codes</title>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Georgia, serif;
+  background: #f7f5ff;
+  color: #292344;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
+header {
+  text-align: center;
+  margin: 10px auto 25px;
+}
 
-        header {
-            background: #2563eb;
-            color: white;
-            text-align: center;
-            padding: 22px 15px;
-        }
+header h1 {
+  color: #6554c0;
+  margin-bottom: 6px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+header p {
+  color: #77718e;
+}
 
-        header p {
-            margin: 6px 0 0;
-        }
+.container {
+  max-width: 650px;
+  margin: auto;
+}
 
-        .container {
-            max-width: 650px;
-            margin: 25px auto;
-            padding: 15px;
-        }
+.card {
+  background: white;
+  border: 1px solid #e4dfff;
+  border-radius: 18px;
+  padding: 23px;
+  box-shadow: 0 6px 20px #33226612;
+}
 
-        .back-link {
-            display: inline-block;
-            text-decoration: none;
-            color: #2563eb;
-            font-weight: bold;
-            margin-bottom: 18px;
-        }
+label {
+  display: block;
+  margin: 14px 0 7px;
+  font-weight: bold;
+}
 
-        .quiz-card {
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-        }
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cfc6ff;
+  border-radius: 10px;
+  background: white;
+  color: #292344;
+  font-size: 16px;
+}
 
-        .badge {
-            display: inline-block;
-            background: #dbeafe;
-            color: #1d4ed8;
-            padding: 7px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+button {
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-top: 15px;
+}
 
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0 8px;
-            font-size: 13px;
-            color: #64748b;
-        }
+.primary {
+  background: #6b59c8;
+  color: white;
+  width: 100%;
+}
 
-        .progress-track {
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+.secondary {
+  background: #eeeaff;
+  color: #5141a3;
+}
 
-        #progressBar {
-            height: 100%;
-            width: 0%;
-            background: #2563eb;
-            transition: width 0.3s;
-        }
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
 
-        #question {
-            font-size: 21px;
-            line-height: 1.5;
-            margin: 25px 0 20px;
-        }
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #70678e;
+  font-size: 14px;
+}
 
-        #options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+.progress {
+  height: 7px;
+  background: #eeeaff;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 14px 0 22px;
+}
 
-        .option {
-            padding: 14px;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: #7967dc;
+  transition: width .2s;
+}
 
-        .option:hover:not(:disabled) {
-            border-color: #2563eb;
-            background: #eff6ff;
-        }
+#question {
+  font-size: 21px;
+  line-height: 1.5;
+}
 
-        .option:disabled {
-            cursor: default;
-            color: #1e293b;
-        }
+.option {
+  display: block;
+  text-align: left;
+  width: 100%;
+  margin: 10px 0;
+  background: #faf9ff;
+  border: 1px solid #e2ddfa;
+  color: #292344;
+  line-height: 1.4;
+}
 
-        .option.correct {
-            background: #dcfce7;
-            border-color: #16a34a;
-        }
+.option:hover:not(:disabled) {
+  background: #f0edff;
+  border-color: #8a79e6;
+}
 
-        .option.wrong {
-            background: #fee2e2;
-            border-color: #dc2626;
-        }
+.option.correct {
+  background: #e7f8ed;
+  border-color: #49a86a;
+  color: #155c2b;
+}
 
-        #feedback {
-            min-height: 25px;
-            margin-top: 18px;
-            font-weight: bold;
-            line-height: 1.5;
-        }
+.option.wrong {
+  background: #fff0f0;
+  border-color: #df7777;
+  color: #8a2525;
+}
 
-        .next-btn, .restart-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-        }
+#feedback {
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 10px;
+  line-height: 1.5;
+  background: #f3f0ff;
+}
 
-        .next-btn:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
+.hidden {
+  display: none;
+}
 
-        #resultScreen {
-            display: none;
-            text-align: center;
-        }
+#result {
+  text-align: center;
+}
 
-        .trophy {
-            font-size: 65px;
-            margin: 10px 0;
-        }
+#result h2 {
+  color: #6554c0;
+}
 
-        #finalScore {
-            font-size: 38px;
-            font-weight: bold;
-            color: #2563eb;
-            margin: 15px 0;
-        }
+.small {
+  color: #77718e;
+  font-size: 14px;
+  line-height: 1.5;
+}
 
-        #resultMessage {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .score-box {
-            background: #eff6ff;
-            border-radius: 12px;
-            padding: 18px;
-            margin-top: 20px;
-        }
-
-        footer {
-            text-align: center;
-            color: #64748b;
-            padding: 20px;
-            font-size: 13px;
-        }
-
-        @media (max-width: 480px) {
-            .quiz-card {
-                padding: 18px;
-            }
-
-            #question {
-                font-size: 19px;
-            }
-        }
-    </style>
+footer {
+  text-align: center;
+  color: #8b85a1;
+  margin: 25px 0 10px;
+  font-size: 13px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Haari Codes</h1>
-    <p>CS Companion | Quiz Zone 🧠</p>
+  <h1>haari_codes</h1>
+  <p>Learn · Practise · Improve 💜</p>
 </header>
 
-<div class="container">
+<main class="container">
 
-    <a href="index.html" class="back-link">
-        ← Back to Home
-    </a>
+  <section class="card" id="setup">
+    <h2>Smart Quiz</h2>
+    <p>Choose a subject and test your knowledge!</p>
 
-    <div class="quiz-card" id="quizScreen">
+    <label for="topic">Choose topic</label>
+    <select id="topic">
+      <option value="all">All Topics</option>
+      <option value="c">C Programming</option>
+      <option value="cpp">C++</option>
+      <option value="ds">Data Structures</option>
+      <option value="sql">SQL</option>
+      <option value="html">HTML</option>
+    </select>
 
-        <span class="badge">💻 COMPUTER SCIENCE</span>
+    <label for="amount">Number of questions</label>
+    <select id="amount">
+      <option value="5">5 Questions</option>
+      <option value="10" selected>10 Questions</option>
+      <option value="15">15 Questions</option>
+      <option value="20">20 Questions</option>
+      <option value="all">All Available Questions</option>
+    </select>
 
-        <div class="progress-info">
-            <span id="questionNumber">Question 1 of 5</span>
-            <span id="scoreDisplay">Score: 0</span>
-        </div>
+    <p class="small">
+      Questions and answer choices are shuffled each time.
+      Correct answers can appear under A, B, C or D.
+    </p>
 
-        <div class="progress-track">
-            <div id="progressBar"></div>
-        </div>
+    <button class="primary" id="startBtn">Start Quiz</button>
+    <button class="secondary" onclick="location.href='index.html'">
+      ← Back to Home
+    </button>
+  </section>
 
-        <h2 id="question">Question loading...</h2>
-
-        <div id="options"></div>
-
-        <p id="feedback" aria-live="polite"></p>
-
-        <button class="next-btn" id="nextBtn" disabled>
-            Next Question →
-        </button>
-
+  <section class="card hidden" id="quiz">
+    <div class="topline">
+      <span id="questionCount">Question 1</span>
+      <span id="scoreLabel">Score: 0</span>
     </div>
 
-    <div class="quiz-card" id="resultScreen">
-
-        <div class="trophy" id="trophy">🏆</div>
-
-        <h2>Quiz Completed!</h2>
-
-        <p>Your final score is</p>
-
-        <div id="finalScore">0 / 5</div>
-
-        <div class="score-box">
-            <p id="resultMessage"></p>
-        </div>
-
-        <button class="restart-btn" onclick="startQuiz()">
-            🔄 Try Again
-        </button>
-
-        <a href="courses.html"
-           class="back-link"
-           style="margin-top:20px">
-            📚 Explore Courses
-        </a>
-
+    <div class="progress">
+      <div id="progressBar"></div>
     </div>
 
-</div>
+    <p class="small" id="topicLabel"></p>
+    <h2 id="question"></h2>
+    <div id="options"></div>
 
-<footer>
-    © 2026 Haari Codes | Learn. Practice. Improve.
-</footer>
+    <div id="feedback" class="hidden" aria-live="polite"></div>
+
+    <button class="primary hidden" id="nextBtn">Next Question →</button>
+  </section>
+
+  <section class="card hidden" id="result">
+    <h2>Quiz Completed! 🎉</h2>
+    <p id="finalScore"></p>
+    <h2 id="percentage"></h2>
+    <p id="message"></p>
+    <button class="primary" id="retryBtn">Try Another Quiz</button>
+    <button class="secondary" onclick="location.href='index.html'">
+      ← Back to Home
+    </button>
+  </section>
+
+</main>
+
+<footer>Made with 💜 by Haari Codes</footer>
 
 <script>
+/*
+ Add more questions to this question bank.
+ Each question must have: topic, question, options, answer, explanation.
+ The answer must exactly match one of the options.
+*/
 
-const questions = [
-    {
-        question: "1. Which function is the starting point of a C program?",
-        options: ["printf()", "main()", "scanf()", "return()"],
-        answer: 1,
-        explanation: "The main() function is the entry point of a C program."
-    },
+const questionBank = [
+  // C PROGRAMMING
+  {
+    topic:"c", question:"Which symbol ends most C statements?",
+    options:[";",":",".",","], answer:";",
+    explanation:"A semicolon (;) terminates most C statements."
+  },
+  {
+    topic:"c", question:"Which function is the usual starting point of a C program?",
+    options:["start()","main()","run()","begin()"], answer:"main()",
+    explanation:"Program execution begins at main() in a standard hosted C program."
+  },
+  {
+    topic:"c", question:"Which header is needed for printf()?",
+    options:["<stdlib.h>","<string.h>","<stdio.h>","<math.h>"], answer:"<stdio.h>",
+    explanation:"stdio.h declares standard input/output functions such as printf()."
+  },
+  {
+    topic:"c", question:"Which format specifier is commonly used to print an int?",
+    options:["%f","%c","%s","%d"], answer:"%d",
+    explanation:"%d is commonly used to print an int in printf()."
+  },
+  {
+    topic:"c", question:"Which type stores a single character in C?",
+    options:["char","string","word","character"], answer:"char",
+    explanation:"C uses char to store a character value."
+  },
+  {
+    topic:"c", question:"Which operator gives the remainder of integer division?",
+    options:["/","%","*","//"], answer:"%",
+    explanation:"The modulo operator % gives the remainder for integer operands."
+  },
+  {
+    topic:"c", question:"Which loop checks its condition before each iteration?",
+    options:["do-while only","switch","while","if"], answer:"while",
+    explanation:"A while loop checks the condition before running its body."
+  },
+  {
+    topic:"c", question:"Array indexing in C normally starts at:",
+    options:["1","-1","It depends on the array","0"], answer:"0",
+    explanation:"The first element of an array has index 0."
+  },
+  {
+    topic:"c", question:"Which keyword returns a value from a function?",
+    options:["break","return","continue","output"], answer:"return",
+    explanation:"return ends a function and can send a value back to its caller."
+  },
+  {
+    topic:"c", question:"Which operator accesses the value through a pointer?",
+    options:["&","*","%","#"], answer:"*",
+    explanation:"The unary * operator dereferences a pointer."
+  },
+  {
+    topic:"c", question:"Which statement selects between alternatives using a condition?",
+    options:["typedef","include","if","define"], answer:"if",
+    explanation:"An if statement executes code based on whether its condition is true."
+  },
+  {
+    topic:"c", question:"Which function reads formatted input from standard input?",
+    options:["printf()","scanf()","puts()","strlen()"], answer:"scanf()",
+    explanation:"scanf() reads formatted input from standard input."
+  },
+  {
+    topic:"c", question:"Which loop always executes its body at least once?",
+    options:["for","while","do-while","none of these"], answer:"do-while",
+    explanation:"A do-while loop checks its condition after executing the body."
+  },
+  {
+    topic:"c", question:"Which operator checks equality?",
+    options:["=","==","!=","<="], answer:"==",
+    explanation:"== compares two values; = is the assignment operator."
+  },
+  {
+    topic:"c", question:"Which standard function finds the length of a C string?",
+    options:["size()","length()","strlen()","count()"], answer:"strlen()",
+    explanation:"strlen() returns the number of characters before the terminating null character."
+  },
+  {
+    topic:"c", question:"Which keyword defines a structure in C?",
+    options:["class","struct","record","object"], answer:"struct",
+    explanation:"struct defines a user-defined aggregate type in C."
+  },
+  {
+    topic:"c", question:"What does break do inside a loop?",
+    options:["Skips one iteration","Restarts the program","Exits the loop","Ends the computer"], answer:"Exits the loop",
+    explanation:"break immediately exits the nearest enclosing loop or switch."
+  },
+  {
+    topic:"c", question:"Which is a valid single-line comment in C?",
+    options:["// comment","<!-- comment -->","** comment","## comment"], answer:"// comment",
+    explanation:"C supports // single-line comments and /* ... */ block comments."
+  },
+  {
+    topic:"c", question:"Which operator obtains the address of a variable?",
+    options:["*","&","!","%"], answer:"&",
+    explanation:"The unary & operator obtains an object's address."
+  },
+  {
+    topic:"c", question:"Which keyword skips to the next loop iteration?",
+    options:["stop","exit","continue","break"], answer:"continue",
+    explanation:"continue skips the remaining body and proceeds to the next iteration."
+  },
 
-    {
-        question: "2. Which data type is used to store a whole number in C?",
-        options: ["float", "char", "int", "double"],
-        answer: 2,
-        explanation: "The int data type is used to store integer values."
-    },
+  // C++
+  {
+    topic:"cpp", question:"Which language feature is used to create a class in C++?",
+    options:["struct only","class","define","package"], answer:"class",
+    explanation:"The class keyword declares a class in C++."
+  },
+  {
+    topic:"cpp", question:"Which stream is commonly used for output in C++?",
+    options:["cin","cout","input","print"], answer:"cout",
+    explanation:"std::cout is the standard output stream."
+  },
+  {
+    topic:"cpp", question:"Which operator is used with cout to send output?",
+    options:["<<",">>","&&","::"], answer:"<<",
+    explanation:"The insertion operator << sends data to an output stream."
+  },
+  {
+    topic:"cpp", question:"Which operator is used with cin to receive input?",
+    options:["<<",">>","==","&&"], answer:">>",
+    explanation:"The extraction operator >> reads input from a stream."
+  },
+  {
+    topic:"cpp", question:"What is a constructor?",
+    options:["A function called to initialize an object","A loop","A header file","An operator only"], answer:"A function called to initialize an object",
+    explanation:"A constructor is called when an object is created."
+  },
+  {
+    topic:"cpp", question:"Which concept allows one interface to have different implementations?",
+    options:["Encapsulation only","Polymorphism","Compilation","Iteration"], answer:"Polymorphism",
+    explanation:"Polymorphism allows a common interface to represent different behaviors."
+  },
+  {
+    topic:"cpp", question:"Which access specifier allows access from anywhere permitted by the program?",
+    options:["private","protected","public","hidden"], answer:"public",
+    explanation:"Public class members can be accessed wherever the object and member are accessible."
+  },
+  {
+    topic:"cpp", question:"Which feature lets a class acquire properties from another class?",
+    options:["Inheritance","Iteration","Casting","Linking"], answer:"Inheritance",
+    explanation:"Inheritance derives a class from another class."
+  },
+  {
+    topic:"cpp", question:"Which symbol is used to access a member through an object?",
+    options:["-> only"," . ","#","@"], answer:" . ",
+    explanation:"The dot operator accesses a member through an object; -> is used through a pointer."
+  },
+  {
+    topic:"cpp", question:"Which header provides std::string?",
+    options:["<string>","<stdio.h>","<memory.h>","<character>"], answer:"<string>",
+    explanation:"The standard C++ string class is declared in the <string> header."
+  },
 
-    {
-        question: "3. Which operator is used to get the address of a variable?",
-        options: ["*", "&", "%", "#"],
-        answer: 1,
-        explanation: "The & operator gives the memory address of a variable."
-    },
+  // DATA STRUCTURES
+  {
+    topic:"ds", question:"Which data structure follows LIFO?",
+    options:["Queue","Stack","Tree","Graph"], answer:"Stack",
+    explanation:"LIFO means Last In, First Out. A stack follows this rule."
+  },
+  {
+    topic:"ds", question:"Which data structure follows FIFO?",
+    options:["Stack","Queue","Heap","Graph"], answer:"Queue",
+    explanation:"FIFO means First In, First Out. A queue follows this rule."
+  },
+  {
+    topic:"ds", question:"Which operation adds an item to a stack?",
+    options:["Pop","Enqueue","Push","Dequeue"], answer:"Push",
+    explanation:"Push inserts an item at the top of a stack."
+  },
+  {
+    topic:"ds", question:"Which operation removes an item from a queue?",
+    options:["Push","Pop","Dequeue","Insert-front only"], answer:"Dequeue",
+    explanation:"Dequeue removes an item from the front of a queue."
+  },
+  {
+    topic:"ds", question:"Which structure consists of nodes connected by links?",
+    options:["Linked list","Array only","Integer","Variable"], answer:"Linked list",
+    explanation:"A linked list stores nodes connected using links or pointers."
+  },
+  {
+    topic:"ds", question:"Which search works efficiently on a sorted array by halving the search range?",
+    options:["Linear search","Binary search","Depth-first search","Bubble search"], answer:"Binary search",
+    explanation:"Binary search repeatedly halves a sorted search range."
+  },
+  {
+    topic:"ds", question:"What is the typical time complexity of linear search in the worst case?",
+    options:["O(1)","O(log n)","O(n)","O(n²)"], answer:"O(n)",
+    explanation:"In the worst case, linear search checks every element."
+  },
+  {
+    topic:"ds", question:"Which data structure is commonly used for breadth-first search?",
+    options:["Stack","Queue","Single variable","Hash only"], answer:"Queue",
+    explanation:"BFS uses a queue to visit vertices level by level."
+  },
+  {
+    topic:"ds", question:"Which data structure represents hierarchical relationships?",
+    options:["Tree","Queue","Stack only","String"], answer:"Tree",
+    explanation:"Trees represent hierarchical relationships between nodes."
+  },
+  {
+    topic:"ds", question:"Which structure stores key-value pairs for fast average lookup?",
+    options:["Stack","Hash table","Queue","Linked list only"], answer:"Hash table",
+    explanation:"Hash tables use a hash function to map keys to storage locations."
+  },
 
-    {
-        question: "4. Which loop executes its body at least once?",
-        options: ["for", "while", "do-while", "None of these"],
-        answer: 2,
-        explanation: "A do-while loop checks its condition after executing the body."
-    },
+  // SQL
+  {
+    topic:"sql", question:"Which SQL command retrieves data from a table?",
+    options:["GET","SELECT","OPEN","FETCH TABLE"], answer:"SELECT",
+    explanation:"SELECT retrieves data from one or more tables."
+  },
+  {
+    topic:"sql", question:"Which clause filters rows based on a condition?",
+    options:["ORDER BY","WHERE","GROUP BY","FROM only"], answer:"WHERE",
+    explanation:"WHERE filters rows before grouping and result presentation."
+  },
+  {
+    topic:"sql", question:"Which command adds new rows to a table?",
+    options:["INSERT","UPDATE","ALTER","SELECT"], answer:"INSERT",
+    explanation:"INSERT adds new rows to a table."
+  },
+  {
+    topic:"sql", question:"Which command changes existing rows?",
+    options:["CREATE","UPDATE","DROP","SELECT"], answer:"UPDATE",
+    explanation:"UPDATE modifies existing rows in a table."
+  },
+  {
+    topic:"sql", question:"Which command removes rows matching a condition?",
+    options:["DELETE","ALTER","CREATE","GRANT"], answer:"DELETE",
+    explanation:"DELETE removes rows from a table."
+  },
+  {
+    topic:"sql", question:"Which clause sorts query results?",
+    options:["SORT","ORDER BY","GROUP BY","ARRANGE"], answer:"ORDER BY",
+    explanation:"ORDER BY sorts results in ascending or descending order."
+  },
+  {
+    topic:"sql", question:"Which function counts rows?",
+    options:["SUM()","TOTAL()","COUNT()","NUMBER()"], answer:"COUNT()",
+    explanation:"COUNT() returns the number of rows or non-NULL values, depending on its argument."
+  },
+  {
+    topic:"sql", question:"Which key uniquely identifies each row in a table?",
+    options:["Foreign key only","Primary key","Duplicate key","Sort key"], answer:"Primary key",
+    explanation:"A primary key uniquely identifies each row and cannot contain NULL."
+  },
+  {
+    topic:"sql", question:"Which join returns matching rows from both tables?",
+    options:["INNER JOIN","CROSS JOIN","FULL JOIN only","NO JOIN"], answer:"INNER JOIN",
+    explanation:"INNER JOIN returns rows satisfying the join condition in both tables."
+  },
+  {
+    topic:"sql", question:"Which clause groups rows with matching values?",
+    options:["WHERE","ORDER BY","GROUP BY","VALUES"], answer:"GROUP BY",
+    explanation:"GROUP BY groups rows so aggregate functions can operate on each group."
+  },
 
-    {
-        question: "5. Which operator accesses a structure member through a pointer?",
-        options: [".", "->", "&", "=="],
-        answer: 1,
-        explanation: "The arrow operator (->) accesses structure members through a pointer."
-    }
+  // HTML
+  {
+    topic:"html", question:"What does HTML stand for?",
+    options:["HyperText Markup Language","HighText Machine Language","Hyper Tool Multi Language","HomeText Markup Link"], answer:"HyperText Markup Language",
+    explanation:"HTML stands for HyperText Markup Language."
+  },
+  {
+    topic:"html", question:"Which tag creates the largest standard heading?",
+    options:["<h6>","<head>","<h1>","<heading>"], answer:"<h1>",
+    explanation:"<h1> is the highest-level standard HTML heading."
+  },
+  {
+    topic:"html", question:"Which tag creates a hyperlink?",
+    options:["<linkto>","<a>","<href>","<url>"], answer:"<a>",
+    explanation:"The anchor element <a> creates a hyperlink, usually using href."
+  },
+  {
+    topic:"html", question:"Which attribute specifies an image's file location?",
+    options:["href","src","alt","link"], answer:"src",
+    explanation:"The src attribute specifies the image resource URL."
+  },
+  {
+    topic:"html", question:"Which tag creates an unordered list?",
+    options:["<ol>","<li>","<ul>","<list>"], answer:"<ul>",
+    explanation:"<ul> creates an unordered list; each item is usually inside <li>."
+  },
+  {
+    topic:"html", question:"Which tag inserts a line break?",
+    options:["<break>","<lb>","<br>","<newline>"], answer:"<br>",
+    explanation:"The <br> element inserts a line break."
+  },
+  {
+    topic:"html", question:"Which attribute provides alternative text for an image?",
+    options:["title only","alt","name","text"], answer:"alt",
+    explanation:"The alt attribute provides a text alternative for an image."
+  },
+  {
+    topic:"html", question:"Which tag creates a table row?",
+    options:["<td>","<th>","<tr>","<table-row>"], answer:"<tr>",
+    explanation:"<tr> defines a table row."
+  },
+  {
+    topic:"html", question:"Which element contains page metadata and the title?",
+    options:["<body>","<main>","<head>","<footer>"], answer:"<head>",
+    explanation:"The head element contains metadata, linked resources, and the document title."
+  },
+  {
+    topic:"html", question:"Which declaration identifies an HTML5 document?",
+    options:["<html5>","<!DOCTYPE html>","<doctype>","<version=5>"], answer:"<!DOCTYPE html>",
+    explanation:"The HTML5 doctype is <!DOCTYPE html>."
+  }
 ];
 
-let currentQuestion = 0;
+const topicNames = {
+  c: "C Programming",
+  cpp: "C++",
+  ds: "Data Structures",
+  sql: "SQL",
+  html: "HTML"
+};
+
+let questions = [];
+let current = 0;
 let score = 0;
 let answered = false;
 
+const $ = id => document.getElementById(id);
+
+function shuffle(array) {
+  const result = [...array];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
 function startQuiz() {
+  const selectedTopic = $("topic").value;
+  let bank = selectedTopic === "all"
+    ? questionBank
+    : questionBank.filter(q => q.topic === selectedTopic);
 
-    currentQuestion = 0;
-    score = 0;
-    answered = false;
+  if (bank.length === 0) {
+    alert("No questions are available for this topic yet.");
+    return;
+  }
 
-    document.getElementById("quizScreen").style.display = "block";
-    document.getElementById("resultScreen").style.display = "none";
+  bank = shuffle(bank);
 
-    showQuestion();
+  const amount = $("amount").value;
+  questions = amount === "all"
+    ? bank
+    : bank.slice(0, Math.min(Number(amount), bank.length));
+
+  questions = questions.map(q => ({
+    ...q,
+    options: shuffle(q.options)
+  }));
+
+  current = 0;
+  score = 0;
+  answered = false;
+
+  $("setup").classList.add("hidden");
+  $("result").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+
+  showQuestion();
 }
 
 function showQuestion() {
+  answered = false;
 
-    answered = false;
+  const q = questions[current];
 
-    const q = questions[currentQuestion];
+  $("questionCount").textContent =
+    `Question ${current + 1} of ${questions.length}`;
 
-    document.getElementById("question").textContent = q.question;
+  $("scoreLabel").textContent = `Score: ${score}`;
 
-    document.getElementById("questionNumber").textContent =
-        "Question " + (currentQuestion + 1) + " of " + questions.length;
+  $("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
 
-    document.getElementById("scoreDisplay").textContent =
-        "Score: " + score;
+  $("topicLabel").textContent = topicNames[q.topic];
+  $("question").textContent = q.question;
+  $("options").innerHTML = "";
+  $("feedback").classList.add("hidden");
+  $("nextBtn").classList.add("hidden");
 
-    document.getElementById("progressBar").style.width =
-        (currentQuestion / questions.length * 100) + "%";
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
 
-    document.getElementById("feedback").textContent = "";
+    button.addEventListener("click", () => checkAnswer(option, button));
 
-    const optionsContainer = document.getElementById("options");
-
-    optionsContainer.innerHTML = "";
-
-    q.options.forEach(function(option, index) {
-
-        const button = document.createElement("button");
-
-        button.className = "option";
-        button.textContent =
-            String.fromCharCode(65 + index) + ") " + option;
-
-        button.addEventListener("click", function() {
-            checkAnswer(index, button);
-        });
-
-        optionsContainer.appendChild(button);
-    });
-
-    const nextBtn = document.getElementById("nextBtn");
-
-    nextBtn.disabled = true;
-
-    nextBtn.textContent =
-        currentQuestion === questions.length - 1
-        ? "See My Result 🏆"
-        : "Next Question →";
+    $("options").appendChild(button);
+  });
 }
 
-function checkAnswer(selected, selectedButton) {
+function checkAnswer(selected, clickedButton) {
+  if (answered) return;
+  answered = true;
 
-    if (answered) return;
+  const q = questions[current];
+  const isCorrect = selected === q.answer;
 
-    answered = true;
+  if (isCorrect) score++;
 
-    const q = questions[currentQuestion];
+  document.querySelectorAll(".option").forEach(button => {
+    button.disabled = true;
 
-    const buttons = document.querySelectorAll(".option");
+    const optionText = button.textContent.slice(3);
 
-    buttons.forEach(function(button) {
-        button.disabled = true;
-    });
-
-    const feedback = document.getElementById("feedback");
-
-    if (selected === q.answer) {
-
-        score++;
-
-        selectedButton.classList.add("correct");
-
-        feedback.textContent = "✅ Correct! " + q.explanation;
-        feedback.style.color = "#15803d";
-
-    } else {
-
-        selectedButton.classList.add("wrong");
-
-        buttons[q.answer].classList.add("correct");
-
-        feedback.textContent = "❌ Not quite! " + q.explanation;
-        feedback.style.color = "#b91c1c";
+    if (optionText === q.answer) {
+      button.classList.add("correct");
     }
+  });
 
-    document.getElementById("scoreDisplay").textContent =
-        "Score: " + score;
+  if (!isCorrect) clickedButton.classList.add("wrong");
 
-    document.getElementById("progressBar").style.width =
-        ((currentQuestion + 1) / questions.length * 100) + "%";
+  $("scoreLabel").textContent = `Score: ${score}`;
+  $("progressBar").style.width =
+    `${((current + 1) / questions.length) * 100}%`;
 
-    document.getElementById("nextBtn").disabled = false;
+  $("feedback").classList.remove("hidden");
+  $("feedback").innerHTML = "";
+
+  const heading = document.createElement("strong");
+  heading.textContent = isCorrect ? "Correct! 🎉" : "Not quite!";
+
+  const explanation = document.createElement("p");
+  explanation.textContent =
+    `Correct answer: ${q.answer}\n${q.explanation}`;
+
+  $("feedback").append(heading, explanation);
+
+  $("nextBtn").textContent =
+    current === questions.length - 1 ? "See Results" : "Next Question →";
+
+  $("nextBtn").classList.remove("hidden");
 }
 
-document.getElementById("nextBtn").addEventListener("click", function() {
+function nextQuestion() {
+  if (!answered) return;
 
-    if (!answered) return;
+  current++;
 
-    currentQuestion++;
+  if (current < questions.length) {
+    showQuestion();
+  } else {
+    showResults();
+  }
+}
 
-    if (currentQuestion < questions.length) {
+function showResults() {
+  $("quiz").classList.add("hidden");
+  $("result").classList.remove("hidden");
 
-        showQuestion();
+  const percent = Math.round((score / questions.length) * 100);
 
-    } else {
+  $("finalScore").textContent =
+    `You scored ${score} out of ${questions.length}.`;
 
-        showResult();
-    }
+  $("percentage").textContent = `${percent}%`;
+
+  $("message").textContent =
+    percent >= 80 ? "Excellent work! Keep it up! 💜" :
+    percent >= 50 ? "Good effort! Practise a little more." :
+    "Keep learning. Try again and improve your score!";
+}
+
+$("startBtn").addEventListener("click", startQuiz);
+$("nextBtn").addEventListener("click", nextQuestion);
+
+$("retryBtn").addEventListener("click", () => {
+  $("result").classList.add("hidden");
+  $("setup").classList.remove("hidden");
 });
 
-function showResult() {
-
-    document.getElementById("quizScreen").style.display = "none";
-    document.getElementById("resultScreen").style.display = "block";
-
-    document.getElementById("finalScore").textContent =
-        score + " / " + questions.length;
-
-    const percentage = (score / questions.length) * 100;
-
-    let message;
-    let trophy;
-
-    if (percentage === 100) {
-
-        message = "Perfect score! You've mastered this quiz. 🎉";
-        trophy = "🏆";
-
-    } else if (percentage >= 60) {
-
-        message = "Great job! Keep learning and practising. 💙";
-        trophy = "🥇";
-
-    } else {
-
-        message = "Good attempt! Review your lessons and try again. 💪";
-        trophy = "📚";
-    }
-
-    document.getElementById("resultMessage").textContent = message;
-
-    document.getElementById("trophy").textContent = trophy;
-
-    document.getElementById("progressBar").style.width = "100%";
-}
-
-startQuiz();
-
 </script>
-
 </body>
-</html>
+    </html>
