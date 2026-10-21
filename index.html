@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,7 @@ body {
   margin: 0;
   font-family: Georgia, serif;
   color: var(--dark);
-  background: #fff;
+  background: #ffffff;
 }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
@@ -26,7 +27,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(255,255,255,.97);
+  background: #ffffff;
   border-bottom: 1px solid var(--border);
 }
 .topbar {
@@ -66,18 +67,22 @@ header {
 .search input {
   width: 100%;
   padding: 12px 40px 12px 16px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--purple);
   border-radius: 28px;
   outline: none;
-  background: var(--lavender);
+  background: var(--purple);
+  color: #ffffff;
 }
-.search input:focus { border-color: var(--purple); }
+.search input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.search input:focus { border-color: var(--dark); }
 .search-icon {
   position: absolute;
   right: 15px;
   top: 9px;
   font-size: 21px;
-  color: var(--purple);
+  color: #ffffff;
 }
 .menu-button {
   border: 0;
@@ -101,16 +106,17 @@ header {
 }
 .menu a:hover { background: var(--lavender); }
 .hero {
-  min-height: 650px;
-  padding: 55px 20px 28px;
+  min-height: calc(100vh - 150px);
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  background: radial-gradient(ellipse at center, #fff 20%, #f7f0ff 100%);
+  background: #ffffff;
 }
 .hero-logo {
-  width: clamp(190px, 48vw, 300px);
+  width: clamp(190px, 48vw, 260px);
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
@@ -119,20 +125,14 @@ header {
 }
 .hero-title {
   margin: 20px 0 0;
-  font-size: clamp(35px, 7vw, 58px);
+  font-size: clamp(35px, 7vw, 52px);
   line-height: 1.2;
-  overflow-wrap: anywhere;
-}
-.hero-subtitle {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: clamp(18px, 4vw, 27px);
 }
 .hero-buttons {
-  width: min(100%, 430px);
+  width: min(100%, 380px);
   display: grid;
   gap: 13px;
-  margin-top: 32px;
+  margin-top: 30px;
 }
 .hero-buttons a {
   display: block;
@@ -155,206 +155,71 @@ header {
 }
 .hero-buttons a:first-child:hover { background: #6d2bd1; color: white; }
 
-  .tagline {
-margin-top: auto;
-padding-top: 55px;
-width: 100%;
-text-align: center;
-display: block;
-color: var(--purple);
-font-size: clamp(19px, 4vw, 25px);
-font-weight: bold;
-letter-spacing: .5px;
-  }
-
-.section {
-  max-width: 950px;
-  margin: 22px auto;
-  padding: 24px;
-}
-.section h2 {
-  margin: 0 0 14px;
-  font-size: 25px;
-}
-.section-intro { color: var(--muted); }
-.course-list {
-  border-top: 1px solid var(--border);
-}
-details { border-bottom: 1px solid var(--border); }
-summary {
-  padding: 15px 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.lesson-links {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 4px 20px;
-  padding: 0 8px 14px;
-}
-.lesson-links a, .tool-link {
-  padding: 8px 4px;
-  color: #6541a5;
-  overflow-wrap: anywhere;
-}
-.lesson-links a:hover, .tool-link:hover {
-  color: var(--purple);
-  text-decoration: underline;
-}
-.tools {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-.tool-link {
+.tagline {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center;
   display: block;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--lavender);
-}
-.about {
-  background: var(--lavender);
-  border-radius: 18px;
+  color: var(--purple);
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: bold;
+  letter-spacing: .5px;
 }
 footer {
-  padding: 28px 16px;
+  padding: 24px 16px;
   text-align: center;
   color: var(--muted);
 }
 @media (max-width: 600px) {
   .topbar { gap: 8px; padding: 10px 12px; min-height: 70px; }
-  .brand { gap: 7px; }
+  .brand gap: 7px;
   .brand img { width: 39px; height: 39px; }
   .brand-name { font-size: 19px; }
   .search { max-width: none; min-width: 35px; }
   .search input { padding: 10px 30px 10px 11px; font-size: 13px; }
   .search-icon { right: 9px; top: 8px; font-size: 17px; }
   .menu-button { font-size: 25px; }
-  .hero { min-height: 610px; padding-top: 40px; }
-  .hero-logo { width: min(68vw, 255px); }
-  .section { padding: 18px; margin: 16px auto; }
-  .lesson-links { grid-template-columns: 1fr; }
-  .tools { grid-template-columns: 1fr; }
 }
 </style>
 </head>
-<body><header>
+<body>
+
+<header>
   <div class="topbar">
     <a class="brand" href="index.html" aria-label="Haari Codes Home">
       <img src="haari-logo.png" alt="Haari Codes logo">
       <div class="brand-name">Haari_<span>Codes</span></div>
-    </a><form class="search" id="searchForm" role="search">
-  <input id="searchInput" type="search" placeholder="Search..." aria-label="Search courses and lessons">
-  <button class="search-icon" type="submit" aria-label="Search" style="border:0;background:none;cursor:pointer">⌕</button>
-</form>
-
-<button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">☰</button>
-
+    </a>
+    <form class="search" id="searchForm" role="search">
+      <input id="searchInput" type="search" placeholder="Search..." aria-label="Search">
+      <button class="search-icon" type="submit" aria-label="Search" style="border:0;background:none;cursor:pointer">⌕</button>
+    </form>
+    <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
   <nav class="menu" id="menu">
-    <a href="#home">Home</a>
+    <a href="courses.html">Courses</a>
     <a href="quiz.html">Quiz</a>
     <a href="error-detector.html">Error Detector</a>
-    <a href="#about">About</a>
+    <a href="about.html">About Us</a>
   </nav>
 </header>
   
 <main>
 <section class="hero" id="home">
-  <img class="hero-logo" src="haari-logo.png" alt="Haari Codes logo">  <h1 class="hero-title">Haari_<span>Codes</span></h1>  <div class="hero-buttons">
+  <img class="hero-logo" src="haari-logo.png" alt="Haari Codes logo">
+  <h1 class="hero-title">Haari_<span>Codes</span></h1>
+  <div class="hero-buttons">
     <a href="courses.html">Courses</a>
     <a href="quiz.html">Quiz</a>
     <a href="error-detector.html">Error Detector</a>
-  </div>  
-</section><section id="courses" class="section">
-  <h2>Courses</h2>  <div class="course-list">
-    <details>
-      <summary>01. C Programming</summary>
-      <div class="lesson-links">
-        <a href="cintroduction.html">Introduction to C</a>
-        <a href="variables.html">Variables & Data Types</a>
-        <a href="operators.html">Operators</a>
-        <a href="input-output.html">Input & Output</a>
-        <a href="conditional-statement.html">Conditional Statements</a>
-        <a href="loops.html">Loops</a>
-        <a href="function.html">Functions</a>
-        <a href="arrays.html">Arrays</a>
-        <a href="string.html">Strings</a>
-        <a href="pointers.html">Pointers</a>
-        <a href="structure.html">Structures</a>
-      </div>
-    </details><details>
-  <summary>02. C++ Programming</summary>
-  <div class="lesson-links">
-    <a href="cpp-programming.html">Course Overview</a>
-    <a href="cpp-introduction.html">Introduction</a>
-    <a href="cpp-variables.html">Variables & Data Types</a>
-    <a href="cpp-operators.html">Operators</a>
-    <a href="cpp-input-output.html">Input & Output</a>
-    <a href="cpp-conditions.html">Conditional Statements</a>
-    <a href="cpp-loops.html">Loops</a>
-    <a href="cpp-functions.html">Functions</a>
-    <a href="cpp-arrays.html">Arrays</a>
-    <a href="cpp-pointers.html">Pointers</a>
-    <a href="cpp-oop.html">Object-Oriented Programming</a>
   </div>
-</details>
-
-<details>
-  <summary>03. Data Structures</summary>
-  <div class="lesson-links">
-    <a href="data-structures.html">Course Overview</a>
-    <a href="ds-introduction.html">Introduction</a>
-    <a href="ds-arrays.html">Arrays</a>
-    <a href="ds-linked-lists.html">Linked Lists</a>
-    <a href="ds-stacks.html">Stacks</a>
-    <a href="ds-queues.html">Queues</a>
-    <a href="ds-searching.html">Searching</a>
-    <a href="ds-sorting.html">Sorting</a>
-    <a href="ds-trees.html">Trees</a>
-    <a href="ds-graphs.html">Graphs</a>
-    <a href="ds-hashing.html">Hashing</a>
-  </div>
-</details>
-
-<details>
-  <summary>04. SQL</summary>
-  <div class="lesson-links">
-    <a href="sql.html">Course Overview</a>
-    <a href="sql-introduction.html">Introduction to SQL</a>
-    <a href="sql-ddl.html">DDL Commands</a>
-    <a href="sql-dml.html">DML Commands</a>
-    <a href="sql-select.html">SELECT Queries</a>
-    <a href="sql-operators.html">SQL Operators</a>
-    <a href="sql-functions.html">SQL Functions</a>
-    <a href="sql-group-by.html">GROUP BY & HAVING</a>
-    <a href="sql-joins.html">SQL Joins</a>
-    <a href="sql-subqueries.html">Subqueries</a>
-    <a href="sql-constraints.html">Constraints</a>
-  </div>
-</details>
-
-<details>
-  <summary>05. HTML & CSS</summary>
-  <div class="lesson-links">
-    <a href="html-introduction.html">Introduction to HTML</a>
-    <a href="html-tags.html">HTML Tags</a>
-    <a href="html-text-formatting.html">Text Formatting</a>
-    <a href="html-links-images.html">Links & Images</a>
-    <a href="html-lists.html">Lists</a>
-    <a href="html-tables.html">Tables</a>
-    <a href="html-forms.html">Forms</a>
-    <a href="html-semantic-elements.html">Semantic Elements</a>
-    <a href="html-audio-video.html">Audio & Video</a>
-    <a href="html-css-basics.html">CSS Basics</a>
-  </div>
-</details>
-
-  </div>
+  <div class="tagline">Learn • Practise • Build</div>
 </section>
-<centre><div class="tagline">Learn • Practise • Build </div></centre>
-</main><footer>Made with ♥ by Haari_Codes</footer><script>
+</main>
+
+<footer>Made with ♥ by Haari_Codes</footer>
+
+<script>
 const menuButton = document.getElementById("menuButton");
 const menu = document.getElementById("menu");
 
@@ -363,45 +228,6 @@ menuButton.addEventListener("click", function () {
   menuButton.setAttribute("aria-expanded", String(opened));
   menuButton.textContent = opened ? "✕" : "☰";
 });
-
-menu.querySelectorAll("a").forEach(function(link) {
-  link.addEventListener("click", function() {
-    menu.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.textContent = "☰";
-  });
-});
-
-document.getElementById("searchForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-  const query = document.getElementById("searchInput").value.trim().toLowerCase();
-  if (!query) return;
-
-  const links = Array.from(document.querySelectorAll(".lesson-links a"));
-  const match = links.find(function(link) {
-    return link.textContent.toLowerCase().includes(query);
-  });
-
-  const courseSummaries = Array.from(document.querySelectorAll(".course-list summary"));
-  const course = courseSummaries.find(function(summary) {
-    return summary.textContent.toLowerCase().includes(query);
-  });
-
-  if (match) {
-    match.closest("details").open = true;
-    document.getElementById("courses").scrollIntoView({behavior:"smooth"});
-    match.scrollIntoView({behavior:"smooth", block:"center"});
-    match.focus({preventScroll:true});
-  } else if (course) {
-    course.parentElement.open = true;
-    document.getElementById("courses").scrollIntoView({behavior:"smooth"});
-  } else if ("quiz".includes(query) || "quick quiz".includes(query)) {
-    location.href = "quiz.html";
-  } else if ("error detector".includes(query) || "error".includes(query)) {
-    location.href = "error-detector.html";
-  } else {
-    alert("No matching lesson found. Try a course or lesson name.");
-  }
-});
-</script></body>
+</script>
+</body>
 </html>
