@@ -682,7 +682,15 @@ document.getElementById("searchInput").addEventListener("input", function () {
             card.style.display = "flex";
         });
     }
+    
 });
+    function toggleCourses() {
+    const list = document.getElementById("courseList");
+    const arrow = document.getElementById("courseArrow");
+
+    list.classList.toggle("show");
+    arrow.textContent = list.classList.contains("show") ? "▾" : "▸";
+    }
 </script>
 
 </body>
