@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Tags & Elements | Haari Codes</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f5ff;color:#292344;line-height:1.7}
+header{background:#6b59c8;color:white;text-align:center;padding:22px 15px}
+.container{max-width:850px;margin:25px auto;padding:0 15px}
+.card{background:white;border:1px solid #e5dfff;border-radius:15px;padding:20px;margin-bottom:20px;box-shadow:0 4px 15px #38266b0b}
+h2,h3{color:#6554c0}
+pre{background:#25213a;color:#f4efff;padding:16px;border-radius:10px;overflow-x:auto;font-size:14px}
+code{font-family:monospace}
+.example{background:#f0edff;padding:15px;border-radius:10px;margin-top:12px}
+button,.nav{display:inline-block;border:0;border-radius:9px;padding:11px 16px;margin:5px 5px 5px 0;background:#6b59c8;color:white;text-decoration:none;font-family:inherit;font-size:15px;cursor:pointer}
+.question{padding:13px;border:1px solid #e5dfff;border-radius:10px;margin:14px 0}
+.question button{display:block;width:100%;text-align:left;background:#f5f2ff;color:#292344;border:1px solid #e2dcff}
+.question button:disabled{cursor:default}
+.feedback{font-weight:bold}
+.small{color:#77718e;font-size:14px}
+footer{text-align:center;color:#77718e;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<h1>Haari Codes 💜</h1>
+<p>HTML Course · Lesson 2</p>
+</header>
+
+<main class="container">
+<section class="card">
+<p><strong>Home / HTML / Lesson 2</strong></p>
+<h2>HTML Tags & Elements</h2>
+<p>HTML tags define the structure and meaning of content on a webpage. Tags are written inside angle brackets, such as <code>&lt;p&gt;</code>.</p>
+<p>An HTML element commonly contains an opening tag, content and a closing tag.</p>
+<pre><code>&lt;p&gt;Welcome to Haari Codes!&lt;/p&gt;</code></pre>
+</section>
+
+<section class="card">
+<h2>1. Opening and Closing Tags</h2>
+<ul>
+<li><strong>Opening tag:</strong> <code>&lt;p&gt;</code></li>
+<li><strong>Content:</strong> Welcome!</li>
+<li><strong>Closing tag:</strong> <code>&lt;/p&gt;</code></li>
+</ul>
+<p>The closing tag contains a forward slash before the tag name.</p>
+<pre><code>&lt;h1&gt;My Website&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+</section>
+
+<section class="card">
+<h2>2. Heading Tags</h2>
+<p>HTML provides six heading levels, from <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>.</p>
+<pre><code>&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Section Heading&lt;/h2&gt;
+&lt;h3&gt;Subsection&lt;/h3&gt;
+&lt;h4&gt;Heading 4&lt;/h4&gt;
+&lt;h5&gt;Heading 5&lt;/h5&gt;
+&lt;h6&gt;Heading 6&lt;/h6&gt;</code></pre>
+<div class="example">
+<h1 style="color:#292344">Main Heading</h1>
+<h2>Section Heading</h2>
+<h3>Subsection</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+</div>
+<p>Use headings in a logical order to make your content easier to navigate.</p>
+</section>
+
+<section class="card">
+<h2>3. Paragraph and Line Break</h2>
+<pre><code>&lt;p&gt;This is paragraph one.&lt;/p&gt;
+&lt;p&gt;This is paragraph two.&lt;/p&gt;
+Hello&lt;br&gt;World</code></pre>
+<p><code>&lt;p&gt;</code> creates a paragraph. <code>&lt;br&gt;</code> inserts a line break without creating a new paragraph.</p>
+</section>
+
+<section class="card">
+<h2>4. Text Formatting Tags</h2>
+<pre><code>&lt;strong&gt;Important text&lt;/strong&gt;
+&lt;em&gt;Emphasized text&lt;/em&gt;
+&lt;b&gt;Bold appearance&lt;/b&gt;
+&lt;i&gt;Italic appearance&lt;/i&gt;
+&lt;u&gt;Underlined text&lt;/u&gt;
+&lt;mark&gt;Highlighted text&lt;/mark&gt;
+&lt;del&gt;Deleted text&lt;/del&gt;
+&lt;sub&gt;Subscript&lt;/sub&gt;
+&lt;sup&gt;Superscript&lt;/sup&gt;</code></pre>
+<div class="example">
+<strong>Important text</strong><br>
+<em>Emphasized text</em><br>
+<mark>Highlighted text</mark><br>
+H<sub>2</sub>O and x<sup>2</sup>
+</div>
+<p><code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> convey meaning as well as presentation. Use them when that meaning is intended.</p>
+</section>
+
+<section class="card">
+<h2>5. Container Tags</h2>
+<h3>Div element</h3>
+<p><code>&lt;div&gt;</code> is a generic block-level container used to group content.</p>
+<pre><code>&lt;div&gt;
+  &lt;h2&gt;About Me&lt;/h2&gt;
+  &lt;p&gt;I am learning HTML.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<h3>Span element</h3>
+<p><code>&lt;span&gt;</code> is a generic inline container, often used to style part of a sentence.</p>
+<pre><code>&lt;p&gt;Learn &lt;span&gt;HTML&lt;/span&gt; today!&lt;/p&gt;</code></pre>
+</section>
+
+<section class="card">
+<h2>6. Empty or Void Elements</h2>
+<p>Some HTML elements do not wrap content and do not require closing tags.</p>
+<pre><code>&lt;br&gt;
+&lt;hr&gt;
+&lt;img src="flower.jpg" alt="Flower"&gt;
+&lt;input type="text"&gt;</code></pre>
+<ul>
+<li><code>&lt;br&gt;</code>: line break</li>
+<li><code>&lt;hr&gt;</code>: thematic break</li>
+<li><code>&lt;img&gt;</code>: image</li>
+<li><code>&lt;input&gt;</code>: form input</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>7. Advantages of Using HTML Elements</h2>
+<ul>
+<li>Organizes webpage content.</li>
+<li>Helps browsers understand content structure.</li>
+<li>Semantic elements can improve accessibility.</li>
+<li>Works with CSS and JavaScript to build websites.</li>
+</ul>
+<h2>Common Mistakes</h2>
+<ul>
+<li>Forgetting a closing tag when one is required.</li>
+<li>Using headings only to make text bigger.</li>
+<li>Incorrectly nesting elements.</li>
+<li>Using obsolete tags instead of modern semantic HTML.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Quick Quiz 📝</h2>
+<p>Choose an answer for each question.</p>
+
+<div class="question" data-answer="1" data-explanation="The h1 element represents the highest-level standard heading.">
+<strong>1. Which is the highest-level HTML heading?</strong>
+<button onclick="answer(this,0)">A. &lt;h6&gt;</button>
+<button onclick="answer(this,1)">B. &lt;h1&gt;</button>
+<button onclick="answer(this,2)">C. &lt;head&gt;</button>
+<p class="feedback"></p>
+</div>
+
+<div class="question" data-answer="2" data-explanation="The br element inserts a line break.">
+<strong>2. Which tag inserts a line break?</strong>
+<button onclick="answer(this,0)">A. &lt;lb&gt;</button>
+<button onclick="answer(this,1)">B. &lt;break&gt;</button>
+<button onclick="answer(this,2)">C. &lt;br&gt;</button>
+<p class="feedback"></p>
+</div>
+
+<div class="question" data-answer="0" data-explanation="The div element is a generic block-level container.">
+<strong>3. Which element is a generic block container?</strong>
+<button onclick="answer(this,0)">A. &lt;div&gt;</button>
+<button onclick="answer(this,1)">B. &lt;img&gt;</button>
+<button onclick="answer(this,2)">C. &lt;br&gt;</button>
+<p class="feedback"></p>
+</div>
+
+<div class="question" data-answer="1" data-explanation="The strong element indicates that its content has strong importance.">
+<strong>4. Which element marks text as strongly important?</strong>
+<button onclick="answer(this,0)">A. &lt;small&gt;</button>
+<button onclick="answer(this,1)">B. &lt;strong&gt;</button>
+<button onclick="answer(this,2)">C. &lt;span&gt;</button>
+<p class="feedback"></p>
+</div>
+
+<div class="question" data-answer="2" data-explanation="The img element is a void element and does not need a closing tag.">
+<strong>5. Which is a void element?</strong>
+<button onclick="answer(this,0)">A. &lt;div&gt;</button>
+<button onclick="answer(this,1)">B. &lt;p&gt;</button>
+<button onclick="answer(this,2)">C. &lt;img&gt;</button>
+<p class="feedback"></p>
+</div>
+
+<button onclick="showScore()">Check Score</button>
+<p id="result" aria-live="polite"></p>
+</section>
+
+<section class="card">
+<h2>Lesson Navigation</h2>
+<a class="nav" href="html-introduction.html">← Previous Lesson</a>
+<a class="nav" href="index.html">Home</a>
+<a class="nav" href="html-text-formatting.html">Next Lesson →</a>
+<p class="small">Next lesson filename: html-text-formatting.html. Create that file before using the link.</p>
+</section>
+</main>
+
+<footer>Haari Codes · Learn, Practise, Build 💜</footer>
+
+<script>
+function answer(button, selected) {
+  const q = button.closest(".question");
+  if (q.dataset.done === "true") return;
+  q.dataset.done = "true";
+
+  const correct = Number(q.dataset.answer);
+  const buttons = q.querySelectorAll("button");
+  const feedback = q.querySelector(".feedback");
+
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) {
+      b.style.background = "#dff5e5";
+      b.style.borderColor = "#43a66b";
+    }
+  });
+
+  if (selected === correct) {
+    feedback.textContent = "Correct! 🎉";
+    feedback.style.color = "#23783e";
+  } else {
+    feedback.textContent = "Not quite. " + q.dataset.explanation;
+    feedback.style.color = "#a13b48";
+  }
+}
+
+function showScore() {
+  const questions = [...document.querySelectorAll(".question")];
+  const completed = questions.filter(q => q.dataset.done === "true");
+
+  if (completed.length !== questions.length) {
+    document.getElementById("result").textContent =
+      `Answer all questions first: ${completed.length}/${questions.length}`;
+    return;
+  }
+
+  const correct = questions.filter(q => {
+    const answerIndex = Number(q.dataset.answer);
+    return q.querySelectorAll("button")[answerIndex]
+      .style.background === "rgb(223, 245, 229)";
+  }).length;
+
+  document.getElementById("result").textContent =
+    `Your score: ${correct}/${questions.length} 💜`;
+}
+</script>
+</body>
+</html>
