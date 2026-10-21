@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio & Video | CS Companion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f4ff;color:#30234a;line-height:1.7}
+header{background:#6541a5;color:white;padding:24px 16px;text-align:center}
+header h1{margin:0}
+nav{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+nav a{color:white;text-decoration:none;border:1px solid #d9c9ff;padding:6px 12px;border-radius:8px}
+main{max-width:900px;margin:auto;padding:18px}
+section{background:white;border:1px solid #e5dcfa;border-radius:14px;padding:18px;margin:16px 0}
+h2{color:#6541a5}
+code,pre{background:#f0eaff;border-radius:6px;padding:3px 6px;overflow-wrap:anywhere}
+pre{padding:14px;overflow-x:auto;white-space:pre-wrap}
+button{background:#6541a5;color:white;border:0;border-radius:8px;padding:10px 15px;cursor:pointer;font-family:inherit}
+button:hover{background:#4d2e88}
+.demo{background:#faf8ff;padding:14px;border-radius:10px}
+.question{border-bottom:1px solid #eee;padding:12px 0}
+label{display:block;margin:6px 0}
+#result{font-weight:bold;color:#6541a5}
+footer{text-align:center;padding:20px;color:#6c5a85}
+</style>
+</head>
+<body>
+<header>
+<h1>Audio & Video in HTML 🎧</h1>
+<p>CS Companion | HTML Lesson 09</p>
+<nav>
+<a href="html-semantic-elements.html">← Previous</a>
+<a href="index.html">Home</a>
+<a href="html-css-basics.html">Next →</a>
+</nav>
+</header><main>
+<section>
+<h2>1. Introduction</h2>
+<p>HTML can display audio and video directly on a webpage. The <code>&lt;audio&gt;</code> element plays sound, while <code>&lt;video&gt;</code> displays video.</p>
+<ul>
+<li><code>&lt;audio&gt;</code> for music, recordings and sound effects.</li>
+<li><code>&lt;video&gt;</code> for lessons, clips and demonstrations.</li>
+<li><code>&lt;source&gt;</code> specifies the media file and its format.</li>
+</ul>
+</section><section>
+<h2>2. Adding Audio</h2>
+<pre><code>&lt;audio controls&gt;
+  &lt;source src="music.mp3" type="audio/mpeg"&gt;
+  Your browser does not support audio.
+&lt;/audio&gt;</code></pre>
+<p><b>Explanation:</b></p>
+<ul>
+<li><code>controls</code> displays play, pause and volume controls.</li>
+<li><code>src</code> identifies the audio file.</li>
+<li><code>type</code> tells the browser the media format.</li>
+</ul>
+<p>Common audio formats include MP3, WAV and OGG. Browser support can vary.</p>
+</section><section>
+<h2>3. Adding Video</h2>
+<pre><code>&lt;video controls width="400" poster="cover.jpg"&gt;
+  &lt;source src="lesson.mp4" type="video/mp4"&gt;
+  Your browser does not support video.
+&lt;/video&gt;</code></pre>
+<ul>
+<li><code>controls</code> shows video playback controls.</li>
+<li><code>width</code> sets the displayed width.</li>
+<li><code>poster</code> displays a preview image before playback.</li>
+<li><code>height</code> can set the displayed height.</li>
+</ul>
+<p>Common video formats include MP4 and WebM. Codec and browser support affect playback.</p>
+</section><section>
+<h2>4. Important Media Attributes</h2>
+<ul>
+<li><code>controls</code>: shows playback controls.</li>
+<li><code>autoplay</code>: requests automatic playback. Browsers often block autoplay with sound, so avoid relying on it.</li>
+<li><code>muted</code>: starts the media without sound.</li>
+<li><code>loop</code>: repeats playback.</li>
+<li><code>preload</code>: hints whether media should load before playback.</li>
+</ul>
+<pre><code>&lt;video controls muted loop width="320"&gt;
+  &lt;source src="clip.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+<p>Use autoplay carefully, and give users control over media playback.</p>
+</section><section>
+<h2>5. Captions and Subtitles</h2>
+<p>The <code>&lt;track&gt;</code> element can provide captions or subtitles for a video, usually using a WebVTT file.</p>
+<pre><code>&lt;video controls width="400"&gt;
+  &lt;source src="lesson.mp4" type="video/mp4"&gt;
+  &lt;track src="captions.vtt"
+         kind="captions"
+         srclang="en"
+         label="English"&gt;
+&lt;/video&gt;</code></pre>
+<p>Captions make videos more accessible, including for people who cannot hear the audio.</p>
+</section><section>
+<h2>6. Embedding an Online Video</h2>
+<p>You can embed a video from a service that permits embedding using an <code>&lt;iframe&gt;</code>. For example, YouTube provides an embed URL.</p>
+<pre><code>&lt;iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="HTML lesson video"
+  allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+<p>Replace <code>VIDEO_ID</code> with the actual video ID. Use the provider's official embed code and a meaningful title. Do not paste a normal watch-page URL where an embed URL is required.</p>
+</section><section>
+<h2>7. Try It Yourself</h2>
+<p>Choose a media element to see a sample structure. The demo below illustrates the HTML structure; it does not need a real media file.</p>
+<div class="demo">
+<label for="mediaType">Choose media:</label>
+<select id="mediaType">
+<option value="audio">Audio</option>
+<option value="video">Video</option>
+</select>
+<pre id="preview"></pre>
+</div>
+</section><section>
+<h2>8. Quick Quiz 📝</h2>
+<form id="quiz">
+<div class="question">
+<p>1. Which tag plays audio?</p>
+<label><input type="radio" name="q1" value="a"> &lt;sound&gt;</label>
+<label><input type="radio" name="q1" value="b"> &lt;audio&gt;</label>
+<label><input type="radio" name="q1" value="c"> &lt;music&gt;</label>
+<p id="f1"></p>
+</div>
+<div class="question">
+<p>2. What does the controls attribute do?</p>
+<label><input type="radio" name="q2" value="a"> Adds playback controls</label>
+<label><input type="radio" name="q2" value="b"> Changes the file name</label>
+<label><input type="radio" name="q2" value="c"> Adds subtitles automatically</label>
+<p id="f2"></p>
+</div>
+<div class="question">
+<p>3. Which tag displays video?</p>
+<label><input type="radio" name="q3" value="a"> &lt;movie&gt;</label>
+<label><input type="radio" name="q3" value="b"> &lt;media&gt;</label>
+<label><input type="radio" name="q3" value="c"> &lt;video&gt;</label>
+<p id="f3"></p>
+</div>
+<div class="question">
+<p>4. Which attribute makes media repeat?</p>
+<label><input type="radio" name="q4" value="a"> muted</label>
+<label><input type="radio" name="q4" value="b"> loop</label>
+<label><input type="radio" name="q4" value="c"> poster</label>
+<p id="f4"></p>
+</div>
+<div class="question">
+<p>5. Which element can add caption files to video?</p>
+<label><input type="radio" name="q5" value="a"> &lt;track&gt;</label>
+<label><input type="radio" name="q5" value="b"> &lt;captionfile&gt;</label>
+<label><input type="radio" name="q5" value="c"> &lt;text&gt;</label>
+<p id="f5"></p>
+</div>
+<button type="submit">Check Answers</button>
+<button type="button" id="reset">Try Again</button>
+<p id="result"></p>
+</form>
+</section><nav>
+<a href="html-semantic-elements.html">← Previous Lesson</a>
+<a href="index.html">Home</a>
+<a href="html-css-basics.html">Next: CSS Basics →</a>
+</nav>
+</main><footer>Made with 💜 by Haari Codes | CS Companion</footer><script>
+const mediaType = document.getElementById("mediaType");
+const preview = document.getElementById("preview");
+
+function updatePreview(){
+  preview.textContent = mediaType.value === "audio"
+    ? '<audio controls>\\n  <source src="music.mp3" type="audio/mpeg">\\n  Your browser does not support audio.\\n</audio>'
+    : '<video controls width="400">\\n  <source src="lesson.mp4" type="video/mp4">\\n  Your browser does not support video.\\n</video>';
+}
+mediaType.addEventListener("change", updatePreview);
+updatePreview();
+
+const answers = {
+  q1: ["b", "The <audio> element plays audio."],
+  q2: ["a", "The controls attribute displays playback controls."],
+  q3: ["c", "The <video> element displays video."],
+  q4: ["b", "The loop attribute repeats playback."],
+  q5: ["a", "The <track> element can provide captions or subtitles."]
+};
+
+document.getElementById("quiz").addEventListener("submit", function(event){
+  event.preventDefault();
+  let score = 0;
+  for(let i = 1; i <= 5; i++){
+    const key = "q" + i;
+    const chosen = document.querySelector('input[name="' + key + '"]:checked');
+    const feedback = document.getElementById("f" + i);
+    if(chosen && chosen.value === answers[key][0]){
+      score++;
+      feedback.textContent = "Correct! " + answers[key][1];
+      feedback.style.color = "green";
+    } else {
+      feedback.textContent = "Correct answer: " + answers[key][0].toUpperCase() + ". " + answers[key][1];
+      feedback.style.color = "#b42318";
+    }
+  }
+  document.getElementById("result").textContent = "Your score: " + score + "/5";
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+  document.getElementById("quiz").reset();
+  for(let i = 1; i <= 5; i++){
+    document.getElementById("f" + i).textContent = "";
+  }
+  document.getElementById("result").textContent = "";
+});
+</script></body>
+</html>
