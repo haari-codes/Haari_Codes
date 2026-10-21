@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Lists | CS Companion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f3ff;color:#29213b;line-height:1.7}
+header{background:#6c3bbd;color:white;text-align:center;padding:24px 15px}
+.container{max-width:850px;margin:25px auto;padding:0 16px}
+.card{background:white;padding:22px;margin-bottom:20px;border-radius:14px;box-shadow:0 3px 12px #29134b12}
+h2{color:#6c3bbd}
+code,pre{background:#f0e8ff;border-radius:6px}
+code{padding:3px 6px}
+pre{padding:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+button,.nav a{display:inline-block;background:#6c3bbd;color:white;border:0;padding:10px 16px;border-radius:8px;text-decoration:none;cursor:pointer;margin:5px 4px 5px 0;font:inherit}
+button:hover,.nav a:hover{background:#4d258e}
+.question{border-bottom:1px solid #e7def5;padding:12px 0}
+label{display:block;margin:7px 0}
+#result{font-weight:bold;margin-top:15px}
+footer{text-align:center;padding:20px;color:#655477}
+</style>
+</head>
+<body>
+
+<header>
+<h1>HTML Lists</h1>
+<p>CS Companion | HTML Lesson 05</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What Is a List?</h2>
+<p>An HTML list displays related items in an organised format. Lists are useful for menus, instructions, shopping lists and many other things.</p>
+<p>HTML provides three main types of lists:</p>
+<ul>
+<li>Ordered List</li>
+<li>Unordered List</li>
+<li>Description List</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>2. Ordered List</h2>
+<p>An ordered list displays items in a sequence, usually using numbers.</p>
+<p>Tags: <code>&lt;ol&gt;</code> and <code>&lt;li&gt;</code></p>
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Wake up&lt;/li&gt;
+  &lt;li&gt;Study&lt;/li&gt;
+  &lt;li&gt;Sleep&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>Output:</p>
+<ol>
+<li>Wake up</li>
+<li>Study</li>
+<li>Sleep</li>
+</ol>
+
+<h3>Changing the numbering style</h3>
+<pre><code>&lt;ol type="A"&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Mango&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+<p>Common <code>type</code> values:</p>
+<ul>
+<li><code>1</code>: 1, 2, 3</li>
+<li><code>A</code>: A, B, C</li>
+<li><code>a</code>: a, b, c</li>
+<li><code>I</code>: I, II, III</li>
+<li><code>i</code>: i, ii, iii</li>
+</ul>
+<p>You can also use <code>start="5"</code> to begin numbering at 5.</p>
+</section>
+
+<section class="card">
+<h2>3. Unordered List</h2>
+<p>An unordered list displays items with bullets rather than a numbered sequence.</p>
+<p>Tags: <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code></p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+  &lt;li&gt;Pen&lt;/li&gt;
+  &lt;li&gt;Pencil&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>Output:</p>
+<ul>
+<li>Notebook</li>
+<li>Pen</li>
+<li>Pencil</li>
+</ul>
+<p>CSS can change bullet styles:</p>
+<pre><code>&lt;ul style="list-style-type: square;"&gt;
+  &lt;li&gt;Notebook&lt;/li&gt;
+  &lt;li&gt;Pen&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>Other styles include <code>disc</code>, <code>circle</code> and <code>none</code>.</p>
+</section>
+
+<section class="card">
+<h2>4. Description List</h2>
+<p>A description list presents terms and their descriptions.</p>
+<p>Tags:</p>
+<ul>
+<li><code>&lt;dl&gt;</code>: description list</li>
+<li><code>&lt;dt&gt;</code>: description term</li>
+<li><code>&lt;dd&gt;</code>: description or definition</li>
+</ul>
+<pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Structures a webpage.&lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Styles a webpage.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+<p>Output:</p>
+<dl>
+<dt><strong>HTML</strong></dt>
+<dd>Structures a webpage.</dd>
+<dt><strong>CSS</strong></dt>
+<dd>Styles a webpage.</dd>
+</dl>
+</section>
+
+<section class="card">
+<h2>5. Nested Lists</h2>
+<p>A nested list is a list placed inside another list item. It helps organise subtopics.</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;Programming
+    &lt;ul&gt;
+      &lt;li&gt;C&lt;/li&gt;
+      &lt;li&gt;C++&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Database
+    &lt;ul&gt;
+      &lt;li&gt;SQL&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>Output:</p>
+<ul>
+<li>Programming
+  <ul>
+    <li>C</li>
+    <li>C++</li>
+  </ul>
+</li>
+<li>Database
+  <ul>
+    <li>SQL</li>
+  </ul>
+</li>
+</ul>
+<p>Remember to place the nested list inside its parent <code>&lt;li&gt;</code> element.</p>
+</section>
+
+<section class="card">
+<h2>6. Try It Yourself</h2>
+<p>Select a list type to see a live example.</p>
+<select id="listType" style="padding:10px;border-radius:8px;max-width:100%">
+<option value="ordered">Ordered List</option>
+<option value="unordered">Unordered List</option>
+<option value="description">Description List</option>
+</select>
+<button type="button" onclick="showList()">Show List</button>
+<div id="listOutput"></div>
+
+<script>
+function showList(){
+ const type=document.getElementById("listType").value;
+ const output=document.getElementById("listOutput");
+ output.replaceChildren();
+
+ if(type==="ordered"){
+   const list=document.createElement("ol");
+   ["Learn HTML","Practise coding","Build a project"].forEach(item=>{
+     const li=document.createElement("li");
+     li.textContent=item;
+     list.appendChild(li);
+   });
+   output.appendChild(list);
+ }else if(type==="unordered"){
+   const list=document.createElement("ul");
+   ["HTML","CSS","JavaScript"].forEach(item=>{
+     const li=document.createElement("li");
+     li.textContent=item;
+     list.appendChild(li);
+   });
+   output.appendChild(list);
+ }else{
+   const list=document.createElement("dl");
+   [["HTML","Structures webpages."],["CSS","Styles webpages."]].forEach(pair=>{
+     const dt=document.createElement("dt");
+     const dd=document.createElement("dd");
+     dt.textContent=pair[0];
+     dd.textContent=pair[1];
+     list.append(dt,dd);
+   });
+   output.appendChild(list);
+ }
+}
+</script>
+</section>
+
+<section class="card">
+<h2>7. Quick Quiz</h2>
+<p>Answer all five questions and check your score.</p>
+<form id="quizForm">
+
+<div class="question">
+<p>1. Which tag creates an ordered list?</p>
+<label><input type="radio" name="q1" value="a"> &lt;ul&gt;</label>
+<label><input type="radio" name="q1" value="b"> &lt;ol&gt;</label>
+<label><input type="radio" name="q1" value="c"> &lt;dl&gt;</label>
+</div>
+
+<div class="question">
+<p>2. Which tag defines an individual list item?</p>
+<label><input type="radio" name="q2" value="a"> &lt;dt&gt;</label>
+<label><input type="radio" name="q2" value="b"> &lt;dd&gt;</label>
+<label><input type="radio" name="q2" value="c"> &lt;li&gt;</label>
+</div>
+
+<div class="question">
+<p>3. Which list uses bullets by default?</p>
+<label><input type="radio" name="q3" value="a"> Unordered list</label>
+<label><input type="radio" name="q3" value="b"> Ordered list</label>
+<label><input type="radio" name="q3" value="c"> Description list</label>
+</div>
+
+<div class="question">
+<p>4. Which tag defines a term in a description list?</p>
+<label><input type="radio" name="q4" value="a"> &lt;li&gt;</label>
+<label><input type="radio" name="q4" value="b"> &lt;dt&gt;</label>
+<label><input type="radio" name="q4" value="c"> &lt;ol&gt;</label>
+</div>
+
+<div class="question">
+<p>5. What is a nested list?</p>
+<label><input type="radio" name="q5" value="a"> A list with no items</label>
+<label><input type="radio" name="q5" value="b"> A list containing an image</label>
+<label><input type="radio" name="q5" value="c"> A list inside another list item</label>
+</div>
+
+<button type="button" onclick="checkQuiz()">Submit Answers</button>
+<button type="reset" onclick="resetQuiz()">Try Again</button>
+</form>
+<div id="result"></div>
+<div id="explanations"></div>
+</section>
+
+<section class="card nav">
+<h2>Lesson Navigation</h2>
+<a href="html-links-images.html">← Previous Lesson</a>
+<a href="index.html">Home</a>
+<a href="html-tables.html">Next Lesson →</a>
+</section>
+
+</main>
+
+<footer>
+<p>Haari_Codes | Learn • Practice • Grow 💜</p>
+</footer>
+
+<script>
+function checkQuiz(){
+ const answers={q1:"b",q2:"c",q3:"a",q4:"b",q5:"c"};
+ const explanations=[
+ "1. <ol> creates an ordered list.",
+ "2. <li> defines an individual list item.",
+ "3. <ul> creates an unordered list with bullets by default.",
+ "4. <dt> defines a term in a description list.",
+ "5. A nested list is placed inside another list item."
+ ];
+ let score=0;
+ let unanswered=false;
+
+ for(const q in answers){
+   const selected=document.querySelector('input[name="'+q+'"]:checked');
+   if(!selected) unanswered=true;
+   else if(selected.value===answers[q]) score++;
+ }
+
+ const result=document.getElementById("result");
+ const details=document.getElementById("explanations");
+
+ if(unanswered){
+   result.textContent="Please answer all five questions first.";
+   details.replaceChildren();
+   return;
+ }
+
+ result.textContent="Your score: "+score+"/5"+
+   (score===5?" 🎉 Excellent work!":" 💜 Keep practising!");
+
+ details.replaceChildren();
+ const heading=document.createElement("h3");
+ heading.textContent="Answer Explanations";
+ details.appendChild(heading);
+
+ explanations.forEach(text=>{
+   const p=document.createElement("p");
+   p.textContent=text;
+   details.appendChild(p);
+ });
+}
+
+function resetQuiz(){
+ document.getElementById("result").textContent="";
+ document.getElementById("explanations").replaceChildren();
+}
+</script>
+
+</body>
+  </html>
