@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Links & Images | CS Companion</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #f7f3ff;
+    color: #29213b;
+    line-height: 1.7;
+}
+
+header {
+    background: #6c3bbd;
+    color: white;
+    text-align: center;
+    padding: 24px 15px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 0 16px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #29134b12;
+}
+
+h2 { color: #6c3bbd; }
+
+code, pre {
+    background: #f0e8ff;
+    border-radius: 6px;
+}
+
+code { padding: 3px 6px; }
+
+pre {
+    padding: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+button, .nav a {
+    display: inline-block;
+    background: #6c3bbd;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 5px 4px 5px 0;
+    font: inherit;
+}
+
+button:hover, .nav a:hover { background: #4d258e; }
+
+.example-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.question {
+    border-bottom: 1px solid #e7def5;
+    padding: 12px 0;
+}
+
+label { display: block; margin: 7px 0; }
+
+#result { font-weight: bold; margin-top: 15px; }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #655477;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>HTML Links & Images</h1>
+    <p>CS Companion | HTML Lesson 04</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+    <h2>1. What Is a Hyperlink?</h2>
+    <p>
+        A hyperlink connects one webpage or resource to another.
+        In HTML, we use the anchor tag <code>&lt;a&gt;</code>.
+    </p>
+
+    <pre><code>&lt;a href="https://www.wikipedia.org"&gt;
+  Visit Wikipedia
+&lt;/a&gt;</code></pre>
+
+    <p>Here:</p>
+    <ul>
+        <li><code>&lt;a&gt;</code> is the anchor tag.</li>
+        <li><code>href</code> specifies the destination.</li>
+        <li>The text between the tags becomes clickable.</li>
+    </ul>
+
+    <p>
+        Example:
+        <a href="https://www.wikipedia.org" target="_blank"
+           rel="noopener noreferrer">Visit Wikipedia</a>
+    </p>
+</section>
+
+<section class="card">
+    <h2>2. Types of Links</h2>
+
+    <h3>External Link</h3>
+    <p>Opens a page on another website.</p>
+    <pre><code>&lt;a href="https://www.example.com"&gt;
+  Visit Website
+&lt;/a&gt;</code></pre>
+
+    <h3>Internal Link</h3>
+    <p>Connects to another page in the same project.</p>
+    <pre><code>&lt;a href="html-tags.html"&gt;
+  Learn HTML Tags
+&lt;/a&gt;</code></pre>
+    <p>The destination filename must match the actual file.</p>
+
+    <h3>Email Link</h3>
+    <pre><code>&lt;a href="mailto:hello@example.com"&gt;
+  Send Email
+&lt;/a&gt;</code></pre>
+
+    <h3>Open a Link in a New Tab</h3>
+    <pre><code>&lt;a href="https://www.example.com"
+   target="_blank"
+   rel="noopener noreferrer"&gt;
+  Open Website
+&lt;/a&gt;</code></pre>
+    <p><code>target="_blank"</code> opens the destination in a new tab or window.</p>
+</section>
+
+<section class="card">
+    <h2>3. What Is an HTML Image?</h2>
+    <p>
+        Images make webpages more informative and attractive.
+        HTML uses the <code>&lt;img&gt;</code> tag to display an image.
+    </p>
+
+    <pre><code>&lt;img src="flower.jpg"
+     alt="A pink flower"
+     width="300"&gt;</code></pre>
+
+    <p>Important attributes:</p>
+    <ul>
+        <li><code>src</code>: location or path of the image.</li>
+        <li><code>alt</code>: text describing the image if it cannot load; also useful for screen readers.</li>
+        <li><code>width</code>: specifies the image width.</li>
+        <li><code>height</code>: specifies the image height.</li>
+    </ul>
+    <p>The <code>&lt;img&gt;</code> tag is a void element, so it does not need a closing tag.</p>
+</section>
+
+<section class="card">
+    <h2>4. Understanding Image Paths</h2>
+
+    <h3>Same Folder</h3>
+    <pre><code>index.html
+flower.jpg</code></pre>
+    <pre><code>&lt;img src="flower.jpg" alt="Flower"&gt;</code></pre>
+
+    <h3>Image Inside a Folder</h3>
+    <pre><code>index.html
+images/
+  flower.jpg</code></pre>
+    <pre><code>&lt;img src="images/flower.jpg" alt="Flower"&gt;</code></pre>
+
+    <h3>Parent Folder</h3>
+    <pre><code>&lt;img src="../flower.jpg" alt="Flower"&gt;</code></pre>
+    <p><code>../</code> means move up one folder level.</p>
+
+    <p><strong>Remember:</strong> On GitHub Pages, filenames and folder names must match, including uppercase and lowercase letters.</p>
+</section>
+
+<section class="card">
+    <h2>5. Clickable Image</h2>
+    <p>An image can also work as a link by placing the image inside an anchor tag.</p>
+
+    <pre><code>&lt;a href="https://www.wikipedia.org"&gt;
+  &lt;img src="flower.jpg"
+       alt="Open Wikipedia"&gt;
+&lt;/a&gt;</code></pre>
+
+    <p>Clicking the image opens the linked destination.</p>
+</section>
+
+<section class="card">
+    <h2>6. Try It Yourself</h2>
+    <p>Enter a website address and test the link.</p>
+
+    <input id="siteAddress" type="url"
+           placeholder="https://example.com"
+           style="width:100%;padding:12px;border:1px solid #cbb9e8;border-radius:8px;">
+
+    <button type="button" onclick="testLink()">Test Link</button>
+    <div id="linkOutput"></div>
+
+    <script>
+    function testLink() {
+        const input = document.getElementById("siteAddress");
+        const output = document.getElementById("linkOutput");
+        const raw = input.value.trim();
+
+        if (!raw) {
+            output.textContent = "Please enter a website address.";
+            return;
+        }
+
+        try {
+            const url = new URL(raw);
+
+            if (url.protocol !== "https:" && url.protocol !== "http:") {
+                throw new Error("Invalid protocol");
+            }
+
+            output.replaceChildren();
+
+            const link = document.createElement("a");
+            link.href = url.href;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = "Open " + url.href;
+            output.appendChild(link);
+        } catch (error) {
+            output.textContent =
+                "Enter a valid address starting with https:// or http://";
+        }
+    }
+    </script>
+</section>
+
+<section class="card">
+    <h2>7. Quick Quiz</h2>
+    <p>Answer all five questions to check your understanding.</p>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <p>1. Which tag creates a hyperlink?</p>
+            <label><input type="radio" name="q1" value="a"> &lt;img&gt;</label>
+            <label><input type="radio" name="q1" value="b"> &lt;a&gt;</label>
+            <label><input type="radio" name="q1" value="c"> &lt;linktext&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>2. Which attribute specifies the link destination?</p>
+            <label><input type="radio" name="q2" value="a"> src</label>
+            <label><input type="radio" name="q2" value="b"> alt</label>
+            <label><input type="radio" name="q2" value="c"> href</label>
+        </div>
+
+        <div class="question">
+            <p>3. Which tag displays an image?</p>
+            <label><input type="radio" name="q3" value="a"> &lt;img&gt;</label>
+            <label><input type="radio" name="q3" value="b"> &lt;picturetext&gt;</label>
+            <label><input type="radio" name="q3" value="c"> &lt;image&gt;</label>
+        </div>
+
+        <div class="question">
+            <p>4. What is the purpose of the alt attribute?</p>
+            <label><input type="radio" name="q4" value="a"> Changes the image colour</label>
+            <label><input type="radio" name="q4" value="b"> Describes the image in text</label>
+            <label><input type="radio" name="q4" value="c"> Opens a new tab</label>
+        </div>
+
+        <div class="question">
+            <p>5. Which attribute opens a link in a new tab?</p>
+            <label><input type="radio" name="q5" value="a"> target="_blank"</label>
+            <label><input type="radio" name="q5" value="b"> href="_newtab"</label>
+            <label><input type="radio" name="q5" value="c"> src="_blank"</label>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+        <button type="reset" onclick="resetQuiz()">Try Again</button>
+    </form>
+
+    <div id="result"></div>
+    <div id="explanations"></div>
+</section>
+
+<section class="card nav">
+    <h2>Lesson Navigation</h2>
+    <a href="html-text-formatting.html">← Previous Lesson</a>
+    <a href="index.html">Home</a>
+    <a href="html-lists.html">Next Lesson →</a>
+</section>
+
+</main>
+
+<footer>
+    <p>Haari_Codes | Learn • Practice • Grow 💜</p>
+</footer>
+
+<script>
+function checkQuiz() {
+    const answers = {
+        q1: "b",
+        q2: "c",
+        q3: "a",
+        q4: "b",
+        q5: "a"
+    };
+
+    const explanations = [
+        "1. The <a> tag creates hyperlinks.",
+        "2. href specifies the destination of a link.",
+        "3. The <img> tag displays an image.",
+        "4. alt provides a text description of the image.",
+        "5. target=\"_blank\" opens the destination in a new tab or window."
+    ];
+
+    let score = 0;
+    let unanswered = [];
+
+    for (const q in answers) {
+        const selected = document.querySelector(
+            'input[name="' + q + '"]:checked'
+        );
+
+        if (!selected) {
+            unanswered.push(q);
+        } else if (selected.value === answers[q]) {
+            score++;
+        }
+    }
+
+    const result = document.getElementById("result");
+    const details = document.getElementById("explanations");
+
+    if (unanswered.length) {
+        result.textContent = "Please answer all five questions first.";
+        details.replaceChildren();
+        return;
+    }
+
+    result.textContent = "Your score: " + score + "/5" +
+        (score === 5 ? " 🎉 Excellent work!" : " 💜 Keep practising!");
+
+    details.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = "Answer Explanations";
+    details.appendChild(heading);
+
+    explanations.forEach(text => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        details.appendChild(p);
+    });
+}
+
+function resetQuiz() {
+    document.getElementById("result").textContent = "";
+    document.getElementById("explanations").replaceChildren();
+}
+</script>
+
+</body>
+  </html>
