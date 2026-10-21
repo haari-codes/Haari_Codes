@@ -397,6 +397,98 @@ header {
         font-size: 18px;
     }
 }
+    .menu-course {
+    position: relative;
+}
+
+.menu-item {
+    border: none;
+    background: transparent;
+    color: #30245d;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 11px 13px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    color: #843cff;
+}
+
+.course-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 280px;
+    max-height: 65vh;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #e2d4ff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px #28145f20;
+    padding: 10px;
+    z-index: 100;
+}
+
+.course-list.show {
+    display: block;
+}
+
+.course-list details {
+    padding: 7px 5px;
+    border-bottom: 1px solid #eee7ff;
+}
+
+.course-list summary {
+    cursor: pointer;
+    color: #5125a8;
+    font-weight: bold;
+    padding: 6px 3px;
+}
+
+.course-list ul {
+    list-style-type: "* ";
+    padding-left: 24px;
+    margin: 5px 0;
+}
+
+.course-list li {
+    padding: 5px 0;
+}
+
+.course-list li a {
+    color: #40345f;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.course-list li a:hover {
+    color: #843cff;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .menu-course {
+        width: 100%;
+    }
+
+    .menu-item {
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .course-list {
+        position: static;
+        width: 100%;
+        max-height: 50vh;
+        box-shadow: none;
+        margin-top: 5px;
+    }
+}
 </style>
 </head>
 
@@ -408,13 +500,84 @@ header {
         <span>Haari_<span>Codes</span></span>
     </a>
 
-    <nav class="nav-links" id="navLinks">
-        <a class="active" href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#error-detector">Error Detector</a>
-        <a href="#about">About</a>
-    </nav>
+<nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+
+    <div class="menu-course">
+        <button class="menu-item" onclick="toggleCourses()">
+            Courses <span id="courseArrow">▸</span>
+        </button>
+
+        <div id="courseList" class="course-list">
+
+            <details>
+                <summary>C Programming</summary>
+                <ul>
+                    <li><a href="cprograming.html">Lesson 1: Introduction</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>C++</summary>
+                <ul>
+                    <li><a href="cpp-introduction.html">Lesson 1: Introduction</a></li>
+                    <li><a href="cpp-variables.html">Lesson 2: Variables</a></li>
+                    <li><a href="cpp-operators.html">Lesson 3: Operators</a></li>
+                    <li><a href="cpp-input-output.html">Lesson 4: Input and Output</a></li>
+                    <li><a href="cpp-conditions.html">Lesson 5: Conditions</a></li>
+                    <li><a href="cpp-loops.html">Lesson 6: Loops</a></li>
+                    <li><a href="cpp-functions.html">Lesson 7: Functions</a></li>
+                    <li><a href="cpp-arrays.html">Lesson 8: Arrays</a></li>
+                    <li><a href="cpp-pointers.html">Lesson 9: Pointers</a></li>
+                    <li><a href="cpp-oop.html">Lesson 10: OOP</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>Data Structures</summary>
+                <ul>
+                    <li><a href="ds-introduction.html">Lesson 1: Introduction</a></li>
+                    <li><a href="ds-arrays.html">Lesson 2: Arrays</a></li>
+                    <li><a href="ds-linked-lists.html">Lesson 3: Linked Lists</a></li>
+                    <li><a href="ds-stacks.html">Lesson 4: Stacks</a></li>
+                    <li><a href="ds-queues.html">Lesson 5: Queues</a></li>
+                    <li><a href="ds-searching.html">Lesson 6: Searching</a></li>
+                    <li><a href="ds-sorting.html">Lesson 7: Sorting</a></li>
+                    <li><a href="ds-trees.html">Lesson 8: Trees</a></li>
+                    <li><a href="ds-graphs.html">Lesson 9: Graphs</a></li>
+                    <li><a href="ds-hashing.html">Lesson 10: Hashing</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>SQL</summary>
+                <ul>
+                    <li><a href="sql-introduction.html">Lesson 1: Introduction</a></li>
+                    <li><a href="sql-ddl.html">Lesson 2: DDL</a></li>
+                    <li><a href="sql-dml.html">Lesson 3: DML</a></li>
+                    <li><a href="sql-select.html">Lesson 4: SELECT</a></li>
+                    <li><a href="sql-operators.html">Lesson 5: Operators</a></li>
+                    <li><a href="sql-functions.html">Lesson 6: Functions</a></li>
+                    <li><a href="sql-group-by.html">Lesson 7: GROUP BY</a></li>
+                    <li><a href="sql-joins.html">Lesson 8: Joins</a></li>
+                    <li><a href="sql-subqueries.html">Lesson 9: Subqueries</a></li>
+                    <li><a href="sql-constraints.html">Lesson 10: Constraints</a></li>
+                </ul>
+            </details>
+
+            <details>
+                <summary>HTML</summary>
+                <ul>
+                    <li><a href="html-introduction.html">Lesson 1: Introduction</a></li>
+                </ul>
+            </details>
+        </div>
+    </div>
+
+    <a href="#quiz">Quiz</a>
+    <a href="#error-detector">Error Detector</a>
+    <a href="#about">About Us</a>
+                            </nav>
 
     <form class="search" id="searchForm">
         <input id="searchInput" type="search"
