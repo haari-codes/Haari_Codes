@@ -1,707 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haari_Codes | Home</title>
-
+<title>Haari Codes | CS Companion</title>
 <style>
-:root {
-    --purple: #843cff;
-    --deep: #28145f;
-    --light: #f2eaff;
-    --text: #30245d;
-    --muted: #756b99;
-    --white: #ffffff;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: Georgia, serif;
-    color: var(--text);
-    background:
-        radial-gradient(ellipse at 0% 15%, #eee5ff, transparent 35%),
-        radial-gradient(ellipse at 100% 65%, #f0e8ff, transparent 35%),
-        #fff;
-    min-height: 100vh;
-}
-
-/* HEADER */
-
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 12px 4%;
-    min-height: 82px;
-    background: #ffffff;
-    border-bottom: 1px solid #e6d9ff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--deep);
-    font-size: clamp(18px, 2.4vw, 28px);
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.brand img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ddc6ff;
-}
-
-.brand span span {
-    color: var(--purple);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.nav-links a {
-    padding: 11px 13px;
-    border-radius: 25px;
-    color: var(--text);
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: white;
-    background: var(--purple);
-}
-
-.search {
-    display: flex;
-    align-items: center;
-    border: 1px solid #dfd0ff;
-    border-radius: 30px;
-    padding: 4px 10px;
-    background: #faf8ff;
-    max-width: 200px;
-}
-
-.search input {
-    width: 100%;
-    min-width: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    padding: 8px 3px;
-    font-size: 14px;
-}
-
-.search button {
-    border: none;
-    background: none;
-    color: var(--purple);
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.menu-button {
-    display: none;
-    background: transparent;
-    border: none;
-    color: var(--purple);
-    font-size: 27px;
-    cursor: pointer;
-}
-
-/* HERO */
-
-.hero {
-    text-align: center;
-    padding: 30px 16px 22px;
-}
-
-.hero-logo {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%;
-    background: white;
-    border: 3px solid #ddc6ff;
-    box-shadow: 0 7px 25px #843cff18;
-}
-
-.hero h1 {
-    color: var(--deep);
-    font-size: clamp(34px, 5vw, 55px);
-    margin: 12px 0 5px;
-}
-
-.hero h1 span {
-    color: var(--purple);
-}
-
-.tagline {
-    color: var(--muted);
-    font-size: 19px;
-    margin: 8px 0;
-}
-
-.decoration {
-    color: var(--purple);
-    font-size: 20px;
-    letter-spacing: 5px;
-    margin: 12px 0;
-}
-
-/* CARDS */
-
-.features {
-    max-width: 1350px;
-    margin: 0 auto;
-    padding: 0 4% 55px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.feature-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    min-width: 0;
-    min-height: 175px;
-    padding: 22px 18px;
-    border: 1px solid #e2d4ff;
-    border-radius: 17px;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 7px 22px #6841a20d;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px #843cff20;
-    border-color: #bd9aff;
-}
-
-.feature-icon {
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    display: grid;
-    place-items: center;
-    border-radius: 18px;
-    background: var(--light);
-    color: var(--purple);
-    font-family: Arial, sans-serif;
-    font-size: 34px;
-}
-
-.feature-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.feature-content h2 {
-    color: var(--deep);
-    font-size: 22px;
-    margin: 0 0 10px;
-}
-
-.feature-content p {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin: 0;
-}
-
-.arrow {
-    flex-shrink: 0;
-    width: 35px;
-    height: 35px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--purple);
-    color: white;
-    font-size: 21px;
-}
-
-/* ABOUT */
-
-.about {
-    text-align: center;
-    padding: 30px 20px 22px;
-    border-top: 2px solid #ddc6ff;
-    background: #ffffffd9;
-}
-
-.about h2 {
-    color: var(--deep);
-    font-size: 28px;
-    margin: 5px 0 14px;
-}
-
-.about h2 span {
-    color: var(--purple);
-    margin-right: 8px;
-}
-
-.about p {
-    max-width: 650px;
-    margin: 10px auto;
-    color: var(--muted);
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.copyright {
-    padding-top: 10px;
-    font-size: 12px !important;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 1050px) {
-    header {
-        flex-wrap: wrap;
-    }
-
-    .nav-links {
-        order: 4;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-        max-width: 650px;
-    }
-
-    .feature-card {
-        min-height: 145px;
-    }
-}
-
-@media (max-width: 600px) {
-    header {
-        gap: 10px;
-        padding: 10px 4%;
-    }
-
-    .brand {
-        font-size: 19px;
-        gap: 7px;
-    }
-
-    .brand img {
-        width: 43px;
-        height: 43px;
-    }
-
-    .menu-button {
-        display: block;
-        order: 2;
-    }
-
-    .search {
-        order: 3;
-        flex: 1 1 100%;
-        max-width: none;
-    }
-
-    .nav-links {
-        display: none;
-        order: 4;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 3px;
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links a {
-        text-align: center;
-    }
-
-    .hero {
-        padding-top: 25px;
-    }
-
-    .hero-logo {
-        width: 150px;
-        height: 150px;
-    }
-
-    .tagline {
-        font-size: 16px;
-    }
-
-    .features {
-        padding: 0 15px 38px;
-        gap: 14px;
-    }
-
-    .feature-card {
-        gap: 12px;
-        padding: 17px 12px;
-        min-height: 135px;
-    }
-
-    .feature-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 14px;
-        font-size: 27px;
-    }
-
-    .feature-content h2 {
-        font-size: 19px;
-        margin-bottom: 6px;
-    }
-
-    .feature-content p {
-        font-size: 13px;
-    }
-
-    .arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 18px;
-    }
-}
-    .menu-course {
-    position: relative;
-}
-
-.menu-item {
-    border: none;
-    background: transparent;
-    color: #30245d;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 11px 13px;
-    cursor: pointer;
-}
-
-.menu-item:hover {
-    color: #843cff;
-}
-
-.course-list {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 280px;
-    max-height: 65vh;
-    overflow-y: auto;
-    background: white;
-    border: 1px solid #e2d4ff;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px #28145f20;
-    padding: 10px;
-    z-index: 100;
-}
-
-.course-list.show {
-    display: block;
-}
-
-.course-list details {
-    padding: 7px 5px;
-    border-bottom: 1px solid #eee7ff;
-}
-
-.course-list summary {
-    cursor: pointer;
-    color: #5125a8;
-    font-weight: bold;
-    padding: 6px 3px;
-}
-
-.course-list ul {
-    list-style-type: "* ";
-    padding-left: 24px;
-    margin: 5px 0;
-}
-
-.course-list li {
-    padding: 5px 0;
-}
-
-.course-list li a {
-    color: #40345f;
-    font-size: 13px;
-    text-decoration: none;
-    white-space: normal;
-}
-
-.course-list li a:hover {
-    color: #843cff;
-    text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-    .menu-course {
-        width: 100%;
-    }
-
-    .menu-item {
-        width: 100%;
-        text-align: center;
-        font-size: 15px;
-    }
-
-    .course-list {
-        position: static;
-        width: 100%;
-        max-height: 50vh;
-        box-shadow: none;
-        margin-top: 5px;
-    }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f8f5ff;color:#30234a;line-height:1.6}
+header{background:#6541a5;color:white;text-align:center;padding:32px 16px}
+header h1{font-size:2.2rem;margin:0}
+header p{margin:8px 0 0}
+main{max-width:850px;margin:auto;padding:18px}
+h2{color:#6541a5;margin:0 0 10px}
+.intro,.course,.tools{background:white;border:1px solid #e5dcfa;border-radius:12px;padding:18px;margin:16px 0}
+details{border-top:1px solid #e9e1f8;padding:12px 0}
+summary{cursor:pointer;font-weight:bold;color:#54358c}
+.links{padding:8px 0 0 14px}
+.links a{display:block;color:#6541a5;text-decoration:none;padding:5px 0}
+.links a:hover{text-decoration:underline;color:#392069}
+.tools a{display:block;color:#6541a5;text-decoration:none;padding:5px 0}
+.tagline{font-size:.95rem;color:#6c5a85}
+footer{text-align:center;padding:20px;color:#6c5a85}
 </style>
 </head>
-
 <body>
-
 <header>
-    <a class="brand" href="index.html">
-        <img src="haari-logo.png" alt="Haari_Codes logo">
-        <span>Haari_<span>Codes</span></span>
-    </a>
-
-<nav class="nav-links" id="navLinks">
-    <a href="index.html">Home</a>
-
-    <div class="menu-course">
-        <button class="menu-item" onclick="toggleCourses()">
-            Courses <span id="courseArrow">▸</span>
-        </button>
-
-        <div id="courseList" class="course-list">
-
-            <details>
-                <summary>C Programming</summary>
-                <ul>
-                  <li><a href="cintroduction.html"> lesson 1: Introduction to C</a></li>
-       <li><a href="variables.html">lesson 2: Variables &amp; Data Types</a></li>
-     <li> <a href="operators.html">lesson 3: Operators</a></li>
-      <li><a href="input-output.html">lesson 4: Input &amp; Output</a></li>
-      <li><a href="conditional-statement.html">lesson 5: Conditional Statements</a></li>
-      <li><a href="loops.html">lesson 6: Loops</a></li>
-      <li><a href="function.html">lesson 7: Functions</a></li>
-     <li> <a href="arrays.html">lesson 8: Arrays</a></li>
-     <li> <a href="string.html">lesson 9: Strings</a></li>
-      <li><a href="pointers.html">lesson 10: Pointers</a></li>
-    <li>  <a href="structure.html">lesson 11: Structures</a></li>
-                </ul>
-            </details>
-
-            <details>
-                <summary>C++</summary>
-                <ul>
-                    <li><a href="cpp-introduction.html">Lesson 1: Introduction</a></li>
-                    <li><a href="cpp-variables.html">Lesson 2: Variables</a></li>
-                    <li><a href="cpp-operators.html">Lesson 3: Operators</a></li>
-                    <li><a href="cpp-input-output.html">Lesson 4: Input and Output</a></li>
-                    <li><a href="cpp-conditions.html">Lesson 5: Conditions</a></li>
-                    <li><a href="cpp-loops.html">Lesson 6: Loops</a></li>
-                    <li><a href="cpp-functions.html">Lesson 7: Functions</a></li>
-                    <li><a href="cpp-arrays.html">Lesson 8: Arrays</a></li>
-                    <li><a href="cpp-pointers.html">Lesson 9: Pointers</a></li>
-                    <li><a href="cpp-oop.html">Lesson 10: OOP</a></li>
-                </ul>
-            </details>
-
-            <details>
-                <summary>Data Structures</summary>
-                <ul>
-                    <li><a href="ds-introduction.html">Lesson 1: Introduction</a></li>
-                    <li><a href="ds-arrays.html">Lesson 2: Arrays</a></li>
-                    <li><a href="ds-linked-lists.html">Lesson 3: Linked Lists</a></li>
-                    <li><a href="ds-stacks.html">Lesson 4: Stacks</a></li>
-                    <li><a href="ds-queues.html">Lesson 5: Queues</a></li>
-                    <li><a href="ds-searching.html">Lesson 6: Searching</a></li>
-                    <li><a href="ds-sorting.html">Lesson 7: Sorting</a></li>
-                    <li><a href="ds-trees.html">Lesson 8: Trees</a></li>
-                    <li><a href="ds-graphs.html">Lesson 9: Graphs</a></li>
-                    <li><a href="ds-hashing.html">Lesson 10: Hashing</a></li>
-                </ul>
-            </details>
-
-            <details>
-                <summary>SQL</summary>
-                <ul>
-                    <li><a href="sql-introduction.html">Lesson 1: Introduction</a></li>
-                    <li><a href="sql-ddl.html">Lesson 2: DDL</a></li>
-                    <li><a href="sql-dml.html">Lesson 3: DML</a></li>
-                    <li><a href="sql-select.html">Lesson 4: SELECT</a></li>
-                    <li><a href="sql-operators.html">Lesson 5: Operators</a></li>
-                    <li><a href="sql-functions.html">Lesson 6: Functions</a></li>
-                    <li><a href="sql-group-by.html">Lesson 7: GROUP BY</a></li>
-                    <li><a href="sql-joins.html">Lesson 8: Joins</a></li>
-                    <li><a href="sql-subqueries.html">Lesson 9: Subqueries</a></li>
-                    <li><a href="sql-constraints.html">Lesson 10: Constraints</a></li>
-                </ul>
-            </details>
-
-            <details>
-                <summary>HTML</summary>
-                <ul>
-                    <li><a href="html-introduction.html">Lesson 1: Introduction</a></li>
-                </ul>
-            </details>
-        </div>
-    </div>
-
-    <a href="quiz.html">Quiz</a>
-    <a href="#error-detector">Error Detector</a>
-    <a href="#about">About Us</a>
-                            </nav>
-
-    <form class="search" id="searchForm">
-        <input id="searchInput" type="search"
-               placeholder="Search..." aria-label="Search features">
-        <button type="submit" aria-label="Search">⌕</button>
-    </form>
-
-    <button class="menu-button" id="menuButton"
-            type="button" aria-label="Toggle menu">☰</button>
-</header>
-
-<main>
-    <section class="hero">
-        <img class="hero-logo" src="haari-logo.png"
-             alt="Haari_Codes illustrated logo">
-
-        <h1>Haari_<span>Codes</span></h1>
-        <p class="tagline">Learn&nbsp; · &nbsp;Practise&nbsp; · &nbsp;Build</p>
-        <div class="decoration">━━ ♥ ━━</div>
-    </section>
-
-    <section class="features" id="features">
-
-        <a class="feature-card" href="courses.html"
-           data-search="courses programming lessons learn">
-            <div class="feature-icon">⌘</div>
-            <div class="feature-content">
-                <h2>Courses</h2>
-                <p>Explore and learn programming step by step.</p>
-            </div>
-            <span class="arrow">➜</span>
-        </a>
-
-        <a class="feature-card" href="quiz.html" id="quiz"
-           data-search="quiz test questions practice">
-            <div class="feature-icon">✓</div>
-            <div class="feature-content">
-                <h2>Take a Quiz</h2>
-                <p>Test your knowledge and practise what you learn.</p>
-            </div>
-            <span class="arrow">➜</span>
-        </a>
-
-        <a class="feature-card" href="#error-detector" id="error-detector"
-           data-search="error detector code debugging">
-            <div class="feature-icon">{ }</div>
-            <div class="feature-content">
-                <h2>Error Detector</h2>
-                <p>Find and fix coding errors as you practise.</p>
-            </div>
-            <span class="arrow">➜</span>
-        </a>
-
-    </section>
-</main>
-
-<footer class="about" id="about">
-    <h2><span>♡</span> About Us</h2>
-    <p>
-        Haari_Codes helps learners explore programming through
-        simple explanations, practical examples and coding practice.
-    </p>
-    <p class="copyright">© 2026 Haari_Codes. All rights reserved.</p>
-</footer>
-
-<script>
-const menuButton = document.getElementById("menuButton");
-const navLinks = document.getElementById("navLinks");
-
-menuButton.addEventListener("click", function () {
-    navLinks.classList.toggle("open");
-});
-
-document.getElementById("searchForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const query = document.getElementById("searchInput")
-        .value.trim().toLowerCase();
-
-    const cards = document.querySelectorAll(".feature-card");
-    let found = false;
-
-    cards.forEach(function (card) {
-        const text = (
-            card.innerText + " " + card.dataset.search
-        ).toLowerCase();
-
-        const matches = query === "" || text.includes(query);
-        card.style.display = matches ? "flex" : "none";
-
-        if (matches) found = true;
-    });
-
-    if (!found) {
-        alert("No matching feature found. Try Courses, Quiz, or Error Detector.");
-    }
-});
-
-document.getElementById("searchInput").addEventListener("input", function () {
-    if (this.value.trim() === "") {
-        document.querySelectorAll(".feature-card").forEach(function (card) {
-            card.style.display = "flex";
-        });
-    }
-    
-});
-    function toggleCourses() {
-    const list = document.getElementById("courseList");
-    const arrow = document.getElementById("courseArrow");
-
-    list.classList.toggle("show");
-    arrow.textContent = list.classList.contains("show") ? "▾" : "▸";
-    }
-</script>
-
+<h1>Haari_Codes 💜</h1>
+<p>CS Companion</p>
+<p>Learn • Practise • Build</p>
+</header><main>
+<section class="intro">
+<h2>Welcome to CS Companion!</h2>
+<p>Your simple companion for learning programming, understanding concepts and practising coding.</p>
+<p class="tagline">Choose a course below and start learning at your own pace.</p>
+</section><section class="course">
+<h2>Courses & Lessons</h2><details>
+<summary>01. C Programming</summary>
+<div class="links">
+<a href="cintroduction.html">01. Introduction to C</a>
+<a href="variables.html">02. Variables & Data Types</a>
+<a href="operators.html">03. Operators</a>
+<a href="input-output.html">04. Input & Output</a>
+<a href="conditional-statement.html">05. Conditional Statements</a>
+<a href="loops.html">06. Loops</a>
+<a href="function.html">07. Functions</a>
+<a href="arrays.html">08. Arrays</a>
+<a href="string.html">09. Strings</a>
+<a href="pointers.html">10. Pointers</a>
+<a href="structure.html">11. Structures</a>
+</div>
+</details><details>
+<summary>02. C++ Programming</summary>
+<div class="links">
+<a href="cpp-programming.html">Course Overview</a>
+<a href="cpp-introduction.html">01. Introduction</a>
+<a href="cpp-variables.html">02. Variables & Data Types</a>
+<a href="cpp-operators.html">03. Operators</a>
+<a href="cpp-input-output.html">04. Input & Output</a>
+<a href="cpp-conditions.html">05. Conditional Statements</a>
+<a href="cpp-loops.html">06. Loops</a>
+<a href="cpp-functions.html">07. Functions</a>
+<a href="cpp-arrays.html">08. Arrays</a>
+<a href="cpp-pointers.html">09. Pointers</a>
+<a href="cpp-oop.html">10. Object-Oriented Programming</a>
+</div>
+</details><details>
+<summary>03. Data Structures</summary>
+<div class="links">
+<a href="data-structures.html">Course Overview</a>
+<a href="ds-introduction.html">01. Introduction</a>
+<a href="ds-arrays.html">02. Arrays</a>
+<a href="ds-linked-lists.html">03. Linked Lists</a>
+<a href="ds-stacks.html">04. Stacks</a>
+<a href="ds-queues.html">05. Queues</a>
+<a href="ds-searching.html">06. Searching</a>
+<a href="ds-sorting.html">07. Sorting</a>
+<a href="ds-trees.html">08. Trees</a>
+<a href="ds-graphs.html">09. Graphs</a>
+<a href="ds-hashing.html">10. Hashing</a>
+</div>
+</details><details>
+<summary>04. SQL</summary>
+<div class="links">
+<a href="sql.html">Course Overview</a>
+<a href="sql-introduction.html">01. Introduction to SQL</a>
+<a href="sql-ddl.html">02. DDL Commands</a>
+<a href="sql-dml.html">03. DML Commands</a>
+<a href="sql-select.html">04. SELECT Queries</a>
+<a href="sql-operators.html">05. SQL Operators</a>
+<a href="sql-functions.html">06. SQL Functions</a>
+<a href="sql-group-by.html">07. GROUP BY & HAVING</a>
+<a href="sql-joins.html">08. SQL Joins</a>
+<a href="sql-subqueries.html">09. Subqueries</a>
+<a href="sql-constraints.html">10. Constraints</a>
+</div>
+</details><details>
+<summary>05. HTML & CSS</summary>
+<div class="links">
+<a href="html-introduction.html">01. Introduction to HTML</a>
+<a href="html-tags.html">02. HTML Tags</a>
+<a href="html-text-formatting.html">03. Text Formatting</a>
+<a href="html-links-images.html">04. Links & Images</a>
+<a href="html-lists.html">05. Lists</a>
+<a href="html-tables.html">06. Tables</a>
+<a href="html-forms.html">07. Forms</a>
+<a href="html-semantic-elements.html">08. Semantic Elements</a>
+<a href="html-audio-video.html">09. Audio & Video</a>
+<a href="html-css-basics.html">10. CSS Basics</a>
+</div>
+</details>
+</section><section class="tools">
+<h2>Practice & Tools</h2>
+<a href="quiz.html">→ Quick Quiz: Test Your Knowledge</a>
+<a href="error-detector.html">→ Error Detector: Check Your Code</a>
+</section><section class="intro">
+<h2>About Haari_Codes</h2>
+<p>Haari_Codes is a learning project built to make computer science concepts easier to understand through lessons, examples and practice.</p>
+</section>
+</main><footer>Made with 💜 by Haari_Codes</footer>
 </body>
 </html>
