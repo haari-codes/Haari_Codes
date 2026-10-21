@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Error Detector | CS Companion</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f4ff;color:#30234a;line-height:1.6}
+header{background:#6541a5;color:white;padding:24px 16px;text-align:center}
+header h1{margin:0}
+nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+nav a{color:white;text-decoration:none;border:1px solid #d9c9ff;padding:6px 12px;border-radius:8px}
+main{max-width:950px;margin:auto;padding:16px}
+.card{background:white;border:1px solid #e5dcfa;border-radius:14px;padding:18px;margin:16px 0}
+h2{color:#6541a5}
+label{display:block;font-weight:bold;margin:10px 0 5px}
+select,textarea{width:100%;padding:12px;border:1px solid #cfc0ee;border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:240px;font-family:monospace;resize:vertical}
+button{border:0;border-radius:8px;padding:10px 16px;margin:5px 4px 5px 0;background:#6541a5;color:white;font:inherit;cursor:pointer}
+button:hover{background:#4d2e88}
+.secondary{background:#ece5fb;color:#432c70}
+#results{overflow-wrap:anywhere}
+.issue{padding:12px;margin:10px 0;border-radius:8px;background:#fff5e8;border-left:4px solid #d97706}
+.good{background:#eaf8ee;border-left-color:#16803d}
+.info{background:#f0eaff;border-left-color:#6541a5}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f0fc;padding:12px;border-radius:8px}
+.small{font-size:.92rem;color:#655779}
+footer{text-align:center;padding:20px;color:#6c5a85}
+</style>
+</head>
+<body>
+<header>
+<h1>🛠️ Error Detector</h1>
+<p>CS Companion | Find common coding mistakes</p>
+<nav>
+<a href="index.html">← Home</a>
+<a href="quiz.html">Practice Quiz</a>
+<a href="html-introduction.html">HTML Lessons</a>
+</nav>
+</header><main>
+<section class="card">
+<h2>Check Your Code</h2>
+<p>Paste your code below, select its language and tap <b>Detect Errors</b>.</p><label for="language">Programming language</label>
+<select id="language">
+
+<option value="html">HTML</option>
+<option value="css">CSS</option>
+<option value="javascript">JavaScript</option>
+<option value="c">C</option>
+<option value="cpp">C++</option>
+</select><label for="code">Your code</label>
+
+<textarea id="code" spellcheck="false" placeholder="Paste your code here..."></textarea><button id="check">Detect Errors</button>
+<button class="secondary" id="example">Load Example</button>
+<button class="secondary" id="clear">Clear</button>
+
+<p class="small">Privacy: this checker analyses the code in your browser. It does not upload your code to a server.</p>
+</section><section class="card">
+<h2>Results</h2>
+<div id="results" aria-live="polite">Your results will appear here.</div>
+</section><section class="card">
+<h2>What Can It Detect?</h2>
+<ul>
+<li><b>HTML:</b> common missing closing tags, missing attributes and malformed tag patterns.</li>
+<li><b>CSS:</b> unbalanced braces, missing declarations and some missing semicolons.</li>
+<li><b>JavaScript:</b> common missing brackets, parentheses, unfinished strings and simple syntax patterns.</li>
+<li><b>C/C++:</b> common missing semicolons, suspicious missing headers and unmatched brackets.</li>
+</ul>
+<p class="small">These are rule-based checks, not a full compiler. Some warnings may be false positives, and some errors may not be detected. Advanced language features, comments, strings and complex syntax can make simple checks imperfect.</p>
+</section>
+</main><footer>Made with 💜 by Haari Codes | CS Companion</footer><script>
+const language = document.getElementById("language");
+const codeBox = document.getElementById("code");
+const results = document.getElementById("results");
+
+const examples = {
+html: '<!DOCTYPE html>\n<html>\n<head>\n<title>My Page</title>\n</head>\n<body>\n<h1>Hello World</h1>\n<p>Welcome to my website\n</body>\n</html>',
+css: 'h1 {\n  color: purple\n  font-size: 24px;\n',
+javascript: 'const message = "Hello";\nconsole.log(message;\n',
+c: '#include <stdio.h>\nint main(void) {\n    printf("Hello World")\n    return 0;\n}',
+cpp: '#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello World"\n    return 0;\n}'
+};
+
+document.getElementById("example").addEventListener("click", function(){
+  codeBox.value = examples[language.value];
+  results.textContent = "Example loaded. Tap Detect Errors to check it.";
+});
+
+language.addEventListener("change", function(){
+  codeBox.value = "";
+  results.textContent = "Language changed. Paste code or load an example.";
+});
+
+document.getElementById("clear").addEventListener("click", function(){
+  codeBox.value = "";
+  results.textContent = "Code cleared.";
+});
+
+function addIssue(message, type){
+  const div = document.createElement("div");
+  div.className = "issue " + (type || "");
+  div.textContent = message;
+  results.appendChild(div);
+}
+
+function countChar(text, character){
+  let count = 0;
+  for(const c of text) if(c === character) count++;
+  return count;
+}
+
+function checkBrackets(code, issues){
+  const opening = [];
+  const pairs = {")":"(", "]":"[", "}":"{"};
+  let quote = "";
+  let escaped = false;
+  let lineComment = false;
+  let blockComment = false;
+
+  for(let i=0;i<code.length;i++){
+    const c=code[i], next=code[i+1];
+
+    if(lineComment){
+      if(c === "\n") lineComment=false;
+      continue;
+    }
+    if(blockComment){
+      if(c==="*" && next==="/"){blockComment=false;i++;}
+      continue;
+    }
+    if(quote){
+      if(escaped){escaped=false;continue;}
+      if(c==="\\"){escaped=true;continue;}
+      if(c===quote) quote="";
+      continue;
+    }
+    if(c==="/" && next==="/"){lineComment=true;i++;continue;}
+    if(c==="/" && next==="*"){blockComment=true;i++;continue;}
+    if(c==="'" || c==='"' || c==="`"){quote=c;continue;}
+
+    if(c==="(" || c==="[" || c==="{") opening.push({char:c,line:code.slice(0,i).split("\n").length});
+    else if(c===")" || c==="]" || c==="}"){
+      if(!opening.length || opening[opening.length-1].char !== pairs[c]){
+        issues.push("Possible unmatched '" + c + "' near line " + code.slice(0,i).split("\n").length + ".");
+      }else{
+        opening.pop();
+      }
+    }
+  }
+
+  for(const item of opening){
+    issues.push("Possible missing closing bracket for '" + item.char + "' opened on line " + item.line + ".");
+  }
+  if(quote) issues.push("Possible unfinished string or template literal.");
+}
+
+function checkHTML(code, issues){
+  const voidTags = new Set(["area","base","br","col","embed","hr","img","input","link","meta","param","source","track","wbr"]);
+  const stack = [];
+  const tokenPattern = /<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z][^>]*>/g;
+  let match;
+  let lastIndex = 0;
+
+  while((match=tokenPattern.exec(code))!==null){
+    const between = code.slice(lastIndex,match.index);
+    if(between.includes("<") || between.includes(">")){
+      issues.push("Possible stray angle bracket near line " + code.slice(0,match.index).split("\n").length + ".");
+    }
+    lastIndex=tokenPattern.lastIndex;
+    const tag=match[0];
+    if(tag.startsWith("<!--") || tag.startsWith("<!")) continue;
+
+    const closing=tag.startsWith("</");
+    const nameMatch=tag.match(/^<\/?\s*([a-zA-Z][\w:-]*)/);
+    if(!nameMatch) continue;
+    const name=nameMatch[1].toLowerCase();
+    const line=code.slice(0,match.index).split("\n").length;
+
+    if(!closing && !tag.endsWith(">")){
+      issues.push("Tag may be incomplete on line " + line + ".");
+    }
+    if(!closing && !voidTags.has(name) && !tag.endsWith("/>")){
+      stack.push({name,line});
+    }else if(closing){
+      const index=stack.map(x=>x.name).lastIndexOf(name);
+      if(index===-1){
+        issues.push("Closing tag </" + name + "> on line " + line + " has no matching opening tag (check manually).");
+      }else{
+        if(index!==stack.length-1){
+          issues.push("Tag nesting may be incorrect near </" + name + "> on line " + line + ".");
+        }
+        stack.splice(index,1);
+      }
+    }
+
+    if(name==="img" && !/\balt\s*=/.test(tag)){
+      issues.push("Image on line " + line + " should have an alt attribute for accessibility.");
+    }
+    if(name==="a" && !/\bhref\s*=/.test(tag)){
+      issues.push("Link on line " + line + " is missing an href attribute.");
+    }
+  }
+
+  if(code.slice(lastIndex).includes("<")){
+    issues.push("Possible unfinished HTML tag near the end of the code.");
+  }
+  for(const item of stack){
+    issues.push("Opening <" + item.name + "> on line " + item.line + " may be missing a closing tag.");
+  }
+  if(!/<!doctype\s+html/i.test(code)){
+    issues.push("Consider adding <!DOCTYPE html> at the start of the document.");
+  }
+}
+
+function checkCSS(code, issues){
+  checkBrackets(code, issues);
+  const clean=code.replace(/\/\*[\s\S]*?\*\//g,"");
+  const rules=clean.match(/[^{}]+\{[^{}]*\}/g) || [];
+
+  if(!rules.length && clean.trim()){
+    issues.push("No complete CSS rule was found. Check selectors and braces.");
+  }
+
+  rules.forEach(rule=>{
+    const body=rule.slice(rule.indexOf("{")+1,rule.lastIndexOf("}"));
+    body.split(";").forEach((part,index,arr)=>{
+      const declaration=part.trim();
+      if(!declaration) return;
+      if(!declaration.includes(":")){
+        issues.push("Possible missing ':' in CSS declaration: " + declaration);
+      }else if(index < arr.length-1 && !declaration.endsWith(";")){
+        issues.push("Check the end of CSS declaration: " + declaration);
+      }
+    });
+  });
+}
+
+function checkJavaScript(code, issues){
+  checkBrackets(code, issues);
+  if(/=\s*;/.test(code)) issues.push("Possible missing value before a semicolon.");
+  if(/\b(?:const|let)\s+[A-Za-z_$][\w$]*\s*;/.test(code)){
+    issues.push("A const or let declaration may be missing an initial value.");
+  }
+  if(/\bconsole\.log\s*\([^)]*$/.test(code)){
+    issues.push("A console.log() call may be missing a closing parenthesis.");
+  }
+  if(/\bfunction\s+[A-Za-z_$][\w$]*\s*\([^)]*$/.test(code)){
+    issues.push("A function declaration may have unfinished parentheses.");
+  }
+  if(/=>\s*;/.test(code)) issues.push("Possible missing expression after an arrow function.");
+  issues.push("JavaScript note: full syntax validation needs a JavaScript parser or runtime. This checker only flags common patterns.");
+}
+
+function checkC(code, issues){
+  checkBrackets(code, issues);
+  const clean=code
+    .replace(/\/\*[\s\S]*?\*\//g,"")
+    .replace(/\/\/.*$/gm,"")
+    .replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g,'""');
+
+  if(/\bprintf\s*\(/.test(code) && !/#\s*include\s*<stdio\.h>/.test(code)){
+    issues.push("If you use printf(), check whether #include <stdio.h> is needed.");
+  }
+  if(/\bscanf\s*\(/.test(code) && !/#\s*include\s*<stdio\.h>/.test(code)){
+    issues.push("If you use scanf(), check whether #include <stdio.h> is needed.");
+  }
+  if(/\bcout\b|\bcin\b/.test(code) && !/#\s*include\s*<iostream>/.test(code)){
+    issues.push("cout/cin usually require #include <iostream> in C++.");
+  }
+  if(/\b(?:printf|scanf|cout|cin)\b/.test(code) && !/[;]\s*(?:\/\/.*)?$/m.test(clean)){
+    issues.push("Check that statements end with semicolons.");
+  }
+  if(/\b(?:printf|scanf|cout|cin)\b[^;\n]*\)\s*(?:\/\/.*)?$/m.test(clean)){
+    issues.push("A statement may be missing a semicolon.");
+  }
+  if(!/\bmain\s*\(/.test(code)){
+    issues.push("No main() function found. Check whether this code is intended to be a complete program.");
+  }
+  issues.push("C/C++ note: this page does not compile code. Compiler errors, types, declarations and logic need a real compiler to verify.");
+}
+
+document.getElementById("check").addEventListener("click", function(){
+  const code=codeBox.value;
+  results.replaceChildren();
+
+  if(!code.trim()){
+    addIssue("Paste some code first, eda! 💜");
+    return;
+  }
+
+  const issues=[];
+  if(language.value==="html") checkHTML(code,issues);
+  else if(language.value==="css") checkCSS(code,issues);
+  else if(language.value==="javascript") checkJavaScript(code,issues);
+  else checkC(code,issues);
+
+  if(!issues.length){
+    addIssue("No obvious issues found by these basic checks. This does not guarantee that the code is error-free.","good");
+  }else{
+    addIssue("Found " + issues.length + " possible issue(s). Review the notes below.","info");
+    issues.forEach(issue=>addIssue(issue));
+  }
+});
+</script></body>
+</html>
