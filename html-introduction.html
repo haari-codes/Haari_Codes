@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to HTML | Haari Codes</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f7f5ff;
+  color: #292344;
+  line-height: 1.7;
+}
+
+header {
+  background: #6b59c8;
+  color: white;
+  text-align: center;
+  padding: 22px 15px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 850px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5dfff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px #38266b0b;
+}
+
+h2, h3 {
+  color: #6554c0;
+}
+
+pre {
+  background: #25213a;
+  color: #f4efff;
+  padding: 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+code {
+  font-family: monospace;
+}
+
+.example {
+  background: #f0edff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+button, .nav-button {
+  display: inline-block;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 16px;
+  margin: 5px 5px 5px 0;
+  background: #6b59c8;
+  color: white;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #eeeaff;
+  color: #5141a3;
+}
+
+.question {
+  padding: 13px;
+  border: 1px solid #e5dfff;
+  border-radius: 10px;
+  margin: 14px 0;
+}
+
+.question button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #f5f2ff;
+  color: #292344;
+  border: 1px solid #e2dcff;
+}
+
+.question button:disabled {
+  cursor: default;
+}
+
+#result {
+  font-weight: bold;
+  color: #5141a3;
+}
+
+footer {
+  text-align: center;
+  color: #77718e;
+  padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Haari Codes 💜</h1>
+  <p>HTML Course · Lesson 1</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+  <p><strong>Home / HTML / Lesson 1</strong></p>
+  <h2>Introduction to HTML</h2>
+
+  <p>
+    HTML stands for <strong>HyperText Markup Language</strong>.
+    It is the standard markup language used to structure content on web pages.
+  </p>
+
+  <p>
+    HTML tells the browser what content is present, such as headings,
+    paragraphs, images, links, lists and forms.
+  </p>
+
+  <div class="example">
+    <strong>Remember:</strong> HTML creates the structure,
+    CSS controls the appearance, and JavaScript adds interactivity.
+  </div>
+</section>
+
+<section class="card">
+  <h2>1. What is HTML?</h2>
+  <ul>
+    <li>HTML is a markup language, not a programming language.</li>
+    <li>It uses elements represented by tags.</li>
+    <li>Browsers read HTML and display the page.</li>
+    <li>HTML files commonly use the <code>.html</code> extension.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>2. Basic Structure of an HTML Document</h2>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h3>Explanation</h3>
+  <ul>
+    <li><code>&lt;!DOCTYPE html&gt;</code> declares an HTML document using modern HTML.</li>
+    <li><code>&lt;html&gt;</code> is the root element.</li>
+    <li><code>&lt;head&gt;</code> contains metadata and page information.</li>
+    <li><code>&lt;title&gt;</code> sets the browser tab title.</li>
+    <li><code>&lt;body&gt;</code> contains the visible page content.</li>
+    <li><code>&lt;h1&gt;</code> creates a main heading.</li>
+    <li><code>&lt;p&gt;</code> creates a paragraph.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>3. HTML Tags and Elements</h2>
+
+  <p>A tag is written inside angle brackets. Many HTML elements have an opening tag, content and a closing tag.</p>
+
+<pre><code>&lt;p&gt;Welcome to Haari Codes!&lt;/p&gt;</code></pre>
+
+  <ul>
+    <li><code>&lt;p&gt;</code> is the opening tag.</li>
+    <li><code>Welcome to Haari Codes!</code> is the content.</li>
+    <li><code>&lt;/p&gt;</code> is the closing tag.</li>
+  </ul>
+
+  <p>Some elements, such as <code>&lt;br&gt;</code> and <code>&lt;img&gt;</code>, do not need a separate closing tag.</p>
+</section>
+
+<section class="card">
+  <h2>4. HTML Attributes</h2>
+
+  <p>Attributes provide extra information about an element. They are usually written in the opening tag.</p>
+
+<pre><code>&lt;a href="https://example.com"&gt;Visit Website&lt;/a&gt;
+
+&lt;img src="flower.jpg"
+     alt="A flower"&gt;</code></pre>
+
+  <ul>
+    <li><code>href</code> specifies a link destination.</li>
+    <li><code>src</code> specifies an image source.</li>
+    <li><code>alt</code> provides alternative text for an image.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>5. Common HTML Tags</h2>
+
+  <ul>
+    <li><code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>: headings</li>
+    <li><code>&lt;p&gt;</code>: paragraph</li>
+    <li><code>&lt;a&gt;</code>: hyperlink</li>
+    <li><code>&lt;img&gt;</code>: image</li>
+    <li><code>&lt;br&gt;</code>: line break</li>
+    <li><code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code>: lists</li>
+    <li><code>&lt;li&gt;</code>: list item</li>
+    <li><code>&lt;div&gt;</code>: generic block container</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>6. Try It Yourself</h2>
+  <p>What will this HTML display?</p>
+
+<pre><code>&lt;h1&gt;My Website&lt;/h1&gt;
+&lt;p&gt;Welcome!&lt;/p&gt;</code></pre>
+
+  <div class="example">
+    <h1 style="margin:0;color:#292344">My Website</h1>
+    <p style="margin-bottom:0">Welcome!</p>
+  </div>
+</section>
+
+<section class="card" id="quiz">
+  <h2>Quick Quiz 📝</h2>
+  <p>Answer these questions to check your understanding.</p>
+
+  <div class="question" data-answer="1"
+       data-explanation="HTML stands for HyperText Markup Language.">
+    <strong>1. What does HTML stand for?</strong>
+    <button onclick="answer(this,0)">A. HighText Machine Language</button>
+    <button onclick="answer(this,1)">B. HyperText Markup Language</button>
+    <button onclick="answer(this,2)">C. Hyper Tool Multi Language</button>
+    <p class="feedback"></p>
+  </div>
+
+  <div class="question" data-answer="2"
+       data-explanation="The body element contains the main visible content of a webpage.">
+    <strong>2. Which element contains visible webpage content?</strong>
+    <button onclick="answer(this,0)">A. head</button>
+    <button onclick="answer(this,1)">B. title</button>
+    <button onclick="answer(this,2)">C. body</button>
+    <p class="feedback"></p>
+  </div>
+
+  <div class="question" data-answer="0"
+       data-explanation="The href attribute specifies a hyperlink destination.">
+    <strong>3. Which attribute specifies a link destination?</strong>
+    <button onclick="answer(this,0)">A. href</button>
+    <button onclick="answer(this,1)">B. src</button>
+    <button onclick="answer(this,2)">C. alt</button>
+    <p class="feedback"></p>
+  </div>
+
+  <div class="question" data-answer="1"
+       data-explanation="The p element represents a paragraph.">
+    <strong>4. Which tag creates a paragraph?</strong>
+    <button onclick="answer(this,0)">A. &lt;para&gt;</button>
+    <button onclick="answer(this,1)">B. &lt;p&gt;</button>
+    <button onclick="answer(this,2)">C. &lt;text&gt;</button>
+    <p class="feedback"></p>
+  </div>
+
+  <div class="question" data-answer="2"
+       data-explanation="The img element embeds an image in a webpage.">
+    <strong>5. Which tag displays an image?</strong>
+    <button onclick="answer(this,0)">A. &lt;picturetext&gt;</button>
+    <button onclick="answer(this,1)">B. &lt;src&gt;</button>
+    <button onclick="answer(this,2)">C. &lt;img&gt;</button>
+    <p class="feedback"></p>
+  </div>
+
+  <button onclick="showScore()">Check Final Score</button>
+  <p id="result" aria-live="polite"></p>
+</section>
+
+<section class="card">
+  <h2>Lesson Navigation</h2>
+  <a class="nav-button secondary" href="index.html">← Home</a>
+  <a class="nav-button secondary" href="quiz.html">Practice Quiz</a>
+  <a class="nav-button" href="html-tags.html">Next Lesson →</a>
+  <p class="small">Next lesson filename: html-tags.html. Create that page before using the link.</p>
+</section>
+
+</main>
+
+<footer>Haari Codes · Learn, Practise, Build 💜</footer>
+
+<script>
+function answer(button, selected) {
+  const question = button.closest(".question");
+
+  if (question.dataset.done === "true") return;
+
+  question.dataset.done = "true";
+
+  const correct = Number(question.dataset.answer);
+  const feedback = question.querySelector(".feedback");
+
+  question.querySelectorAll("button").forEach((option, index) => {
+    option.disabled = true;
+
+    if (index === correct) {
+      option.style.background = "#dff5e5";
+      option.style.borderColor = "#43a66b";
+    }
+  });
+
+  if (selected === correct) {
+    feedback.textContent = "Correct! 🎉";
+    feedback.style.color = "#23783e";
+  } else {
+    feedback.textContent =
+      "Not quite. " + question.dataset.explanation;
+    feedback.style.color = "#a13b48";
+  }
+}
+
+function showScore() {
+  const questions = [...document.querySelectorAll(".question")];
+  const completed = questions.filter(q => q.dataset.done === "true");
+  const correct = completed.filter(q =>
+    q.querySelectorAll("button")[Number(q.dataset.answer)].style.background
+      === "rgb(223, 245, 229)"
+  ).length;
+
+  if (completed.length < questions.length) {
+    document.getElementById("result").textContent =
+      "Answer all 5 questions first! Completed: " +
+      completed.length + "/5";
+    return;
+  }
+
+  document.getElementById("result").textContent =
+    "Your score: " + correct + "/" + questions.length +
+    (correct === questions.length
+      ? " Excellent work! 💜"
+      : " Keep practising. You can do it!");
+}
+</script>
+
+</body>
+  </html>
