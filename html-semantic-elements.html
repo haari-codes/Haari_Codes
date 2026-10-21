@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic HTML | CS Companion</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;background:#f7f3ff;color:#29213b;line-height:1.7}
+header{background:#6c3bbd;color:white;text-align:center;padding:24px 15px}
+.container{max-width:850px;margin:25px auto;padding:0 16px}
+.card{background:white;padding:22px;margin-bottom:20px;border-radius:14px;box-shadow:0 3px 12px #29134b12}
+h2{color:#6c3bbd}
+code,pre{background:#f0e8ff;border-radius:6px}
+code{padding:3px 6px}
+pre{padding:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+button,.nav a{display:inline-block;background:#6c3bbd;color:white;border:0;padding:10px 16px;border-radius:8px;text-decoration:none;cursor:pointer;margin:5px 4px 5px 0;font:inherit}
+button:hover,.nav a:hover{background:#4d258e}
+.question{border-bottom:1px solid #e7def5;padding:12px 0}
+label{display:block;margin:7px 0}
+#result{font-weight:bold;margin-top:15px}
+.semantic-demo{border:2px solid #a98bdb;border-radius:10px;overflow:hidden;margin:15px 0}
+.demo-header,.demo-nav,.demo-main,.demo-section,.demo-article,.demo-footer{padding:12px;margin:8px;border-radius:6px}
+.demo-header{background:#e9ddff}
+.demo-nav{background:#f2eaff}
+.demo-main{background:#faf7ff;border:1px dashed #b9a2dc}
+.demo-section{background:#eaf5ff}
+.demo-article{background:#e7f7ed}
+.demo-footer{background:#fcecf5}
+footer{text-align:center;padding:20px;color:#655477}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Semantic HTML Elements</h1>
+<p>CS Companion | HTML Lesson 08</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+<h2>1. What Is Semantic HTML?</h2>
+<p>Semantic HTML uses elements that describe the meaning and purpose of their content.</p>
+<p>For example, <code>&lt;nav&gt;</code> identifies a navigation area, while <code>&lt;footer&gt;</code> identifies footer information.</p>
+
+<h3>Why use semantic elements?</h3>
+<ul>
+<li>Make code easier to understand and maintain.</li>
+<li>Help screen readers interpret webpage structure.</li>
+<li>Make page sections clearer for developers and browsers.</li>
+<li>Provide meaningful structure for search engines.</li>
+</ul>
+
+<p>Compare these examples:</p>
+<pre><code>&lt;div&gt;Menu links go here&lt;/div&gt;
+
+&lt;nav&gt;Menu links go here&lt;/nav&gt;</code></pre>
+<p>Both can contain links, but <code>&lt;nav&gt;</code> communicates that the content is a navigation section.</p>
+</section>
+
+<section class="card">
+<h2>2. Important Semantic Elements</h2>
+
+<h3>1. &lt;header&gt;</h3>
+<p>Contains introductory content, such as a page title, logo or introductory links. A page or section can have its own header.</p>
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;My Website&lt;/h1&gt;
+  &lt;p&gt;Welcome!&lt;/p&gt;
+&lt;/header&gt;</code></pre>
+
+<h3>2. &lt;nav&gt;</h3>
+<p>Contains a major group of navigation links.</p>
+<pre><code>&lt;nav&gt;
+  &lt;a href="index.html"&gt;Home&lt;/a&gt;
+  &lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+<h3>3. &lt;main&gt;</h3>
+<p>Contains the main, unique content of the page. Normally, a page has one visible <code>&lt;main&gt;</code> element.</p>
+<pre><code>&lt;main&gt;
+  &lt;h2&gt;Main Content&lt;/h2&gt;
+  &lt;p&gt;Page information goes here.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+<h3>4. &lt;section&gt;</h3>
+<p>Groups related content, often under a heading.</p>
+<pre><code>&lt;section&gt;
+  &lt;h2&gt;Our Courses&lt;/h2&gt;
+  &lt;p&gt;Explore our courses.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+<h3>5. &lt;article&gt;</h3>
+<p>Represents a self-contained piece of content that could make sense independently, such as a blog post or news article.</p>
+<pre><code>&lt;article&gt;
+  &lt;h2&gt;Learning HTML&lt;/h2&gt;
+  &lt;p&gt;HTML structures webpages.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+
+<h3>6. &lt;aside&gt;</h3>
+<p>Contains related or supplementary content, such as a sidebar or a related-links section.</p>
+<pre><code>&lt;aside&gt;
+  &lt;h3&gt;Related Topics&lt;/h3&gt;
+  &lt;p&gt;Learn CSS next.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+
+<h3>7. &lt;footer&gt;</h3>
+<p>Contains footer information for a page or section, such as copyright details or related links.</p>
+<pre><code>&lt;footer&gt;
+  &lt;p&gt;Copyright 2026&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+</section>
+
+<section class="card">
+<h2>3. Live Structure Preview</h2>
+<p>Here is how semantic elements can organise a webpage.</p>
+
+<div class="semantic-demo">
+<header class="demo-header">
+<strong>&lt;header&gt;</strong>
+<div>My Learning Website</div>
+</header>
+
+<nav class="demo-nav">
+<strong>&lt;nav&gt;</strong>
+<div>Home | Courses | About</div>
+</nav>
+
+<main class="demo-main">
+<strong>&lt;main&gt;</strong>
+
+<section class="demo-section">
+<strong>&lt;section&gt;</strong>
+<div>HTML Learning Resources</div>
+
+<article class="demo-article">
+<strong>&lt;article&gt;</strong>
+<div>Lesson: Introduction to HTML</div>
+</article>
+</section>
+
+<aside>
+<strong>&lt;aside&gt;</strong>
+<div>Related learning links</div>
+</aside>
+</main>
+
+<footer class="demo-footer">
+<strong>&lt;footer&gt;</strong>
+<div>Haari_Codes | Learn • Practice • Grow</div>
+</footer>
+</div>
+</section>
+
+<section class="card">
+<h2>4. Section vs Article vs Div</h2>
+
+<ul>
+<li><strong>section:</strong> Groups related content under a common topic.</li>
+<li><strong>article:</strong> Contains independent, self-contained content.</li>
+<li><strong>div:</strong> A generic container without built-in semantic meaning, often used for styling or layout.</li>
+</ul>
+
+<pre><code>&lt;section&gt;
+  &lt;h2&gt;Latest Posts&lt;/h2&gt;
+
+  &lt;article&gt;
+    &lt;h3&gt;Post One&lt;/h3&gt;
+    &lt;p&gt;Post content...&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/section&gt;
+
+&lt;div class="purple-box"&gt;
+  Styled content
+&lt;/div&gt;</code></pre>
+
+<p>Choose the element based on the meaning of the content, not just its appearance.</p>
+</section>
+
+<section class="card">
+<h2>5. Common Mistakes</h2>
+<ul>
+<li>Using <code>&lt;nav&gt;</code> for every group of links, even when it is not a major navigation area.</li>
+<li>Using <code>&lt;section&gt;</code> as a generic styling container without a clear topic.</li>
+<li>Putting the main page content outside <code>&lt;main&gt;</code> unnecessarily.</li>
+<li>Choosing an element because of its default appearance instead of its meaning.</li>
+</ul>
+<p>Semantic elements do not automatically create a particular design. Use CSS to control colours, spacing and layout.</p>
+</section>
+
+<section class="card">
+<h2>6. Quick Quiz</h2>
+<p>Answer all five questions.</p>
+
+<form id="quizForm">
+
+<div class="question">
+<p>1. Which element contains the main content of a page?</p>
+<label><input type="radio" name="q1" value="a"> &lt;footer&gt;</label>
+<label><input type="radio" name="q1" value="b"> &lt;main&gt;</label>
+<label><input type="radio" name="q1" value="c"> &lt;aside&gt;</label>
+</div>
+
+<div class="question">
+<p>2. Which element is used for major navigation links?</p>
+<label><input type="radio" name="q2" value="a"> &lt;nav&gt;</label>
+<label><input type="radio" name="q2" value="b"> &lt;article&gt;</label>
+<label><input type="radio" name="q2" value="c"> &lt;footer&gt;</label>
+</div>
+
+<div class="question">
+<p>3. Which element is suitable for a self-contained blog post?</p>
+<label><input type="radio" name="q3" value="a"> &lt;div&gt;</label>
+<label><input type="radio" name="q3" value="b"> &lt;aside&gt;</label>
+<label><input type="radio" name="q3" value="c"> &lt;article&gt;</label>
+</div>
+
+<div class="question">
+<p>4. Which element commonly contains copyright information?</p>
+<label><input type="radio" name="q4" value="a"> &lt;main&gt;</label>
+<label><input type="radio" name="q4" value="b"> &lt;footer&gt;</label>
+<label><input type="radio" name="q4" value="c"> &lt;nav&gt;</label>
+</div>
+
+<div class="question">
+<p>5. Which element is a generic container without semantic meaning?</p>
+<label><input type="radio" name="q5" value="a"> &lt;article&gt;</label>
+<label><input type="radio" name="q5" value="b"> &lt;section&gt;</label>
+<label><input type="radio" name="q5" value="c"> &lt;div&gt;</label>
+</div>
+
+<button type="button" onclick="checkQuiz()">Submit Answers</button>
+<button type="reset" onclick="resetQuiz()">Try Again</button>
+</form>
+
+<div id="result" aria-live="polite"></div>
+<div id="explanations"></div>
+</section>
+
+<section class="card" style="text-align:center">
+<h2>Lesson Navigation</h2>
+<a class="nav-link" href="html-forms.html">← Previous Lesson</a>
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="html-audio-video.html">Next Lesson →</a>
+</section>
+
+</main>
+
+<footer>
+<p>Haari_Codes | Learn • Practice • Grow 💜</p>
+</footer>
+
+<script>
+function checkQuiz(){
+ const answers={q1:"b",q2:"a",q3:"c",q4:"b",q5:"c"};
+
+ const explanations=[
+ "1. <main> contains the main content of the page.",
+ "2. <nav> identifies a major navigation section.",
+ "3. <article> is suitable for self-contained content such as a blog post.",
+ "4. <footer> commonly contains copyright and related information.",
+ "5. <div> is a generic container without inherent semantic meaning."
+ ];
+
+ let score=0;
+ let unanswered=false;
+
+ for(const q in answers){
+   const selected=document.querySelector('input[name="'+q+'"]:checked');
+   if(!selected) unanswered=true;
+   else if(selected.value===answers[q]) score++;
+ }
+
+ const result=document.getElementById("result");
+ const details=document.getElementById("explanations");
+
+ if(unanswered){
+   result.textContent="Please answer all five questions first.";
+   details.replaceChildren();
+   return;
+ }
+
+ result.textContent="Your score: "+score+"/5"+
+   (score===5?" 🎉 Excellent work!":" 💜 Keep practising!");
+
+ details.replaceChildren();
+
+ const heading=document.createElement("h3");
+ heading.textContent="Answer Explanations";
+ details.appendChild(heading);
+
+ explanations.forEach(text=>{
+   const p=document.createElement("p");
+   p.textContent=text;
+   details.appendChild(p);
+ });
+}
+
+function resetQuiz(){
+ document.getElementById("result").textContent="";
+ document.getElementById("explanations").replaceChildren();
+}
+</script>
+
+</body>
+</html>
