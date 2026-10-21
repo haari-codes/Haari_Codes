@@ -228,6 +228,50 @@ menuButton.addEventListener("click", function () {
   menuButton.setAttribute("aria-expanded", String(opened));
   menuButton.textContent = opened ? "✕" : "☰";
 });
+
+// Search mapping to redirect directly to the respective pages from index.html
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  if (!query) return;
+
+  // C Programming Lessons
+  if (query.includes("intro to c") || query.includes("introduction to c") || query.includes("c introduction")) {
+    location.href = "cintroduction.html";
+  } else if (query.includes("variable") || query.includes("data type")) {
+    location.href = "variables.html";
+  } else if (query.includes("operator")) {
+    location.href = "operators.html";
+  } else if (query.includes("input") || query.includes("output")) {
+    location.href = "input-output.html";
+  } else if (query.includes("conditional") || query.includes("if")) {
+    location.href = "conditional-statement.html";
+  } else if (query.includes("loop")) {
+    location.href = "loops.html";
+  } else if (query.includes("function")) {
+    location.href = "function.html";
+  } else if (query.includes("array")) {
+    location.href = "arrays.html";
+  } else if (query.includes("string")) {
+    location.href = "string.html";
+  } else if (query.includes("pointer")) {
+    location.href = "pointers.html";
+  } else if (query.includes("structure")) {
+    location.href = "structure.html";
+  }
+  // General Sections & Pages
+  else if (query.includes("quiz")) {
+    location.href = "quiz.html";
+  } else if (query.includes("error detector") || query.includes("error")) {
+    location.href = "error-detector.html";
+  } else if (query.includes("course")) {
+    location.href = "courses.html";
+  } else if (query.includes("about")) {
+    location.href = "about.html";
+  } else {
+    alert("No matching page found. Try typing a course or lesson name.");
+  }
+});
 </script>
 </body>
 </html>
